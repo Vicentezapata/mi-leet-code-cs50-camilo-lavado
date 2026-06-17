@@ -1,0 +1,1348 @@
+# Transcripción: chunk_024.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  The others, 5,000.
+[0:00:03]  Now we're starting to see some spread.
+[0:00:05]  So we only have six guests in contention for first place.
+[0:00:09]  And the next question now is six.
+[0:00:11]  What is the function used to open a file in C?
+[0:00:15]  F open, open, file open, file.
+[0:00:21]  What is the function used to open a file in C?
+[0:00:27]  Seven seconds.
+[0:00:31]  There's some differences between C and Python here.
+[0:00:34]  And the reveal, it is indeed F open.
+[0:00:38]  It's 77% correct, too.
+[0:00:40]  All right, let's see the rankings now.
+[0:00:42]  If you are guest 15, 97, 15, 6, 1, 7, 1, 3, 7, 5, 3, or 3, 2, 7, 3,
+[0:00:48]  you're now in the lead as we move on to question seven.
+[0:00:52]  How does Stirling compute the average, sorry,
+[0:00:55]  how does Stirling compute the length of a string in C?
+[0:00:58]  It looks at how much memory the string uses.
+[0:01:00]  It counts the number of characters until it reaches backslash 0.
+[0:01:03]  It counts the number of bits in the string,
+[0:01:05]  or it creates pointers for each character and counts them.
+[0:01:09]  10 seconds.
+[0:01:11]  Stirling in C. Recall that we implemented this ourselves in class,
+[0:01:17]  but then we used the library thereafter.
+[0:01:19]  And indeed, with 85%, it simply counts the number of characters
+[0:01:23]  until it reaches that sentinel backslash 0, AKA null.
+[0:01:27]  And in this case, we have 5, 4, 4 of you tied now for first.
+[0:01:35]  All right, question eight.
+[0:01:36]  Where does malloc allocate memory from?
+[0:01:40]  The stack, the heap, the pointers, or the temp?
+[0:01:45]  Where does malloc allocate memory from?
+[0:01:50]  Responses are coming in.
+[0:01:51]  Eight seconds.
+[0:01:55]  Good review question at that.
+[0:01:58]  In two seconds, we'll see that malloc allocates memory from, woo, close one.
+[0:02:02]  The heap is correct.
+[0:02:04]  The heap is correct.
+[0:02:05]  The stack, recall, is where functions store their local variables
+[0:02:08]  and their arguments, and that just happens automatically.
+[0:02:11]  The heap represented in our pictures up top is where malloc draws from.
+[0:02:15]  Now we have guest 15 has made its way to the top here,
+[0:02:23]  but others can catch up if they don't buzz in fast enough.
+[0:02:25]  So number nine.
+[0:02:27]  How many people flew from 50ville to New York on the day of the crime?
+[0:02:33]  16, 29, 8, or 3?
+[0:02:40]  Anyone with a laptop perhaps has an advantage here?
+[0:02:48]  Five seconds.
+[0:02:51]  And the answers are, but the answer is 16.
+[0:02:58]  Let's see if guest 15 got this.
+[0:03:01]  They did not.
+[0:03:03]  Goodbye to guest 15 at the top.
+[0:03:05]  All right, question 10.
+[0:03:07]  We're about halfway there.
+[0:03:08]  What are meta tags used for in HTML?
+[0:03:13]  To describe a web page, to define parameters for an element,
+[0:03:16]  to group elements together, to translate content
+[0:03:18]  into machine readable format.
+[0:03:21]  What are meta tags used for in HTML?
+[0:03:24]  We saw a few of them for different use cases.
+[0:03:31]  And with one second, we see that indeed the number one answer
+[0:03:36]  was to describe the web page, be it for a mobile device,
+[0:03:39]  be it for screen scrapers like Facebook and Twitter
+[0:03:42]  and other such apps that grab images and descriptions thereof.
+[0:03:45]  All right, we're in the second half now.
+[0:03:47]  Guest 4, 6, 6, 9 has edged ahead.
+[0:03:52]  Guest 15 is now in sixth place.
+[0:03:54]  All right, number 11 is, how do you find the address of a variable in C?
+[0:03:59]  Think back a few weeks.
+[0:04:00]  Star, dollar sign, ampersand, or ask from one of your own classmates.
+[0:04:10]  How do you find the address of a variable in C?
+[0:04:19]  And the number one answer is ampersand, which is indeed
+[0:04:22]  the address of operator at 62%.
+[0:04:25]  Nicely done.
+[0:04:26]  Let's see who's atop the list now.
+[0:04:28]  Guest 4, 6, 6, 9 has retained their lead.
+[0:04:31]  So we move on to 12.
+[0:04:32]  What does the arrow operator mean in C?
+[0:04:36]  A hyphen and a greater than sign.
+[0:04:38]  Nothing?
+[0:04:39]  Starts a comment, replaces a star and dot operator, declares a pointer.
+[0:04:46]  What does this arrow operator mean in C?
+[0:04:51]  Again from a few weeks back.
+[0:04:53]  Three seconds.
+[0:04:55]  Harder assortment, perhaps.
+[0:04:57]  And it's, oh, replaces a star and dot operator.
+[0:05:02]  The number two answer was indeed correct.
+[0:05:04]  This was just a cleaner way, syntactic sugar,
+[0:05:07]  for collapsing what would be a star and then some parentheses and then
+[0:05:10]  a dot into quite simply something that looks like an arrow itself.
+[0:05:13]  All right, Carter, who's in the lead now?
+[0:05:16]  Still that same guest.
+[0:05:18]  And let's see what 13 has for us.
+[0:05:20]  Which of these is not a data type in SQLite?
+[0:05:24]  Blob, string, integer, text.
+[0:05:32]  We used a few of these more commonly than others.
+[0:05:35]  But not all of these are for real.
+[0:05:39]  Five seconds to make your decision.
+[0:05:43]  And the results are blob is a thing, string is not.
+[0:05:48]  In SQLite, it's, of course, called text, as we've seen it.
+[0:05:52]  Blob, as goofy as it sounds, is just binary large object.
+[0:05:56]  But indeed, it's how you might store a binary file in your database.
+[0:06:00]  All right, the rankings now.
+[0:06:02]  Oh, guest 8444 has eked ahead.
+[0:06:06]  So we move on to 14.
+[0:06:08]  Which of the following is a valid way to print exclamation point,
+[0:06:11]  exclamation point, exclamation point, exclamation point in Python?
+[0:06:16]  And I'll let you read these yourselves, which is a valid way.
+[0:06:23]  Everyone got quiet in his thinking.
+[0:06:28]  All right, six seconds.
+[0:06:31]  A few hundred responses in so far.
+[0:06:35]  All right, and yes, nicely done.
+[0:06:37]  78% is correct.
+[0:06:39]  You can use the star operator to essentially multiply
+[0:06:41]  a character at left.
+[0:06:43]  All right, who's in the lead, Carter?
+[0:06:45]  We now have still guest 8444.
+[0:06:48]  And so we move on now to 15.
+[0:06:50]  What does the free function do?
+[0:06:54]  Deallocates memory from a primitive, deallocates memory at the given pointer,
+[0:06:58]  terminates a loop, or returns a value from the function.
+[0:07:01]  What does the free function do?
+[0:07:08]  Five seconds.
+[0:07:10]  What does the free function do?
+[0:07:12]  Calls the opposite, essentially, of malloc.
+[0:07:14]  And it deallocates the memory at the given pointer as well.
+[0:07:18]  And in C, that's on you.
+[0:07:20]  In Python, you don't need to worry about allocating or freeing a life.
+[0:07:24]  All right, we now have at the top, still guest 8444.
+[0:07:28]  And seeing more and more spread.
+[0:07:30]  16, which is not a step of compiling?
+[0:07:35]  Think back now to week two, compiling, preprocessing, linking, or threading.
+[0:07:41]  Which is not a step of compiling?
+[0:07:46]  We use it as a catch-all, but it technically
+[0:07:48]  means a few different things collectively.
+[0:07:55]  All right, and threading is indeed not on the list.
+[0:07:58]  That is a technical thing.
+[0:08:00]  Generally meaning a program can do multiple things at once,
+[0:08:03]  but that is not related here to compiling.
+[0:08:07]  All right, guest 8444 is still at the top.
+[0:08:10]  We have just a few questions left.
+[0:08:11]  And so 17, what was the surprise at the beginning of the Halloween lecture?
+[0:08:16]  According to your classmates, someone scared me.
+[0:08:19]  Someone hid candy under every chair.
+[0:08:21]  Someone dressed up as me.
+[0:08:23]  The entire staff dressed up as Carter.
+[0:08:29]  Interesting litmus test of who came to or watched lecture, perhaps.
+[0:08:35]  Let's see which guests got this correct.
+[0:08:38]  Someone, someone's really dressed up as indeed me at 64%.
+[0:08:42]  So I think we have attendance here, essentially, from that lecture.
+[0:08:45]  So let's move on now to the final few questions
+[0:08:48]  after seeing that guest 8444 is still doing well.
+[0:08:52]  Can anyone dethrone them?
+[0:08:54]  Why is it incorrect to use the equals equals operator in C
+[0:08:57]  to compare strings?
+[0:09:00]  It's computationally inefficient.
+[0:09:02]  You're comparing the locations of the strings.
+[0:09:04]  Strings don't exist.
+[0:09:05]  Using equal equals will lead to buffer overflow.
+[0:09:12]  Why is it incorrect to use equal equals in C to compare strings?
+[0:09:16]  Three seconds.
+[0:09:17]  We saw this live, and it motivated like an entire week
+[0:09:20]  because you're comparing the locations.
+[0:09:22]  That is, the addresses in memory of those same strings.
+[0:09:25]  All right, let's see if this leaves the rankings the same.
+[0:09:29]  Guest 8444 is still at the top.
+[0:09:31]  And pulling ahead, two final questions.
+[0:09:33]  19, what is the difference between null 1L and null 2L?
+[0:09:41]  Null and null mean the same thing.
+[0:09:43]  Nulls refers to backslash 0, whereas null 2L is the 0 address.
+[0:09:47]  Null is the 0 address, whereas null 2L refers to backslash 0.
+[0:09:51]  Null is null but lazier.
+[0:09:55]  Five seconds.
+[0:09:57]  Subtle, not the best design, perhaps, to have in technical terms.
+[0:10:01]  But indeed, 62% of you got that N-U-L is the first thing
+[0:10:05]  we talked about when we talked about backslash 0.
+[0:10:07]  And N-U-L-L is a pointer.
+[0:10:09]  It's the 0 pointer.
+[0:10:11]  Same number, but different context.
+[0:10:13]  All right, Carter, guest 8444 is the person
+[0:10:17]  to beat with our final 20th questions.
+[0:10:21]  What do the binary bulbs on stage spell today?
+[0:10:28]  And these are your four choices.
+[0:10:31]  Different from usual, we usually use 8-bit ASCII.
+[0:10:34]  Today we are using UTF-8, which is a form of Unicode,
+[0:10:39]  which is the larger subset that uses one or two or three or even four
+[0:10:43]  bytes to spell a single character.
+[0:10:47]  And the answer, wow, close, is indeed a cupcake.
+[0:10:52]  Indeed a cupcake.
+[0:10:53]  Well done.
+[0:10:54]  And let's see the final results.
+[0:10:56]  8444 is the winner.
+[0:10:58]  Are they here in person, perhaps?
+[0:11:00]  8444?
+[0:11:02]  You're 8444?
+[0:11:03]  Come on down.
+[0:11:11]  Thank you.
+[0:11:11]  There you go.
+[0:11:12]  Congratulations.
+[0:11:14]  You're too high.
+[0:11:15]  Oh, you are.
+[0:11:16]  All right, so today, if we may, give me just one moment.
+[0:11:32]  All right.
+[0:11:43]  All right.
+[0:11:43]  So today, we are so pleased to be joined by Jennifer 8 Lee, who's
+[0:11:48]  an alumna of the college, a dear friend, and is actually really the reason why
+[0:11:53]  there's evidence of Muppets in CS50.
+[0:11:55]  In fact, some years ago, I was visiting her.
+[0:11:58]  And she had on her shelf this custom Muppet.
+[0:12:00]  It wasn't one that appears on TV.
+[0:12:02]  But she had somehow gone on a website, a former toy store called FAO Schwartz
+[0:12:06]  at the time.
+[0:12:06]  And you're allowed to configure your own Muppet whatnot.
+[0:12:09]  Choose the eyes, the nose, the face, and the torso.
+[0:12:11]  And I just thought this was the coolest thing.
+[0:12:13]  So in the taxi on the way home, I was going on the website,
+[0:12:16]  trying to purchase our very first Muppet.
+[0:12:18]  I then sort of woke up the next morning thinking,
+[0:12:20]  why did I just buy a puppet in the back of a taxi?
+[0:12:22]  And so it sat on the shelf for really two years.
+[0:12:25]  And then a colleague of mine within CS50's team
+[0:12:27]  decided, after I brought it into the office to sit on a shelf there,
+[0:12:30]  to actually bring it to life.
+[0:12:31]  And indeed, if you Google around CS50 Muppetry and Puppetry Online,
+[0:12:35]  you'll see, in fact, these as characters,
+[0:12:37]  not only over the past couple of years in COVID times,
+[0:12:39]  when really there was next to no one actually here.
+[0:12:42]  And so they were instead.
+[0:12:43]  But indeed, she's brought not only this educational element,
+[0:12:47]  this pedagogical element, this playful element to CS50.
+[0:12:50]  And we have her here today to speak to exactly the sorts of encodings
+[0:12:54]  that are here on stage.
+[0:12:55]  Jenny is the former vice chair of the Unicode Subcommittee on Emoji,
+[0:12:59]  which is to say that she and her colleagues
+[0:13:01]  have been influential in taking emoji from what was a very limited character
+[0:13:05]  set early on and by far unrepresentative of much human emotion in speech
+[0:13:11]  into really an initiative now to capture digitally
+[0:13:13]  all of the world's languages, past, present, and future,
+[0:13:17]  as well as the range of emotions that we might see here
+[0:13:19]  in the form of that pillow or even in the cake that awaits.
+[0:13:22]  So allow me to introduce Jennifer Eight-Lee.
+[0:13:26]  Thank you.
+[0:13:26]  I have much drink.
+[0:13:31]  OK.
+[0:13:32]  Clicker.
+[0:13:33]  Hi.
+[0:13:33]  All right, hold on.
+[0:13:34]  I have to hide my drinks.
+[0:13:36]  I might need more water.
+[0:13:37]  All right.
+[0:13:38]  I'm really excited to speak here.
+[0:13:42]  Last year, I was here.
+[0:13:43]  One, I was wearing a mask, which is like a real bummer of your lecturing.
+[0:13:46]  And then the entire front part was all Muppets.
+[0:13:49]  So I'm really happy to see humans, actually.
+[0:13:52]  And it's always an honor to speak at Sanders.
+[0:13:55]  And then Dave and I were actually classmates way back when.
+[0:13:58]  So I do remember him when he was an undergrad, much like you.
+[0:14:01]  So I am going to give a talk on the world of emoji
+[0:14:05]  and how I kind of became an emoji activist.
+[0:14:07]  So it kind of all starts with my friend Ying Liu, who
+[0:14:12]  is a designer, who is well known for doing the Twitter Fail Whale, which
+[0:14:16]  was kind of laid to rest, except now this week it seems like it
+[0:14:20]  may be necessary again.
+[0:14:23]  So she and I one day were texting.
+[0:14:25]  This is back in 2015.
+[0:14:26]  We were texting about dumplings because we are Chinese-ish women
+[0:14:30]  and we like to text about food.
+[0:14:32]  And so I sent her this picture of dumplings.
+[0:14:34]  She was like, yum, yum, yum, yum, yum, yum, yum, yum.
+[0:14:37]  And then she was like, oh, Apple doesn't have a dumpling emoji.
+[0:14:42]  And I was like, oh, that's kind of interesting.
+[0:14:44]  I didn't really think anything about it
+[0:14:46]  because people point things out to you all the time
+[0:14:49]  and then you just forget and move on.
+[0:14:52]  But then half an hour later, on my phone
+[0:14:54]  appears this dumpling with heart eyes.
+[0:14:57]  And you don't see it because it's a still shot,
+[0:15:00]  but it actually had blinking eyes.
+[0:15:01]  So she liked to call it bling, bling, dumpling.
+[0:15:03]  So she, as a designer, had decided
+[0:15:05]  to go in and make her own dumpling emoji
+[0:15:09]  because she was like, I'm a designer.
+[0:15:10]  I can fix it.
+[0:15:11]  But that actually got me thinking.
+[0:15:12]  I was like, where do emoji come from?
+[0:15:15]  And how is there not a dumpling emoji?
+[0:15:17]  Because from my perspective, dumplings
+[0:15:19]  are this kind of universal food.
+[0:15:22]  And there are a lot of Japanese foods on the emoji keyboard.
+[0:15:29]  And I was not, this was back in 2015,
+[0:15:31]  I was not a big emoji user at all.
+[0:15:34]  You have things like ramen.
+[0:15:35]  You have bento boxes.
+[0:15:37]  You have curry.
+[0:15:38]  You have tempura.
+[0:15:39]  You even have like kind of obscure kind of foods
+[0:15:43]  like this thing.
+[0:15:44]  Things on a stick turns out to be fish things on a stick.
+[0:15:47]  Then this pink and white swirly thing is also a fish thing.
+[0:15:52]  And there's even like that triangle rice ball
+[0:15:54]  that looks like it's had a bikini wax, all well
+[0:15:56]  represented on the emoji keyboard, but no dumplings.
+[0:15:59]  And it's very strange because like all cultures kind of have
+[0:16:02]  their dumpling, right, whether or not it's
+[0:16:05]  kinkali or ravioli or empanadas.
+[0:16:07]  Like essentially, everyone sort of like
+[0:16:09]  discover the idea of like yummy goodness
+[0:16:12]  inside a carbohydrate shell, whether or not
+[0:16:15]  baked or fried or steamed.
+[0:16:18]  So I was like, OK.
+[0:16:21]  I literally Googled, I was like, who controls emoji?
+[0:16:24]  And you discover that they're actually
+[0:16:25]  regulated by a nonprofit called the Unicode Consortium.
+[0:16:29]  And it is, you know, and I just like went on their website
+[0:16:33]  and I discovered that they had 12 full voting members
+[0:16:36]  as of 2015.
+[0:16:37]  So this is 2015.
+[0:16:38]  And they were like mostly US multinational tech companies.
+[0:16:41]  It was Oracle, it was IBM, Microsoft, Adobe, Google,
+[0:16:45]  Apple, Facebook, and Yahoo.
+[0:16:47]  And of the three that were not multinational US tech
+[0:16:51]  companies, they were, let's see, a German company called SAP,
+[0:16:55]  a Chinese telecom company called Huawei,
+[0:16:58]  and then like the government of Oman.
+[0:17:00]  Like those were basically the 12 full voting members
+[0:17:03]  of US multinational tech companies.
+[0:17:05]  So they at that point paid $18,000 a year
+[0:17:11]  to have full voting power on the Unicode committee.
+[0:17:14]  And I was like, oh, that's a lot of money.
+[0:17:17]  And I kind of felt indignant about this.
+[0:17:20]  But then like if you kind of keep on digging on their website,
+[0:17:23]  you found like there was this kind of interesting loophole,
+[0:17:25]  which is you could join as an individual for $75.
+[0:17:30]  You don't get voting power.
+[0:17:31]  But it gave you the right to put yourself on the email list
+[0:17:35]  and also to like attend the quarterly Unicode meeting.
+[0:17:38]  So I was like, I'll do that.
+[0:17:39]  I had no idea what I was doing.
+[0:17:40]  But I'm like, I'm going to go fight for this dumpling emoji.
+[0:17:43]  Because from my perspective, dumplings are universal.
+[0:17:46]  Emoji are kind of universal.
+[0:17:48]  So the fact there was no dumpling emoji
+[0:17:51]  meant like something was wrong in the universe.
+[0:17:53]  And I was determined to fix this.
+[0:17:55]  So I was on this email list.
+[0:17:58]  And then a couple of like maybe even like a couple weeks later,
+[0:18:02]  they kind of sent out this note that's like, hey,
+[0:18:04]  who's coming to the quarterly meeting?
+[0:18:06]  And I was like, I looked at the calendar.
+[0:18:08]  I looked at my schedule.
+[0:18:09]  I was like, oh, I'll be in like Silicon Valley at that time.
+[0:18:13]  So I basically RSVP'd.
+[0:18:16]  And I was like, I will be there.
+[0:18:17]  And took Caltrain to an Apple building.
+[0:18:21]  It's a legal building in, I think, with Sunnyvale.
+[0:18:23]  So I just like show up.
+[0:18:24]  And I don't know what I was sort of expecting
+[0:18:27]  with the Unicode.
+[0:18:28]  I think I maybe thought it was going to be like a baby
+[0:18:30]  congress, like with the little very formal seats,
+[0:18:32]  people with gavels.
+[0:18:34]  That is not what I found.
+[0:18:35]  Basically, it was a conference room full of people
+[0:18:38]  who skewed whiter, skewed older, skewed males,
+[0:18:41]  skewed engineers.
+[0:18:42]  And this is basically the room where it happened.
+[0:18:44]  So this is 2015.
+[0:18:46]  These were the people who decided your emoji.
+[0:18:49]  All very nice.
+[0:18:50]  And one even had a daughter who had a sense of humor
+[0:18:54]  and made him a shirt that said shadowy emoji overlord.
+[0:18:58]  So I just kind of listened to them debate things
+[0:19:01]  like milk emoji and beans emoji.
+[0:19:03]  And it just seemed like not quite right to me
+[0:19:06]  that it would be this global visual language
+[0:19:10]  that were basically decided by a small group of people
+[0:19:14]  inside a conference room in Silicon Valley.
+[0:19:16]  So I decided to form a group called Emoji Nation
+[0:19:19]  whose motto is emoji by the people for the people.
+[0:19:22]  And it basically advocates for more kind
+[0:19:24]  of representative, inclusive emoji.
+[0:19:28]  We started with a Kickstarter campaign, a dumpling emoji
+[0:19:32]  process, trying to write the wrong in this world,
+[0:19:35]  and made this little cute video sort of advocating.
+[0:19:38]  Dumplings are one of the most universal cross-cultural foods
+[0:19:41]  in the world.
+[0:19:42]  Georgia has kinkali, Japan has gyoza, Korea has mandu,
+[0:19:46]  Italy has ravioli, Poland has barogi,
+[0:19:48]  Russia has palmeni, Argentina has empanadas,
+[0:19:51]  Jewish people have krepler, China has pot stickers,
+[0:19:54]  Nepal and Tibet have momos.
+[0:19:57]  Yet somehow, despite their popularity,
+[0:19:59]  there is no dumpling emoji in the standard set.
+[0:20:02]  Why is that?
+[0:20:03]  Emoji exists for pizza, tempura, sushi, spaghetti,
+[0:20:06]  hot dog, and now tacos, which Taco Bell takes credit for.
+[0:20:10]  We need to write this disparity.
+[0:20:12]  Dumplings are global, emoji are global.
+[0:20:15]  Isn't it time we brought them together?
+[0:20:19]  Oh yeah, oh wow, we're at it.
+[0:20:20]  How about an emoji for Chinese takeout?
+[0:20:26]  I did put together a dumpling emoji proposal.
+[0:20:28]  I wrote this, I remember Thanksgiving Day, 2015,
+[0:20:31]  on a plane, and we got it passed.
+[0:20:35]  Basically, dumpling, takeout box, chopsticks,
+[0:20:38]  and fortune cookie.
+[0:20:40]  I have to say, I don't think fortune cookie
+[0:20:42]  would have made it on its own merits,
+[0:20:44]  but it kind of like slid in on the coattails
+[0:20:46]  of the other ones, and so these were the proposals
+[0:20:49]  as we submitted them, and then these are the ones
+[0:20:51]  that kind of exist now on the Apple keyboard.
+[0:20:54]  And I have to say, the dumpling looks really,
+[0:20:56]  really realistic, oddly realistic,
+[0:20:59]  whereas the fortune cookie I think is a big fail,
+[0:21:01]  because first of all, it looks like a dead 3D Pac-Man,
+[0:21:06]  so I'm very disappointed in the manifestation of that,
+[0:21:11]  but that's okay, that's okay.
+[0:21:12]  And so it's kind of interesting,
+[0:21:14]  what is the process of getting an emoji passed?
+[0:21:18]  And I will sort of walk you through it.
+[0:21:20]  So first of all, you come up with your idea, right,
+[0:21:23]  and then you kind of write this proposal,
+[0:21:26]  and then you submit it to the Unicode Emoji Subcommittee,
+[0:21:29]  who then kind of gives you comments
+[0:21:30]  and then sends it back to you,
+[0:21:31]  and you kind of go around and around in a circle,
+[0:21:34]  and when, so these are things that we consider.
+[0:21:38]  So somewhere in there, I also fought my way
+[0:21:40]  onto the Emojis Committee, and then also became a vice chair,
+[0:21:44]  sort of a extracurricular,
+[0:21:46]  just like completely run amok in my life.
+[0:21:48]  So things that matter, popular demand
+[0:21:52]  is a frequently requested emoji,
+[0:21:55]  multiple usages and meanings,
+[0:21:57]  so that's actually kind of very important
+[0:21:59]  for something like, you know,
+[0:22:00]  certain animals have meanings,
+[0:22:02]  so we did sloth a while ago,
+[0:22:06]  and it also has not only literal meaning,
+[0:22:08]  but sort of like connotations.
+[0:22:11]  There are visually distinctness that can be recognized,
+[0:22:14]  so this was a blocker for one of the emoji
+[0:22:18]  that I have worked on before, which is cave,
+[0:22:21]  which is kind of hard to do.
+[0:22:22]  I think, you know, meaning-wise, it's pretty good,
+[0:22:24]  but it's really hard to get a cave down in emoji sizes,
+[0:22:27]  and then it filling a gap, completeness.
+[0:22:29]  So a good example for that is like,
+[0:22:31]  for some reason, for many years,
+[0:22:33]  we had red heart, yellow heart, green heart,
+[0:22:35]  blue heart, purple heart, and no orange heart,
+[0:22:38]  so you know, you would do the rainbow,
+[0:22:42]  but people would substitute the pumpkin in,
+[0:22:43]  so you would like, you know, have a rainbow heart thing
+[0:22:45]  with a little pumpkin stuck in the middle,
+[0:22:47]  so orange heart obviously should be added
+[0:22:51]  and give a sense of completeness.
+[0:22:53]  And then something else is existing vendor compatibility,
+[0:22:56]  and so a good example for that was many years ago,
+[0:23:01]  WhatsApp decided to add the gender non-binary emoji,
+[0:23:05]  and then once it did that,
+[0:23:07]  then all the other kind of vendors jumped on.
+[0:23:11]  So what kind of knocks out an emoji?
+[0:23:14]  So too specific or narrow, so we'll often see that
+[0:23:18]  with like very specific animals or a very specific group.
+[0:23:21]  It's redundant, so one year, oh my God, who makes it?
+[0:23:25]  Butterball, Butterball makes the turkeys.
+[0:23:27]  Butterball submitted an emoji proposal
+[0:23:30]  that was like a cooked turkey,
+[0:23:32]  but we already had a live turkey,
+[0:23:33]  so it seemed kind of redundant,
+[0:23:34]  and both like a cooked turkey
+[0:23:35]  for Thanksgiving and a live turkey.
+[0:23:37]  So not visually discernible.
+[0:23:41]  This is a struggle for things like, I don't know,
+[0:23:42]  my friends have kind of proposed kimchi.
+[0:23:48]  Kimchi is really hard on emoji sizes for many reasons,
+[0:23:50]  and part of that tension
+[0:23:52]  is because it's not visually discernible.
+[0:23:54]  Then there are no logos, brands, deities, or celebrities,
+[0:23:57]  so no Nike Swoosh, no McDonald's M,
+[0:24:00]  and then this is one that we kind of decided
+[0:24:01]  in the last year or so, which is no more flags.
+[0:24:04]  Flags are a very complicated thing,
+[0:24:07]  and as a result, Unicode does not want to be in the business
+[0:24:09]  of deciding what is a country or not a country.
+[0:24:12]  So like when you get a proposal from like Kurdistan,
+[0:24:15]  you're like, so right now,
+[0:24:17]  the way that the emoji flags are decided
+[0:24:19]  is they kind of depend on what the UN recognizes,
+[0:24:22]  and then those get passed down
+[0:24:23]  to the International Standards Organization,
+[0:24:25]  and then Unicode just does that.
+[0:24:26]  Like it does not want to be in the business
+[0:24:29]  of kind of geopolitical affairs.
+[0:24:33]  So once it comes out of the subcommittee,
+[0:24:35]  it goes to the full Unicode Technical Committee, UTC.
+[0:24:38]  Those are the people that were in the room that I showed you,
+[0:24:42]  and they vote once a year, basically,
+[0:24:45]  to pass all the emoji, and it takes a while.
+[0:24:48]  There's a lot of like coordinating
+[0:24:50]  with the International Standards Organization,
+[0:24:52]  and like a lot of working with the companies,
+[0:24:54]  and eventually, it takes a long time,
+[0:24:56]  but it ends up on your devices,
+[0:24:58]  and that historically has taken about 18 to 24 months
+[0:25:01]  from when you put in a proposal to when you get it in.
+[0:25:03]  It's gonna be a little bit longer going forward, probably,
+[0:25:06]  is my sense as we're gonna,
+[0:25:09]  Unicode has decided to sort of space out
+[0:25:11]  some of the Unicode releases.
+[0:25:13]  So emoji nation, you know, kind of has done its thing.
+[0:25:17]  So one of the weird things is like,
+[0:25:18]  how did Unicode, this like kind of nonprofit organization
+[0:25:21]  based in Mountain View, California,
+[0:25:23]  end up controlling this like global visual language?
+[0:25:26]  So a lot of it has to start with,
+[0:25:29]  has to do with the fact that emoji started in Japan
+[0:25:32]  back in the late 1990s.
+[0:25:33]  One of the, this set from Docomo in 1999
+[0:25:37]  is considered, is widely considered
+[0:25:39]  sort of like the first like color emoji set.
+[0:25:42]  It has been collected by the Museum of Modern Art.
+[0:25:44]  And so these, the Japanese telecom companies would use,
+[0:25:48]  basically would have their own sets of emoji,
+[0:25:50]  and then there were different companies,
+[0:25:52]  so they would have different sets.
+[0:25:53]  So you could basically only send these like visual characters
+[0:25:56]  with someone who was on your same carrier.
+[0:25:58]  So it's like, it's like basically equivalent of,
+[0:26:01]  if you were on like Verizon,
+[0:26:02]  you could only text people on Verizon with like emoji,
+[0:26:05]  or if you were on T-Mobile, you could only do that.
+[0:26:09]  So at a certain point, they decided they were,
+[0:26:13]  the Apple and Google came into Japan,
+[0:26:16]  they wanted to start selling smartphones,
+[0:26:18]  and they realized that it was a hodgepodge of systems,
+[0:26:21]  and they wanted to unify it.
+[0:26:23]  And so in 2007, they went to Unicode,
+[0:26:26]  and they're like, okay, help us unify the emoji,
+[0:26:30]  like kind of like basically all the emojis
+[0:26:33]  so that we have one standard system.
+[0:26:35]  And part of the reason is why Unicode?
+[0:26:38]  Because Unicode basically has this mission
+[0:26:40]  is to enable everyone speaking every language on Earth
+[0:26:43]  to be able to use your languages
+[0:26:44]  on computer and smartphone.
+[0:26:45]  So it basically unifies all written languages
+[0:26:48]  into one ginormous set.
+[0:26:51]  And that was not the case actually when I was growing up.
+[0:26:54]  There was a point where like,
+[0:26:56]  if you were Japanese on Apple,
+[0:26:57]  that would be different than Japanese on DOS,
+[0:27:00]  or like Chinese or Arabic.
+[0:27:02]  So it drove everyone crazy,
+[0:27:04]  and they basically decided around the late 80s
+[0:27:07]  or early 1990s that they were gonna come up
+[0:27:09]  with one standardized system
+[0:27:11]  that sort of encoded all characters in one ginormous set.
+[0:27:16]  So there's three main projects for Unicode if you care.
+[0:27:19]  So one is encoding characters, including emoji.
+[0:27:22]  Now there are about 100,000 characters assigned.
+[0:27:25]  So that includes like Chinese, Japanese,
+[0:27:28]  Korean, Arabic, Cyrillic,
+[0:27:32]  actually all the hieroglyphics, all of the emoji.
+[0:27:35]  A lot of things like the Bitcoin symbol
+[0:27:37]  or like copy left or whatever.
+[0:27:39]  Those all assigned were about 100,000 characters,
+[0:27:42]  even those languages that are basically out of use.
+[0:27:45]  So the other thing it does,
+[0:27:47]  it creates localization resources.
+[0:27:50]  So things so that you know like,
+[0:27:52]  oh, if you're in this country,
+[0:27:54]  you're using a euro or you're using the pesos or something.
+[0:27:59]  So there's a lot of localization that is needed
+[0:28:03]  depending on which geography you're using your device from
+[0:28:07]  or like that you know that the time is used this way
+[0:28:10]  or dates are shown that way.
+[0:28:11]  So that is called the Common Locale Data Repository
+[0:28:15]  or CLDR as they call it.
+[0:28:16]  And the other thing they do is they kind of maintain
+[0:28:18]  libraries for developers in order to do all to kind of,
+[0:28:23]  so they are not building everything from scratch
+[0:28:24]  and that is called ICU.
+[0:28:26]  So it's very funny because like, it's called CLDR.
+[0:28:28]  And then one day, one of our friends' girlfriends
+[0:28:32]  made him this thing, which she called a seal deer
+[0:28:37]  because whenever he talked about CLDR,
+[0:28:39]  she thought he was talking about seal deers.
+[0:28:43]  So now this is his little like mascot
+[0:28:45]  for like Unicode related things.
+[0:28:47]  So how does Unicode do this?
+[0:28:50]  So it basically signs code points
+[0:28:52]  and each code point is a unique number
+[0:28:54]  assigned to each Unicode character.
+[0:28:56]  So face with tears of joy can be written like this
+[0:29:02]  with a code point or it can be written like this
+[0:29:04]  in terms of decimal numbers
+[0:29:05]  and it can also be written this in binary numbers.
+[0:29:07]  So these are all basically the same.
+[0:29:09]  And the key thing to know at least about Emoji
+[0:29:12]  is that when your device,
+[0:29:13]  if you're talking your iPhone with someone
+[0:29:16]  who's on a laptop or an iPad or like an Android device,
+[0:29:19]  it's not sending the images back and forth,
+[0:29:21]  it's sending just a number back and forth.
+[0:29:23]  And then locally, your phone or like your laptop decides
+[0:29:27]  like, oh, this number correlates with which image
+[0:29:31]  in terms of our Emoji font and then pulls it up.
+[0:29:33]  So this is really key to know why different Emoji
+[0:29:38]  look different on different platforms.
+[0:29:40]  So 2007 to 2010, it took about three years,
+[0:29:43]  but Unicode 6.0 came out
+[0:29:45]  with our first little baby set of Emoji.
+[0:29:47]  And it just kind of hung out there for a year,
+[0:29:50]  like no one, it wasn't doing anything.
+[0:29:51]  So 2011 though, Apple starts adding the Emoji keyboard
+[0:29:55]  and it just like explodes.
+[0:29:57]  Like I feel like in some ways Emoji
+[0:30:00]  were not like invented, they were discovered.
+[0:30:02]  They like obviously touch something very, very primal
+[0:30:05]  to like our human desire to like communicate
+[0:30:10]  in like little colorful glyphs on electronic devices.
+[0:30:13]  And you kind of have, what's kind of really interesting
+[0:30:15]  is like the ambiguity that comes
+[0:30:19]  with what Emoji kind of mean.
+[0:30:21]  And so one of the, this is one of my favorite Emoji,
+[0:30:23]  it's sort of like an upside down spine face,
+[0:30:25]  very, very ambiguous, clearly very ambiguous,
+[0:30:27]  because if you start typing into Google,
+[0:30:29]  like the top hits are like, what does it mean from a guy?
+[0:30:31]  What does it mean from a girl?
+[0:30:32]  Like it's clearly something that a lot of people
+[0:30:35]  are using in like complex situationships
+[0:30:37]  between each other.
+[0:30:38]  So one of the fun things is who can propose Emoji.
+[0:30:44]  Technically anyone can, anyone here can,
+[0:30:46]  normal humans can.
+[0:30:47]  We have basically Google Doc or Google Form
+[0:30:50]  that we throw up historically between August,
+[0:30:53]  sorry, April and August in the last two years.
+[0:30:56]  And so this is one of our favorite examples.
+[0:31:00]  This is Rayouf Ahoumadi.
+[0:31:02]  She was a 15 year old Saudi Arabian girl
+[0:31:04]  who was living in Vienna at the time
+[0:31:06]  that she proposed the hijab emoji.
+[0:31:10]  And then, you know, then she was like Time Magazine,
+[0:31:12]  like, you know, Coolest Teens.
+[0:31:13]  She got like a whole bunch of different things.
+[0:31:14]  She got into Harvard and Stanford,
+[0:31:16]  and she went to Stanford.
+[0:31:18]  And so this is a process we got.
+[0:31:21]  Then there was a group of folks from Argentina
+[0:31:23]  who got the mate emoji kind of, you know,
+[0:31:26]  for a symbol of their national drink.
+[0:31:28]  Then we worked with, there was a nonprofit
+[0:31:31]  that really wanted to like get a menstruation emoji.
+[0:31:36]  And so what they proposed to begin with
+[0:31:38]  was like bloody underwear.
+[0:31:40]  And I was just like, no, no, no,
+[0:31:42]  so many different reasons why this is a terrible emoji.
+[0:31:46]  But so we did get blood drops.
+[0:31:47]  And then you could do moon and blood drop
+[0:31:49]  or underwear and blood drop.
+[0:31:50]  There's a lot of different ways.
+[0:31:51]  Actually, it's really funny
+[0:31:52]  because I was polling my friends beforehand
+[0:31:54]  what they would use to indicate menstruation
+[0:31:57]  before there was a blood drop.
+[0:32:00]  So there was like red wine.
+[0:32:01]  There was like kind of that rose
+[0:32:04]  with the like falling petal.
+[0:32:06]  And then my favorite was actually
+[0:32:08]  my friend who used a Japanese flag
+[0:32:10]  as a way to indicate that she was having her period.
+[0:32:14]  So one of the biggest contributors,
+[0:32:17]  this skin tone emoji appeared I think in 2015.
+[0:32:21]  It was amazing.
+[0:32:22]  And it was proposed by a mom, Katrina Parrott.
+[0:32:26]  She is a entrepreneur and a mom
+[0:32:28]  who is just like at home one day
+[0:32:29]  and her daughter comes home and is like,
+[0:32:33]  you know, I wish there were emoji that look like me.
+[0:32:36]  And her mom was like, that's great, honey.
+[0:32:38]  What's an emoji?
+[0:32:39]  And so she, like me, I guess, Googled
+[0:32:42]  and just figured out that Unicode controlled emoji.
+[0:32:46]  And she just came up with a proposal saying
+[0:32:47]  we should not only have the yellow skin tones.
+[0:32:50]  At that time, everything was sort of Simpson's yellow.
+[0:32:53]  It's really interesting to see how race
+[0:32:57]  and like nationality are like depicted
+[0:32:59]  in different parts of the world.
+[0:33:01]  So originally in Japan, everyone was yellow.
+[0:33:05]  But these were the non, you know, by default,
+[0:33:07]  everyone was just like, you know, human or Japanese.
+[0:33:11]  But they had like a couple of things that were like not.
+[0:33:13]  Like one was you had a blonde person.
+[0:33:16]  So there's an emoji called like blonde woman or whatever
+[0:33:19]  that represents all Westerners.
+[0:33:20]  Okay, so that was one.
+[0:33:22]  They have one that's like an Indian guy with a turban.
+[0:33:24]  So that's supposed to represent Indian people.
+[0:33:26]  And then there's like a guy with a little hat
+[0:33:30]  that's supposed to represent like Chinese people.
+[0:33:32]  So that was like, that was the view,
+[0:33:33]  Japanese view of race, which was like default.
+[0:33:36]  Then you were like blonde Western Chinese or Indian.
+[0:33:39]  And that is all there was.
+[0:33:42]  And obviously in the United States,
+[0:33:44]  we care a lot about race.
+[0:33:46]  And then so she came up with a system with five skin tones,
+[0:33:49]  like just like normal people.
+[0:33:51]  Some guy in Germany decided that he wanted to do a face
+[0:33:55]  with one eyebrow raised or as we call it, the Kober emoji.
+[0:34:00]  And oh, this one's fun.
+[0:34:03]  So woman's flat shoe.
+[0:34:04]  I have to say not highly used statistically at this point,
+[0:34:07]  but I really kind of appreciate it
+[0:34:09]  because it was a mom who was very offended
+[0:34:11]  that all women's shoes had heels, even the sandals.
+[0:34:14]  So this is her, she had like three kids at the time.
+[0:34:17]  She now has four, she was very fertile.
+[0:34:20]  And she also did the women's flat.
+[0:34:26]  Okay, she also did one piece bathing suit
+[0:34:31]  because she was also offended by the fact
+[0:34:34]  that the only kind of bathing suit you had
+[0:34:35]  was like this like little itsy bitsy polka dot bikini thing,
+[0:34:38]  which is not great if you're like taking your six year old.
+[0:34:40]  So I have to say that got passed,
+[0:34:42]  but like it didn't go over like super well with everyone.
+[0:34:45]  So, you know, Unicode because it's very public
+[0:34:47]  submits things for comments.
+[0:34:49]  And we got this comment back.
+[0:34:51]  So one piece bathing suit, why?
+[0:34:54]  A person wanting to indicate the use of swimwear
+[0:34:56]  can't use existing bikini, is this really necessary?
+[0:34:59]  What about a Victorian bathing costume
+[0:35:02]  or a wetsuit or waterings?
+[0:35:03]  This is like literally in like the records
+[0:35:07]  and like do not encode.
+[0:35:09]  And so the person who did this is actually very impressive.
+[0:35:12]  He's actually the person who created
+[0:35:14]  the middle finger emoji.
+[0:35:16]  And actually, if you've ever seen the Vulcan emoji,
+[0:35:18]  he the Vulcan hand emoji, he's actually very active.
+[0:35:22]  And I have to say, this is actually,
+[0:35:23]  I think one of the more impressive emojis.
+[0:35:25]  So obviously, obviously we have a lot of active debate.
+[0:35:29]  Sometimes you get like whole countries submitting.
+[0:35:31]  So literally the government of Finland,
+[0:35:33]  as in like their equivalent of the State Department,
+[0:35:35]  their diplomacy kind of thing, submitted a proposal for sauna.
+[0:35:40]  And these were so creepy and so weird.
+[0:35:47]  So much is wrong with this.
+[0:35:49]  And, but I felt where they were coming from.
+[0:35:52]  First of all, like they're naked.
+[0:35:54]  They have no, they have club feet.
+[0:35:56]  And so we decided to help them.
+[0:35:58]  We're like, okay, we see where you're going with this.
+[0:36:00]  Let's see if we can like help you like come up,
+[0:36:03]  you know, like we had the spoon,
+[0:36:05]  like should there be like steam around them?
+[0:36:07]  Like, should they be naked or wearing a towel?
+[0:36:09]  It's like super like dicey.
+[0:36:10]  But we wanted to help them,
+[0:36:11]  because it was like literally a foreign government
+[0:36:13]  coming in front of Unicode,
+[0:36:14]  advocating for the sauna emoji
+[0:36:16]  on behalf of their entire country.
+[0:36:17]  So then this is, it's sort of evolved into just basically
+[0:36:20]  person in seamy room, which is,
+[0:36:22]  which is the most sort of like the PG version of sauna.
+[0:36:25]  No, and there's no spoon, they're all dressed.
+[0:36:27]  It's very odd.
+[0:36:28]  But so you can see the evolution of what it started out,
+[0:36:31]  what we submitted and what it ended up.
+[0:36:34]  So there's a lot of like evolution
+[0:36:36]  throughout the entire process.
+[0:36:38]  And like companies can submit emoji proposals too.
+[0:36:42]  So Google actually worked on this one.
+[0:36:43]  I love this one, okay.
+[0:36:44]  So just to give you some context, as of 2015,
+[0:36:47]  there are many ways you could be or have an occupation
+[0:36:50]  as a male on the emoji keyboard, right?
+[0:36:53]  Like, for example, you could be a police officer,
+[0:36:57]  you could be a detective,
+[0:36:58]  you could be a Buckingham palace guard,
+[0:37:00]  you could even be Santa Claus.
+[0:37:01]  Like these are so many jobs that you could have.
+[0:37:04]  But if you were a woman, as of 2015,
+[0:37:05]  there were four things that you could be.
+[0:37:07]  You could be a princess,
+[0:37:09]  you could be a bride, you could be a dancer,
+[0:37:11]  or you could be a playboy bunny.
+[0:37:12]  These were the sum total of all the occupations
+[0:37:15]  that we could have.
+[0:37:16]  So there was sort of this movement at that time.
+[0:37:20]  It was like this like video on YouTube that like went viral.
+[0:37:23]  There was like a New York Times op-ed that was like,
+[0:37:25]  where are the women with professions?
+[0:37:26]  So basically they came up with a set of emoji
+[0:37:30]  for professions.
+[0:37:31]  And what's nice is not only did women have
+[0:37:33]  these professions, now men have them too.
+[0:37:36]  So of emoji nation emoji,
+[0:37:38]  these are some of the ones that we've worked on.
+[0:37:40]  I think about 130 of the emoji on your keyboard
+[0:37:42]  probably came through, touched our system in some way,
+[0:37:46]  including, I have to say, microbe or virus.
+[0:37:49]  I think I have the opinion that every emoji has its day.
+[0:37:52]  Like it might not be like today, it might not be next year,
+[0:37:56]  but I have to say virus was not doing anything,
+[0:37:58]  then came 2020 and that was like such a good moment for it.
+[0:38:01]  Along with soap, we had also done soap.
+[0:38:03]  So among the other emoji that we have worked on
+[0:38:08]  are sari, mooncake, llama, like teddy bear.
+[0:38:10]  There were no toys, I felt really sad for toys.
+[0:38:13]  We have like giraffe, there was hot bubble tea.
+[0:38:17]  Bubble tea was very controversial actually.
+[0:38:19]  I have to say, we tried to slide it in originally
+[0:38:22]  with the takeout box and the dumplings
+[0:38:24]  and people were not happy.
+[0:38:26]  I understand that, cause there's not a lot,
+[0:38:28]  like compared to like beer or wine,
+[0:38:31]  like bubble tea does not have a long history on this planet.
+[0:38:35]  But I will say that they submitted again,
+[0:38:40]  actually kind of originally proposing
+[0:38:42]  that it was not just bubble tea,
+[0:38:44]  but like a black ball and milk and tea.
+[0:38:46]  It was kind of cool.
+[0:38:47]  And I have to say, there was definitely a generational divide
+[0:38:50]  between like the Asian women who sit in that room
+[0:38:53]  and are like, this absolutely is a thing that we consume
+[0:38:55]  like almost like every week of our life.
+[0:38:57]  And people who are a little bit older,
+[0:38:59]  who are like, that looks like a parfait.
+[0:39:01]  How do you not know that's a parfait?
+[0:39:02]  And we're like, we absolutely know.
+[0:39:04]  It is not a parfait.
+[0:39:05]  And so it got in eventually.
+[0:39:07]  So it does sort of influence,
+[0:39:08]  it kind of shows like who is in the room influences,
+[0:39:12]  you know, the decisions that get made
+[0:39:14]  or sometimes in the room,
+[0:39:15]  now sometimes more likely in the Zoom.
+[0:39:18]  I actually have to say beaver emoji.
+[0:39:20]  If you see beaver emoji,
+[0:39:21]  that's one of the ones I'm most proud of.
+[0:39:23]  So that is actually co-authored by a professor
+[0:39:25]  here at Harvard who is both lesbian
+[0:39:29]  and was married to a woman from Canada.
+[0:39:31]  So it was very important to her
+[0:39:32]  to get the beaver emoji passed.
+[0:39:35]  And she promised me it would always be
+[0:39:37]  the first line of her bio.
+[0:39:38]  So, and indeed, if you go to her Twitter handle,
+[0:39:42]  it's like Joan Donovan, creator of the beaver emoji,
+[0:39:46]  is head of research at the Shorenstein Center
+[0:39:48]  at the Harvard Kennedy School.
+[0:39:49]  It's kind of, it's pretty impressive.
+[0:39:52]  And then we did greens.
+[0:39:53]  Actually greens was really interesting because people,
+[0:39:57]  this was also like a generational cultural thing.
+[0:39:59]  People were like, why do we need greens?
+[0:40:00]  We have salad.
+[0:40:01]  And I was like, we're Chinese.
+[0:40:03]  We don't eat raw greens
+[0:40:04]  because you don't know where it's been or if it's clean.
+[0:40:07]  So we cook our greens.
+[0:40:08]  So salad is not something that we have.
+[0:40:09]  So eventually I got my greens.
+[0:40:11]  And so that was kind of fun.
+[0:40:14]  And then, so these are some of the people
+[0:40:15]  who sort of have contributed
+[0:40:16]  to our little emoji nation things,
+[0:40:18]  including a number of Native Americans who helped get feather.
+[0:40:21]  So why do I care?
+[0:40:22]  So part of it is because I'm Chinese.
+[0:40:24]  I grew up speaking Chinese and English at the same time.
+[0:40:26]  And it's really interesting to see Chinese
+[0:40:28]  and English characters in terms of emoji
+[0:40:32]  and Chinese together, right?
+[0:40:33]  So this is fire.
+[0:40:34]  You have like fire characters and now you have emoji things.
+[0:40:36]  And it's kind of, it kind of shows
+[0:40:37]  that there is a longevity in the human experience
+[0:40:40]  of something that was designed 4,000 years ago
+[0:40:42]  as the same visual cues in the human experiences as now.
+[0:40:44]  So mouth, tree, moon, sun.
+[0:40:50]  You can mix and match them, which is super fun.
+[0:40:52]  So, you know, two trees kind of make a forest.
+[0:40:56]  Oops, sorry.
+[0:40:58]  Then the moon and sun together means right, which I like.
+[0:41:06]  I like this one.
+[0:41:07]  So if you stop and you think about this.
+[0:41:09]  So this is basically a pig under a roof.
+[0:41:15]  And what does that mean?
+[0:41:17]  It does not mean farm, as you might think.
+[0:41:20]  It actually means home or family.
+[0:41:21]  So in the Chinese kind of structure and outlook on the view,
+[0:41:26]  it's like where you keep your pigs
+[0:41:28]  is actually where your home is and what your farm is.
+[0:41:32]  So it gets kind of weird in all kinds of ways.
+[0:41:35]  So one of my favorite radicals.
+[0:41:36]  So this character means woman, ni.
+[0:41:40]  And as I was learning Chinese,
+[0:41:44]  you kind of notice like how it shows up.
+[0:41:46]  So this is a woman underneath a roof and you're like,
+[0:41:50]  oh, it means mom or wife or like whatever, like home.
+[0:41:55]  It does not.
+[0:41:56]  It means peace because things are at home
+[0:42:00]  when the woman is, or things are at peace
+[0:42:03]  when the woman is at home underneath a roof,
+[0:42:05]  which I always thought was a little bit odd.
+[0:42:07]  Then there is also a woman plus child.
+[0:42:12]  So you're like, oh, and actually specifically boy child,
+[0:42:15]  the connotation there is a little bit unclear.
+[0:42:17]  So you're like a woman plus child, family, mom, whatever.
+[0:42:21]  It is not, it means good.
+[0:42:22]  So the standard for goodness in ancient China
+[0:42:25]  was a woman who had a male child.
+[0:42:27]  So that kind of just like kind of irked me growing up.
+[0:42:31]  And then three women together means evil,
+[0:42:34]  which is like very like Macbeth.
+[0:42:35]  This character means greed.
+[0:42:40]  This character means slave.
+[0:42:42]  This marriage, I think this one is jealousy.
+[0:42:45]  And this means adultery or betrayal.
+[0:42:48]  So like definitely not loving the way women were portrayed
+[0:42:54]  on the emoji keyboard.
+[0:42:55]  So in case you're wondering,
+[0:42:56]  we just came out with a kid's book called Had Moji
+[0:42:58]  that kind of compares emoji and Chinese.
+[0:43:01]  And I think they sent out a bunch of books
+[0:43:04]  so that you guys can do some kind of contests
+[0:43:06]  like later on with CS50.
+[0:43:09]  So, but the mixing and matching is really interesting, right?
+[0:43:12]  For example, the skin tones are actually
+[0:43:15]  the same yellow character plus a layer of skin tone
+[0:43:18]  on top of this.
+[0:43:19]  So I kind of took my lessons from Chinese
+[0:43:21]  in terms of seeing how things can be fine.
+[0:43:24]  So there's something you should know about,
+[0:43:25]  which is Zwitch.
+[0:43:26]  This is also an invisible emoji character.
+[0:43:28]  It stands for zero with joiner.
+[0:43:30]  And it was actually originally created most for,
+[0:43:32]  I think Arabic, where you would basically kind of force
+[0:43:36]  something to have like be in the beginning of a word
+[0:43:38]  or an end of a word by kind of having
+[0:43:41]  this like invisible character.
+[0:43:42]  So the rainbow flag, for example,
+[0:43:44]  is actually a rainbow plus the white flag.
+[0:43:47]  And we could have all kinds of fun combinations.
+[0:43:51]  If you look at polar bear, it actually is,
+[0:43:54]  if you have an older device or it breaks apart,
+[0:43:55]  it is bear plus snow, which is really cute.
+[0:43:59]  Originally I had bear plus white.
+[0:44:01]  And then we decided that bear plus snow
+[0:44:04]  made a lot more sense.
+[0:44:05]  So another one, this is new.
+[0:44:07]  I think you guys should have it if you've updated
+[0:44:10]  your phones in the last year or so.
+[0:44:12]  So mending heart is heart plus bandaid.
+[0:44:16]  What is this one?
+[0:44:17]  Oh, this is interesting.
+[0:44:19]  There was a breastfeeding woman for a long time
+[0:44:22]  and people felt like there was not gender parity.
+[0:44:24]  It was actually really interesting.
+[0:44:24]  All the people who wrote in and were like,
+[0:44:26]  I wanna be a dad showing that I'm holding my baby.
+[0:44:29]  Why is there only a woman holding my baby?
+[0:44:31]  So we kind of created a whole set.
+[0:44:34]  So this is man plus model, ta-da.
+[0:44:38]  And so this is, and all of these occupations
+[0:44:40]  are actually oftentimes a woman plus like the fried egg
+[0:44:44]  or like a school or a tractor.
+[0:44:47]  And that's how you got the occupations.
+[0:44:49]  If you send an emoji over into an older system,
+[0:44:53]  sometimes it'll break apart.
+[0:44:55]  So one of my kind of favorite kind of contributions
+[0:44:57]  in this world is interracial couple emoji,
+[0:44:59]  which we did with Tinder, which is super fun.
+[0:45:03]  Cause then you could have different couples that are,
+[0:45:06]  and like so many common, this is a fun,
+[0:45:09]  if you guys ever have to do a combinatoric test,
+[0:45:11]  this is really fun cause you have two genders
+[0:45:14]  plus a third like neutral gender plus two people
+[0:45:17]  plus five skin tones plus yellow.
+[0:45:19]  Like how many emoji couples can you come up with
+[0:45:23]  when you introduce this factor?
+[0:45:24]  So this is, and underneath it, it's just as which sequence,
+[0:45:28]  it's like two people standing together
+[0:45:29]  that are like glued together.
+[0:45:31]  Now this actually gets interesting from a CS50 perspective
+[0:45:34]  because in many cases, even though you only see one character
+[0:45:38]  underneath the hood, depending on how your system works,
+[0:45:41]  they're counting each one of these as an individual character.
+[0:45:44]  So your string length actually might be five instead of one.
+[0:45:47]  And this kind of became a problem with things like Twitter
+[0:45:49]  where things had a hard skin length.
+[0:45:51]  So gender inclusivity is actually one of the things
+[0:45:54]  that we've been dealing most with in the last couple years.
+[0:45:58]  So it's kind of interesting if you think about
+[0:46:01]  both what a pictorial language looks like
+[0:46:02]  versus the abstractness of a spoken language.
+[0:46:06]  So, cause you know, we had boy and we had girl,
+[0:46:10]  but there was no way to say generic child, right?
+[0:46:12]  Like if you want to say child,
+[0:46:14]  you had to pick a boy or a girl,
+[0:46:15]  but not a way to say like just some little person.
+[0:46:19]  And that's really key cause in English at least,
+[0:46:21]  there is no gender implied by child.
+[0:46:25]  So how do we mimic that?
+[0:46:27]  And it also is a key for something like doctor, right?
+[0:46:30]  Doctor and teacher, those don't have gender implied,
+[0:46:34]  but when we have them on the emoji keyboard,
+[0:46:37]  you had to pick a male teacher or a female doctor or whatnot.
+[0:46:42]  So there was actually a guy at Adobe
+[0:46:45]  who considered himself non-gender binary.
+[0:46:47]  Also the man behind the orange heart,
+[0:46:51]  he fought and got basically the first three
+[0:46:56]  non-gender binary emoji.
+[0:46:59]  So child, adult, and older adult.
+[0:47:02]  So those are creative.
+[0:47:04]  And then we started having to propagate them
+[0:47:06]  through actually all the occupations.
+[0:47:07]  So these are the gender neutral versions of many of those.
+[0:47:11]  But then we got into this whole thing
+[0:47:13]  where every emoji that had a gender originally
+[0:47:16]  had to be mirrored.
+[0:47:17]  So originally we had bearded man,
+[0:47:18]  and then we're like, okay, well,
+[0:47:20]  we actually have to get bearded woman.
+[0:47:21]  So that is on your keyboard.
+[0:47:23]  There is pregnant woman.
+[0:47:24]  There is now pregnant man, which is interesting.
+[0:47:28]  There is woman in a bridal gown.
+[0:47:31]  There is now man in a bridal gown.
+[0:47:34]  And then there were ones that actually had to be created
+[0:47:36]  that were neither man or woman.
+[0:47:38]  So this is a mer person.
+[0:47:40]  So there was merman, there was mermaid,
+[0:47:41]  and there was mer person.
+[0:47:42]  It was really interesting to figure out
+[0:47:43]  how do you draw a gender neutral mer person?
+[0:47:46]  Like a bunch of them in the beginning
+[0:47:47]  actually had the arms crossed around sort of the chest.
+[0:47:51]  Monarch.
+[0:47:51]  So there was prince and princess,
+[0:47:52]  and now there is monarch.
+[0:47:54]  And one of my favorite actually is there was Santa Claus,
+[0:47:57]  and there was Mrs. Claus, and now there's Mx Claus.
+[0:47:59]  Like the name of this character literally in Unicode
+[0:48:02]  is Mx Claus.
+[0:48:02]  So I feel like it's sort of like a very official enshrining
+[0:48:05]  of gender non-binaryness in the world.
+[0:48:09]  Not everyone loved it.
+[0:48:10]  New York Post did not love this.
+[0:48:11]  They were like, we're turning into like emoji woke wars.
+[0:48:16]  So some emoji stats for you.
+[0:48:18]  This is very fascinating.
+[0:48:19]  This is sort of like the general distribution.
+[0:48:21]  By far, the single emoji that you use
+[0:48:23]  more than anything else is the face with tears of joy.
+[0:48:26]  About 10% of all emoji sent is that one character.
+[0:48:30]  And then number two is heart, red heart.
+[0:48:33]  And then it kind of goes down.
+[0:48:34]  So there's a frequency of emoji use.
+[0:48:36]  This is sort of done by order of magnitude.
+[0:48:40]  So one is half of two, two is half of one, da-da-da-da-da.
+[0:48:45]  So it's really interesting.
+[0:48:46]  It's a very, very steep drop off after the first couple.
+[0:48:49]  In case you ever wanna go onto the emoji
+[0:48:52]  kind of Unicode website,
+[0:48:54]  you too can see all the frequency things.
+[0:48:56]  So I think it's really funny.
+[0:48:58]  So basically, if it's green going this way,
+[0:49:00]  it increased in usage between 2019 and 2021.
+[0:49:03]  If it's red going this way, it dropped.
+[0:49:05]  And so pleading face, which was a relatively new emoji,
+[0:49:08]  just sort of shut up on the charts.
+[0:49:12]  And whereas actually like smiling face with heart eyes,
+[0:49:16]  eyes like kind of, kind of slipped, which is interesting.
+[0:49:19]  So we just closed our emoji proposal round for 2022.
+[0:49:23]  These were sort of the breakdowns.
+[0:49:24]  People love submitting smileys and food and beverages,
+[0:49:26]  animals and nature, da-da-da.
+[0:49:29]  I mean, these are very googly colors.
+[0:49:31]  So what is the future of emoji?
+[0:49:33]  I will tell you because we just had a meeting two weeks ago,
+[0:49:36]  so I can now publicly talk about it.
+[0:49:38]  So historically, there was this whole idea
+[0:49:40]  like Unicode doesn't wanna be in the world
+[0:49:42]  of like encoding glyphs for like devices everywhere.
+[0:49:46]  Like there was a very controversial
+[0:49:48]  when it started doing that.
+[0:49:49]  Cause mostly what Unicode used to do
+[0:49:50]  was take an existing language, could be done,
+[0:49:53]  and then it would just take it and digitize it, right?
+[0:49:56]  It took languages that existed and just digitize them.
+[0:49:59]  And then when it kind of wandered into emoji world,
+[0:50:03]  suddenly it's like deciding what deserves to be,
+[0:50:07]  like an emoji decides to be digitized.
+[0:50:09]  So trying to get kind of get out of it
+[0:50:12]  and they have proposals over time where it's like,
+[0:50:15]  oh, maybe we should like come up with a way
+[0:50:17]  to just send pictures back and forth where you,
+[0:50:21]  it's a fixed picture and you like use a hash
+[0:50:24]  so that you know, we would look at the picture
+[0:50:27]  and then like go do a lookup somewhere.
+[0:50:29]  Like that did not go over well.
+[0:50:30]  Then there was actually a really interesting proposal
+[0:50:33]  I kind of like didn't go over well,
+[0:50:35]  which is using something called a QID,
+[0:50:37]  which is in the Wikipedia world.
+[0:50:39]  So in Wikipedia world, items all have numbers
+[0:50:44]  across the different language Wikipedia.
+[0:50:46]  So Obama, human, Earth, they will have an ID number
+[0:50:50]  so that the page in English and the page in German
+[0:50:53]  and the page in Chinese all know
+[0:50:54]  that they're pointing to the same thing.
+[0:50:56]  So the question, so one idea came up like,
+[0:50:58]  why don't we use the numbering system?
+[0:51:00]  So we can use like Eiffel Tower in, you know,
+[0:51:02]  see the number and then like, oh, people know like,
+[0:51:05]  oh, you're trying to say Eiffel Tower.
+[0:51:07]  That did not go over well.
+[0:51:08]  So those are both, both of those proposals seem dead
+[0:51:10]  as of yet and it's too bad
+[0:51:13]  because you'll see kind of what's happening.
+[0:51:14]  Okay, so what's coming in 2022?
+[0:51:16]  So these are the emoji that I actually sort of thought
+[0:51:19]  they would be on your phones by now,
+[0:51:20]  but because we're in mid November
+[0:51:21]  and they usually update early November.
+[0:51:23]  So three more hearts, people love hearts,
+[0:51:26]  like wing, blackbird, goose, birds also,
+[0:51:29]  purple flowers, jellyfish, moose face, donkey.
+[0:51:32]  Donkey will be a little bit late for the kind of elections.
+[0:51:35]  Ginger, peapod, wireless, conda, shaking face.
+[0:51:40]  Folding hand fan, that one was interesting
+[0:51:42]  because when people first proposed it,
+[0:51:44]  they proposed it as like an electric fan
+[0:51:46]  and that didn't, like, who knows what electric fans
+[0:51:49]  will look like in a hundred years?
+[0:51:50]  Because the thing is once an emoji, always an emoji,
+[0:51:52]  they never retire.
+[0:51:53]  So they're always looking for things
+[0:51:55]  that have a visual longevity.
+[0:51:57]  Floppy disk, do not actually do that.
+[0:51:59]  So there's always like, we don't want another floppy disk.
+[0:52:02]  And then hair pick is interesting.
+[0:52:03]  So there was a whole debate about how to convey
+[0:52:08]  like Afro, African hair, like the curly hair
+[0:52:11]  that they introduced a couple of years ago
+[0:52:12]  was supposed to do that.
+[0:52:13]  And most of the vendors actually have it
+[0:52:16]  in a sort of Afro-y way, except for Apple.
+[0:52:17]  So there's a lot of complaints,
+[0:52:18]  but hair pick was sort of an interesting way,
+[0:52:21]  it means both comb, but also has sort of an interesting
+[0:52:24]  historic connotation and it's been around
+[0:52:26]  for about 2000 years.
+[0:52:28]  A couple of music things, maracas and flute.
+[0:52:30]  Beyond 2022, one of the things that's gonna die, oops,
+[0:52:33]  can I go back?
+[0:52:35]  No, I can't, oh well.
+[0:52:36]  We're gonna retire the family emoji.
+[0:52:41]  They didn't go over so well.
+[0:52:42]  There were so many of them, it's combinatorically
+[0:52:44]  if you had all the, everything in, you know,
+[0:52:48]  all the races, all the races, all the,
+[0:52:50]  because you wanted to have skin tones,
+[0:52:52]  because you didn't want to imply
+[0:52:53]  that families can only be one race.
+[0:52:54]  It was such a ordeal.
+[0:52:56]  Essentially, we're all like, no one uses them
+[0:52:58]  and there's so many and it's like the fonts,
+[0:53:01]  in terms of the load is like too large.
+[0:53:03]  So they're just gonna make them all into like,
+[0:53:05]  basically little like bathroom symbol type folks.
+[0:53:08]  So I think that is, those will disappear.
+[0:53:10]  What's actually really interesting about the family emoji
+[0:53:13]  is they had, when they introduced the family emoji,
+[0:53:15]  they had gay family emoji and the Russian government
+[0:53:18]  went berserk and actually you can Google this in 2015,
+[0:53:21]  you'll see a bunch of articles about like,
+[0:53:23]  the Russian government considering it
+[0:53:24]  homosexual propaganda to youth
+[0:53:26]  and there was a big debate about whether or not
+[0:53:27]  they were gonna ban Apple devices and whatever.
+[0:53:29]  So you can see a lot of the media coverage from that time
+[0:53:31]  but I thought it was really interesting
+[0:53:34]  how upset a national government can get
+[0:53:36]  about little pictures on your phone.
+[0:53:39]  Another thing that's gonna, that's on the agenda,
+[0:53:42]  as of a couple of weeks ago,
+[0:53:43]  is directionality in terms of emoji.
+[0:53:46]  So as you know, most emoji kind of just flipped
+[0:53:48]  one way or another and the reason why it matters
+[0:53:51]  is because not all languages run in the same direction.
+[0:53:54]  So for example, Arabic.
+[0:53:55]  So we are used to left to right
+[0:53:58]  but a lot of languages go right to left.
+[0:54:01]  So and this kind of, it kind of changes the meaning
+[0:54:03]  of emoji, for example, right to left.
+[0:54:05]  I send this a lot to my friends
+[0:54:07]  when I'm going flying from the Bay Area to New York.
+[0:54:11]  If you do it from left to right, however,
+[0:54:14]  that is what it looks like.
+[0:54:15]  So it looks like, you know, you're in a Bay Area
+[0:54:17]  but the plane is still going that, you know,
+[0:54:20]  kind of up and to the right
+[0:54:21]  and then now it looks like you're going
+[0:54:23]  from New York to the Bay Area.
+[0:54:25]  The other place is like, oh, it's a girl
+[0:54:27]  and she's running really fast, right?
+[0:54:29]  That is right to left in our world.
+[0:54:32]  Wait, left to right, sorry, sorry.
+[0:54:34]  That was, that's supposed to be left to right
+[0:54:35]  and in here it would be, she's like behind,
+[0:54:38]  like pollution or something like that.
+[0:54:40]  So sorry about that.
+[0:54:41]  So an example, this is actually in the proposal.
+[0:54:43]  Like in one case, if it's left to right,
+[0:54:46]  you're running away from a line of cars
+[0:54:48]  and the other one, it's a warning
+[0:54:49]  to not run behind car fumes.
+[0:54:51]  So they are trying to figure out like,
+[0:54:53]  how do we mirror a bunch of the emoji?
+[0:54:56]  But the main thing that I think sort of,
+[0:55:00]  I don't know when it's gonna happen,
+[0:55:01]  I'm really hopeful it's gonna happen,
+[0:55:02]  is trying to come up with a system
+[0:55:04]  that supports little stickers in line
+[0:55:06]  that don't need Unicode.
+[0:55:09]  So this is like Slack or on Twitch.
+[0:55:12]  You can embed little pictures in line
+[0:55:14]  and all the vendors have to get together
+[0:55:16]  and agree to come up with a standard way to do that.
+[0:55:19]  They have not yet come up with that.
+[0:55:21]  But that is sort of one of the ways
+[0:55:23]  that Unicode wants to back away
+[0:55:25]  from actually being like a global regulator
+[0:55:28]  for like little colorful glyphs.
+[0:55:30]  And so if you ever need to reach me on,
+[0:55:34]  in my emoji world, you can find me,
+[0:55:36]  Jenny at Emojination.org.
+[0:55:38]  There will be, it will be actually a while,
+[0:55:42]  I think, before we see a next generation
+[0:55:44]  of emoji showing up.
+[0:55:46]  There used to be like every year
+[0:55:47]  they would get new code points.
+[0:55:48]  It might be a little bit less than every year now
+[0:55:50]  as they work on things like directionality over time.
+[0:55:53]  So that, if anyone has questions,
+[0:55:55]  you can ask questions, you can find me afterwards.
+[0:55:58]  I think I feel like there's supposed to be
+[0:56:00]  some hubbub right now about maybe,
+[0:56:04]  maybe microphones, but maybe not.
+[0:56:09]  But maybe I'm just done.
+[0:56:10]  And if there are questions or if David is around,
+[0:56:12]  I'm happy to answer any questions that folks have.
+[0:56:16]  Yes, yes.
+[0:56:23]  So the question is what are my thoughts on the emoji movie?
+[0:56:26]  You're talking about the Sony animated one.
+[0:56:28]  Yes, okay.
+[0:56:30]  My thought on that is it is better than a 6% rating
+[0:56:33]  on Rotten Tomatoes would lead you to believe.
+[0:56:36]  So that's my one thought.
+[0:56:37]  And my next thought is that that was a rush job
+[0:56:42]  from an animation perspective.
+[0:56:43]  That was about 18 months of,
+[0:56:47]  whereas a typical animated movie takes four years.
+[0:56:50]  So in my spare time,
+[0:56:51]  I also produce movies and documentaries.
+[0:56:53]  So one thing that is key to know about movies
+[0:56:59]  and animated movies, and this is very important,
+[0:57:01]  they take a very long time, but you can always fix it
+[0:57:04]  because you haven't shot anything.
+[0:57:07]  And a very good example of that is,
+[0:57:08]  I assume you guys have seen Frozen.
+[0:57:10]  If you haven't seen, you've seen of the age
+[0:57:12]  that you would have seen Frozen.
+[0:57:13]  I do not understand like how huge a phenomenon
+[0:57:17]  or why it was such a huge phenomenon.
+[0:57:19]  But they actually did an original cut of Frozen.
+[0:57:24]  And it did, so I don't know if you guys know
+[0:57:27]  the sort of Snow Queen thing,
+[0:57:29]  but she's like super dark and like not fun
+[0:57:31]  and like kind of evil and like not someone
+[0:57:34]  you want to like get behind as a character.
+[0:57:35]  So they actually did sort of a rough cut of that, of Frozen.
+[0:57:39]  And they came out of that with, it's just storyboarding.
+[0:57:42]  And they were like, that is not good.
+[0:57:44]  And they killed it.
+[0:57:46]  So they were like, we can't go with this.
+[0:57:48]  And then started from scratch, more or less again,
+[0:57:51]  starting with the song, Let It Go,
+[0:57:54]  which is actually written by a kid
+[0:57:55]  from my elementary school, Bobby Lopez
+[0:57:57]  or co-written by Bobby Lopez.
+[0:57:59]  I also, actually fun fact, I also went,
+[0:58:01]  I would take the school bus with Lin Manuel Miranda.
+[0:58:05]  So I was a fourth grader when he was like a kindergartener.
+[0:58:07]  So we had a very musical elementary school in New York City.
+[0:58:10]  But the thing is they could fix it
+[0:58:12]  because they had enough time and have enough money.
+[0:58:14]  Not like movies where you shoot humans, much harder to fix.
+[0:58:19]  Because you have the footage that you have
+[0:58:20]  and you can do little pickups, but you can't fix it.
+[0:58:22]  So essentially what happened in that case,
+[0:58:24]  I think it's 18 months and it could have gotten better.
+[0:58:28]  A lot of the movies that you see with Pixar,
+[0:58:30]  like it's very, it's actually sort of emotionally similar
+[0:58:32]  to the movie called Inside Out.
+[0:58:35]  And, but inside they just have more time and so it's better.
+[0:58:38]  So as opposed to 18 months,
+[0:58:39]  which is not long enough to make animated movie, good.
+[0:58:43]  But the other fun thing is it was so weird
+[0:58:47]  because they sold sponsorships.
+[0:58:48]  It was like, like, oh my God, here comes the bots
+[0:58:53]  and the malware.
+[0:58:54]  Let's go into Dropbox and protect ourselves.
+[0:58:57]  And so I think that it got a lot of like bad kind of,
+[0:59:01]  kind of vibes from the press for doing things like that.
+[0:59:04]  But from a kid's perspective, it's fine.
+[0:59:07]  I think if, I don't know that I would like put
+[0:59:10]  into my top 10 of animated pictures,
+[0:59:13]  but it's better than 6% on Rotten Tomatoes.
+[0:59:16]  And then actually, if you guys ever care,
+[0:59:17]  we have done, I did a documentary about emoji.
+[0:59:21]  So, and all the people that helped create emoji.
+[0:59:24]  And we did a CS50X movie night, I think,
+[0:59:29]  during the pandemic, was it during the pandemic?
+[0:59:31]  Everything's sort of like blurred together,
+[0:59:33]  but it was during the pandemic.
+[0:59:35]  Are we, more questions?
+[0:59:37]  Yes.
+[0:59:48]  Or there's the man, yeah.
+[0:59:52]  Yeah, that's a very good question.
+[0:59:53]  Yeah, so the question is one of the proposed,
+[0:59:56]  one of our criteria is of...

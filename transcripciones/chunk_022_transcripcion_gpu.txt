@@ -1,0 +1,1237 @@
+# Transcripción: chunk_022.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  just user experience thus far, because I feel like I'm biasing people
+[0:00:04]  to registering for basketball, maybe, because it's checked by default.
+[0:00:08]  I mean, a lot of forms nowadays have a blank placeholder for the form.
+[0:00:12]  So this is just an aesthetic thing.
+[0:00:13]  But I can do this.
+[0:00:14]  Let me go back to the same form.
+[0:00:16]  And let me give myself just a blank option at the top
+[0:00:19]  that, in fact, I'm going to disable.
+[0:00:21]  So you technically can't select it proactively.
+[0:00:24]  But I am going to select it by default.
+[0:00:26]  And so we probably haven't seen those HTML attributes before.
+[0:00:29]  But if I want to create the equivalent of a title for this dropdown,
+[0:00:35]  I'm going to literally create a disabled option that's automatically
+[0:00:39]  selected called sport so that you can't select it, per se.
+[0:00:42]  But it is there at the top.
+[0:00:43]  So if I go back now to my other tab, reload,
+[0:00:47]  it's just marginally prettier than before.
+[0:00:49]  And I'm not biasing people toward accidentally registering
+[0:00:51]  for basketball alone.
+[0:00:52]  And if I click on this, you'll see that sport is grayed out,
+[0:00:55]  and therefore not manually selectable.
+[0:00:57]  But I can select any of these other three still.
+[0:01:00]  All right, well, unfortunately, if I type in David
+[0:01:02]  and I try registering, for instance, for soccer and click register,
+[0:01:06]  I do end up at slash register.
+[0:01:09]  And there's no question mark or name or sport.
+[0:01:11]  So it's probably indeed post instead of get.
+[0:01:14]  Those are hints.
+[0:01:15]  But not found.
+[0:01:16]  Notice the tab here very succinctly says 404 not found.
+[0:01:22]  Well, why is that?
+[0:01:24]  Just to be clear, why did slash register give me a 404?
+[0:01:31]  What's the logic here?
+[0:01:34]  Perhaps just state the obvious, or it doesn't exist, right?
+[0:01:39]  We haven't done that step yet, all right?
+[0:01:40]  So something as simple as that.
+[0:01:42]  And so I actually sort of belabor that point,
+[0:01:45]  because as you're learning a lot of these conventions
+[0:01:47]  and some of this new syntax, honestly, you're
+[0:01:49]  just going to make stupid mistakes.
+[0:01:50]  Something's not going to work.
+[0:01:51]  But again, go back to first principles.
+[0:01:53]  Well, why is it not found?
+[0:01:54]  All right, slash register should be a template maybe
+[0:01:57]  called register.html.
+[0:01:58]  Oh, I forgot my app.route.
+[0:02:00]  So that should be the kind of thinking as you try to diagnose
+[0:02:02]  these problems moving forward.
+[0:02:04]  All right, so let me go into app.py.
+[0:02:06]  And let me give myself a second route here.
+[0:02:09]  So app.route, quote unquote, slash route.
+[0:02:13]  Then let me define a function called anything I want.
+[0:02:15]  But I'm going to call it, sorry, not slash route, slash register.
+[0:02:19]  Let me call the function just to be consistent register.
+[0:02:22]  But I could call that anything I want.
+[0:02:24]  And just for now, let's not do anything too interesting.
+[0:02:27]  Let's just return the rendering of a template called success.html.
+[0:02:31]  Let's just pretend for now that registration is successful,
+[0:02:34]  no matter who you are or what you do.
+[0:02:36]  Now, I need that template.
+[0:02:37]  And I only have index.html at this point.
+[0:02:40]  So let me actually now do my best practices.
+[0:02:42]  Let me copy all of that.
+[0:02:44]  Let me, in a separate terminal window, let me go into my froshims directory.
+[0:02:51]  And let me create a new template called layout.html, just like before.
+[0:02:55]  Let me paste all that same code.
+[0:02:57]  Let me delete the form and just put in that big placeholder, so block body.
+[0:03:03]  And then end block is all I did earlier.
+[0:03:06]  This is just kind of boilerplate now convention.
+[0:03:09]  Everything else I'm going to leave the same.
+[0:03:10]  But if I wanted to make it prettier, I could add my CSS up top.
+[0:03:13]  If I wanted to add this crazy repeating background,
+[0:03:16]  I could probably do that up top too.
+[0:03:18]  So I could make every page look as ugly as it did back in my day.
+[0:03:21]  But we'll focus just today on the text.
+[0:03:23]  All right, so now that I have layout.html, let me clean up index.html.
+[0:03:28]  I don't need all this redundancy.
+[0:03:30]  I don't need all of these tags at the top.
+[0:03:32]  Instead, recall, I think I just need extends, quote unquote, layout.html,
+[0:03:39]  with the appropriate percent signs and curly braces.
+[0:03:43]  I then have the appropriate block body, though I could call body anything I
+[0:03:46]  want, but I'm going to stick with my convention earlier.
+[0:03:49]  And I'm going to delete the tags down here that I no longer need.
+[0:03:52]  Why?
+[0:03:53]  Because if I go into layout.html, I already have all my open tags,
+[0:03:57]  all my closed tags.
+[0:03:58]  The only stuff I want in index.html is going to be what belongs in the body.
+[0:04:03]  So end block down here.
+[0:04:05]  And just to be pedantic, let me go ahead and highlight all that, hit Shift Tab,
+[0:04:10]  and that will unindent it just to line things up, just to be tidy.
+[0:04:14]  All right, so better, even though it looks a little cryptic now.
+[0:04:16]  But now I've laid the foundation for making a third page, a fourth page,
+[0:04:19]  that don't have all of that same copy paste.
+[0:04:22]  All right, so now let's go back into app.py.
+[0:04:25]  Success.html is where I left off.
+[0:04:27]  So OK, let me open my terminal window.
+[0:04:29]  Let me code up a template called success.html, whose purpose in life
+[0:04:34]  is literally just going to be to say, you are registered, just
+[0:04:37]  so that we see some informative message on the screen.
+[0:04:40]  So this part I do still need, extends layout.html.
+[0:04:44]  So there's a little bit of copy paste still, which is a little ugly,
+[0:04:47]  but so be it.
+[0:04:49]  Block body for this template.
+[0:04:51]  And I'm just going to say, you are registered, exclamation point.
+[0:04:55]  All right, and then end block.
+[0:04:56]  So super simple.
+[0:04:57]  It's just an informative message claiming that the student is registered.
+[0:05:02]  All right, let's go back to the original form, which is this.
+[0:05:05]  Let me reload to make sure my HTML has reloaded.
+[0:05:08]  Type in David.
+[0:05:09]  I'm going to register again for soccer and click Register.
+[0:05:13]  And oh, interesting, method not allowed.
+[0:05:16]  So I'm not getting a 404 anymore.
+[0:05:18]  I'm getting 405 at slash register.
+[0:05:24]  What's the deduction here?
+[0:05:25]  How did I screw up this time?
+[0:05:30]  405 is progress, yeah?
+[0:05:33]  So the placeholder, I think, is OK.
+[0:05:36]  This is now about the underlying HTTP stuff.
+[0:05:38]  The method was not allowed.
+[0:05:43]  Say again?
+[0:05:44]  So get versus post thing, too.
+[0:05:46]  So by default, all of these routes in Flask, just by default, assume get.
+[0:05:50]  Because it's safe.
+[0:05:50]  It doesn't allow you to send information to the server in quite the same way.
+[0:05:54]  But if I do want to support post, recall that we changed this to be methods equals
+[0:05:59]  and then a list with quote unquote post in it.
+[0:06:01]  So I just need to enable support for that method.
+[0:06:04]  That is that HTTP verb.
+[0:06:06]  All right, let's go back to the form.
+[0:06:07]  Reload just to make sure I haven't screwed up.
+[0:06:09]  Type in my name, David.
+[0:06:11]  Select soccer from the dropdown.
+[0:06:12]  Click Register.
+[0:06:13]  And now I'm not only at slash register in the URL.
+[0:06:17]  It claims that I am indeed registered.
+[0:06:19]  Now, of course, I've done nothing interesting.
+[0:06:21]  There's no database.
+[0:06:22]  There's no CSV file.
+[0:06:23]  We'll get to that in a bit.
+[0:06:24]  But at least I now have the plumbing in place
+[0:06:26]  to do something dynamic based on that sport.
+[0:06:30]  All right, well, how can I now improve upon this?
+[0:06:33]  How about we go ahead and implement, store the actual registrants
+[0:06:37]  in a dictionary in the computer's memory?
+[0:06:39]  So instead of just claiming that they're registered,
+[0:06:41]  let's actually make a notation.
+[0:06:43]  The simplest way, as we did weeks ago in Python,
+[0:06:45]  is just store things in a variable in memory,
+[0:06:47]  like a list or a dictionary, a set, anything like that.
+[0:06:51]  All right, well, let me go back into VS Code in an app.py.
+[0:06:54]  And I think what I'm going to have to do here
+[0:06:56]  is change my register route to actually do some useful information.
+[0:07:01]  But before I register the user, let's consider
+[0:07:04]  where I want to actually put them.
+[0:07:06]  And so let me propose that.
+[0:07:08]  How about we do this?
+[0:07:11]  At the top of my file, let me go ahead and declare
+[0:07:14]  a global variable called registrants and set that equal to an empty
+[0:07:20]  dictionary.
+[0:07:21]  So we've done this before, when we were playing around previously
+[0:07:24]  with using dictionaries to store key value pairs.
+[0:07:26]  And I'm going to propose that we store the registrants as a dictionary.
+[0:07:28]  Why?
+[0:07:29]  Because I'm going to keep it simple.
+[0:07:30]  The name is going to be the student's name.
+[0:07:33]  Sorry, the key is going to be the student's name.
+[0:07:35]  And the value is going to be whatever sport they registered for.
+[0:07:37]  So David and soccer and Carter and basketball.
+[0:07:40]  So it kind of makes sense for a two-column dictionary, so to speak,
+[0:07:43]  as we often depict it on screen.
+[0:07:45]  So how can I use this dictionary?
+[0:07:47]  Well, let me go ahead and do this.
+[0:07:49]  Down here, under slash register, let me go ahead and initially do this.
+[0:07:55]  How about we get the user's name from request.form.get
+[0:07:59]  and set it equal to whatever the value of the name is.
+[0:08:02]  And I'm not going to give a default value now,
+[0:08:03]  because I don't want to call the student world or something
+[0:08:05]  strange like that.
+[0:08:07]  I'm just going to assume for now that it's there.
+[0:08:09]  Let's then create another variable called sport
+[0:08:11]  and do request.form.get quote unquote sport to get the student's sport.
+[0:08:16]  And then let's go ahead and do this.
+[0:08:18]  In the registrants dictionary, let's index into it using the student's name
+[0:08:24]  and let's set it equal to whatever the sport is.
+[0:08:27]  So I've got these variables just to keep my code tidy.
+[0:08:29]  And I'm now putting a key value pair into that dictionary.
+[0:08:36]  All right.
+[0:08:37]  Well, what do I want to now do?
+[0:08:39]  And I'll go ahead and say success.html.
+[0:08:42]  Sure, let's go ahead and do that.
+[0:08:43]  But now I think success.html means that.
+[0:08:46]  So let me go back to the form.
+[0:08:47]  Reload.
+[0:08:48]  Let me type in David and soccer.
+[0:08:52]  Register.
+[0:08:53]  OK.
+[0:08:54]  Let me go back and say Carter and basketball.
+[0:08:59]  Register.
+[0:09:00]  OK.
+[0:09:01]  Now let's see what I want to do next.
+[0:09:03]  How about I go into?
+[0:09:07]  Let me give myself another route.
+[0:09:08]  And let's play around here.
+[0:09:09]  So app.route.
+[0:09:11]  Let's give myself another third route called registrants,
+[0:09:15]  whose purpose in life is just to show me who all of those registrants are,
+[0:09:18]  just like you would expect from a website like this.
+[0:09:21]  And then let me define a function called registrants or anything else.
+[0:09:24]  And then let me return the rendering of a template called registrants.html.
+[0:09:31]  And let me pass in.
+[0:09:33]  This is kind of neat.
+[0:09:34]  I can do registrants equals registrants, which again looks weird.
+[0:09:37]  But what am I doing?
+[0:09:38]  I'm presuming to pass in a placeholder called registrants, the value of which
+[0:09:43]  is this dictionary that I've been collecting all of the registrations in.
+[0:09:47]  So similar to the name placeholder before,
+[0:09:49]  but it's a little more powerful because now it's a whole dictionary, not just
+[0:09:52]  a single string.
+[0:09:54]  So I think now, let me be creative here.
+[0:09:57]  Let me go into my templates under my templates folder.
+[0:10:03]  And let's do this.
+[0:10:04]  Let's go into my terminal window.
+[0:10:07]  Let's create another template called registrants.html that's
+[0:10:11]  actually going to do this displaying of all of the registrants for us.
+[0:10:15]  So extends layout.html, just so I can borrow all of the same HTML as before.
+[0:10:21]  And let's define block body, just like before.
+[0:10:24]  And inside of this, end block, I want to put, I don't know,
+[0:10:28]  like a bulleted list or an ordered list of all of the registrants.
+[0:10:31]  So how can I do this?
+[0:10:32]  Well, let's do an unordered list, ul.
+[0:10:36]  And here's where Jinja and Flask more generally get kind of interesting.
+[0:10:42]  I want there to be something like this, an li and then the student's name,
+[0:10:49]  and then an li, yeah, like that, and then maybe sport, something like this.
+[0:10:56]  But I didn't pass in a name.
+[0:10:57]  I didn't pass in a sport.
+[0:10:59]  I passed in the entire dictionary of registrants.
+[0:11:02]  Now, in Python, if we were just doing something in the black and white terminal
+[0:11:05]  window and doing a command line program, I'd probably
+[0:11:08]  have some kind of for loop in Python.
+[0:11:10]  Jinja does allow you to do this.
+[0:11:13]  So a templating language tends to come with very lightweight mechanisms
+[0:11:16]  for doing placeholders, doing simple loops, doing simple conditions.
+[0:11:20]  So Python-like syntax.
+[0:11:21]  And it's almost identical.
+[0:11:23]  So watch what I can do.
+[0:11:24]  Inside of this unordered list, let me not start to manually output a single li.
+[0:11:30]  Let me use this syntax.
+[0:11:32]  The same Jinja syntax that I used for block, so curly brace percent sign.
+[0:11:36]  And I'm going to say this, for name in registrants.
+[0:11:40]  So this is just like Python syntax for iterating over a dictionary.
+[0:11:44]  And now this is going to look stupid, but the opposite of that is end for.
+[0:11:48]  So in HTML, you use the slash.
+[0:11:49]  In Jinja, you literally use the word end, no space,
+[0:11:52]  and then the name of the keyword.
+[0:11:54]  So end for is how you close this.
+[0:11:56]  But this is where templating gets really cool.
+[0:11:59]  You can now do li.
+[0:12:01]  And in here, I can do something like that student's name.
+[0:12:05]  And that's it.
+[0:12:06]  I'm going to leave it like that.
+[0:12:07]  And what I'm doing here is using really a template as templates are intended.
+[0:12:13]  I've got the basic building blocks of what I want this output to look like.
+[0:12:17]  But thanks to this little for loop here, thanks to Jinja syntax,
+[0:12:20]  the curly brace and the percent sign, I'm
+[0:12:23]  going to iterate over every dictionary printing out name, name, name, name.
+[0:12:26]  And so if I've got two kids registered now,
+[0:12:28]  I'm going to see two li's, David and Carter respectively.
+[0:12:32]  So let's see.
+[0:12:33]  Let me go back to my frosh im's tab here.
+[0:12:39]  And I don't have a link yet, so I've got to do this manually,
+[0:12:42]  like a developer would.
+[0:12:43]  Let me go to slash registrants.
+[0:12:46]  And I'll zoom out and hit Enter.
+[0:12:49]  And you'll see what you'll probably see, too,
+[0:12:51]  when making mistakes for the first time in this world.
+[0:12:54]  So where is the error message?
+[0:12:55]  Unfortunately, internal server error is not all that useful.
+[0:12:59]  But we do tell you, see terminal window.
+[0:13:01]  So if I go to the terminal window, I haven't been paying attention
+[0:13:04]  to this for quite some time.
+[0:13:05]  And in fact, I have two terminal windows open
+[0:13:07]  so that I can still use commands at the prompt.
+[0:13:09]  But if I go back to my first terminal window, aka bash there,
+[0:13:13]  you'll see in your terminal window when developing web applications,
+[0:13:17]  like all of the mistakes you made in the terminal itself.
+[0:13:20]  This is one of those Python tracebacks that's related to me screwing up here.
+[0:13:23]  Now, let me go ahead here and let's see.
+[0:13:27]  Type error function is not iterable.
+[0:13:30]  And block for name function is not iterable.
+[0:13:36]  All right, so what mistake did I make?
+[0:13:38]  Well, this is what happens when I don't follow my notes
+[0:13:41]  and make changes on the fly.
+[0:13:42]  So I have this variable on line 5 called registrants in all lowercase.
+[0:13:46]  But what did I then do on the fly here in line 22?
+[0:13:53]  I defined a function called registrants.
+[0:13:55]  So newbie mistake, like I shouldn't have done this.
+[0:13:57]  I can't have a variable and a function of the same name
+[0:14:00]  because the symbols are literally identical.
+[0:14:02]  So just to make clear that this variable up here is actually global,
+[0:14:05]  we'll use our convention like we did in C often.
+[0:14:08]  When we had a global variable, we'll capitalize it all
+[0:14:11]  just to make it stand out like a constant value up there.
+[0:14:14]  And so down here, what I'm going to do is pass in registrants in all caps.
+[0:14:19]  So that was stupid.
+[0:14:20]  Didn't mean to confuse there.
+[0:14:21]  But the reason for that error to be clear
+[0:14:23]  is that you can't have a function that's the same name as a variable.
+[0:14:26]  I could just change the variable name altogether.
+[0:14:27]  I'm going to go ahead and just capitalize it to make it really stand out
+[0:14:30]  that this is, in fact, a global variable up top.
+[0:14:33]  All right, now I'm going to go back to my browser.
+[0:14:36]  Let's do David and soccer.
+[0:14:41]  All right, but there's going to be some other mistakes here.
+[0:14:44]  So on line 17, let me go ahead and change this variable
+[0:14:47]  to be capitalized there because, indeed, I
+[0:14:49]  want to put the key and the value in this newly named variable
+[0:14:53]  as all capitals registrants.
+[0:14:55]  Let me now go back to VS Code here.
+[0:14:57]  Let me go back to the form.
+[0:14:58]  And let me start adding some data fresh.
+[0:15:00]  Let me register David for soccer, clicking Register Now.
+[0:15:04]  And we should see you are registered.
+[0:15:06]  But hopefully now, it's indeed in the computer's memory.
+[0:15:09]  Let me go back and register now Carter for basketball,
+[0:15:13]  clicking Register Again.
+[0:15:15]  And hopefully, it's now registered.
+[0:15:16]  If I now change my route manually to b slash registrants,
+[0:15:21]  which is this newly added route that I made, and hit Enter, now I see.
+[0:15:25]  Thank God.
+[0:15:25]  Now I see the unordered list containing everything in the computer's memory.
+[0:15:30]  So when I say you are registered, I kind of mean it now
+[0:15:33]  because the server is still running and in the computer's memory
+[0:15:36]  is in this registering global variable, a dictionary of key value pairs.
+[0:15:41]  Of course, we're only seeing the keys at the moment.
+[0:15:44]  So it might be nice to actually see the values as well.
+[0:15:47]  So let me go back to VS Code.
+[0:15:50]  And let me go into registrants.html.
+[0:15:53]  And I'll just do something a little messy.
+[0:15:55]  I'll just say, how about, let's just make it a sentence.
+[0:15:58]  Is registered for, and now another placeholder,
+[0:16:03]  I'm going to say registrants bracket name.
+[0:16:06]  So just like in Python, if registrants is itself a dictionary,
+[0:16:11]  registrants bracket, and then the key you want to index into
+[0:16:15]  is perfectly valid syntax as well.
+[0:16:17]  So now let me go back to slash registrants.
+[0:16:20]  Let me click Reload again.
+[0:16:23]  So why isn't it working, everyone?
+[0:16:24]  What's the bug that I introduced earlier?
+[0:16:27]  If David is registered for none and Carter is registered for none,
+[0:16:30]  but David and Carter are in the dictionary, that's a good thing.
+[0:16:34]  So some of the data is in there.
+[0:16:36]  So why are there no sports associated?
+[0:16:38]  Well, the first thing I literally just did in front of you
+[0:16:40]  all was I went to app.py and I stared at line 17 thinking,
+[0:16:44]  how did I screw this up?
+[0:16:46]  I'm putting sport as the value of the key, which is the student's name.
+[0:16:50]  All right, line 17 looked fine to me a few seconds ago,
+[0:16:53]  so I looked then with my eyes at line 16.
+[0:16:55]  And this too looked OK.
+[0:16:56]  My first thought was, oh, did I use request.args instead of request.form
+[0:17:01]  instead, because that would have assumed get instead of post.
+[0:17:04]  But no, that looks OK too.
+[0:17:06]  So then my final instinct was, oh my god, did I screw up the HTML form?
+[0:17:10]  And so that's why I went back over to my tab here.
+[0:17:13]  I went to the original form here.
+[0:17:16]  I then view page source.
+[0:17:18]  And this might not be as obvious to you if you've never
+[0:17:20]  seen the select menu before.
+[0:17:22]  What is apparently missing here that might explain my mistake?
+[0:17:28]  Yeah.
+[0:17:30]  Yeah, I didn't name this form field quote unquote sport.
+[0:17:33]  Now to be fair, you haven't seen me do this as a select menu before,
+[0:17:36]  and it's different from this input.
+[0:17:38]  When you have an input tag, you literally say name equals whatever
+[0:17:42]  on the input tag.
+[0:17:43]  It turns out, I don't know why I skipped this earlier.
+[0:17:45]  I probably meant to come back to it.
+[0:17:47]  The select tag also can take a name parameter.
+[0:17:49]  So if I go back to the name parameter here and go back and add the name
+[0:17:54]  parameter, let me go into that template, which is index.html.
+[0:17:59]  Let me add name equals quote unquote sport in all lower case,
+[0:18:03]  which is different from the visual aesthetic of this temporary disabled
+[0:18:07]  option that's just there to make things prettier for the human.
+[0:18:10]  Now let me go ahead here.
+[0:18:12]  And first, I'm going to go into my terminal window.
+[0:18:16]  Now I'm actually going to hit Control-C to stop the server altogether,
+[0:18:19]  because I want to throw away the contents of memory
+[0:18:22]  and therefore get rid of that dictionary that had David and Carter
+[0:18:24]  and those none values.
+[0:18:25]  So this is sort of me clearing the computer's memory.
+[0:18:28]  I'm going to rerun flask run.
+[0:18:31]  I get that same URL as before, so I'm going to hover over that
+[0:18:34]  and open the new tab.
+[0:18:35]  And just to be sure, I'm going to do view page source.
+[0:18:37]  And here I see now, OK, now the form has both a name and a sport in it.
+[0:18:43]  All right, now I'm really going to cross my fingers,
+[0:18:45]  because I intend for this now to work.
+[0:18:47]  David will register again for soccer.
+[0:18:50]  Register.
+[0:18:51]  Claims we are registered.
+[0:18:52]  I'm going to go back and do it again for Carter and basketball.
+[0:18:55]  Register.
+[0:18:56]  We still don't have a link, so I'm going to manually go up to the URL
+[0:19:01]  and change slash register to registrants as before, zooming out and hit Enter.
+[0:19:06]  And thank God, now I'm actually registered properly for this.
+[0:19:10]  So thank you.
+[0:19:16]  So what is it?
+[0:19:16]  20 years later, I'm still struggling to implement this site?
+[0:19:19]  OK, so here now, we have for the first time in Python and web stuff,
+[0:19:24]  now we have a proper web application.
+[0:19:26]  And it's not just echoing back, hello, David, hello, Carter.
+[0:19:28]  This could now work for any of you.
+[0:19:30]  And it's currently served privately.
+[0:19:32]  But if I made this URL public, I could put this on the web now
+[0:19:34]  and let anyone in the world register.
+[0:19:37]  But there's kind of some issues here.
+[0:19:39]  There's some security flaws potentially.
+[0:19:42]  And so for instance, let me go back to the web form here
+[0:19:45]  and let me open up the Inspect tab, the Developer Tools,
+[0:19:49]  and just remind you that anyone on the internet, not only you,
+[0:19:52]  the developer, but an adversary, can see all of your HTML,
+[0:19:56]  see all of your CSS, see all of your JavaScript.
+[0:19:58]  But more importantly, because this is all client side in the browser,
+[0:20:02]  there is literally nothing technically stopping them from changing the HTML,
+[0:20:07]  or at least their copy of it.
+[0:20:08]  And I did that last week with Yale.
+[0:20:09]  I changed their website.
+[0:20:11]  But no, I changed my copy of their website.
+[0:20:13]  But when forms get involved, you could maybe be actually malicious now.
+[0:20:17]  Because even though this dropdown menu only
+[0:20:20]  has basketball, soccer, and Ultimate Frisbee,
+[0:20:24]  suppose I really want to register for how about, let's say,
+[0:20:30]  name your favorite sport.
+[0:20:32]  Volleyball.
+[0:20:33]  We really want to register for volleyball.
+[0:20:35]  But this website won't let me.
+[0:20:37]  Well, there's nothing stopping me from going under the Elements tab
+[0:20:40]  in my browser, going into the Select menu here.
+[0:20:44]  And you know what?
+[0:20:45]  Ultimate Frisbee, let's change this to volleyball.
+[0:20:48]  And let's change this to volleyball.
+[0:20:51]  Enter.
+[0:20:52]  I'm going to close the inspector now.
+[0:20:55]  And as requested, now we support volleyball in the form.
+[0:20:59]  Now, it's not changed on the server, to be fair.
+[0:21:02]  But think about how HTTP works.
+[0:21:04]  When I fill out this with, say, let's say, Bernie's name,
+[0:21:08]  Bernie really wants to register for volleyball as well, at the moment,
+[0:21:11]  my code is just going to trust that what's in request.form
+[0:21:15]  is what was in the original form itself, no matter whether the human
+[0:21:20]  adversarially actually changed it.
+[0:21:22]  So if I actually submit this form and click Register for Bernie and Volleyball,
+[0:21:26]  even though that's not one of the supported available sports,
+[0:21:29]  if I now go to registrants, my website nonetheless
+[0:21:33]  has trusted that Bernie, and perhaps you, are registered for volleyball.
+[0:21:37]  So what's the implication of this?
+[0:21:38]  This has surely happened in the past, when really poorly implemented websites
+[0:21:43]  allow you to specify the price of an item, for instance, in your shopping cart.
+[0:21:47]  And they just trust that when you click Submit or Add to Cart,
+[0:21:50]  it adds the price to the back end server.
+[0:21:54]  If you're not validating the price and making sure, as with a database,
+[0:21:57]  that wait a minute, that price is valid, or wait a minute,
+[0:21:59]  those sports are valid, who knows what people are going to do to your site?
+[0:22:03]  And it's that simple to actually hack a website accordingly.
+[0:22:08]  Now, we can very easily fix this with some week six style Python.
+[0:22:12]  We really just need to do a bit of logic here.
+[0:22:15]  And so let me propose this.
+[0:22:16]  Let me go into app.py here.
+[0:22:18]  And at the very top, let me also create how about a global variable called
+[0:22:24]  sports in all caps.
+[0:22:25]  And I'm going to set that equal to, in square brackets, the list of sports
+[0:22:29]  I actually want to support.
+[0:22:30]  So I'm going to put in basketball here.
+[0:22:32]  I'm going to put in soccer here.
+[0:22:34]  And I'm sorry, no volleyball officially.
+[0:22:36]  I'm going to put in ultimate frisbee here.
+[0:22:38]  So I've got this global list of supported sports.
+[0:22:41]  Now, think about how I made this form a while ago.
+[0:22:44]  I just hard coded these sports here.
+[0:22:46]  Well, I don't have to do that.
+[0:22:47]  I can sort of draw upon my own official list of sports instead.
+[0:22:52]  So let me scroll down to my index.html rendering template here.
+[0:22:56]  Let me say that the sports I want to support are these.
+[0:22:59]  So just using the same placeholder trick as before.
+[0:23:02]  But I'm now telling the template what sports we currently support.
+[0:23:06]  Now, if I go back into index.html, I don't have to manually do any of this.
+[0:23:11]  Let me get rid of all three of those options,
+[0:23:13]  which I manually inputted earlier.
+[0:23:15]  Let me use my new trick with ginger syntax and say for sports in sports.
+[0:23:21]  Then let me proactively say end for, just to finish that thought.
+[0:23:24]  And then in here, let me do option value equals in curly braces sports.
+[0:23:30]  And then so that the human also sees the same words,
+[0:23:32]  I'm going to say sport out here.
+[0:23:34]  So I've completely changed what was hard coded, manually type,
+[0:23:38]  to something now that's completely dynamic.
+[0:23:40]  So now it's not going to stop someone adversarially
+[0:23:43]  like me from changing the HTML.
+[0:23:44]  But watch this.
+[0:23:46]  The behavior on the form, if we go back, is still now the same drop down
+[0:23:51]  as before.
+[0:23:52]  So aesthetically, it looks the same.
+[0:23:53]  But you know what?
+[0:23:54]  Why don't we be clever now?
+[0:23:55]  And let's go into app.py and the slash register route.
+[0:23:59]  And why don't we say this?
+[0:24:01]  If, how about sport, not in sports, then let's return render template failure.html.
+[0:24:12]  Now this template doesn't exist yet, so let me just quickly make this real fast.
+[0:24:15]  I'm going to copy that code from before.
+[0:24:18]  Let me create a code file in failure.html.
+[0:24:23]  I'm just going to paste this here so we have a super simple error message.
+[0:24:26]  And I'm going to say, you are not registered,
+[0:24:28]  just that's what we mean by failure.
+[0:24:30]  And now in app.py, consider what logic I've added.
+[0:24:33]  Sports, in all caps on line 22, is that same global list as before
+[0:24:39]  by asking, Pythonically, if sport, not in sports, well, then you hacked me.
+[0:24:44]  You tried to inject volleyball or some other sport into request.form.
+[0:24:49]  So I'm just going to say, no, failure, not letting you register.
+[0:24:53]  And I can do this a little more verbosely, too.
+[0:24:57]  Why don't I also say this?
+[0:24:58]  If not name, so if the name is blank, let's similarly
+[0:25:02]  return a render template of failure.html.
+[0:25:05]  In other words, if you didn't give me a name, you left it blank,
+[0:25:08]  that's not useful for me running the sports program.
+[0:25:10]  Let's also consider that to be a failure.
+[0:25:13]  So if I go back to this tab now, I'm going to reload,
+[0:25:15]  just to make sure I have the latest client side.
+[0:25:17]  Let me be lazy and just click Register, Enter.
+[0:25:21]  You are not registered, because I didn't give it an actual name.
+[0:25:23]  All right, well, let's go back.
+[0:25:25]  How about I now type David, but I'm not going to choose a sport.
+[0:25:28]  I just want to register myself.
+[0:25:30]  Nope, that did not work now.
+[0:25:32]  Let me go ahead here and choose soccer.
+[0:25:35]  This, I think, does work.
+[0:25:37]  Let me go back now and try this hacker trick,
+[0:25:40]  whereby I go into the dropdown menu.
+[0:25:43]  I go into the select menu.
+[0:25:46]  I change as before ultimate frisbee to volleyball.
+[0:25:49]  And I'll change this one here to volleyball.
+[0:25:53]  Let me close the tab now.
+[0:25:55]  This looks like it's available now, but when I click Register this time,
+[0:25:59]  it says you are not registered.
+[0:26:01]  And this is much better than relying on other techniques
+[0:26:05]  you might see or have seen online with regard to HTML,
+[0:26:07]  because there's also this trick.
+[0:26:09]  Let me go back to the screen here.
+[0:26:11]  Let me go back to index.html.
+[0:26:13]  And you might have seen online or you might eventually
+[0:26:15]  see online that there's other attributes you can use, like required.
+[0:26:18]  You can literally tell the browser, uh-uh, this field is required.
+[0:26:21]  You cannot leave it blank.
+[0:26:23]  If I go back to the browser now, reload, and I again presume to be lazy
+[0:26:27]  and I don't type in any name and click Register, OK, so that's kind of nice.
+[0:26:31]  Now the browser is being a little more helpful for me, saying no, no, no.
+[0:26:35]  This is required.
+[0:26:36]  You have to fill this out.
+[0:26:38]  But again, if you know what you're doing, OK, well,
+[0:26:40]  I disagree with your requiring a name of me.
+[0:26:43]  Let me go in here.
+[0:26:44]  Let me go over to this tag.
+[0:26:46]  Let me delete the required attribute.
+[0:26:49]  And now I slipped through.
+[0:26:51]  But I didn't slip through on the server.
+[0:26:53]  And so there's a difference here and an important distinction.
+[0:26:55]  And so many people in the real world still screw this up.
+[0:26:58]  There's client-side validation, like actually checking
+[0:27:01]  that the data is as you expect on the client side, the browser.
+[0:27:04]  And there's server-side validation.
+[0:27:05]  And even though client-side validation, like adding that required attribute,
+[0:27:08]  makes things more user-friendly, right?
+[0:27:10]  Like that was a pretty little pop-up.
+[0:27:11]  It tells me that it's required.
+[0:27:12]  It just looks better than the previous version.
+[0:27:15]  It is not trustable.
+[0:27:16]  You cannot trust any input that ever comes from the user.
+[0:27:20]  Because clearly, with like an hour or so of CS50,
+[0:27:24]  they can learn how to turn all of these defenses off.
+[0:27:26]  So even if you like the user interface better, client-side,
+[0:27:29]  you have to, have to, have to do server-side validation always.
+[0:27:33]  Users are not to be trusted.
+[0:27:35]  And as soon as any app or website you make becomes popular,
+[0:27:38]  unfortunately, then you have to deal with all of the adversarial
+[0:27:41]  possibilities as well.
+[0:27:49]  Oh, good question.
+[0:27:50]  Could the adversary potentially access things sensitive like app.py?
+[0:27:54]  Theoretically, no.
+[0:27:55]  Like if Flask itself is buggy, then sure, maybe.
+[0:27:58]  If you're running some other software on your server, on your laptop,
+[0:28:00]  then sure, it's possible.
+[0:28:02]  However, if your server's properly configured,
+[0:28:04]  theoretically, they should not be able to get access to that.
+[0:28:07]  With that said, we'll soon see, or you might with your final project,
+[0:28:10]  if you do something web-based, you're never
+[0:28:12]  going to want to write like usernames and passwords in your actual code.
+[0:28:17]  You can put them in what are called environment variables.
+[0:28:19]  So sort of in the computer's memory, but not in your code,
+[0:28:21]  just in case you or someone screws up.
+[0:28:24]  There are still ways to defend against those kinds of possibilities,
+[0:28:28]  however slim.
+[0:28:29]  Yeah, a good question.
+[0:28:38]  And this comes back to first principles, just like in C and in Python.
+[0:28:41]  As soon as you return from a function, that's it.
+[0:28:44]  Nothing below that line of code executes.
+[0:28:46]  And so to summarize the question, even though I'm returning this failure
+[0:28:50]  .html template, how am I making sure we still don't accidentally
+[0:28:54]  put volleyball in that global dictionary?
+[0:28:56]  It's because, for instance, if you don't give me a name on line 22
+[0:29:00]  at the moment, I'm returning the failure template, and that's it.
+[0:29:03]  Lines 23, 24, 25, 26, 27 never execute.
+[0:29:06]  In particular, 26 never executes.
+[0:29:09]  And that's where I would have been saving the name.
+[0:29:11]  Similarly, if we get an invalid sport that is either blank or not
+[0:29:17]  in the original authoritative list, we return failure.html
+[0:29:21]  as a template in line 25.
+[0:29:22]  We never get to line 26.
+[0:29:24]  So it just boils down to return and what that means in Python 2.
+[0:29:28]  Good question.
+[0:29:29]  Other questions as well?
+[0:29:33]  All right, how about we make one more enhancement here or so?
+[0:29:38]  Because the problem with storing everything in this global dictionary
+[0:29:42]  might be what?
+[0:29:45]  We've got it all working, finally.
+[0:29:47]  But why is probably a global dictionary not the place
+[0:29:50]  to store Frosh IM's registration data?
+[0:29:54]  What's the implication of this?
+[0:29:58]  OK, I might slow the whole process down, but RAM is actually good.
+[0:30:01]  Memory is actually generally a good thing,
+[0:30:03]  so not going to be a deal breaker here.
+[0:30:06]  Why might I not want to store that data, though, in that variable?
+[0:30:12]  You can perhaps infer how I fixed something earlier.
+[0:30:16]  Yeah, and back.
+[0:30:19]  Yeah, the memory gets deleted, garbage collected, if you will,
+[0:30:23]  as soon as Flask stops running.
+[0:30:25]  So if you so much as hit Control-C, like you've
+[0:30:27]  just lost all of your freshmen who registered for the sport,
+[0:30:31]  probably not a good thing.
+[0:30:32]  I did this deliberately a moment ago, and I hit Control-C,
+[0:30:35]  because I did want to clear the dictionary.
+[0:30:37]  But trusting that your server will never crash,
+[0:30:40]  and your code will always work, and the power will never go out,
+[0:30:42]  that's not the right way to build any kind of web
+[0:30:44]  application with persistent data.
+[0:30:46]  So what we probably want to do is reintroduce CSVs.
+[0:30:48]  And we've played with those in C and in Python.
+[0:30:51]  Could totally use CSVs.
+[0:30:52]  But we also now have SQL at our disposal.
+[0:30:55]  And let me propose that we do this in SQL instead.
+[0:30:58]  And for this, let me go ahead and open up a version of the program
+[0:31:01]  that I wrote in advance.
+[0:31:02]  So let me go ahead and close these templates, which will look very similar,
+[0:31:05]  but a little different from the ones I wrote in advance.
+[0:31:09]  And let me go ahead and open up in today's, let me go into source 9,
+[0:31:14]  let me go into Frosh IMs, how about version 4,
+[0:31:18]  technically, and the versions online.
+[0:31:20]  And let me go ahead and open up app.py as follows.
+[0:31:23]  So here is an already made version that does just a little something different.
+[0:31:27]  At the very top, I'm importing CS50 SQL library,
+[0:31:30]  which you might recall we used a couple of weeks
+[0:31:32]  past just to write Python that talks to a SQL database.
+[0:31:34]  And this feels like an opportune moment to bring that idea back.
+[0:31:37]  Down here on line 8, I'm creating a DB variable
+[0:31:40]  that opens up a file called froshims.db using syntax that we've seen before.
+[0:31:45]  I did create this froshims.db file in advance of class,
+[0:31:48]  just so that we have a couple of columns in which to store
+[0:31:51]  names and sports and such.
+[0:31:52]  Here's that same global array, a global list called sports.
+[0:31:56]  And let's just see what's going on down below.
+[0:31:59]  If I scroll down to index, this is the same as before,
+[0:32:03]  as we wrote together on the fly.
+[0:32:05]  Let's skip deregister for a moment and go now into register.
+[0:32:08]  So this one's a little different, but let's see what I've done.
+[0:32:11]  I've got some comments in here, because I wrote it in advance.
+[0:32:13]  And I think this logic is pretty much the same, though I tightened it up.
+[0:32:16]  And I'm asking two questions at once using on line 38 the or keyword here,
+[0:32:20]  just to say if there's not a name or the sport is not in sports,
+[0:32:23]  that is what we'll call now a failure.
+[0:32:25]  But what's fun now is that on line 42, I'm using the CS50 SQL library
+[0:32:31]  to execute some actual SQL.
+[0:32:33]  And I'm going to insert into a table called registrants two columns, name
+[0:32:37]  and sport.
+[0:32:38]  What names in sport?
+[0:32:39]  Well, these two values with placeholders, plugging in name and sport.
+[0:32:43]  Notice I'm using the question marks.
+[0:32:45]  Absolutely necessary, so we don't get one of those SQL injection attacks,
+[0:32:48]  because that too could be possible if someone typed in some dangerous words
+[0:32:52]  or keywords like delete or single quotes or semicolons in the form.
+[0:32:55]  Here, I'm letting the library sanitize the data.
+[0:32:58]  And then this is a trick we haven't yet seen,
+[0:33:00]  and it's really going to start tying things together.
+[0:33:03]  I can also use a redirect function in Flask
+[0:33:06]  that has the effect of doing the, if you will, safetyschool.org trick again,
+[0:33:11]  whereby after the user registers, if I want to automatically show them now
+[0:33:16]  everyone who is registered at slash registrants,
+[0:33:19]  I don't have to manually expect that they'll change the URL like I've
+[0:33:22]  been doing for the past few minutes.
+[0:33:23]  I can just redirect them anywhere I want on my app,
+[0:33:26]  or heck, I could redirect them to any URL on the internet
+[0:33:29]  using this function call.
+[0:33:31]  And it's just a nice way to send them to a different route
+[0:33:33]  if you want them to see, in this case, those registrants.
+[0:33:36]  So let me do this.
+[0:33:37]  In the same directory, let me increase my terminal window size.
+[0:33:41]  Let me do SQLite 3 of froshims.db, and let me type .schema.
+[0:33:47]  And you can indeed see it wraps onto two lines
+[0:33:49]  here that each registrant has an ID, which will be automatically assigned
+[0:33:54]  123 on up, a name, which is not null text, and a sport, which is also the same.
+[0:34:00]  And the primary key is just going to be this unique identifier.
+[0:34:02]  So that I made in advance.
+[0:34:04]  But if I do select star from registrants, semicolon,
+[0:34:08]  there's no one currently registered for any sports.
+[0:34:11]  But let's try now running this.
+[0:34:13]  Let me go ahead and close my old version, which we wrote together.
+[0:34:17]  And I'll close that tab.
+[0:34:18]  Let me do flask run in this version 4 here.
+[0:34:22]  All right, I'm going to see some similar output.
+[0:34:24]  I'm going to open the URL now.
+[0:34:26]  And you'll see that I made a couple of changes before.
+[0:34:29]  Instead of using a select menu, I used what are called radio buttons now,
+[0:34:33]  which is a reference to old school radio buttons that were mutually
+[0:34:36]  exclusive in cars back in the day.
+[0:34:37]  And we'll see how to do this.
+[0:34:39]  But it's just an alternative to a select menu.
+[0:34:41]  And I'm going to go ahead and type in my name again here.
+[0:34:45]  So I'll do David.
+[0:34:46]  I'll do soccer by selecting this radio button.
+[0:34:49]  And I'm going to click register now.
+[0:34:51]  And notice what happened.
+[0:34:52]  It's a little ugly, the formatting.
+[0:34:54]  But so again was this 20 years ago.
+[0:34:57]  Here I have now at the slash registrants route.
+[0:35:01]  Instead of an unordered list, I'm just using a simple HTML table.
+[0:35:04]  So I'll show you what this looks like in just a moment too.
+[0:35:06]  And I'll show you this deregister button, which
+[0:35:09]  is sort of unnecessarily large.
+[0:35:11]  I also have functionality we'll soon see for how you can unregister someone
+[0:35:15]  from a sport as well.
+[0:35:16]  So take your name out of contention.
+[0:35:18]  Well, let me go back to my terminal window here.
+[0:35:21]  And I'm going to click the plus to give myself a second terminal.
+[0:35:24]  So I can go back into source nine, froshims4.
+[0:35:28]  I'm going to do SQLite of froshims.db.
+[0:35:31]  I'm going to do select star from registrants now.
+[0:35:34]  And now you'll see that, indeed, there's David registered for soccer.
+[0:35:39]  And in fact, if I quit the Flask program with Control-C and rerun it again,
+[0:35:44]  no big deal, because that next version of Flask
+[0:35:47]  will just use the database as well.
+[0:35:49]  So I'm persisting, keeping the data in SQLite,
+[0:35:52]  whereas I'm actually grabbing it using my Python code in Flask.
+[0:35:56]  All right, let's put one more person in here so we can delete one of us two.
+[0:36:00]  Carter for basketball, register.
+[0:36:03]  And now we see both of us here.
+[0:36:04]  All right, so let's see how we did this.
+[0:36:06]  Let's go back over to VS Code.
+[0:36:08]  Let me shrink down my terminal window.
+[0:36:10]  Let me go into the, actually, let's go into the templates directory.
+[0:36:17]  And let's look at, for instance, index.html.
+[0:36:21]  So previously, we were using a select menu.
+[0:36:23]  Turns out radio buttons use the input tag.
+[0:36:26]  But instead of having an input of type equals text, like for the human's name,
+[0:36:32]  you have type equals radio.
+[0:36:33]  And so long as each of your radio buttons has the same name,
+[0:36:36]  the same name, the same name, that's what makes them mutually exclusive.
+[0:36:40]  So checking one radio button turns off the others,
+[0:36:42]  because they have the same name.
+[0:36:44]  The value I want to assign to each of these radio buttons
+[0:36:46]  is just the sport placeholder.
+[0:36:48]  This is what the human sees on the screen.
+[0:36:50]  So it's almost the same as the select menu.
+[0:36:52]  It just looks aesthetically different.
+[0:36:54]  But there's my same button.
+[0:36:55]  So that's all the difference I made there.
+[0:36:57]  And I added a heading tag, h1, just to say register to make clear what it is.
+[0:37:01]  But let's take a look at another file, this one now being
+[0:37:06]  how about the slash registrants route.
+[0:37:10]  So if I open up registrants.html here now,
+[0:37:13]  it's way more verbose than my unordered list.
+[0:37:16]  But this is just kind of boring HTML.
+[0:37:18]  Here's my table tag, table head, table row, table heading.
+[0:37:22]  This makes things bold as the first row of the table.
+[0:37:25]  Name, sport are my two columns.
+[0:37:27]  I've got a third empty column just so I can fit that button,
+[0:37:29]  as we'll soon see again.
+[0:37:31]  tbody for table body.
+[0:37:33]  Here's the same for loop trick again, so that I can output for every registrant
+[0:37:37]  a whole table row.
+[0:37:38]  And there's this weird form in there, but we'll come back to that.
+[0:37:41]  But there's the registrants name.
+[0:37:43]  There's the registrants sport.
+[0:37:45]  But notice the slightly different syntax here.
+[0:37:49]  Recall that CS50's execute function, when it returns to you,
+[0:37:55]  a list of dictionaries.
+[0:37:57]  You can then get at the individual columns by way of those keys.
+[0:38:01]  So let's go to the slash registrants route.
+[0:38:03]  Let me go back to app.py, scroll down here.
+[0:38:05]  And it's actually super simple.
+[0:38:07]  Here I have a slash registrants route that first executes
+[0:38:11]  select star from registrants.
+[0:38:13]  So just old SQL stuff.
+[0:38:14]  Give me everyone from the registrants table.
+[0:38:16]  Let me then render the template called registrants.html
+[0:38:19]  and just pass in this list of dictionaries.
+[0:38:23]  And we haven't quite done this yet.
+[0:38:24]  If you go back to registrants.html, how do you
+[0:38:27]  iterate over each dictionary in that list?
+[0:38:31]  Well, the syntax is just for registrant in registrants.
+[0:38:34]  That makes this a dictionary, one at a time in the list, just like in Python.
+[0:38:39]  So registrant.name and registrant.sport is just another syntax
+[0:38:43]  for using the square bracket notation.
+[0:38:46]  It's just a little cleaner and slightly more succinct
+[0:38:49]  than having quotes in square brackets everywhere.
+[0:38:52]  And then the rest of this is just HTML.
+[0:38:55]  So what happens now if I want to, like Carter's been cut from the basketball
+[0:39:00]  team, if you will.
+[0:39:01]  So how do we do that?
+[0:39:02]  Well, we want to click this button, deregister, next to Carter's name.
+[0:39:06]  But how does this work?
+[0:39:08]  And think about now any website you visited that has something like a
+[0:39:11]  shopping cart where you can remove things from your cart or update
+[0:39:15]  quantities or add more quantities to your shopping cart on Amazon
+[0:39:18]  or anything else.
+[0:39:19]  Well, let's actually look at the HTML that my app has spit out.
+[0:39:23]  Let's actually look at this here, and we'll see the following.
+[0:39:27]  We'll see that we have here in the HTML that reached the user,
+[0:39:31]  not only is David in the first column, Soccer in the second.
+[0:39:35]  Notice that my registrants.html form is also spitting out a tiny little web
+[0:39:40]  form of its own.
+[0:39:41]  It's ugly, but I only care about its functionality for now.
+[0:39:45]  And notice what I'm doing here.
+[0:39:47]  Every registrant in this database gets their very own deregister button.
+[0:39:52]  And that form has a button that says deregister.
+[0:39:55]  But notice what else each of those forms have.
+[0:39:57]  There's no text box.
+[0:39:58]  There's no dropdown menu.
+[0:39:59]  There's no radio buttons.
+[0:40:01]  Rather, you have a hidden input field here.
+[0:40:06]  So there is a way with HTML to have a form that will submit information,
+[0:40:11]  but you don't have to give the user the ability to change that information.
+[0:40:15]  You can just go ahead and tuck it inside of the form invisibly,
+[0:40:18]  if you will, hidden in fashion.
+[0:40:21]  And so what's going to happen is if I click the deregister button next
+[0:40:24]  to Carter, his primary key is 2.
+[0:40:28]  Mine is instead 1.
+[0:40:30]  So what's going to happen if I click his deregister button,
+[0:40:33]  it submits a form with a ID parameter whose value is 2,
+[0:40:40]  and it submits it to the deregister route.
+[0:40:42]  So what does that mean?
+[0:40:43]  Well, if I go to VS Code and I go to app.py,
+[0:40:46]  let's look at the deregister route that I skipped over.
+[0:40:50]  So if you access the deregister route via post, this code gets called.
+[0:40:55]  I grab from request.form the ID that was submitted in hidden fashion.
+[0:41:01]  If there's indeed an ID, that is it's not blank, it's not 0,
+[0:41:03]  it's an actual number like 1, 2, 3, or more,
+[0:41:06]  I execute delete from registrants where ID equals that value
+[0:41:12]  with a question mark placeholder.
+[0:41:13]  And then I redirect the user back to registrants.
+[0:41:17]  Now, if I go back to this form here, I click deregister.
+[0:41:20]  We'll see that in action.
+[0:41:22]  Gone is now Carter.
+[0:41:23]  And in fact, if I go back to my terminal window here,
+[0:41:27]  I open up SQLite 3 of froshims.db and rerun select star from registrants,
+[0:41:33]  Carter is now gone.
+[0:41:35]  So again, using very simple HTML forms, you
+[0:41:38]  can get buttons and links and other such UI mechanisms
+[0:41:41]  to do things on the server that you want.
+[0:41:43]  But there is a danger here.
+[0:41:45]  This now has really meant this example is like an administrative website
+[0:41:49]  like it was some 20 years ago just for us internal staff to be doing things.
+[0:41:54]  Technically, this is dangerous, what I've just done too.
+[0:41:59]  Even though Carter's ID is 2 in hidden and mine is 1 in hidden,
+[0:42:04]  what could this allow an adversary to do if they had admin access
+[0:42:08]  to the same site?
+[0:42:12]  Any thoughts?
+[0:42:15]  Yeah.
+[0:42:17]  Yeah.
+[0:42:19]  They could change the value of that hidden attribute
+[0:42:21]  by opening up Chrome's developer tools, change the number in the HTML.
+[0:42:25]  They could delete anyone, deregister anyone they want from the database.
+[0:42:28]  Now, in this case, I claim this is fine because this is only
+[0:42:31]  meant for a staff who were running sports back in the day,
+[0:42:34]  but it's indeed a risk.
+[0:42:36]  So wouldn't it be nice if we could actually
+[0:42:38]  ensure that only those users who are authorized
+[0:42:41]  are allowed to execute certain actions?
+[0:42:44]  I think for this capability, we're actually
+[0:42:47]  going to need to introduce something a bit more.
+[0:42:50]  And so here, of course, is an opportunity to talk briefly about really
+[0:42:54]  what you and I do all day long every day.
+[0:42:55]  We log into one or more websites or apps,
+[0:42:58]  or at least until you're logged out automatically
+[0:43:00]  and you have to do it again.
+[0:43:02]  So here, for instance, is a screenshot of Gmail.
+[0:43:04]  When you type in your username, you type in your password,
+[0:43:06]  maybe your two-factor code that gets texted or sent to your phone,
+[0:43:09]  then you're logged in.
+[0:43:10]  And thankfully, you're not prompted to log in again typically
+[0:43:13]  for a number of hours or days or weeks, depending on the website.
+[0:43:17]  Like Gmail keeps you logged in for ages.
+[0:43:19]  Your bank probably logs you out within an hour or so for safety's sake.
+[0:43:23]  So that is completely configurable on the server.
+[0:43:26]  But how does Gmail know, how does Google know,
+[0:43:29]  that even as you're checking different mails again and again and again,
+[0:43:32]  how do they know that you're still the same person who logged in?
+[0:43:36]  Well, it turns out that using these same building blocks as today,
+[0:43:39]  HTTP and HTML and more, you can actually
+[0:43:42]  implement the notion of a login feature by doing the equivalent of something
+[0:43:48]  with something called cookies.
+[0:43:49]  Essentially, what happens when you first log into a website
+[0:43:52]  for the very first time successfully with your username and password,
+[0:43:55]  a cookie, so to speak, is planted on your computer.
+[0:43:58]  And metaphorically, this is kind of like taking a hand stamp,
+[0:44:01]  and your hand is now stamped, in this case a smiley face,
+[0:44:04]  so that every other time you click on a link on that same website,
+[0:44:07]  google.com, gmail.com, whatever, unbeknownst to you,
+[0:44:10]  your browser is constantly presenting that hand stamp,
+[0:44:13]  just like going into a club or an amusement park or something like that,
+[0:44:17]  where they don't want to check your ID again.
+[0:44:18]  They don't want to check your ticket again.
+[0:44:19]  They just want to quickly see the same hand stamp.
+[0:44:22]  And so that is one of the things that a browser is always doing for you
+[0:44:25]  once you're logged in.
+[0:44:26]  Any cookies that have been planted, so to speak, in your Mac or PC or phone
+[0:44:31]  are constantly re-presented to the site every time you click a link
+[0:44:35]  or make another request to that website.
+[0:44:37]  And mechanically how this works, not just metaphorically in ink,
+[0:44:41]  essentially this is what happens.
+[0:44:42]  Here is a example of an HTTP request to something like Gmail.
+[0:44:47]  And suppose, for instance, that you've logged in.
+[0:44:49]  Typically, as of last week, we said that coming back from the server
+[0:44:53]  would be another virtual envelope containing a 200 OK message,
+[0:44:57]  and then the actual web page or the picture of a cat or whatever it may be.
+[0:45:01]  But Google can also, if they verified that you have some username and password
+[0:45:05]  correctly inputted, they can do the equivalent of stamping your hand.
+[0:45:09]  And the way they do this is they send an additional line of text
+[0:45:13]  in that virtual envelope from the server to your browser,
+[0:45:16]  literally using another HTTP header, not content type,
+[0:45:21]  which just mundanely tells you what kind of content has come back.
+[0:45:24]  They literally send an HTTP header called set-cookie.
+[0:45:29]  And then they set a key value pair on your Mac or PC.
+[0:45:33]  This is the technical equivalent of the smiley face hand stamp.
+[0:45:36]  And what your computer is designed to do, because your computer and intern
+[0:45:40]  browser are supposed to implement HTTP, any time you click another link on Gmail
+[0:45:46]  or click on another mail or the like, your browser, unbeknownst to you,
+[0:45:50]  presents that hand stamp.
+[0:45:51]  And how it does it technically is, in the envelope,
+[0:45:54]  it sends to Google from your browser.
+[0:45:57]  It doesn't send set-cookie.
+[0:45:58]  It just sends cookie, colon, and the exact same thing.
+[0:46:02]  And so long as Google is smart and they have a database or something
+[0:46:06]  of all of the session value, session is the technical term
+[0:46:10]  for this maintenance of information across HTTP,
+[0:46:13]  so long as Google has a big database that knows that my cookie value is 123
+[0:46:17]  and your cookie value is 456, they can infer from this virtual hand
+[0:46:23]  stamp whose emails they should be showing, mine or yours or the like.
+[0:46:28]  So this is just scratching the surface.
+[0:46:29]  If I really wanted to enable only Carter to deregister himself,
+[0:46:34]  I just have to make sure that I log him in somehow, username, password,
+[0:46:38]  and all of that.
+[0:46:39]  I stamp his hand or really put a cookie on his computer.
+[0:46:42]  And only if his cookie lines up with the user ID he's trying to deregister
+[0:46:48]  should he be allowed to, in fact, do so.
+[0:46:51]  So all of this is quite possible.
+[0:46:52]  And indeed, the technical term for this is session.
+[0:46:55]  And what we thought we'd do in our remaining time
+[0:46:57]  today is show you some examples of exactly how
+[0:47:00]  some of the most familiar web functionality is implemented today,
+[0:47:03]  some of which you'll use in your own problem set
+[0:47:06]  9, which itself will be a web app, or perhaps even your final project.
+[0:47:10]  So let me go ahead and do this.
+[0:47:11]  Let me close my previous tabs and all things Frosh IMs.
+[0:47:15]  And let's move on to implementing some notion of login.
+[0:47:18]  So in just a moment, I'll switch over here to VS Code.
+[0:47:21]  And what I'm going to do is, indeed, in my source9 directory,
+[0:47:25]  I'm going to go into a login directory.
+[0:47:27]  And if I type ls here, you'll see app.py, requirements.text,
+[0:47:31]  which just refers to libraries I want to automatically install,
+[0:47:35]  and a templates folder as well.
+[0:47:36]  I'm going to go ahead and stop the previous server
+[0:47:38]  and close that terminal window.
+[0:47:40]  And I'm going to open up this version of app.py.
+[0:47:43]  So there's a few new lines here.
+[0:47:45]  And we'll give you these lines for problem set 9.
+[0:47:48]  But I've got some of the familiar stuff up here,
+[0:47:50]  including this new redirect function we just used.
+[0:47:52]  And I have a session variable that comes with Flask 2.
+[0:47:56]  So what's nice, again, about Flask is that it deals with all of this cookie
+[0:47:59]  stuff for you.
+[0:48:00]  It sets the cookie.
+[0:48:01]  It checks the cookie.
+[0:48:02]  And what Flask does for you is it gives you
+[0:48:05]  the abstraction of a variable called session,
+[0:48:08]  so that anything you put in the session variable, which itself is
+[0:48:11]  a dictionary, will be there again and again and again,
+[0:48:15]  whenever that same user comes back.
+[0:48:16]  A session is how you implement, essentially,
+[0:48:19]  like the proverbial shopping cart.
+[0:48:22]  If I'm logged into Amazon, you're logged into Amazon.
+[0:48:25]  Amazon knows which of us is which by way of that cookie.
+[0:48:28]  And Amazon, if they're using Flask, provides the programmer
+[0:48:32]  with a dictionary called session.
+[0:48:34]  And Flask makes sure that when Carter's visiting the site,
+[0:48:37]  the code uses his session object.
+[0:48:39]  When I'm visiting the site, it uses my session object.
+[0:48:42]  But it's all implemented with those same cookies.
+[0:48:44]  This is the same as before.
+[0:48:46]  These lines are new.
+[0:48:47]  And you'll see these in problem set 9.
+[0:48:49]  This is how we enable sessions in a web application.
+[0:48:52]  And I'll just wave my hands at the detail.
+[0:48:54]  There's different ways to implement sessions,
+[0:48:56]  whether you use cookies on the server, cookies on the browser,
+[0:48:59]  or other things.
+[0:49:00]  These just ensure that we're storing the session information,
+[0:49:04]  the shopping cart, on the server itself.
+[0:49:07]  Now down here, let's go ahead and do this.
+[0:49:09]  Let's go ahead and run Flask run so I can see what this app does.
+[0:49:15]  If I do this and visit the URL that gets outputted,
+[0:49:18]  you'll see a very simple web page here.
+[0:49:20]  And if I type in, for instance, my name, I'm
+[0:49:22]  not going to bother with a password and click Log In,
+[0:49:25]  you'll see that you are logged in as David.
+[0:49:28]  And now I can log out.
+[0:49:29]  So I'm going to go ahead and click Log Out.
+[0:49:32]  And now it seems to know that I'm not logged in again.
+[0:49:34]  I can log in as Carter because I didn't bother
+[0:49:36]  implementing passwords for simplicity.
+[0:49:38]  But now the site knows I'm logged in as Carter.
+[0:49:40]  Better yet, if I reload, reload, reload, or click this button again and again,
+[0:49:45]  notice it still knows that I'm Carter until such time as I log out.
+[0:49:51]  All right, well, how is this working?
+[0:49:53]  Well, let's go back to VS Code here.
+[0:49:55]  And let me scroll down to first this route.
+[0:49:58]  This is a very common paradigm here whereby
+[0:50:00]  I'm checking for the index route.
+[0:50:03]  If there is not a name in the session, redirect the user to slash log in.
+[0:50:08]  Now what does that mean?
+[0:50:09]  Well, let me go back to VS Code here.
+[0:50:12]  Let me go to the slash route.
+[0:50:14]  So again, your URL will be different.
+[0:50:16]  But I'm just going to go to slash and hit Enter.
+[0:50:18]  Notice that I got automatically redirected to log in.
+[0:50:21]  And so many websites do this.
+[0:50:22]  If you go to a website and you're not logged in,
+[0:50:24]  you're very often redirected to slash log in or slash account or something
+[0:50:28]  like that where you're prompted.
+[0:50:30]  The code for doing that is right here.
+[0:50:32]  If there's no name in the session, if there's no name in the shopping cart,
+[0:50:36]  if you will, go ahead and return the user to log in that route.
+[0:50:40]  Otherwise, implicitly, if they are logged in, show them index.html.
+[0:50:44]  So let's go down that rabbit hole.
+[0:50:46]  Let me open up in VS Code a second terminal window.
+[0:50:49]  Let me go into source 9 and go into this same login demonstration.
+[0:50:54]  And let me open up the template called index.html.
+[0:50:59]  And here's all this is.
+[0:51:00]  There's some layout, but who cares at this point?
+[0:51:02]  It's just the boilerplate generic HTML.
+[0:51:04]  Here's the body block.
+[0:51:06]  I have this.
+[0:51:07]  And this, too, is ginger because of the curly brace and the percent sign.
+[0:51:12]  If there's a name in the session, this is just Python syntax,
+[0:51:16]  then say this sentence.
+[0:51:17]  You are logged in as whatever name is in the session, in the shopping cart,
+[0:51:21]  if you will.
+[0:51:22]  And then I just have this HTML link for logging the user out.
+[0:51:25]  Else, if there is no name in the session, logically,
+[0:51:29]  just say you are not logged in and give them a manual link for logging in
+[0:51:32]  instead.
+[0:51:33]  So that's all this particular template does.
+[0:51:36]  But how does the slash login work?
+[0:51:38]  Well, let's go into this other template, code of login.html,
+[0:51:42]  to which I'm redirected.
+[0:51:43]  Super simple.
+[0:51:44]  This is just copy paste from HTML before.
+[0:51:47]  I've got a login form that's going to have an action of slash login.
+[0:51:50]  Submits for privacy sake just via post.
+[0:51:53]  And then the rest of this is just a simple form.
+[0:51:56]  And I'm using an input type equals submit instead of button
+[0:51:58]  equals type equals submit, but same idea here, too.
+[0:52:01]  And if I go back to app.py, well, let's see how login works.
+[0:52:05]  It's a lot all at once, but they're relatively simple
+[0:52:08]  re-applications of the same idea.
+[0:52:10]  So if the user visits slash login via get or post, call this function login.
+[0:52:16]  If the user has submitted via post, and we saw this technique before,
+[0:52:20]  go ahead and do this on line 23.
+[0:52:23]  Store in this special session variable that comes with Flask a name key,
+[0:52:29]  and store in it the user's own name.
+[0:52:32]  So quote unquote name will have a value of David or Carter or the like.
+[0:52:36]  And as soon as you do that, redirect the user back to slash,
+[0:52:40]  just so they see the home page again.
+[0:52:41]  And this is how Amazon and all these other websites work, too.
+[0:52:44]  Otherwise, if they visit this page implicitly via get,
+[0:52:48]  and even though I didn't say equals equals get anywhere,
+[0:52:50]  that's sort of the implication.
+[0:52:52]  Because if you can only get here via get or post,
+[0:52:54]  and we already handled post, logically all that remains is get,
+[0:52:57]  well, then just show them the login screen instead.
+[0:53:01]  But there's a half a dozen ways we could express that same logic.
+[0:53:04]  And then for logout, this is kind of straightforward.
+[0:53:07]  If the user clicks that logout link and ends up at slash logout, this route,
+[0:53:11]  well, just change the value of that key in the session to be none.
+[0:53:17]  Effectively, no, Carter's gone.
+[0:53:18]  David's gone.
+[0:53:19]  There's no one logged in.
+[0:53:21]  So that is all that's required to actually implement
+[0:53:24]  the notion of logging in and logging out of a website plus the password
+[0:53:27]  thing, which should probably involve a database, but one thing at a time.
+[0:53:30]  And really, session is sort of like the code version of a shopping cart,
+[0:53:34]  whereby if I visit the same code, I get my own session object.
+[0:53:38]  If Carter visits the website, he gets his own session object.
+[0:53:40]  And the way Flask keeps us straight is they put one cookie on my computer,
+[0:53:45]  a different cookie on his computer, and uses those to line up with,
+[0:53:49]  making sure the right session gets shown to the right actual user.
+[0:53:55]  Questions on this notion of sessions?
+[0:54:01]  No?
+[0:54:02]  All right, how about a couple final examples just to tie this all together?
+[0:54:06]  Let me go back into VS Code here.
+[0:54:08]  Let me quit my previous version of Flask.
+[0:54:11]  Let's go into Source 9 and go into Store, which is a separate app altogether.
+[0:54:16]  And let's start by just running Flask to see what it does.
+[0:54:18]  Let's hover over the URL and open it in another tab.
+[0:54:21]  And this is pretty ugly, too.
+[0:54:23]  Let me zoom in.
+[0:54:24]  But it's a very simple bookstore, like in earlyamazon.com
+[0:54:28]  for each of these seven books here, each of which seems to be like,
+[0:54:31]  maybe this is h1, this is h2, h2, h2, h2, and then there's
+[0:54:35]  a button underneath each.
+[0:54:37]  Well, now let's use this as an opportunity to kind of infer,
+[0:54:40]  like for any website, how this thing works.
+[0:54:42]  Let me go ahead and do View Page Source.
+[0:54:44]  And you can do this for any website on the internet.
+[0:54:47]  Let's try to figure out how this bookstore adds things to a cart.
+[0:54:51]  Well, here's the h1 tag, uninteresting, h2, h2, h2.
+[0:54:55]  So the juicy part is in these forms.
+[0:54:57]  Each of these forms has an action of slash cart.
+[0:55:01]  So that's the route that's going to be interesting in a moment.
+[0:55:03]  And it uses post for privacy's sake.
+[0:55:06]  Each of these forms, like the deregister feature for Carter,
+[0:55:09]  has an ID parameter that's hidden visually
+[0:55:15]  that has a value of 1 or 2 or 3.
+[0:55:18]  So like the unique barcodes for the books, if you will,
+[0:55:22]  but super small numbers in our case.
+[0:55:24]  And then each of these other books has an identical form
+[0:55:28]  except for the value of this here.
+[0:55:30]  Now, in this case, this isn't such a big deal
+[0:55:33]  that a user could technically hack the HTML of this bookstore,
+[0:55:36]  amazon.com, and change the IDs.
+[0:55:38]  Because whoa, what's the worst they're going to do?
+[0:55:40]  Buy more books by adding more IDs to their shopping cart?
+[0:55:44]  That's not a problem.
+[0:55:45]  There's no prices here.
+[0:55:46]  It's just the unique ideas of books.
+[0:55:48]  So whereas the deregister was maybe worrisome
+[0:55:50]  because you're changing the server, I think
+[0:55:52]  it's OK because the user can only, at worst,
+[0:55:55]  buy more books than they might via the buttons alone.
+[0:55:58]  So how does this now work?
+[0:56:00]  Well, let's go into VS Code again here.
+[0:56:04]  Let me give myself another terminal window.
+[0:56:06]  And in source9 slash store, let me open up app.py,
+[0:56:10]  which is where all the logic is.
+[0:56:12]  So I'll flip through most of this quickly because we've seen this before.
+[0:56:14]  These imports are pretty much the same as before.
+[0:56:17]  This line is the same.
+[0:56:18]  This line is almost the same.
+[0:56:20]  But the database now is called store.db instead of froshims.db.
+[0:56:24]  This is the boilerplate code for just enabling sessions,
+[0:56:27]  this notion of a shopping cart.
+[0:56:29]  So let's see how the index works.
+[0:56:31]  How is it I'm seeing all seven books at once?
+[0:56:33]  Well, in this index function, I'm using on line 19
+[0:56:37]  select star from books to get all the books from the database.
+[0:56:40]  And then I'm rendering a template called books.html,
+[0:56:43]  passing in as a placeholder all of those books.
+[0:56:45]  All right, let's go down that rabbit hole for a second.
+[0:56:48]  Let me open up books.html in my templates directory.
+[0:56:51]  And here again, even though it's new today,
+[0:56:54]  it's probably increasingly familiar syntactically.
+[0:56:57]  Here's the h1.
+[0:56:59]  Here is my loop.
+[0:57:00]  Here's the h2, which is going to output the current book's title in that loop.
+[0:57:04]  Here's the form.
+[0:57:06]  Here's the ID of that book that's going to be outputted in the form.
+[0:57:08]  So I didn't manually type out seven long forms.
+[0:57:11]  I just did one in this template so that it gets generated automatically.
+[0:57:15]  Literally what a website play Amazon would
+[0:57:17]  do to show you 10 books at a time or 10 search results or more at a time.
+[0:57:23]  All right, well, let's go to slash cart, which was the juicy one.
+[0:57:27]  And this one's longer.
+[0:57:28]  But let's see if we can reason through it.
+[0:57:30]  If the user submits via get or post to slash cart, well, we first do this.
+[0:57:35]  And this is just necessary in some boilerplate rewrote.
+[0:57:38]  We're going to use the session object to store a variable called cart that,
+[0:57:43]  in this case, is going to be a list.
+[0:57:44]  So session, again, is just a dictionary.
+[0:57:46]  You can put anything in it you want.
+[0:57:48]  Previously, we put students' names and sports.
+[0:57:51]  Now what I want to do is actually, sorry, previously we
+[0:57:56]  put the student's name, the user's name in it.
+[0:58:00]  Now I'm going to actually store a cart key whose value is a list.
+[0:58:06]  Why?
+[0:58:06]  Because I want to aggregate more and more books in this list.
+[0:58:09]  All right, so that just makes sure that I have at least an empty shopping
+[0:58:12]  cart the very first time the user does this.
+[0:58:15]  If they visit this form via post, let's go ahead and get the ID of the book
+[0:58:18]  that they posted.
+[0:58:20]  If it is not empty, if there is a number, like one or two or three,
+[0:58:23]  let's go ahead and go into the shopping cart, which is a list, per this line,
+[0:58:29]  and just append that ID.
+[0:58:31]  So this list of books in your shopping cart
+[0:58:33]  is going to contain like one, comma, two, comma, four, comma, six,
+[0:58:36]  whatever books you're actually buying.
+[0:58:38]  And then the user gets redirected to cart.
+[0:58:40]  What if, though, the user got here via get and not post?
+[0:58:44]  Well, this one's relatively straightforward.
+[0:58:46]  If you just visit slash cart, we select star from books where ID is in,
+[0:58:52]  OK, so this is interesting, this list.
+[0:58:55]  And this is syntax you might not have seen before.
+[0:58:57]  But if you read the documentation for CS50's library,
+[0:59:00]  if you select something and use a question mark placeholder,
+[0:59:04]  and the placeholder itself is a list, we output a comma separated list
+[0:59:09]  of values, just like you would use maybe in problem sets 7
+[0:59:13]  for doing SQL queries on your own.
+[0:59:16]  So this just means show me only those books in my shopping cart, not Carter's,
+[0:59:20]  not someone else's, not in the whole database,
+[0:59:22]  only show me the books in my shopping cart, and then render it as such.
+[0:59:27]  So we only saw what the catalog here looks like at slash books.
+[0:59:32]  Let's go ahead and slash, let's go ahead and add maybe the first book to my cart.
+[0:59:37]  And now I see, at slash cart, only that first book, whose ID is one.
+[0:59:42]  Let me now go back to the bookstore here, scroll down to maybe the seventh book,
+[0:59:46]  and add that to my cart.
+[0:59:48]  And now I see this here, too.
+[0:59:51]  Meanwhile, all of this information is stored in my session.
+[0:59:55]  And so when I reload this cart again and again,
+[0:59:58]  the reason I'm only seeing my two.

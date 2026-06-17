@@ -1,0 +1,1200 @@
+# Transcripción: chunk_017.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  This SQL, when you go to the nice graphical user-friendly find
+[0:00:03]  and replace box, this may very well be what they're doing underneath the hood.
+[0:00:06]  Or, of course, they could be using some other language altogether.
+[0:00:10]  There's one last syntax that's worth knowing,
+[0:00:12]  delete, which, for better or for worse, is even more destructive,
+[0:00:16]  whereby it allows you to delete rows from tables.
+[0:00:19]  It's distinct from drop, which lets you delete tables themselves.
+[0:00:22]  This focuses on rows.
+[0:00:24]  So suppose that you really, really didn't like, let's say,
+[0:00:29]  Tiedemann was a little challenging if you tackle that more comfortable problem.
+[0:00:34]  So if you really don't want to even think about Tiedemann anymore,
+[0:00:37]  so why don't we do delete from favorites where problem equals,
+[0:00:42]  and I won't execute it for real, Tiedemann.
+[0:00:44]  This would have the effect of deleting every row, including
+[0:00:47]  the language therein and the timestamp, where the student answered Tiedemann.
+[0:00:52]  Worse than this would be this.
+[0:00:56]  Why might this be bad?
+[0:01:01]  OK, chuckling, because there's no predicate.
+[0:01:03]  There's no filter, which means literally this would delete all of the data.
+[0:01:07]  So again, with great power here comes great responsibility.
+[0:01:10]  Now, this has just been a data set of what 430 rows by us dynamically created.
+[0:01:14]  There's, of course, some really juicy data sets in the real world.
+[0:01:17]  And one website you might have heard or an app you might have used
+[0:01:20]  is IMDB, the Internet Movie Database, which wonderfully
+[0:01:22]  makes some of their data available for download as CSV files,
+[0:01:26]  or technically TSV files, tab-separated values.
+[0:01:29]  But what we did in advance of class was download some of that data
+[0:01:33]  for both TV shows in the real world and movies in the real world.
+[0:01:36]  And what's wonderful about this data set is it's not just dozens or hundreds
+[0:01:40]  or even thousands of lines.
+[0:01:42]  There are millions of rows of juicy data, TV shows and movies,
+[0:01:46]  with which most folks are probably familiar, at least with a subset.
+[0:01:49]  And we'll see in just a little bit that this data comes
+[0:01:53]  in the form of now six different tables that we've given you.
+[0:01:57]  And the tables in question for today are going
+[0:01:59]  to be the people in the TV business, the stars they're in,
+[0:02:02]  the shows that people are producing, and the like.
+[0:02:04]  This is a picture we'll revisit to enable you to wrap your minds
+[0:02:08]  around what the actual data is.
+[0:02:09]  This feels like a good opportunity, though, for a snack.
+[0:02:12]  In fact, in just a moment, we have a whole lot of Rice Krispie
+[0:02:14]  treats out in the lobby.
+[0:02:16]  But if folks could perhaps acknowledge this mini wedding cake here,
+[0:02:20]  CS50's own Carter Zenke is getting married this week.
+[0:02:24]  So congratulations to Carter as well.
+[0:02:32]  All right, there's only one piece of cake in that box,
+[0:02:42]  but a lot of Rice Krispie treats in the transept.
+[0:02:44]  Let's take 10 minutes, and we'll be back with internet movie database in 10.
+[0:02:47]  All right, we are back.
+[0:02:49]  So if you've never been, you can actually go to imdb.com right now
+[0:02:53]  and play around or download the mobile app.
+[0:02:55]  And it's just a big database of a lot of TV shows and movies and actors
+[0:02:59]  and the like.
+[0:03:00]  But what indeed is nice is you can download some of that data.
+[0:03:03]  And that's what I've done in advance.
+[0:03:04]  And what we've done is we wrote some Python code
+[0:03:07]  to convert some of the flat file databases that they let you download.
+[0:03:12]  And we converted it into a SQL database with six tables, so not just one,
+[0:03:17]  but six, that ultimately are these here.
+[0:03:20]  And let me just help you wrap your minds around
+[0:03:22]  what this picture is, which is an entity relationship diagram, which
+[0:03:26]  is just to say each of these boxes on the screen represents a table.
+[0:03:29]  And each of the arrows or edges represents some kind of relationship
+[0:03:33]  across the tables.
+[0:03:34]  Because up until now, the only data we had
+[0:03:36]  were those three columns in the favorites table.
+[0:03:38]  But what gets really useful about SQL databases,
+[0:03:41]  just like a Google spreadsheet or an Excel file,
+[0:03:44]  is you can have multiple sheets or in a database, multiple tables.
+[0:03:47]  And so what we're about to see is that in this IMDB database for TV shows,
+[0:03:52]  there's going to be a dedicated table for all the people in the TV business.
+[0:03:56]  There's going to be a dedicated table for all of the TV shows that
+[0:03:59]  are in their database as of right now.
+[0:04:01]  There's going to be a dedicated table for writers
+[0:04:04]  in that industry, for the ratings of shows,
+[0:04:08]  for the genres to which shows belong, comedy, and the like.
+[0:04:12]  And then lastly, there's going to be this table, which somehow
+[0:04:15]  associates people with the TV shows that they star in and vice versa.
+[0:04:21]  And so let's consider first what this looks like in code.
+[0:04:24]  And we'll see that it's going to overwhelm intentionally at first.
+[0:04:27]  But I'm going to do this.
+[0:04:28]  I'm going to go back to my terminal window.
+[0:04:30]  I downloaded from the course's website a file called shows.db,
+[0:04:34]  which we made in advance for you.
+[0:04:36]  And if I type ls, I'll see all of my favorites files from before, the CSV,
+[0:04:40]  the DB, and the Python file.
+[0:04:42]  But now there's shows.db.
+[0:04:44]  So I'm going to go ahead in my full screen terminal window here.
+[0:04:47]  I'm not using actual tabs or code files now.
+[0:04:50]  I'm going to run SQLite 3 on the file called shows.db.
+[0:04:54]  And I'm just going to see this version information here.
+[0:04:57]  Let me clear my screen and run the one command
+[0:04:59]  I ran earlier to show us the schema of the favorites database.
+[0:05:03]  Now we'll see the schema for the shows database.
+[0:05:06]  And there's a lot going on here.
+[0:05:07]  But let me scroll back up to the very top, the beginning.
+[0:05:10]  And we see this here.
+[0:05:13]  So when I run .schema, we see a dump, really,
+[0:05:18]  of all of the SQL create table commands that
+[0:05:21]  were run in order to create this database for you.
+[0:05:23]  And one of those tables is called genres.
+[0:05:25]  And another people, ratings, shows, stars, and so forth.
+[0:05:29]  And the columns therein, even though it's
+[0:05:31]  formatted a little more prettily than the automatically generated
+[0:05:34]  create table statement for favorites, whereby we have one column per line
+[0:05:39]  of output here, in the, for instance, people table,
+[0:05:43]  there's going to be an ID column, like unique identifier,
+[0:05:46]  like a Harvard ID, a Yale ID, or the like, a name column, a birth year,
+[0:05:51]  and then some other stuff.
+[0:05:53]  If I scroll down to shows, every show in the world
+[0:05:56]  is going to have a unique ID as well, a title, of course,
+[0:05:59]  the year in which it debuted, and the total number of episodes
+[0:06:02]  as of the time we downloaded the data.
+[0:06:05]  And then what else is there?
+[0:06:06]  Some of these are a little less obvious, like ratings here.
+[0:06:10]  So ratings don't have an ID column, but they have a show ID column
+[0:06:15]  and a rating, like a five-point scale or 10-point scale or the like,
+[0:06:18]  and then the total number of votes that were collected
+[0:06:20]  to contribute to that rating.
+[0:06:21]  IMDB allows people to upvote and downvote shows and movies and the like.
+[0:06:26]  And then similarly is genre structured.
+[0:06:28]  There's a show ID, and then there's a genre,
+[0:06:31]  which is going to be like an English word, like comedy or drama
+[0:06:34]  or something else.
+[0:06:35]  And then what else?
+[0:06:36]  Let's go a little further at the bottom here for stars and writers.
+[0:06:41]  If we go to the very bottom here, stars and writers
+[0:06:44]  are similarly structured too.
+[0:06:46]  They have a show ID and a person ID, so show and person.
+[0:06:51]  And then this writer's table has a show ID and a person ID.
+[0:06:54]  And there's a whole lot of other words that we'll come to in just a moment.
+[0:06:57]  But what is this code hinting at?
+[0:07:00]  Well, if I go back to the picture from earlier here,
+[0:07:03]  you'll see that this picture captures the relationships
+[0:07:07]  among these various tables.
+[0:07:09]  So for instance, if we focus on shows for just a moment,
+[0:07:13]  a show, again, has a unique ID, a title, a year in which it debuted,
+[0:07:17]  and a total number of episodes.
+[0:07:19]  If you want to figure out what genre or genres a show belongs to,
+[0:07:25]  because some shows are just comedies, some shows are just dramas,
+[0:07:28]  but some shows are arguably comedies and dramas
+[0:07:31]  depending on the episode or the like.
+[0:07:33]  So you can imagine wanting to associate two or three
+[0:07:36]  or even more genres with a show.
+[0:07:38]  This line here in this second table allows us to do that.
+[0:07:42]  Every row in the genres table, we'll see, has two items.
+[0:07:47]  A show ID, which relates to the idea of a show.
+[0:07:51]  And that's why these lines literally line up with that specific column name.
+[0:07:57]  And a genre, which is going to be like quote unquote comedy, quote unquote
+[0:08:00]  drama, or something else.
+[0:08:01]  Now with that said, design question, why have we deliberately not just gotten
+[0:08:08]  rid of this genre's table and made our lives simpler
+[0:08:11]  by just adding a genre column to this show's table?
+[0:08:16]  And again, a table is just like a sheet with rows and columns.
+[0:08:19]  At the moment, shows only have four columns, ID, title, year, episodes.
+[0:08:23]  Why not just add a fifth column called genre and put the show's genre there?
+[0:08:31]  Any intuition here?
+[0:08:34]  Why not just keep things simple?
+[0:08:37]  Yeah, and back.
+[0:08:44]  Exactly.
+[0:08:45]  If you add a fifth column here and call it genre,
+[0:08:49]  then you have to pick a genre specifically.
+[0:08:52]  You have to put in that cell, presumably, comedy, or drama,
+[0:08:56]  or musical, or something else.
+[0:08:58]  Now you could write multiple words in the cell.
+[0:09:00]  But generally speaking, that would be sloppy, bad design.
+[0:09:03]  Every cell, just like in a spreadsheet, should really have one value.
+[0:09:06]  It might have multiple words, but it shouldn't be like a weirdly comma
+[0:09:09]  separated list of multiple things.
+[0:09:10]  It should just be in a different cell in that case.
+[0:09:13]  So if you instead were to design this with just a single column called genre,
+[0:09:16]  you're imposing what a computer scientist would
+[0:09:19]  call a one-to-one relationship.
+[0:09:21]  Every show has one genre.
+[0:09:24]  And that's not necessarily a good thing.
+[0:09:26]  Or strictly speaking, it would be a many-to-one,
+[0:09:28]  because the same genre could belong to multiple shows.
+[0:09:31]  But each show could only have one genre in that case.
+[0:09:34]  What a relational database allows you to do in relational
+[0:09:37]  is indeed the operative word.
+[0:09:38]  It allows you to factor out some of your information
+[0:09:41]  and then have maybe one show here in one row.
+[0:09:45]  But then in this genre's table, you could
+[0:09:47]  have one row for that one show genre.
+[0:09:49]  Or you could have two rows in the genre's table for comedy and for drama.
+[0:09:54]  Or if it has a third genre, you could just add another row here.
+[0:09:58]  So you still have one row for the show itself with all the juiciest details,
+[0:10:03]  but a variable number of rows by having this relationship with another table.
+[0:10:08]  Meanwhile, ratings work the same way, at least in this case.
+[0:10:12]  A show has ID, title, year, and episodes.
+[0:10:15]  But if you want to figure out its rating,
+[0:10:17]  you have to kind of follow the arrow here, so to speak,
+[0:10:19]  and look up the corresponding show ID in this table,
+[0:10:22]  find the rating of that show, and the total number of ratings.
+[0:10:26]  So that's been factored out, too, for better or for worse.
+[0:10:29]  Now let's consider people.
+[0:10:31]  People have just three columns, ID, name, and birth.
+[0:10:34]  But there's no mention of the TV show in which people have starred,
+[0:10:37]  or the TV shows that a person has written.
+[0:10:40]  Well, why is that?
+[0:10:41]  Well, if you just had a fourth column here called show,
+[0:10:45]  well, you would have to decide what show is that person in.
+[0:10:48]  No one could ever act again in another show,
+[0:10:50]  because there's no room to store the data.
+[0:10:51]  But if someone, of course, a popular actor can star in multiple shows,
+[0:10:56]  well, we could have one ID for that person, one name, one birth year,
+[0:11:00]  obviously.
+[0:11:00]  There's only one Steve Carell as an actor in the world of people.
+[0:11:04]  But Steve Carell, in this example, could have his person ID, whatever
+[0:11:09]  his Harvard ID equivalent, Yale ID equivalent is,
+[0:11:11]  appear in multiple rows in this table so that it
+[0:11:14]  can be associated with multiple shows.
+[0:11:17]  And this allows you to create what's called a one-to-many relationship.
+[0:11:21]  Or technically, it's bidirectional.
+[0:11:23]  It's a many-to-many relationship.
+[0:11:24]  Why?
+[0:11:25]  Well, one show can certainly have multiple people in it
+[0:11:29]  and multiple people writing for it, just in the real world.
+[0:11:31]  But conversely, one person could certainly act in multiple shows
+[0:11:36]  or write multiple shows.
+[0:11:37]  So this is what you get with relational databases.
+[0:11:40]  You put your sort of canonical data for people in one place,
+[0:11:43]  for shows in another place.
+[0:11:46]  And then you use these additional tables to relate one thing to another.
+[0:11:51]  So we won't dwell on the pictures.
+[0:11:52]  That's just if you sort of can wrap your mind around the data set better
+[0:11:56]  that way, that's one way of thinking about it.
+[0:11:58]  But recall that the code we just saw for the schema, again, escalated quickly.
+[0:12:02]  Like, there's a lot of keywords I haven't mentioned yet.
+[0:12:04]  But some of these are perhaps familiar.
+[0:12:06]  They're capitalized differently here.
+[0:12:08]  But integer is on the list here.
+[0:12:10]  Null is on the list, albeit technically not null.
+[0:12:13]  So let's tease apart some of these keywords
+[0:12:15]  and consider what they're actually doing for your database,
+[0:12:17]  because now we're exploring features that do not exist in the world
+[0:12:21]  of spreadsheets alone.
+[0:12:23]  So it turns out in a SQL database, specifically
+[0:12:26]  SQLite, which is the version of SQL we use in CS50
+[0:12:29]  and which is commonly used for things like mobile applications nowadays,
+[0:12:33]  it's like a lightweight version of SQL.
+[0:12:35]  It's when you aren't trying to run Twitter
+[0:12:37]  and have billions and billions of rows necessarily.
+[0:12:39]  You've got hundreds, thousands, tens of thousands, maybe even a few million,
+[0:12:43]  but not crazy numbers, crazy amounts of data.
+[0:12:47]  In the world of SQLite specifically, there's these five data types.
+[0:12:51]  So just like in C, we had int and char and the like.
+[0:12:54]  In SQL, we have these.
+[0:12:56]  Blob, which is kind of funny, but it just means binary large object.
+[0:12:59]  So it's like a binary data type, zeros and ones that aren't necessarily
+[0:13:03]  fitting into the other categories.
+[0:13:05]  Integer, which of course is an integer as we know it.
+[0:13:07]  Numeric, which is kind of a catch all for numbers that are formatted specially,
+[0:13:12]  so like a date would be like year, year, year, year,
+[0:13:16]  dash month, month, dash day, day.
+[0:13:18]  And this is actually a wonderful thing.
+[0:13:20]  Depending on the country you're from, you might think your date system
+[0:13:23]  in your country is great or it's horrible.
+[0:13:25]  The US system is horrible because we have month, day, and then year,
+[0:13:30]  which is impossible to sort.
+[0:13:31]  It is the wrong way objectively to store data,
+[0:13:34]  and yet here we are using this at scale.
+[0:13:36]  Other countries have gotten this better.
+[0:13:38]  Numeric and SQL itself standardizes that stuff.
+[0:13:41]  So it doesn't matter what country you're from.
+[0:13:42]  You're storing your data in this particular way, for instance.
+[0:13:45]  Times are standardized and other types of numeric data as well.
+[0:13:49]  Real is synonymous with flow, so something with a decimal point
+[0:13:52]  and some number of digits thereafter.
+[0:13:55]  And then text is just for strings and the like.
+[0:13:58]  With other even fancier databases like MySQL, PostgreSQL, Oracle,
+[0:14:02]  and other products you might have heard of,
+[0:14:04]  there's even more data types where you have to make even finer grain decisions.
+[0:14:08]  But for SQLite, it's indeed pretty lightweight.
+[0:14:10]  And you or we just have to decide the data types for each column in a table.
+[0:14:14]  But there's these additional constraints in the world of SQL.
+[0:14:17]  You can additionally say that cells in this column may or may not be null.
+[0:14:23]  So if you want to protect yourself from yourself,
+[0:14:26]  so you don't screw up and insert a null that is a blank value,
+[0:14:29]  you can explicitly design a table to have a column that cannot be null.
+[0:14:33]  And so in fact, someone came up during the break
+[0:14:35]  to ask me about my having manually inserted SQL, quote unquote SQL,
+[0:14:40]  into our favorites database.
+[0:14:41]  You might recall that I kind of cheated.
+[0:14:43]  I just inserted SQL, quote unquote, and 50VIL, the name of a new problem,
+[0:14:47]  quote unquote.
+[0:14:48]  But what did I not insert into the database?
+[0:14:51]  A timestamp.
+[0:14:52]  And I could have.
+[0:14:53]  I could have put like the current day and time a few minutes ago.
+[0:14:55]  But I didn't.
+[0:14:56]  And that's fine if it's acceptable to you and the product you're building.
+[0:15:01]  But I could have prevented that.
+[0:15:02]  If we had defined the table to have a timestamp column that isn't just text,
+[0:15:07]  but it's text that's not null, SQL would have complained
+[0:15:10]  and would not have let me complete that insertion.
+[0:15:13]  So there's these kinds of built-in defenses
+[0:15:14]  that you don't necessarily get with a spreadsheet alone.
+[0:15:17]  And unique means exactly that.
+[0:15:19]  If you want to make sure that every row in that column
+[0:15:22]  is unique, maybe for email addresses or in the US social security numbers
+[0:15:27]  or anything that you want to make sure you don't have two versions of,
+[0:15:31]  you can specify that the column is unique.
+[0:15:32]  And there's other such constraints as well.
+[0:15:34]  But again, this is just a list of features
+[0:15:36]  that you get from a proper relational database.
+[0:15:39]  But perhaps the most intellectually interesting one and the most powerful
+[0:15:43]  one is what's called here a primary key and a foreign key.
+[0:15:47]  And let me go back now to this output.
+[0:15:50]  If we look at shows, you'll see that a show, again,
+[0:15:54]  has an ID, a title, a year, and a number of episodes.
+[0:15:57]  And now the data types might make sense.
+[0:15:59]  The ID, it turns out, just like a Harvard ID, a Yale ID,
+[0:16:02]  is going to be an integer, so a simple number.
+[0:16:04]  The title, of course, is going to be text, but not null.
+[0:16:07]  It would be weird if a TV show had no name.
+[0:16:11]  The whole world would break or your TV guide and whatnot.
+[0:16:13]  So that makes sense there to say not null.
+[0:16:16]  Year is numeric, so it's a standardized form.
+[0:16:18]  Episodes is an integer, like how many episodes have been produced.
+[0:16:21]  And then lastly, notice this, the primary key of the show's table
+[0:16:25]  is apparently the column called ID.
+[0:16:28]  I mentioned a few lines earlier.
+[0:16:30]  This just means that the database will use the ID column
+[0:16:35]  as the unique identifier.
+[0:16:37]  So it's similar to the unique keyword, but primary key
+[0:16:40]  just means the database is going to treat it as special too
+[0:16:42]  and make sure that it is uniquely identifying your data.
+[0:16:46]  But what's interesting is this.
+[0:16:47]  Notice if I scroll back up to people, people
+[0:16:50]  were sort of similarly structured, but with different attributes.
+[0:16:54]  Like up here, we had a person, has an ID, a name, a birth year,
+[0:16:59]  and a primary key of ID.
+[0:17:01]  So ID is, again, integer.
+[0:17:03]  Name is text, but not null, because it would
+[0:17:05]  be weird to have a human with absolutely no name textually.
+[0:17:09]  Birth is going to be numeric, but the primary key of people is ID as well.
+[0:17:14]  So those are the unique columns that the database will just treat special.
+[0:17:17]  Why?
+[0:17:18]  Well, we just looked at shows.
+[0:17:19]  We just looked at people.
+[0:17:21]  Let's focus now on this one down here, stars.
+[0:17:25]  How do you determine who stars in a TV show?
+[0:17:27]  Well, we had two columns, the show ID and the person ID.
+[0:17:30]  This is the incarnation of a many-to-many relationship.
+[0:17:33]  One person could be in many shows.
+[0:17:35]  One show could certainly have many people in it or writing for it.
+[0:17:38]  But notice this.
+[0:17:39]  Within this table of two columns, show ID and person ID,
+[0:17:43]  there's what's going to be called a foreign key called
+[0:17:46]  show ID that references the shows table's ID column and then
+[0:17:52]  another foreign key called person ID, though I could call these things
+[0:17:55]  in parentheses anything I want, that references the people table's ID column.
+[0:18:00]  Now, you're not going to often have to type commands like this.
+[0:18:02]  Again, you set the database up once in the beginning, typically,
+[0:18:05]  maybe with some help from a TF, maybe with help of Google or the like.
+[0:18:08]  But once your database is designed, it's back to the crud,
+[0:18:11]  like create, read, update, delete, the selects, the inserts,
+[0:18:14]  the deletions, and the like.
+[0:18:15]  But what's this implying?
+[0:18:16]  These keywords, like primary key and foreign key,
+[0:18:20]  are what are doing in code what this picture was painting a moment ago.
+[0:18:25]  These lines here are drawn literally to line up with the corresponding things.
+[0:18:30]  People's ID lines up with person ID.
+[0:18:33]  Show's ID lines up with show ID.
+[0:18:36]  And so you're just seeing graphical version, code version, graphical code
+[0:18:40]  that creates these relationships.
+[0:18:43]  Now, given that, let's actually see what these things look like.
+[0:18:47]  So let me go back to VS Code here.
+[0:18:49]  Let me clear my screen.
+[0:18:50]  I'm still within SQLite with shows.db.
+[0:18:53]  Let me go ahead and do what I do with any new database.
+[0:18:56]  If I ever download something or I'm trying to wrap my mind around a problem,
+[0:18:59]  usually it doesn't come with a pretty picture or a three-hour lecture
+[0:19:03]  to explain what the data set is.
+[0:19:05]  Rather, you just have the data set and your own knowledge of SQL.
+[0:19:08]  So let me play around.
+[0:19:09]  So .schema shows me all of the tables.
+[0:19:12]  That might be a starting point.
+[0:19:13]  OK, this is interesting.
+[0:19:14]  I know what people are.
+[0:19:16]  Let's go ahead and show me all the people.
+[0:19:19]  So select star from people.
+[0:19:21]  I'm just trying to wrap my mind around what this data
+[0:19:23]  set looks like in a more user-friendly way.
+[0:19:26]  OK, that's already a lot of people.
+[0:19:29]  As you see the years flying by, there's been a lot of people in the TV business.
+[0:19:33]  So this was maybe not the best query to run,
+[0:19:36]  but this is indicative of just how large this data set is from IMDB.
+[0:19:41]  OK, whenever you lose control over your computer,
+[0:19:45]  Control-C is your friend to interrupt.
+[0:19:47]  What would have been better?
+[0:19:48]  Because I don't think I need to know all the million people in the world.
+[0:19:52]  I could do like limit me to 10 people.
+[0:19:54]  And that's enough now to get a sense of like Fred Astaire has
+[0:19:58]  an idea of one first person ever.
+[0:20:01]  Birth year of 1899, Lauren Bacall and all of these other people
+[0:20:06]  from yesteryear, you see that they are the first 10 people in the database.
+[0:20:09]  So there's an example of some of the data.
+[0:20:11]  Now, if I want to wrap my mind around what a show is,
+[0:20:14]  I know it technically.
+[0:20:15]  I know it from the picture.
+[0:20:16]  But let's just look at some raw data.
+[0:20:17]  So instead of saying select star from people,
+[0:20:20]  let me go ahead and select star from shows, limit 10.
+[0:20:24]  And OK, I've only heard of or seen a couple of these,
+[0:20:28]  but these are older shows at that.
+[0:20:30]  But I see that every show has an ID, a title, a year in which it
+[0:20:33]  debuted in a number of episodes.
+[0:20:35]  But perhaps most opaque is going to be this.
+[0:20:37]  Select star from stars, where this is the table that
+[0:20:42]  associates people with shows.
+[0:20:44]  Am I going to see any names or show titles here?
+[0:20:49]  Not according to the definition we saw earlier.
+[0:20:51]  Oh, I should have done my limit.
+[0:20:52]  Let me interrupt that.
+[0:20:54]  Let me do that again.
+[0:20:55]  Limit 10, no.
+[0:20:57]  And this is where now you're definitely in the programmer world
+[0:21:00]  because this would be the most annoying spreadsheet
+[0:21:03]  to use on your Mac or PC ever.
+[0:21:04]  If you just had like a sheet with all of these numbers
+[0:21:07]  that associates one thing with the other, like, my god,
+[0:21:09]  how do you figure out who this is or what this is?
+[0:21:11]  You have to like manually Control-F or Command-F looking for the data.
+[0:21:15]  But a database doesn't care.
+[0:21:16]  Once you know SQL, you can sort of stitch these things back together.
+[0:21:20]  So what you're seeing here are foreign keys.
+[0:21:23]  Foreign keys.
+[0:21:24]  Why?
+[0:21:25]  Because show ID corresponds to the same numbers
+[0:21:28]  from that other table called shows that has
+[0:21:31]  a proper primary key called ID.
+[0:21:33]  Person ID is a foreign key in this context
+[0:21:35]  because it refers to numbers that belong to, really, the people table
+[0:21:40]  and its ID column.
+[0:21:41]  So this is just a way of somehow linking them.
+[0:21:43]  And so if you think of, I always like think of this in my mind's eye
+[0:21:46]  is this, if this is like the people table, this is the shows table,
+[0:21:50]  and there's this middle table in between, the stars table,
+[0:21:54]  there's some way of like stitching those two together
+[0:21:56]  by lining up the IDs of one with the other and getting back some more data.
+[0:22:01]  So let's actually play with some of this data.
+[0:22:04]  How about we start where we emphasized earlier, genres.
+[0:22:07]  So let me go ahead and take a quick look at all of the genres in this database.
+[0:22:10]  So select star from genres.
+[0:22:12]  Star is usually going to be a little overwhelming,
+[0:22:15]  but it just gives me a sense of what the data is.
+[0:22:17]  But let's actually look at all of them there.
+[0:22:21]  OK, that's a lot.
+[0:22:23]  These are all official genres from IMDB.
+[0:22:27]  OK, it went OK.
+[0:22:28]  It wasn't terribly long.
+[0:22:29]  Let me filter that down.
+[0:22:30]  So from genres where genre equals comedy, capital C,
+[0:22:36]  just based on the data I'm seeing.
+[0:22:38]  OK, so what am I seeing now?
+[0:22:40]  And in fact, let me limit this arbitrarily to 10,
+[0:22:43]  though I could limit it to anything I want.
+[0:22:45]  Here are 10 comedies.
+[0:22:47]  What are they?
+[0:22:48]  Well, who the heck knows?
+[0:22:49]  Like, all I know are the 10 show IDs.
+[0:22:52]  Now, I could do something like this, as we've seen before with SQL.
+[0:22:55]  I could do, all right, well, let's figure out what this show ID is.
+[0:22:58]  Select star from shows where the ID of the show I'm looking for equals what?
+[0:23:06]  6, 2, 6, 1, 4, semicolon.
+[0:23:09]  So I could manually look it up by cross-referencing the other table.
+[0:23:13]  OK, so that was the show in question there,
+[0:23:15]  the first comedy in the data set.
+[0:23:17]  Let me look up the second one.
+[0:23:18]  So instead of that, let's do 6, 3, 8, 8, 1, Enter.
+[0:23:23]  OK, so that's that show.
+[0:23:24]  And let's do one more.
+[0:23:26]  And suffice it to say, this is just getting tedious and vulnerable
+[0:23:29]  to mistakes quickly.
+[0:23:31]  This is not, this surely can't be the way to do this.
+[0:23:34]  And indeed, SQL is going to let us do this a little more powerfully instead.
+[0:23:38]  Let's do this.
+[0:23:39]  Instead of getting this table temporarily with all these show IDs
+[0:23:42]  and all these genres, let's refine the query.
+[0:23:45]  So let's just select the show ID from the genres table
+[0:23:50]  where the genre equals, quote unquote, comedy.
+[0:23:54]  Now I have a big list of show IDs, all of which are comedy.
+[0:23:59]  How many?
+[0:23:59]  Well, I can combine ideas from earlier.
+[0:24:01]  I can just count all of those show IDs, or star if I want to just do that too.
+[0:24:06]  But I can count all those show IDs, 48,706 comedies
+[0:24:10]  in IMDB's database for TV shows.
+[0:24:12]  So it feels like a lot.
+[0:24:13]  But how can I now use that information and get back
+[0:24:16]  the titles of comedies in the database without doing it manually?
+[0:24:20]  Well, let's do this.
+[0:24:22]  I have a moment ago this query.
+[0:24:23]  Let's select the show ID from genres where the current genre is,
+[0:24:28]  quote unquote, comedy.
+[0:24:32]  What if I kind of nest these queries?
+[0:24:33]  Kind of like grade school math in parentheses.
+[0:24:35]  What if I combine this whole thing in parentheses?
+[0:24:38]  And now let me select what I really want.
+[0:24:40]  Let me go ahead and select how about the title of all shows
+[0:24:47]  where the ID of the show is in this list of show IDs.
+[0:24:55]  So if you agree that the shows table has an ID column, which
+[0:25:01]  is otherwise known as its primary key, the unique ID that identifies it,
+[0:25:04]  just like our Harvard IDs, our Yale IDs, and you agree that per a moment ago,
+[0:25:09]  this shorter query will give me back just the show IDs of all
+[0:25:13]  of the comedies in the database.
+[0:25:16]  You can actually combine or nest these queries together.
+[0:25:20]  It's going to respect SQLite, order of operations with parentheses,
+[0:25:23]  just like grade school math.
+[0:25:24]  So the thing in parentheses will be executed first.
+[0:25:26]  That gives it back a list of IDs, like, what, 48,000 IDs.
+[0:25:30]  And then this query, the outer query, is going
+[0:25:32]  to get the title from all of the shows where the ID of the show
+[0:25:36]  is in that big list of 48,000.
+[0:25:38]  So if I now execute these together, I think
+[0:25:41]  the list is still going to be a little long, but let me execute it together.
+[0:25:45]  Now I see this long list of outputs, a little overwhelming.
+[0:25:49]  Let's go ahead and maybe limit it to just 10, as before for discussion's sake.
+[0:25:55]  And now I see 10 comedies ordered arbitrarily from however
+[0:25:59]  they're in the database that happen to indeed be comedy as their genre.
+[0:26:04]  If I want to do this a little more cleanly, I could do this.
+[0:26:06]  Let's see, why don't I order by title ascending order,
+[0:26:11]  which is alphabetically, or the default is also ascending,
+[0:26:14]  limit 10.
+[0:26:15]  Now I see the top 10 weirdly named things with hash symbols,
+[0:26:20]  presumably to get their titles up to the beginning,
+[0:26:23]  or maybe these are hashtags.
+[0:26:24]  Here now we have alphabetically the top first 10 shows that are comedies.
+[0:26:30]  Any questions on these kinds of queries?
+[0:26:34]  It's kind of a lot, but at the same time,
+[0:26:35]  it's just like composing the smaller ideas from before
+[0:26:38]  into slightly more useful queries.
+[0:26:42]  Yeah, do foreign keys have to set the relationship
+[0:26:51]  when you create the table?
+[0:26:52]  The programmer or the database administrator
+[0:26:54]  would create that relationship by using those keywords primary key
+[0:26:58]  and foreign key that teaches the database what is related to what,
+[0:27:02]  per the picture.
+[0:27:03]  So you do that once.
+[0:27:05]  And now I, being the sort of programmer who's familiar with the database,
+[0:27:09]  I am just using these foreign keys in a manner consistent with their design.
+[0:27:16]  And this is where it's useful at some point,
+[0:27:18]  even if no one hands you a picture, to make
+[0:27:19]  sure you understand the database, because that's
+[0:27:21]  going to inform literally what you type in SQL to get the data you care about.
+[0:27:26]  Well, let's do something a little more precise.
+[0:27:28]  How about, very reasonable question, and honestly, this
+[0:27:30]  is exactly what IMDB.com and the app are for,
+[0:27:33]  what if you want to find all of the shows that Steve Carell is in?
+[0:27:36]  Like kind of a reasonable query, like literally
+[0:27:39]  something someone might type into Google, or more specifically IMDB.
+[0:27:42]  It's not really obvious at first glance how to do that though,
+[0:27:45]  because from my database, if these are my six tables,
+[0:27:48]  I can pretty easily get Steve Carell from here.
+[0:27:51]  But I can really only get his ID number, whatever that is, his name,
+[0:27:54]  which I know already, and his birth year.
+[0:27:55]  OK, interesting, but has nothing to do with the shows that he's in.
+[0:27:58]  I can look at shows over here, but there's no mention of Steve Carell,
+[0:28:03]  because there's no person ID here.
+[0:28:05]  Where is that relationship implemented?
+[0:28:07]  Well, it's implemented down here.
+[0:28:09]  So how do we do this?
+[0:28:10]  Well, here's the perfect example of a lesson
+[0:28:12]  we've been trying to emphasize for weeks of taking these baby steps,
+[0:28:15]  like break larger problems down into smaller ones,
+[0:28:18]  and let's do something like this.
+[0:28:20]  Let's just get everything I know about Steve Carell from the database.
+[0:28:23]  Let's select star from people, where the name of the person
+[0:28:26]  is, quote unquote, Steve Carell.
+[0:28:29]  I just want to see what data we've got.
+[0:28:31]  And here's what we have.
+[0:28:32]  OK, there's only one Steve Carell, born in 1962,
+[0:28:35]  and his unique ID is 136797, according to IMDB.
+[0:28:39]  This isn't some global actor identifier, per se.
+[0:28:43]  All right, well, how do I get now all of the shows that Steve Carell is in?
+[0:28:47]  Well, I could do this.
+[0:28:48]  Select star from stars, not to confuse the two.
+[0:28:53]  One's the symbol, one's the table name, where person ID equals 136797.
+[0:29:02]  So I think this will now give me everything from the stars table
+[0:29:05]  that relates to Steve Carell.
+[0:29:07]  OK, and you'll see person ID is the same,
+[0:29:09]  because I'm literally searching for just Steve Carell.
+[0:29:11]  There are, what, like 20 or so shows that he's been in.
+[0:29:14]  All right, well, here's where things would get tedious.
+[0:29:17]  What are those shows?
+[0:29:18]  Well, I could do select title from shows, where the ID of the show equals.
+[0:29:24]  And here's, you know, whenever you copy paste,
+[0:29:26]  you're probably doing something wrong.
+[0:29:28]  OK, he was in the Dana Carvey show, familiar with that.
+[0:29:31]  Well, let's do another one.
+[0:29:32]  We'll copy paste this, where ID equals this.
+[0:29:36]  Over the top, another.
+[0:29:37]  And if we keep digging, we'll probably find the office.
+[0:29:39]  But my god, like, that's going to take forever
+[0:29:41]  to do 20 queries manually.
+[0:29:42]  It's not very dynamic.
+[0:29:43]  But what if we just nest these queries a little more dynamically?
+[0:29:46]  So let me start from the beginning again.
+[0:29:48]  What if we go ahead and select everything we know about people whose
+[0:29:54]  name equals Steve Carell?
+[0:29:58]  That gave us earlier this data.
+[0:30:00]  I don't need all of that data.
+[0:30:02]  I know his name.
+[0:30:02]  I don't care about his birth year.
+[0:30:03]  So let's change this to just be, give me the ID of Steve Carell.
+[0:30:07]  And that gives me back now this smaller temporary data set.
+[0:30:11]  All right, can I now use this inside of another query?
+[0:30:14]  Well, let me wrap the whole thing with parentheses.
+[0:30:16]  And now let me say, select star from the stars table,
+[0:30:21]  where the person ID equals this.
+[0:30:24]  So I'm deliberately not using in, because I'm
+[0:30:26]  assuming there's indeed only one Steve Carell in the world.
+[0:30:29]  So I'm not getting back a list of Steve Carell's.
+[0:30:31]  I'm getting back the one and only in this case.
+[0:30:33]  So equal is fine.
+[0:30:34]  In is when you have multiple.
+[0:30:35]  Equal is when you have one.
+[0:30:37]  Let me go ahead and hit Enter now.
+[0:30:38]  OK, that's more data than I need.
+[0:30:40]  I don't need like 20 copies of Steve Carell's person ID.
+[0:30:42]  So let me hit Up.
+[0:30:44]  Let me go back and let me just get show ID from Steve Carell.
+[0:30:49]  And now I have a list of just the 20 or so show IDs that he has been in.
+[0:30:54]  All right, how can I now use this?
+[0:30:56]  Well, let me hit Up.
+[0:30:57]  Let me put the whole thing in parentheses.
+[0:30:59]  And now let me select what I really want.
+[0:31:01]  Select title from shows, where, and here's the final flourish,
+[0:31:07]  shows table has an ID, has a title, has a year, and has an episode.
+[0:31:14]  And what I really want, though, is to check which shows have ID that is what.
+[0:31:24]  Anyone want to finish the thought?
+[0:31:27]  I just want to, yeah.
+[0:31:31]  Exactly, ID in this.
+[0:31:32]  And this is getting ugly.
+[0:31:34]  And when you actually write your queries in like a text file,
+[0:31:36]  you can format them nicely and indent them.
+[0:31:38]  My font is just getting, I don't want to make it too small to fit everything.
+[0:31:41]  Right now, we have three queries.
+[0:31:42]  One is in doubly nested parentheses.
+[0:31:44]  Then there's the middle one.
+[0:31:45]  Then there's the outer one.
+[0:31:47]  So this last query is going to get me the title from shows,
+[0:31:49]  where the ID of the show is in this big list of 20 or so show IDs
+[0:31:54]  that Steve Carell is in.
+[0:31:55]  And I knew that because I looked up his name here.
+[0:31:57]  And notice, what I did not do this time is I didn't manually
+[0:31:59]  hard code his ID number.
+[0:32:01]  There's no need.
+[0:32:02]  That would be kind of a bad way to implement a website if you're
+[0:32:05]  using a database underneath the hood.
+[0:32:06]  You want the IMDB for real to search for whatever the human typed in.
+[0:32:11]  No one's going to know Steve Carell's person ID or anything else.
+[0:32:14]  So here, we've done this all dynamically.
+[0:32:17]  And now, if I hit Enter, I think I get all of his shows.
+[0:32:21]  Let's go ahead and order this by title just to make it tidy.
+[0:32:24]  And you probably will see at least one or more shows that you know.
+[0:32:27]  And probably the most popular is dot, dot, dot, the office.
+[0:32:32]  So this is literally the kind of query that's being executed underneath the hood
+[0:32:36]  when you go to websites or apps like IMDB.
+[0:32:39]  Your textual query is probably being plugged into a longer SQL query
+[0:32:44]  like this, where some programmer at IMDB probably
+[0:32:47]  wrote this whole query in advance, weeks, months, years ago.
+[0:32:51]  And they're just somehow plugging in the value
+[0:32:54]  that you, the human, typed into the search box or the like.
+[0:32:58]  Questions now on finding this data or any other?
+[0:33:05]  No?
+[0:33:06]  OK, so where else could we go with this?
+[0:33:09]  Well, let's consider how else we might combine data.
+[0:33:15]  Suppose that the next question actually, perhaps appropriately,
+[0:33:18]  would be focusing in on not just people and shows and these stars,
+[0:33:22]  but how do we gather more information about the shows themselves,
+[0:33:26]  like the genres, the ratings, or the like?
+[0:33:27]  So indeed, let's focus on just these two tables here.
+[0:33:30]  Recall that every show has an ID, a title, a year, and episodes.
+[0:33:34]  But it also might have one or more relationships
+[0:33:36]  with rows and this other tables called genres.
+[0:33:38]  And this is so that a show can be a comedy, can be a drama,
+[0:33:41]  can be any number of other things, one row per.
+[0:33:45]  So you would see the same show ID again and again and again
+[0:33:48]  with a different genre written in English,
+[0:33:51]  like comedy, drama, or the like.
+[0:33:53]  Well, how do I kind of reconstitute that data?
+[0:33:56]  Well, turns out there's a few different ways to do this.
+[0:33:59]  And let me propose that we introduce this keyword here, join.
+[0:34:03]  And this is really the most powerful of the keywords in SQL itself.
+[0:34:07]  It doesn't have to be used.
+[0:34:09]  We've seen with nested queries that you can still
+[0:34:11]  select data across multiple tables.
+[0:34:14]  But here is another way.
+[0:34:16]  So let me do this.
+[0:34:17]  Let me go back to my SQLite database.
+[0:34:20]  And let me select sort of in one breath exactly the data I want.
+[0:34:26]  Select star from shows.
+[0:34:29]  And let's just limit this initially to 10 to see what it looks like.
+[0:34:33]  All right, that's again the shows data.
+[0:34:34]  Select star from genres.
+[0:34:37]  Let's limit that to 10 to just to wrap our minds around it.
+[0:34:40]  And now this is not that useful.
+[0:34:42]  However, the data in the leftmost column here
+[0:34:46]  is the primary key in the shows table.
+[0:34:47]  These are just unique IDs.
+[0:34:49]  The data here in the genres table, recall, show ID is the foreign key.
+[0:34:53]  So it's the same numbers, but just copied into another table
+[0:34:56]  so that we can have this relationship across them.
+[0:34:59]  How do I kind of line up these numbers with these numbers
+[0:35:02]  to get back like a wider table that has title and year and episodes
+[0:35:07]  and genre and, heck, ratings and all of that, too, if we want?
+[0:35:11]  Well, you can join these tables by just telling the database
+[0:35:14]  what to join on what.
+[0:35:15]  So let me do this.
+[0:35:16]  Select star from shows.
+[0:35:19]  Join that table, though, on the genres table.
+[0:35:24]  Well, how do you want to join those two tables?
+[0:35:26]  And again, the two tables from the picture look like this.
+[0:35:29]  How do you tell SQL programmatically to sort of put
+[0:35:32]  one of them right next to the other, line up all of the IDs
+[0:35:34]  so that you just get one larger data set?
+[0:35:37]  Well, we can use, indeed, this syntax called join.
+[0:35:41]  So back to VS Code here.
+[0:35:43]  And let me join these two tables.
+[0:35:46]  Sorry, typo here.
+[0:35:48]  Join genres on the shows tables ID column, AKA its primary key,
+[0:35:56]  equaling the genres tables show ID column, AKA the foreign key.
+[0:36:01]  So in other words, it looks a little cryptic,
+[0:36:03]  but I'm just telling SQL how to line up these two tables
+[0:36:06]  and what column to match with the other so that the numbers line up
+[0:36:10]  and I get, essentially, a wider table.
+[0:36:13]  Let me go ahead and hit semicolon and Enter.
+[0:36:17]  And this is now going to give me a lot of data.
+[0:36:19]  We might have to interrupt it.
+[0:36:21]  But notice, even at a glance, we're getting
+[0:36:22]  the ID, the title, the year, the number of episodes, the ID again,
+[0:36:26]  redundantly, but that's to be expected if I'm joining them,
+[0:36:29]  and the genre all the way on the right.
+[0:36:31]  Let me hit Control-C to interrupt.
+[0:36:34]  Let me just limit this to the office, so where title
+[0:36:37]  equals, quote unquote, the office, so we can focus on just one sample datum.
+[0:36:42]  And here, fun fact, there's been more than one office.
+[0:36:45]  The one that you all probably like is this one
+[0:36:48]  that started in 2005 with 188 episodes.
+[0:36:51]  Its ID in the shows table is 386676.
+[0:36:55]  That's confirmed over here, too.
+[0:36:57]  So again, we've just joined the two tables, how, by lining up those fields.
+[0:37:01]  But now that we can see that almost all of the offices produced
+[0:37:04]  over the decades are comedies, except for this one,
+[0:37:07]  there was a version of the office produced in 2001
+[0:37:09]  that was considered more of a drama.
+[0:37:12]  Unsure if it's related to the other.
+[0:37:14]  How can we link in other data?
+[0:37:16]  Well, let's go ahead and link in ratings, too, or instead.
+[0:37:19]  So instead of joining this with genres, let me go ahead and rewind here
+[0:37:23]  and join shows on ratings on shows.id equals ratings.showID.
+[0:37:31]  Again, let's limit it to the office, too, for discussion's sake,
+[0:37:33]  where title equals, quote unquote, the office, semicolon.
+[0:37:38]  And now you can see that among the various offices,
+[0:37:42]  it looks like the one that most of us probably know and love
+[0:37:45]  is the highest rated also, with a 9.0, with like 585,000 people having
+[0:37:51]  cast votes for, whereas these other shows seem to have been less popular.
+[0:37:55]  And perhaps that's why, indeed, you see fewer episodes for them as well.
+[0:37:59]  Even though we've put the data in multiple places,
+[0:38:01]  you can still kind of reconstitute it by lining things up in this way
+[0:38:05]  and rejoining the tables.
+[0:38:07]  Questions now on this.
+[0:38:11]  This is the heart of what SQL does and what relational databases do for you.
+[0:38:19]  Questions?
+[0:38:20]  All right, a few final features.
+[0:38:22]  Like, there's not all that much that SQL takes practice like anything else.
+[0:38:26]  But in terms of syntax and capabilities,
+[0:38:28]  let's just introduce you to a couple of final features here
+[0:38:32]  and problems that arise and how we might solve them.
+[0:38:34]  Let's do this as well.
+[0:38:37]  So let me go back into VS Code here.
+[0:38:39]  And let's just find out Steve Carell's information again.
+[0:38:43]  Last time, we did it with this nested query
+[0:38:45]  by getting his ID and then the show IDs and the titles for those show IDs.
+[0:38:49]  With join, you can do it a little differently.
+[0:38:51]  And any of these ways are fine.
+[0:38:53]  One might become easier to you mentally than another.
+[0:38:56]  Let's go ahead and select the titles.
+[0:38:57]  From what?
+[0:38:59]  Let's select the title from the people table.
+[0:39:04]  But, and I'm going to hit Enter.
+[0:39:05]  And when you're using SQLite 3 interactively,
+[0:39:07]  if you ever find yourself with a prompt that says dot, dot, dot, angle
+[0:39:11]  bracket, it means you're continuing your thought onto the next line.
+[0:39:14]  If you didn't intend that, you can sometimes hit semicolon
+[0:39:17]  to just end the thought and hit Enter and just even if it triggers an error.
+[0:39:21]  But this is one way of formatting my queries now a little more nicely.
+[0:39:23]  I'm just going to add some white space so that it's a little easier to read.
+[0:39:27]  What do I want to select?
+[0:39:28]  Well, I want to select the title of shows from the people table joined
+[0:39:33]  with the stars table on the people table's ID column
+[0:39:38]  equaling the stars table's person ID column.
+[0:39:43]  So in other words, if you think back to what people are and what stars are,
+[0:39:46]  one has an ID, one has a person ID, I'm just now connecting those two tables.
+[0:39:50]  I'm joining those two.
+[0:39:52]  But I want to do this as well with another table.
+[0:39:55]  Let me additionally join in.
+[0:39:57]  So now I only have two hands, but now I'm
+[0:39:59]  putting a third table joined in together here.
+[0:40:01]  Join shows on stars dot show ID equals shows dot ID.
+[0:40:08]  So this is now linking three tables together.
+[0:40:11]  But I only care about this for one person.
+[0:40:12]  So where the name of the person equals quote unquote Steve Carell.
+[0:40:17]  So more cryptic to be sure, but what we're doing with this query
+[0:40:21]  is just taking all three tables that we care about
+[0:40:23]  and we're joining them all together at once using this new join syntax,
+[0:40:28]  literally telling the database what columns to line up with what.
+[0:40:31]  And then we filter at the very end, just like before, to get back.
+[0:40:34]  If I hit Enter, the answer we want, which in this case
+[0:40:38]  is a little slower at the moment.
+[0:40:39]  But that same list of 20 or so shows that he's been in.
+[0:40:43]  There's one other way to do this.
+[0:40:45]  And again, these are all in the slides online.
+[0:40:47]  So you can repeat them without having to jot down everything.
+[0:40:49]  And we'll put them in the notes too.
+[0:40:51]  But there's another way to do this.
+[0:40:52]  I could also use an implicit join.
+[0:40:55]  So that was an explicit join because I literally
+[0:40:57]  typed the word join multiple times at that.
+[0:40:59]  But let me go ahead and select the title from these three tables, people, stars,
+[0:41:04]  and shows.
+[0:41:05]  And this might just be nicer because if you
+[0:41:06]  know what tables you want to select data from, just enumerate them,
+[0:41:09]  separated by commas, which you might prefer in your mind,
+[0:41:12]  where the people ID equals the stars person ID
+[0:41:19]  and the stars show ID equals the shows ID and the name of the person
+[0:41:26]  equals Steve Carell.
+[0:41:27]  So this is an implicit join.
+[0:41:29]  And honestly, I constantly reference my notes for some of this stuff too.
+[0:41:32]  It's not the kind of thing that's going to come like this to you
+[0:41:34]  after just one day.
+[0:41:35]  But it's just a different way of expressing the same thing.
+[0:41:38]  I want to select data from three different tables.
+[0:41:40]  And hey, SQL, here is how I want you to line those tables up
+[0:41:45]  so that I can get like related data for Steve Carell.
+[0:41:48]  And this now will achieve the same results, ultimately.
+[0:41:52]  Let me hit Enter.
+[0:41:56]  And there we go.
+[0:41:57]  So a little slower.
+[0:41:58]  And performance might vary based on computer,
+[0:42:00]  based on implementation of SQL, but I think I still have the same answers.
+[0:42:03]  Now suppose, as I often do, and I had to look it up again last time,
+[0:42:07]  suppose you forget how to spell Steve Carell's name.
+[0:42:10]  Is it two R's, two L's, or the like?
+[0:42:12]  Well, I could also do something like this.
+[0:42:15]  Well, let's just keep this simple.
+[0:42:17]  Select star from people where name equals.
+[0:42:19]  I've been deliberately getting it right so as to not embarrass myself.
+[0:42:22]  That's the Steve Carell I keep querying.
+[0:42:24]  If you forget, well, you could try searching for just Steve's.
+[0:42:28]  But interestingly, there's a bunch of Steve's.
+[0:42:30]  We don't know when they were born.
+[0:42:32]  But that's probably not the Steve Carell we want
+[0:42:36]  if we don't have his last name.
+[0:42:37]  So I could alternatively do, well, it's Steve.
+[0:42:39]  And then it starts with a C, I think.
+[0:42:42]  Well, it turns out there's another wild card you can use in SQL.
+[0:42:45]  We used the asterisk to select all of the columns.
+[0:42:48]  You can, in quotes, use a percent sign to say C something.
+[0:42:53]  So there's zero or more characters after the letter C.
+[0:42:57]  And now this doesn't work because now I would be literally looking
+[0:43:01]  for Steve space C something.
+[0:43:04]  But recall earlier, I mentioned that one other keyword, which
+[0:43:07]  is for fuzzier matching, so to speak, where it's like not exactly what
+[0:43:10]  you're looking for, but it's like what you're looking for.
+[0:43:13]  If you instead say where his name is like, Steve space C something,
+[0:43:16]  now we'll get back a whole bunch of Steve's.
+[0:43:19]  But I think now I could probably find the one I'm actually looking for.
+[0:43:22]  If I don't remember his name, you can use multiple percent signs.
+[0:43:24]  If you forget what his first name is, you could reverse the order.
+[0:43:27]  But that, too, is a very powerful SQL feature at that.
+[0:43:32]  Questions on these queries here?
+[0:43:35]  Yeah.
+[0:43:38]  Sorry?
+[0:43:41]  What about it?
+[0:43:43]  Oh, yeah, sure.
+[0:43:45]  So the query I used here, there's a lot of Steve's whose last name starts
+[0:43:49]  with C. Oops, too far.
+[0:43:52]  The last query I executed was this one here,
+[0:43:55]  so where the name is like, quote unquote, Steve C percent sign.
+[0:43:59]  So that's just another tool for your toolkit here.
+[0:44:02]  But you'll perhaps have noticed that prior to that query,
+[0:44:06]  the joins I did were sort of slow.
+[0:44:07]  And honestly, this database isn't even that big.
+[0:44:10]  Yes, it has tens of thousands of rows in it.
+[0:44:12]  But in the real world, in most of the apps you and I use a lot every day,
+[0:44:16]  or websites, there's millions, even billions of rows of data.
+[0:44:20]  If I had to wait on my computer here, or my code space,
+[0:44:23]  like a second or two to get the data, that's
+[0:44:25]  not going to work for millions of users or customers, certainly.
+[0:44:29]  So how can we actually improve things?
+[0:44:31]  Well, it turns out another upside of a proper relational database
+[0:44:36]  is that it's not just a spreadsheet where the onus is on you
+[0:44:40]  to find the data you're looking for.
+[0:44:42]  You can also tell the database to index the data for you.
+[0:44:46]  An index is an efficient cheat sheet for finding data fast.
+[0:44:51]  Like books in the real world often have indices at the end of the book
+[0:44:55]  where you can look things up alphabetically,
+[0:44:57]  and then you can cross reference it for the pages that that topic appears on.
+[0:45:00]  Same idea in a database.
+[0:45:01]  If you tell the database in advance that you
+[0:45:03]  want to search on a certain column frequently,
+[0:45:06]  you can tell it to build a fancy index that will just
+[0:45:09]  allow you to search that column faster.
+[0:45:11]  By default, these columns are going to be searched, most likely,
+[0:45:14]  by a linear search.
+[0:45:15]  Not even binary search, because the data might not
+[0:45:17]  be sorted because it came in in any order.
+[0:45:20]  But if you create an index, you're probably
+[0:45:22]  going to get something closer to logarithmic than linear,
+[0:45:25]  and that's going to be a big plus overall.
+[0:45:27]  So let me do something simple here.
+[0:45:28]  First, let me turn on a SQLite-specific feature
+[0:45:31]  that just is going to time all of my queries by writing .timer on.
+[0:45:35]  I just want to keep track of how long each of these commands takes.
+[0:45:40]  This one is not a slow command, so this is just going to be relative.
+[0:45:43]  But let's just select everything from the shows table
+[0:45:45]  where the title thereof is the office.
+[0:45:48]  Let's see how long this relatively simple query takes.
+[0:45:51]  All right, not very long at all.
+[0:45:53]  In real terms, like less than a second, 0.035 seconds.
+[0:45:57]  So not slow by any means.
+[0:45:59]  But if you've got hundreds, thousands, millions of users,
+[0:46:02]  like every one of those milliseconds could very well add up,
+[0:46:05]  so can we do better?
+[0:46:07]  Well, we can if I do this.
+[0:46:08]  If I use syntax like this once in the beginning
+[0:46:12]  of the design of my database, I create not a table,
+[0:46:16]  but an index with some name on a specific table on one or more columns,
+[0:46:21]  I can give a clue, a hint to the database in advance saying,
+[0:46:24]  please optimize with some secret sauce, searching or selecting
+[0:46:28]  on this column in this table so that my searches are faster.
+[0:46:32]  So let me do this.
+[0:46:33]  Let me go back to VS Code here.
+[0:46:35]  Let me create an index called, how about title index?
+[0:46:38]  I can call it anything I want, but I want to search faster
+[0:46:41]  on titles, so I'm going to call this a title index, where, rather,
+[0:46:46]  title index on the table called shows.
+[0:46:49]  And then in parentheses is the syntax, the column called title.
+[0:46:53]  So again, I've just borrowed this canonical syntax,
+[0:46:55]  and I've just translated it into something that's TV show specific.
+[0:47:00]  All right, what is this going to do for me?
+[0:47:02]  Once I hit Enter, this is going to create in the computer's memory,
+[0:47:06]  the database's memory, something called a B tree.
+[0:47:08]  It's not a binary tree.
+[0:47:09]  A B tree is actually a potentially more efficient data structure
+[0:47:14]  that we didn't talk about a few weeks back in week five,
+[0:47:16]  but it looks a little something like this,
+[0:47:18]  which looks similar to a binary tree.
+[0:47:20]  But does anyone notice what makes this not a binary tree?
+[0:47:29]  Exactly, binary tree by implying two has no more than two children per node.
+[0:47:34]  But here's a perfect example, one, two, three.
+[0:47:36]  And there could be four children, five children, or more.
+[0:47:38]  But the effect of that, if you have a very wide tree,
+[0:47:41]  the upside is that it's very short.
+[0:47:43]  It pulls the data higher up, closer to the root node.
+[0:47:47]  And recall that the root node is where we began our searches in the past.
+[0:47:50]  Whether it was a BST, a binary search tree, even a try,
+[0:47:53]  or other data structures, we always began at the top.
+[0:47:56]  So the higher up you can pull the data, even if it makes the data structure
+[0:47:59]  very wide, you're going to be able to do boom, boom, boom, look up queries,
+[0:48:02]  look up data probably much faster, certainly
+[0:48:05]  than if it's just a very long list, like a column by default.
+[0:48:09]  So with that said, let me go back to VS Code.
+[0:48:12]  I didn't create the index yet.
+[0:48:13]  Let me go ahead and hit Enter and create it.
+[0:48:15]  All right, it took a moment.
+[0:48:17]  It took like half a second, which obviously is not that slow.
+[0:48:20]  But with more data, that could have been even slower.
+[0:48:22]  But it's a one-time operation as of now.
+[0:48:25]  And now, let me hit up and let me select the same data from shows
+[0:48:30]  where title equals the office.
+[0:48:31]  Last time, just a moment ago, it took 0.035 seconds.
+[0:48:36]  No, not slow.
+[0:48:37]  But also, that's going to add up if I have lots of users of IMDB.
+[0:48:41]  Let's go ahead now and execute the same query again.
+[0:48:44]  How long did that take?
+[0:48:47]  0.001 seconds now.
+[0:48:49]  I mean, practically nothing.
+[0:48:51]  And so that's the sort of opportunity now.
+[0:48:53]  When you've got lots of data and you want to really speed up
+[0:48:55]  these searches, these indexes, these indices that just create for you
+[0:48:58]  these magical data structures in the database's memory,
+[0:49:01]  it allows you to search on columns that you are pretty sure you
+[0:49:04]  want to search on more effectively.
+[0:49:06]  Now, by contrast, if you've ever used Google or Bing or some search
+[0:49:09]  engine that has advanced search, some of those text boxes
+[0:49:13]  that you can search more precisely and might very well be slower.
+[0:49:16]  Why?
+[0:49:16]  Well, probably you don't want to go crazy and just index
+[0:49:19]  every column on every table.
+[0:49:21]  Why?
+[0:49:23]  What might be the intuition?
+[0:49:27]  If logically indexes speed things up, why not index everything?
+[0:49:31]  There's always going to be a trade-off here.
+[0:49:33]  What might that be?
+[0:49:35]  Yeah.
+[0:49:37]  Yeah, it's going to take a lot of storage, right?
+[0:49:40]  This is just a slide on the screen.
+[0:49:41]  But this has to go somewhere.
+[0:49:43]  This needs space in the computer's memory or on the hard drive or the like.
+[0:49:47]  And that's fine if you have unlimited space.
+[0:49:49]  But odds are you don't.
+[0:49:51]  And that's going to get expensive for different reasons.
+[0:49:53]  So maybe you only want to index certain columns and certain tables
+[0:49:58]  and not all of them.
+[0:49:59]  Because you know what?
+[0:50:00]  Even if a user really wants to search, maybe
+[0:50:02]  via advanced search on some other column or table altogether, fine.
+[0:50:07]  If once in a while a query is slow, we're probably
+[0:50:10]  getting a bigger bang for our buck by optimizing the common cases,
+[0:50:13]  the more popular queries that people actually care about too.
+[0:50:18]  All right, so let's come full circle and bring this now back
+[0:50:22]  to how we actually began, which was with some Python code.
+[0:50:27]  So it turns out these are not either or decisions.
+[0:50:30]  It turns out in the real world, developers are constantly
+[0:50:32]  using one, two, three languages at once.
+[0:50:35]  In fact, next week I rattled off HTML, CSS, and JavaScript, one of which
+[0:50:39]  is a proper programming language.
+[0:50:40]  But those languages are often used together, totally normal and common
+[0:50:45]  to use Python and SQL, or Java in SQL, or Swift in SQL,
+[0:50:50]  or any number of different combinations with a database language.
+[0:50:53]  You might use your preferred programming language, Java, Python, C++,
+[0:50:57]  to create the user interface and the logic that
+[0:51:02]  implements the program itself.
+[0:51:03]  But for your data, SQL is a really good candidate.
+[0:51:06]  And indeed, we've seen already that SQL can just speed up certain operations.
+[0:51:09]  You can change, you can collapse 15 lines of code into just one.
+[0:51:13]  And you can use these things together.
+[0:51:16]  So let me come back to, I'm going to quit out of SQLite.
+[0:51:19]  I'm going to minimize my terminal window.
+[0:51:21]  And here's where we left off before with favorites.py.
+[0:51:24]  With favorites.py, everything was being stored in favorites.csv.
+[0:51:30]  And recall that we eventually imported that CSV file into favorites.db
+[0:51:34]  automatically with .import just so we can start playing around with SQL.
+[0:51:38]  But we can now tie these two together.
+[0:51:40]  And a way to do that is as follows.
+[0:51:43]  CS50 has a library for Python.
+[0:51:45]  You might recall having available get string, get int, get float.
+[0:51:49]  You don't strictly need to use them in Python
+[0:51:51]  because it's much easier to just use the input function
+[0:51:54]  and then try, accept, and convert things to int or float or the like.
+[0:51:58]  But it's a lot more work to use SQL in Python without a third party library.
+[0:52:02]  A lot of the commercial options or popular open source options
+[0:52:05]  are actually just complicated to use.
+[0:52:07]  So CS50 does have a very useful function inside of its library for Python
+[0:52:12]  that you should use and must use for the problem set that just makes it easy
+[0:52:15]  to execute Python, execute SQL inside of your Python code.
+[0:52:20]  But it's built on top of a very popular open source alternative.
+[0:52:24]  So you can use that, too, in the real world.
+[0:52:26]  So the documentation for that's at this URL here.
+[0:52:29]  But I'll show you what we need to know here
+[0:52:31]  by focusing back on favorites.py.
+[0:52:33]  So what I'm going to do here as follows is this.
+[0:52:37]  Let me delete everything from favorites.py,
+[0:52:40]  except for, let's say, this, from CS50 import SQL in all caps.
+[0:52:48]  So that's importing a SQL feature from CS50's library
+[0:52:51]  that's going to allow me to open a DB file in code.
+[0:52:55]  How do I do that?
+[0:52:56]  Well, let me create a variable called db for database,
+[0:52:59]  though I could call it anything I want.
+[0:53:00]  Let me call this SQL function and pass in, using special syntax that's not
+[0:53:05]  CS50 specific, it's an industry thing, sqlite colon slash slash slash.
+[0:53:12]  Unlike every other URL you type, this one literally
+[0:53:15]  has three in this context here.
+[0:53:17]  And then the name of the database, which in this case is favorites.db.
+[0:53:20]  So this is just a way of telling this SQL library that we wrote,
+[0:53:24]  but that works exactly like third party alternatives,
+[0:53:27]  open favorites.db using the sqlite technology, if you will.
+[0:53:33]  All right, let's just ask the user a question.
+[0:53:34]  Give me your favorite problem.
+[0:53:38]  So we're going to use input instead of getString,
+[0:53:40]  but we could use getString, but they're pretty much the same for our purposes.
+[0:53:43]  Let's ask the user for their favorite.
+[0:53:45]  And now in Python code, let us select from favorites.db all of the rows
+[0:53:54]  where students specify that problem as their favorite.
+[0:53:58]  So in SQL alone, it would be this, select star from favorites
+[0:54:03]  where problem equals, and I'll do whatever my favorite's going to be,
+[0:54:10]  like problem equals Mario, for instance.
+[0:54:12]  So if I were just using SQL, I would literally write something like that.
+[0:54:15]  But I'm in a .py file now.
+[0:54:17]  I have to use Python syntax, but Python supports strings.
+[0:54:21]  SQL is just text.
+[0:54:22]  It's just a string.
+[0:54:23]  So I could certainly just put my SQL code in a string, perhaps,
+[0:54:27]  and then pass it to a Python function.
+[0:54:29]  And here's the bridge between the two.
+[0:54:31]  If you just treat SQL as any old text, we can put it in a string and execute it.
+[0:54:35]  So let me actually do this.
+[0:54:37]  Let me go ahead and create a variable called rows, which is eventually
+[0:54:40]  going to contain all the rows from the database.
+[0:54:42]  Let me go ahead and select db.execute.
+[0:54:48]  This is the one function you need to know about inside of CS50's library,
+[0:54:51]  and it literally executes a SQL statement.
+[0:54:53]  And then in quotes, you pass it literally what you want to execute.
+[0:54:58]  And let me go ahead and close the parentheses at the end there.
+[0:55:01]  And now let me just try this.
+[0:55:03]  So for row in rows, let's iterate over all of the rows.
+[0:55:06]  Let me go ahead and print out how about row quote unquote.
+[0:55:14]  And what do I want here?
+[0:55:18]  Let's print out the timestamp of that person for kicks.
+[0:55:22]  All right, let me open my terminal window.
+[0:55:24]  Python of favorites.py, crossing my fingers here for sure.
+[0:55:30]  Enter.
+[0:55:33]  There we go, favorites.
+[0:55:34]  I'll type in Mario.
+[0:55:36]  OK, so I got back.
+[0:55:38]  It's not very interesting, but I got back all of the timestamps
+[0:55:41]  of students who typed in Mario that we imported into this database.
+[0:55:44]  Well, what I really care about is how popular Mario is,
+[0:55:47]  so let me change this a little bit.
+[0:55:49]  Let me change this to count the number of rows.
+[0:55:53]  And let me keep it simple.
+[0:55:54]  Let me give an alias like I proposed earlier,
+[0:55:56]  like as n, where n is a number, so that now down here,
+[0:56:00]  I can actually just do this, print out the value of n.
+[0:56:04]  All right, let me go back to my terminal window, run python of favorites.py.
+[0:56:08]  Let me type in Mario.
+[0:56:09]  Enter.
+[0:56:10]  OK, 39.
+[0:56:12]  Now, technically, I'm cheating.
+[0:56:14]  Honestly, if I'm executing select count, we've seen before,
+[0:56:17]  it only ever returns one row, not multiple.
+[0:56:20]  So there's really nothing to iterate over, but it's working fine.
+[0:56:22]  It's just iterating once, but I'm getting lucky.
+[0:56:25]  So technically, what I should probably just do is this.
+[0:56:28]  I should probably give myself a variable called row,
+[0:56:31]  set it equal to the very first row and only row that came back,
+[0:56:37]  and now print out that row's n column.
+[0:56:42]  Let me rerun the program.
+[0:56:43]  I'll type in Mario again.
+[0:56:44]  Enter, and I still see 39.
+[0:56:47]  So this, of course, I don't strictly need to do this.
+[0:56:50]  I don't really need a variable.
+[0:56:52]  I can do rows bracket 0 instead.
+[0:56:55]  But let me focus on what this library is now doing.
+[0:56:57]  So per the documentation, what the CS50 execute function always does for you
+[0:57:03]  is it returns a list of dictionaries.
+[0:57:08]  So if your query returns nothing, like no matches, you get back an empty list,
+[0:57:13]  like open bracket, closed bracket, nothing in it.
+[0:57:15]  Any loop is not going to execute anything useful
+[0:57:17]  because there's nothing in it.
+[0:57:18]  If, though, you get back one row, you're
+[0:57:21]  going to get back a list of size 1, inside of which is a single dictionary.
+[0:57:25]  That dictionary is going to have keys that correspond to whatever you selected,
+[0:57:29]  be it the columns or the count.
+[0:57:31]  So when I selected star before, I would have gotten all of the columns.
+[0:57:35]  That's how I was able to access timestamp.
+[0:57:37]  Here, I'm just selecting count.
+[0:57:39]  And I don't want to have to type this down here.
+[0:57:41]  That would just look kind of atrocious.
+[0:57:42]  It would work.
+[0:57:43]  But it would look weird to just keep retyping count per n star, close per n.
+[0:57:47]  So I just created an alias called n, just to make this my life easier or cleaner
+[0:57:51]  down here.
+[0:57:53]  So to be clear, the CS50 execute function
+[0:57:56]  returns a list of dictionaries when you're using select.
+[0:58:00]  And that is how I can now get back the first and only row
+[0:58:04]  and then print out that row's n value.
+[0:58:07]  It is identical to, let me do this.
+[0:58:11]  Let me highlight this whole line of text.
+[0:58:14]  Let me, in my terminal window, run SQLite3 of favorites.db
+[0:58:17]  like we did before break.
+[0:58:19]  Let me just copy paste this query, enter.
+[0:58:22]  That's the table I got back earlier when we played with SQL manually.
+[0:58:27]  And so when I get back this table, here's the key, here's the value.
+[0:58:30]  And I only have one row, which is why I'm just blindly indexing
+[0:58:34]  into rows bracket 0 because I know there's always going to be an answer there.
+[0:58:37]  It's going to be 0 or 1 or more.
+[0:58:39]  But I know now it's going to be called n because of this here.
+[0:58:42]  So what have I just done?
+[0:58:44]  Well, this is SQL down here.
+[0:58:45]  And this is just me being like a data scientist asking questions
+[0:58:48]  about my data just using like black and white SQL queries.
+[0:58:51]  This is me now being a Python programmer who
+[0:58:53]  wants to talk to a SQL database using Python.
+[0:58:56]  And the bridge we're using happens to be the CS50 library.
+[0:58:59]  But again, there's third party free libraries you can also use as well.
+[0:59:02]  Ours is just very simple.
+[0:59:04]  And indeed, the documentation will explain
+[0:59:06]  how execute behaves a little differently for inserts, updates, and deletes.
+[0:59:09]  You don't get back a list because you're not selecting anything,
+[0:59:12]  but you do get back some return values.
+[0:59:15]  Questions on this?
+[0:59:18]  That's the last of our Python code that ties everything together in spirit.
+[0:59:25]  Yeah.
+[0:59:31]  What this one here?
+[0:59:34]  Yes, so db.execute by definition returns a list of rows.
+[0:59:40]  And each of those rows happens to be a dictionary
+[0:59:42]  because it's convenient, key value pairs.
+[0:59:44]  If I'm selecting the count of rows, I just
+[0:59:47]  know from having learned SQL an hour ago that this is always
+[0:59:50]  going to give me a single row whose column in this case is called n.
+[0:59:55]  So if I know it's a single row, I can just blindly, just like in C,
+[0:59:58]  go into that list.

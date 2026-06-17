@@ -1,0 +1,1102 @@
+# Transcripción: chunk_018.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  or an array in C, and go to the first location,
+[0:00:02]  and then treat that as the single row.
+[0:00:05]  What you don't want to do is this.
+[0:00:06]  Even if you, the human, know the query returns one row,
+[0:00:11]  you can't just magically change the variable name to be singular
+[0:00:14]  and expect to have only one value.
+[0:00:15]  You will always have a list.
+[0:00:17]  So even if there is only one value in it,
+[0:00:19]  it's up to you to do something like this to get at it.
+[0:00:22]  Or if you prefer more succinctness, you can do rows bracket i bracket n.
+[0:00:26]  That'll achieve the same thing without a variable.
+[0:00:36]  Good.
+[0:00:37]  So I have been misleading this whole time
+[0:00:39]  and cheating because this is only ever going to return Mario.
+[0:00:43]  I'm ignoring the favorite that the human typed in here on line 5.
+[0:00:47]  So let me fix that.
+[0:00:48]  And that's going to lead us to some of the problems that
+[0:00:50]  arise ultimately with SQL.
+[0:00:52]  The right way to solve that problem, let me get rid of my terminal window
+[0:00:55]  here, the right way to solve this problem
+[0:00:58]  is not to use an F string like we did in Python generally,
+[0:01:01]  because SQL queries, as we'll see in a moment, can be dangerous.
+[0:01:05]  When you want to plug in user's data into a query
+[0:01:09]  that you've written most of in advance, you should, you must,
+[0:01:13]  you had better use a placeholder, namely a question mark in this case.
+[0:01:18]  This is somewhat specific to CS50's library,
+[0:01:20]  but we just borrowed the convention that every other library uses too.
+[0:01:24]  In the world of SQL, single question marks are used as placeholders.
+[0:01:28]  And the way you do this is as follows.
+[0:01:30]  If you want to plug in a value for that question mark,
+[0:01:34]  just like in printf, in C, you specify as a second, or a third,
+[0:01:38]  or a fourth argument all of the values you want plugged into this.
+[0:01:41]  So in C, weeks ago, we were using %s.
+[0:01:44]  Same exact idea.
+[0:01:46]  In SQL, it's a question mark that you use instead.
+[0:01:49]  This now, if I open back my terminal window
+[0:01:52]  and I run Python of favorites.py, type in Mario, I should still get 39.
+[0:01:57]  But now it can also type in Scratch, perhaps,
+[0:02:00]  and get 44 for that very first piece at 0.
+[0:02:03]  And that one is even more popular here.
+[0:02:05]  So this now is correct.
+[0:02:06]  It would work to use an F string here and then plug in a value
+[0:02:10]  like favorite here, but you'll see in just a moment, don't do that.
+[0:02:14]  You will expose yourself to potential hack or attacks
+[0:02:18]  by trusting the user's input.
+[0:02:20]  And so in fact, let's transition from that
+[0:02:22]  to exactly some of these kinds of challenges, namely two, before we wrap up.
+[0:02:26]  So in the world of SQL, especially when it's
+[0:02:28]  used at scale at the Twitters and the Googles of the world,
+[0:02:31]  a lot of lots of data is probably coming into the database all at once.
+[0:02:35]  Because multiple people are opening their phones at the same time
+[0:02:37]  around the world, they're clicking on the same links roughly
+[0:02:40]  at the same time around the world.
+[0:02:41]  When you have thousands of people all using your site at once,
+[0:02:44]  order of operations is going to be important.
+[0:02:46]  But unfortunately, in SQL and in other contexts of computing,
+[0:02:50]  there's this risk of what's known as a race condition.
+[0:02:52]  So for instance, has anyone ever seen or liked this?
+[0:02:55]  This is like, yes, the world record egg.
+[0:02:58]  Or it's like this thing that was very popular a while back.
+[0:03:01]  It's still kind of going strong.
+[0:03:02]  But if you go to the Instagram profile for world record egg,
+[0:03:05]  the goal was to make the most liked Instagram post ever.
+[0:03:09]  And they did pretty well.
+[0:03:10]  It's just this.
+[0:03:11]  It's just a picture of an egg.
+[0:03:13]  Now at the height of the popularity, there
+[0:03:15]  might have been hundreds, thousands, tens of thousands of people
+[0:03:17]  clicking pretty much at the same time on this egg.
+[0:03:21]  So it actually creates a potential problem
+[0:03:23]  with the integrity of Instagram's data.
+[0:03:25]  Why?
+[0:03:26]  Well, if you have all these requests coming in at once,
+[0:03:28]  how do you possibly keep track of all of them
+[0:03:30]  and update your counter in a way that can keep up with all of that traffic?
+[0:03:34]  Why?
+[0:03:34]  Well, let's just hypothesize what Meta, formerly Facebook,
+[0:03:38]  was doing underneath the hood with Instagram if this were their code.
+[0:03:41]  So suppose, for the sake of discussion, that Instagram servers
+[0:03:44]  are using a mix of Python and SQL.
+[0:03:47]  Probably not using the CS50 library, but they
+[0:03:48]  could absolutely be using those two languages or two others together.
+[0:03:53]  Suppose they do this in order to update the number of likes for that post.
+[0:03:57]  They first execute a SQL query like, select the current number of likes
+[0:04:02]  from a table called posts, where the idea of the post
+[0:04:06]  equals whatever the unique identifier is for that specific egg in the table.
+[0:04:11]  And then they store the result in this rows variable, just like I did.
+[0:04:15]  And then they do this.
+[0:04:17]  They create a variable called likes.
+[0:04:19]  They set it equal to rows bracket 0, so the very first row in the result set.
+[0:04:23]  And they get the likes key.
+[0:04:24]  So this is literally what I just did with the count.
+[0:04:27]  Let me hypothesize that Instagram does something
+[0:04:29]  similar with the total number of likes.
+[0:04:31]  Why are they doing this?
+[0:04:33]  Because they then want to execute a third line of code that executes update.
+[0:04:37]  The posts table set the new number of likes equal to something,
+[0:04:42]  where the idea of the post equals this other thing.
+[0:04:46]  Now notice, just like in printf, there's the comma separated list of values.
+[0:04:49]  They want to update the current number of likes
+[0:04:51]  from the current value to the current value plus 1.
+[0:04:54]  So it's likes plus 1.
+[0:04:56]  And then we plug in the ID for this.
+[0:04:58]  So suppose this is what Instagram's doing.
+[0:05:00]  Unfortunately, whenever you execute multiple lines of code independently
+[0:05:05]  and you're so popular like Instagram that you
+[0:05:07]  have thousands, hundreds of thousands of servers potentially,
+[0:05:11]  it is quite possible that if you and I and everyone else in the room
+[0:05:13]  clicks that egg at the same time, it's not
+[0:05:16]  going to be the case statistically that three lines of code
+[0:05:18]  are executed for me, and then three lines for you,
+[0:05:21]  and then three lines for you.
+[0:05:21]  They're probably going to get interspersed.
+[0:05:24]  This gets executed for me, and then this gets executed for you,
+[0:05:26]  and then they get back to doing work for me, and so forth,
+[0:05:29]  just to kind of multitask, just like a human might, but at a super speed here.
+[0:05:33]  The problem, though, is if these lines of code get interrupted,
+[0:05:37]  what could go wrong?
+[0:05:38]  Well, suppose that Carter and I both click the egg at the same time,
+[0:05:41]  and suppose the current number of likes back in the day is 100.
+[0:05:44]  That stores, in this variable, the value 100.
+[0:05:47]  But if we click so close in time, we might get back the same answer
+[0:05:51]  to this select query.
+[0:05:52]  As of that moment in time when David and Carter clicked, it had 100 likes.
+[0:05:57]  But then this last line of code is executed for me, and then maybe Carter.
+[0:06:00]  Because that answer, the state of the database,
+[0:06:04]  was stored in this variable, then both Carter and I
+[0:06:08]  will result in this line of code being executed with the same value.
+[0:06:13]  Update the posts table, setting the likes equal to 101 for that posts ID.
+[0:06:19]  Why?
+[0:06:20]  Because again, if each of these lines of code running on different servers
+[0:06:24]  are checking the value of the current number of likes,
+[0:06:27]  but then getting interrupted because Carter clicked the darn thing too,
+[0:06:30]  and then resuming their work on my behalf,
+[0:06:33]  we might have a race condition where the code is sort of racing to finish,
+[0:06:36]  but getting interrupted by other users' clicks.
+[0:06:39]  And the problem with that is that if you are inspecting
+[0:06:41]  the value of some variable, or in this case, a database cell,
+[0:06:45]  and making a decision based on it, like how to update it,
+[0:06:48]  you might now lose data.
+[0:06:49]  And Instagram is probably not good for advertising
+[0:06:51]  if they're losing likes.
+[0:06:52]  And so that's probably a problem, not to retain the value 102
+[0:06:57]  and instead insert the number 101 twice.
+[0:06:59]  It's actually similar in spirit to a story
+[0:07:02]  that was told in a databases course I took myself years ago, whereby
+[0:07:08]  it's somewhat analogous to kind of a contrived scenario involving
+[0:07:11]  like a refrigerator.
+[0:07:12]  And this is the closest thing to a refrigerator we could get on stage.
+[0:07:14]  But imagine you've got like one of these little dorm fridges in your dorm too,
+[0:07:18]  and maybe both of you, as the story was told to me, really like milk.
+[0:07:21]  And one of you is at class, but the other of you comes home,
+[0:07:24]  and you open your dorm fridge, and you're like, oh, darn it,
+[0:07:26]  we're out of milk.
+[0:07:27]  And so you close the fridge, you walk across the street
+[0:07:30]  to CVS or some other store, and you get in line to buy some milk.
+[0:07:33]  Meanwhile, your roommate gets out of class,
+[0:07:35]  they come back to your dorm room, they're really thirsty for some milk,
+[0:07:38]  they open up the fridge, they say, oh, we're out of milk,
+[0:07:41]  and then they take a different route, perhaps,
+[0:07:43]  to CVS or some other store nearby, get in line to buy some milk.
+[0:07:46]  Fast forward some amount of time in this very contrived story,
+[0:07:49]  and what happens, oh, damn it, we now ended up with like two gallons of milk.
+[0:07:53]  And there's no way we can fit gallons of milk in there, let alone two of them.
+[0:07:57]  So that's a problem.
+[0:07:58]  But what's the relationship to this here?
+[0:08:02]  Well, both of us, yeah, did what?
+[0:08:19]  Exactly.
+[0:08:25]  Exactly.
+[0:08:26]  So to summarize, both of us had a very similar thought process,
+[0:08:28]  made a similar decision based on the same information,
+[0:08:31]  not realizing that the information, the fridge,
+[0:08:34]  was in the process of being updated.
+[0:08:37]  And of course, in the Instagram world, it happens like this.
+[0:08:39]  In the fridge world, it might take a few minutes.
+[0:08:41]  But the problem is ultimately the result of our having made a decision
+[0:08:45]  about the state of the world, and the state of the world
+[0:08:48]  was in the middle of being updated.
+[0:08:50]  The queries got commingled with others, or in this case,
+[0:08:53]  someone was already on their way to the store.
+[0:08:55]  So what's the solution in the real world?
+[0:08:57]  Well, you could very simply take a Post-it note
+[0:08:59]  and put, like, gone for milk so as to communicate to your roommate
+[0:09:03]  that they should not inspect the value of that variable
+[0:09:06]  and make a decision on it.
+[0:09:07]  Why?
+[0:09:07]  Because it's not yet consistent with the outcome that's about to happen.
+[0:09:11]  You could be more dramatic, and you could actually
+[0:09:13]  lock the fridge somehow, put a padlock around it, or the like,
+[0:09:16]  so they can't even get in there.
+[0:09:18]  And that would achieve the same effect, too.
+[0:09:20]  And that is actually pretty much the solution to this problem in code, too.
+[0:09:24]  It's not safe.
+[0:09:25]  It's not sufficient to only execute three lines of code like this.
+[0:09:29]  Rather, what you probably want to do is use additional SQL keywords
+[0:09:34]  that we won't spend much time on in the class itself, but these.
+[0:09:37]  There are solutions to this problem.
+[0:09:39]  You can begin what's called a transaction,
+[0:09:41]  and you can more explicitly commit to making a decision,
+[0:09:45]  like updating the database to 101 or 102.
+[0:09:48]  Or if you realize, wait a minute, Carter's query in is interrupting mine.
+[0:09:52]  Let me roll back to the previous state and just rewind.
+[0:09:56]  Let me undo, Control-Z, if you will.
+[0:09:58]  There's also another keyword that's not so much used anymore
+[0:10:00]  in SQL, which is locking.
+[0:10:02]  You could literally, back in the day, lock the entire database table,
+[0:10:05]  preventing anyone from updating it or making changes or even reading it
+[0:10:10]  while someone else was accessing it.
+[0:10:11]  That was a very heavy-handed solution because it slowed everything down.
+[0:10:14]  But in short, transactions are now a feature of SQL
+[0:10:18]  that you won't necessarily need to use yourselves that do solve this problem
+[0:10:21]  by doing the equivalent of saying, while David's like counters
+[0:10:25]  in the process of being updated, keep Carter at bay, ideally briefly,
+[0:10:30]  and then let his data go through, too.
+[0:10:32]  It's equivalent, too, to putting a note or a lock on the fridge.
+[0:10:34]  And indeed, I mean lock litter.
+[0:10:36]  They were, once upon a time, called and still are in some texts
+[0:10:40]  called locks on databases, too.
+[0:10:42]  And the last problem, the code for which you might do this, is almost the same.
+[0:10:47]  You simply wrap the three queries with a transaction statement and a commit.
+[0:10:54]  And the term of art here is that this makes your statements atomic.
+[0:11:00]  So atomic means they're either all executed or not at all.
+[0:11:03]  That is, they're all very tightly coupled together without interruption.
+[0:11:06]  Transactions solves that problem and avoid having two gallons of milk.
+[0:11:11]  And the last problem that arises that is tragically so darn common
+[0:11:15]  in the real world today is what's called a SQL injection attack.
+[0:11:18]  And it's what I alluded to earlier with the question marks.
+[0:11:21]  So suppose you're in the habit of logging in to Yale websites
+[0:11:24]  with your NetID or password, or at Harvard, your Harvard Key and password
+[0:11:27]  as well.
+[0:11:28]  Suppose, for the sake of discussion, that the people that implemented,
+[0:11:31]  like Harvard Key login, allow you to type in your email address, of course,
+[0:11:35]  and your password.
+[0:11:36]  But suppose that they are using SQL underneath the hood
+[0:11:39]  to check your username and password, to make sure that you are David Malin
+[0:11:43]  or Carter Zinke or whoever you claim to be.
+[0:11:46]  I haven't shown you the syntax yet, but it turns out
+[0:11:48]  that in SQL, dash dash is a special way of indicating a comment.
+[0:11:53]  It means ignore everything to the right.
+[0:11:55]  So it's just like slash slash and C, or the hash symbol in Python.
+[0:11:59]  Dash dash just means ignore everything to the right.
+[0:12:01]  And we've, of course, seen single quotes.
+[0:12:03]  So one way to wage a SQL injection attack
+[0:12:07]  is to try to inject malicious SQL code into someone else's database
+[0:12:11]  without them realizing it.
+[0:12:12]  How do you do this?
+[0:12:13]  Well, suppose I log in as malin at harvard.edu, single quote, dash dash.
+[0:12:19]  I'm not double quoting anything clearly.
+[0:12:21]  And there's nothing to the right of the dash dash anyway.
+[0:12:25]  But if this imbalance is going to be useful, why?
+[0:12:28]  Because if I'm a hacker, and I'm presuming someone at Harvard
+[0:12:31]  probably is using single quotes to wrap the user's email address
+[0:12:36]  and wrap the user's password, what if I try to complete their thought for them
+[0:12:40]  and close one of those quotes for them, what might happen?
+[0:12:44]  Well, we could do this.
+[0:12:45]  Here, for instance, let me hypothesize as the code
+[0:12:48]  that Harvard wrote, hopefully not, underneath the hood.
+[0:12:50]  So they're using CS50's library in Python, and they're using SQL inside.
+[0:12:54]  Suppose that they have a query like this.
+[0:12:56]  Select star from users where username equals question mark
+[0:13:02]  and password equals question mark.
+[0:13:03]  And then suppose they just plug in whatever username and password
+[0:13:06]  was typed in.
+[0:13:07]  And then if they get back some number of rows, dot, dot, dot,
+[0:13:10]  they assume I am David.
+[0:13:11]  They assume Carter is Carter if both the username and password
+[0:13:14]  are in the database.
+[0:13:15]  Just end of story there.
+[0:13:17]  This is good.
+[0:13:18]  This has the question mark placeholders we discussed earlier.
+[0:13:21]  But what if you don't quite remember that, you don't quite take that to heart,
+[0:13:24]  and you use your more familiar last week, f strings, whereby we use
+[0:13:28]  these curly braces to plug in values?
+[0:13:31]  What if you do this instead?
+[0:13:32]  So it's almost the same idea.
+[0:13:34]  It's still db execute, but now it's select star from users
+[0:13:37]  where username equals.
+[0:13:38]  And now notice I'm doing the single quotes, which is required by SQL,
+[0:13:42]  but I'm using f strings with the curly braces.
+[0:13:44]  And the password equals single quote, password, and then close single quote.
+[0:13:49]  The problem is if you're just blindly pasting,
+[0:13:52]  effectively, the user's input into that web form,
+[0:13:55]  into the username field and the password field,
+[0:13:58]  there's nothing stopping a malicious user, student, faculty, staff
+[0:14:02]  from including a single quote in their name.
+[0:14:05]  Or maybe even, benevolently, if their name happens to have a single quote,
+[0:14:10]  as some last names in particular do.
+[0:14:13]  So this is very fragile.
+[0:14:14]  Why?
+[0:14:15]  Well, suppose that if we plug in my malicious value,
+[0:14:17]  mailin at harvard.edu single quote dash dash,
+[0:14:20]  notice what happens to username here.
+[0:14:23]  The username variable inside of the curly quotes
+[0:14:26]  will get replaced with this.
+[0:14:29]  And notice single quote, which the Harvard programmer wrote,
+[0:14:32]  mailin at harvard.edu, single quote, which I wrote, dash dash, which I wrote,
+[0:14:39]  single quote, which Harvard wrote, and whatever else they want after that.
+[0:14:43]  What's the implication, though, of the dash dash?
+[0:14:48]  Everything to the right is going to be ignored.
+[0:14:51]  So the password is never even checked in this scenario.
+[0:14:54]  I'm tricking the server into ignoring everything after the dash dash.
+[0:14:58]  But I have constructed very cleverly, very maliciously,
+[0:15:01]  a syntactically valid query.
+[0:15:03]  Why?
+[0:15:04]  Because I provided the single quote that's
+[0:15:06]  going to finish the thought of that first single quote.
+[0:15:09]  And now, I would only know how to do this if I saw the code
+[0:15:11]  or if I just randomly try putting apostrophes into web forms
+[0:15:14]  and see if things break.
+[0:15:15]  That's often how adversaries attack systems.
+[0:15:17]  They type in potentially dangerous characters, hit Enter.
+[0:15:20]  If something breaks, they're not necessarily into the system,
+[0:15:23]  but they know that there might be a vulnerability.
+[0:15:25]  And then they start trying more methodically things like this.
+[0:15:27]  So this, then, is going to be bad because it effectively
+[0:15:30]  grays out the rest of the query.
+[0:15:32]  And this query is surely going to return some rows without even
+[0:15:35]  knowing my password.
+[0:15:37]  And so this logic here, dot dot dot, means, well,
+[0:15:39]  if data came back from this query, Harvard
+[0:15:42]  is presumably going to assume that Malin logged in, show him his account
+[0:15:48]  or whatever is being protected here.
+[0:15:50]  So in short, using f-strings bad, using any equivalent, like %s in C,
+[0:15:56]  bad when it comes to SQL, using question marks
+[0:15:59]  or whatever a third party library like CS50s prescribes is the way
+[0:16:03]  to solve this.
+[0:16:04]  Why?
+[0:16:05]  Because libraries like ours are designed to at least be smart and be paranoid.
+[0:16:10]  And what we will do is this.
+[0:16:12]  When you use the question marks and the values are plugged in,
+[0:16:15]  we will escape any potentially dangerous characters
+[0:16:19]  inside of those placeholders.
+[0:16:21]  And so effectively, the single quote will no longer
+[0:16:24]  be considered a grammatical single quote.
+[0:16:25]  It will just be literally a character in the username or password.
+[0:16:29]  So the library takes care of this for you
+[0:16:32]  because you're plugging in the username and password as separate arguments.
+[0:16:36]  And then we, or the third party you're using, actually sanitize.
+[0:16:39]  That is, clean up the data and prevent those bad characters.
+[0:16:44]  Now, this is kind of an internet meme that went around for a while.
+[0:16:47]  If you've ever driven a car or been in a car
+[0:16:49]  where there's the automatic readers for tolls,
+[0:16:52]  this person thought it might be funny to try doing something like this.
+[0:16:55]  What are they presumably doing?
+[0:16:56]  The presumption here is, whether or not it worked is unclear,
+[0:17:00]  is that here's like the end of an actual license plate number.
+[0:17:04]  But here's an interesting single quote in a semicolon that's especially bad
+[0:17:07]  because it means you can maybe execute a second query on the database.
+[0:17:10]  This is someone having fun trying to drop the entire database
+[0:17:13]  table for whatever municipality is scanning through cameras
+[0:17:17]  their license plate code.
+[0:17:19]  And I would be remiss if we didn't end on this note.
+[0:17:21]  At least in computer science circles, there
+[0:17:24]  is someone named, no relation to the tf name we put in the database earlier,
+[0:17:29]  LittleBobbyTables, which ends with this xkcd comic.
+[0:17:34]  And if you chuckle, if you laugh, you're now legit SQL programmers.
+[0:17:41]  Nice.
+[0:17:42]  Nice.
+[0:17:44]  Every CS student out there knows about LittleBobbyTables.
+[0:17:47]  So if you name drop LittleBobbyTables now, you're in.
+[0:17:50]  All right.
+[0:17:50]  That's it, though, for today.
+[0:17:51]  We will see you next time.
+[0:17:53]  CS50, welcome to week eight.
+[0:22:31]  Last week, we learned how to create, read, update, and delete databases
+[0:22:36]  using SQL.
+[0:22:39]  Adam, everyone, happy Halloween.
+[0:22:49]  All right.
+[0:22:50]  So this is CS50.
+[0:22:52]  And this is week eight already.
+[0:22:53]  My thanks to Adam on today, this happy Halloween.
+[0:22:57]  In the coming moments, we're going to learn all about how the internet itself
+[0:23:01]  works, which, of course, is a technology that we all use every day,
+[0:23:05]  probably using in some form right now.
+[0:23:07]  But we'll see that if you start to understand
+[0:23:09]  some of the underlying building blocks that power the internet itself,
+[0:23:12]  we can actually start to build interesting things on top of it.
+[0:23:15]  And a lot of the apps, the websites that you all use every day
+[0:23:17]  should become all the more familiar, things that you yourselves can create.
+[0:23:21]  And honestly, when things go wrong, you'll
+[0:23:23]  have all the more of a mental model for how things work or are not,
+[0:23:26]  in fact, working so that you can ultimately
+[0:23:29]  diagnose all the more issues yourselves.
+[0:23:31]  So if we take a look at the internet in the early days,
+[0:23:34]  it pretty much was just this.
+[0:23:35]  This happens to be, of course, the geography of the United States.
+[0:23:38]  And just some of the first points on the internet were these here.
+[0:23:42]  This was so-called ARPANET back in 1969.
+[0:23:45]  And indeed, the internet had its origins here in the United States
+[0:23:48]  with just a few computers interconnected somehow initially.
+[0:23:52]  That, of course, began to grow over time,
+[0:23:54]  such that we eventually had the West Coast connected to the East Coast.
+[0:23:57]  And nowadays, what you can think of, these dots on the screen
+[0:24:00]  that it's representing, are these things called routers, sort of computers,
+[0:24:04]  or really servers that somehow have wires or maybe wireless connections
+[0:24:07]  between them that allow data to flow from point A to B to C.
+[0:24:11]  And then this, of course, has been now magnified across the entire globe
+[0:24:15]  and even above ground as well so that we can connect all the more readily
+[0:24:19]  to systems anywhere.
+[0:24:21]  Now, in order to route the data from one router to another,
+[0:24:25]  we need to somehow make routing decisions.
+[0:24:28]  And this is the kind of thing that the internet service providers, the ISPs
+[0:24:31]  of the world, just handle for us.
+[0:24:33]  You and I plug our Macs, our PCs, into the network here at Harvard
+[0:24:36]  or equivalently at Yale.
+[0:24:37]  Or we somehow get online via Wi-Fi or cellular technology.
+[0:24:41]  And then some of these larger entities, these bigger companies or countries,
+[0:24:44]  handle most of the data getting from point A to point B.
+[0:24:48]  And if you think about what these routers represent,
+[0:24:51]  they're indeed just servers somehow interconnected,
+[0:24:53]  not unlike this grid of tiles here, for instance, back in the Zoom days.
+[0:24:57]  And in fact, here we have, I claim, a grid of routers implemented here
+[0:25:01]  by the course's teaching fellows and course assistants and TAs.
+[0:25:04]  And if the goal at hand, for instance, is for Phyllis
+[0:25:07]  to route some piece of information, maybe it's an email,
+[0:25:10]  maybe it's a request for a web page in the bottom right-hand corner,
+[0:25:12]  all the way up to, say, Brian here in the top left-hand corner,
+[0:25:16]  suffice it to say, each of these tiles represents a router, a server that
+[0:25:20]  can move the data back, forth, left, and right, that packet of information,
+[0:25:24]  so to speak, from Phyllis to Brian could take any number
+[0:25:27]  of different possible routes, up, down, left, right,
+[0:25:30]  to go from the one corner to another.
+[0:25:32]  So let me go ahead and hit Play.
+[0:25:33]  On this video here, we're in the teaching fellows play this same role.
+[0:25:52]  All right, so in this particular case, the data
+[0:25:55]  was routed pretty straightforwardly up and then to the left.
+[0:25:58]  But suppose that one or more of the staff were a bit busy.
+[0:26:00]  Maybe one of the routers is congested.
+[0:26:02]  That is to say, just got way more envelopes at a moment in time
+[0:26:05]  that it can handle.
+[0:26:06]  Thankfully, the design of the internet is such
+[0:26:09]  that there's often multiple ways the data can get from point A to point B,
+[0:26:12]  maybe going through point C or point D instead.
+[0:26:15]  And so there's a resilience there, even as some of these servers
+[0:26:18]  themselves might go down.
+[0:26:20]  So allow me to propose that we use the same grid of routers
+[0:26:22]  now to route the data in a slightly different way this time.
+[0:26:54]  So success.
+[0:26:55]  You'll see perhaps later just how many takes
+[0:26:57]  it took us to actually get that routing right.
+[0:26:59]  But it does, in fact, manifest that you can
+[0:27:02]  travel different paths in order to get the data from point A to point B.
+[0:27:05]  So as we talk about routers, as you think of the internet,
+[0:27:08]  think of those humans as just representing these routers, points A
+[0:27:11]  to P and everywhere in between.
+[0:27:13]  Now, how did the teaching staff know to route that packet up and then down
+[0:27:18]  or left and right in order to get to the destination?
+[0:27:21]  Well, all of them were programmed, so to speak,
+[0:27:23]  to understand protocols called TCP and IP, otherwise known together typically
+[0:27:28]  as TCP slash IP.
+[0:27:30]  And you've probably seen these acronyms at some point in the real world
+[0:27:33]  on the internet, on some kind of documentation,
+[0:27:35]  even if you haven't really thought hard about it.
+[0:27:37]  But IP is certainly the more common of the two, perhaps, in common culture.
+[0:27:41]  So what does TCP and IP do for us?
+[0:27:43]  Well, really two primary things.
+[0:27:45]  Any computer or any teaching staff member who understands TCP IP
+[0:27:49]  knows how to get data from point A to point B. But how?
+[0:27:52]  Well, let's break down what that problem to be solved is.
+[0:27:55]  IP, otherwise known as internet protocol,
+[0:27:58]  is a protocol that computers speak that allow
+[0:28:01]  them to know how to address computers on the internet.
+[0:28:04]  And a protocol is just a set of conventions that computers adhere to.
+[0:28:08]  So someone wrote code that probably has a whole lot of conditionals
+[0:28:11]  that tells the computer what to do if something happens,
+[0:28:13]  like if I receive a packet, then send it to the next server
+[0:28:17]  or something like that.
+[0:28:18]  In the human world, we have protocols, too.
+[0:28:21]  In healthier times, it was quite common to extend your hand
+[0:28:23]  to another human in order to greet them.
+[0:28:26]  And if they're following human protocol,
+[0:28:28]  they would presumably grab your hand and shake it,
+[0:28:30]  at least in a culture like this one here on campus.
+[0:28:33]  And now that is a human protocol in that someone initiates it,
+[0:28:36]  someone responds to it, and you both sort of know what to do.
+[0:28:39]  You're programmed to know what to do.
+[0:28:41]  So same idea with internet protocol.
+[0:28:42]  Computers just know what to do when they've been programmed to do so.
+[0:28:46]  So what does this mean?
+[0:28:47]  If IP decides that every computer in the world will have a unique address,
+[0:28:52]  just like the Science Center around the corner
+[0:28:56]  might have a unique address of 1 Oxford Street, Cambridge, Massachusetts, 02138
+[0:29:02]  IP dictates that every computer on the internet
+[0:29:05]  have a unique address of this form.
+[0:29:06]  And this, too, is probably something you've seen in the real world,
+[0:29:09]  even if you haven't thought too hard about it.
+[0:29:11]  It's a number in what's called dotted decimal notation,
+[0:29:14]  which means it's a decimal number dot something dot something dot something.
+[0:29:17]  So four digits separated by convention by decimal points,
+[0:29:21]  although there are newer and bigger versions of the same.
+[0:29:24]  And these so-called IP addresses, that might be as simple as 1.2.3.4,
+[0:29:29]  uniquely identify a computer on the internet.
+[0:29:33]  The numbers have to range from 0 to 255 each.
+[0:29:37]  And that's a bit of a hint, just as you start to think more computationally.
+[0:29:40]  If each of these is a number from 0 to 255,
+[0:29:43]  how many bits does that suggest each number is using?
+[0:29:47]  Feel free to shout it out.
+[0:29:50]  How many bits gives us 256 total possibilities?
+[0:29:54]  So 8 bits, that should just be sort of a heuristic in your mind
+[0:29:57]  anytime you hear something that's in the range of 0 to 255 or 256 values total.
+[0:30:02]  Think back to week 0, which gives us 8 bits plus another 8 bits,
+[0:30:05]  another 8 bits, and another 8 bits, which is to say an IP address typically
+[0:30:09]  is 32 bits in total.
+[0:30:11]  Now, if we do another bit of quick mental math or think back to week 0,
+[0:30:14]  if every IP address is 32 bits, how many computers
+[0:30:17]  can we have on the internet at once, give or take?
+[0:30:23]  Roughly 4 billion is the ballpark.
+[0:30:27]  And we don't need to be super precise for discussion's sake,
+[0:30:29]  but roughly 4 billion is how high you can account,
+[0:30:32]  assuming no negative numbers, if you have 32 bits in total.
+[0:30:35]  Now, that's not terribly many numbers of addresses,
+[0:30:39]  especially considering the number of humans in the world,
+[0:30:42]  the number of us that do have laptops or desktops or devices,
+[0:30:45]  more generally phones in our pockets and the like.
+[0:30:47]  So let me just stipulate for today's purposes
+[0:30:49]  that there is even a newer and improved version of IP,
+[0:30:52]  otherwise known as version 6.
+[0:30:54]  This is version 4, but still super popular.
+[0:30:57]  Version 6 uses 128 bits, which is a huge number of possible permutations.
+[0:31:02]  Dare say I can't even pronounce that number.
+[0:31:04]  It's so big.
+[0:31:05]  So there are ways around even this limitation already.
+[0:31:08]  So every computer has an address like this.
+[0:31:11]  What does that really mean?
+[0:31:13]  Well, suppose that I was Phyllis in the story told visually earlier,
+[0:31:16]  and I want to send a message to Brian.
+[0:31:18]  Well, both Phyllis and Brian have IP addresses.
+[0:31:20]  And suppose that Brian's IP address happens
+[0:31:23]  to be 1.2.3.4 in that top left-hand corner.
+[0:31:26]  Well, Phyllis's Mac or PC or phone would essentially
+[0:31:30]  do the equivalent on this human envelope
+[0:31:32]  by writing the to address in the middle of the envelope,
+[0:31:35]  as is our human convention like this.
+[0:31:38]  So this is an envelope, a piece of information, an email, a text message,
+[0:31:41]  whatever, destined for Brian.
+[0:31:42]  And so she would have her computer put Brian's IP address in the middle.
+[0:31:46]  Her IP address is maybe 5.6.7.8.
+[0:31:50]  So just like our human convention, I might write 5.6.7.8
+[0:31:54]  at the top of the envelope, 5, 6, 7, 8, thereby indicating
+[0:31:59]  what the return address is.
+[0:32:00]  And this is helpful because if Brian's computer needs to acknowledge receipt,
+[0:32:03]  if he needs to reply in some form, this way
+[0:32:06]  the envelope has all the information we need.
+[0:32:08]  But in the real world, servers do a lot of things nowadays, not just email,
+[0:32:12]  but maybe chat, maybe video conferencing, maybe any number of other services
+[0:32:16]  as well.
+[0:32:17]  And so it turns out that an address alone might not be sufficient
+[0:32:21]  because how does Brian's computer know when he opens the envelope, so to speak,
+[0:32:25]  that this should be interpreted as an email or interpreted as a chat message
+[0:32:29]  or interpreted as a video attachment that Phyllis has sent?
+[0:32:32]  Well, we need some other mechanism, some other hints on this envelope
+[0:32:35]  to distinguish one type of internet service from another.
+[0:32:39]  And so that's where the other acronym in TCPIP comes in, which is TCP.
+[0:32:44]  So this stands for Transmission Control Protocol,
+[0:32:47]  which is just a different set of conventions
+[0:32:50]  that computers adhere to in order to solve a couple of different problems.
+[0:32:53]  One is this problem of distinguishing one type of service from another.
+[0:32:58]  Now, what does that mean?
+[0:32:59]  Well, humans decades ago decided as they started
+[0:33:02]  inventing all of these various internet services,
+[0:33:05]  the web being the first one, how they might, or the web now
+[0:33:08]  being one of the most popular ones, they decided
+[0:33:10]  to assign different services that can be used on the internet,
+[0:33:14]  unique numbers.
+[0:33:15]  And so two of the most common are these.
+[0:33:17]  80 is the number that a bunch of humans decided years ago
+[0:33:20]  will represent what you and I know is HTTP.
+[0:33:23]  And we'll talk more technically in a bit about what HTTP is.
+[0:33:26]  But obviously, it's the thing that's in the beginning of every URL nowadays.
+[0:33:30]  Or HTTPS, which, of course, has the S added to it.
+[0:33:33]  And that has its own unique number.
+[0:33:35]  And for now, the S just means secure.
+[0:33:37]  One is encrypted or scrambled somehow for privacy sake.
+[0:33:40]  And the other is unencrypted.
+[0:33:41]  It's a little more vulnerable to interception.
+[0:33:44]  So these two numbers are what the world decided when implementing TCP
+[0:33:48]  shall uniquely identify those services.
+[0:33:50]  So what does this mean?
+[0:33:51]  Well, this means that if Brian's computer in the story from before
+[0:33:55]  is hosting not like an email server, but maybe has a website,
+[0:33:57]  and Phyllis is requesting Brian's home page or something like that,
+[0:34:01]  she would have her Mac or PC or phone not only write Brian's IP
+[0:34:06]  address in the middle of the envelope, but also the number, otherwise known
+[0:34:10]  as a port number, that she wants this envelope to be routed to.
+[0:34:15]  Now, 80 would be insecure nowadays.
+[0:34:17]  HTTP colon slash slash is sort of passe.
+[0:34:20]  And we almost always see HTTPS colon slash slash now.
+[0:34:24]  So I'm just going to go with best practice.
+[0:34:26]  And I'm going to add a colon.
+[0:34:27]  And then the number 443 at the end of Brian's IP address.
+[0:34:32]  So now I have an IP address for Brian, the port number for the service
+[0:34:35]  that this is relevant to.
+[0:34:37]  And I'm not going to bother writing it.
+[0:34:38]  But it turns out that Phyllis's computer would also choose a port number,
+[0:34:41]  maybe a random port number, so that Brian can conversely reply.
+[0:34:45]  And then the computer can know which response
+[0:34:48]  is coming back for which request.
+[0:34:51]  But the most important one is this one in the to field,
+[0:34:53]  whereby this distinguishes this from an email, a chat message,
+[0:34:56]  a video conference session, or a Zoom or whatnot
+[0:34:59]  from anything else happening on Brian's computer at the same time.
+[0:35:02]  So all this time, if you've seen these terms TCP and IP,
+[0:35:05]  those are really two of the most important things that they do.
+[0:35:09]  But TCP does one other thing that's super useful, too.
+[0:35:12]  It turns out that it's super common nowadays, especially,
+[0:35:17]  to transmit a lot of media on the internet, whether it's an image
+[0:35:20]  or maybe it's a movie file.
+[0:35:22]  And it would be a little obnoxious, to say the least,
+[0:35:24]  if you're downloading a really big file meant
+[0:35:27]  that no one else in your dorm room or your household
+[0:35:29]  could actually download anything until you're actually done.
+[0:35:32]  So of course, multiple people nowadays can be on the internet at once,
+[0:35:35]  even if all of the connections are a little slower.
+[0:35:37]  But one person's usage does not block someone else's.
+[0:35:40]  Now, how does this work?
+[0:35:41]  Well, TCP, in conjunction with IP, can also
+[0:35:44]  allow you to take a really big image of a cat, which the internet, of course,
+[0:35:48]  is filled with, and take a big image of a cat or a big video file of a cat
+[0:35:52]  and fragment it into multiple pieces.
+[0:35:55]  So I'm just going to roughly tear it down the middle
+[0:35:57]  and then maybe tear it down the middle again.
+[0:35:59]  So now it's four different fragments.
+[0:36:01]  And I'm sorry, but the computer will be reassembling these for us.
+[0:36:05]  And what Phyllis's computer could do now,
+[0:36:08]  if she's uploading this picture of a cat to Brian's web server,
+[0:36:12]  well, she could put one fragment in this envelope
+[0:36:15]  and then have three separate envelopes for the other three fragments.
+[0:36:19]  And what she could then do on the outside of this envelope
+[0:36:22]  is just kind of number them somehow.
+[0:36:24]  And in fact, this is something else that TCP and IP together would do for us.
+[0:36:28]  This first envelope now might say something like one out of four
+[0:36:32]  in the memo field, so to speak, of the metaphorical envelope here.
+[0:36:37]  Now, this should be enough information because now if Brian
+[0:36:40]  gets all four of these envelopes, he presumably
+[0:36:42]  knows how to reassemble the picture of the cat in order, top to bottom,
+[0:36:45]  left to right.
+[0:36:46]  But more importantly, suppose that one of the routers, one of the TFs
+[0:36:50]  in the video, is sort of distracted and they sort of drop one of the packets.
+[0:36:54]  And that's a metaphor actually in practice
+[0:36:56]  for when a router gets really busy, it's got way too much data coming in,
+[0:37:00]  it might metaphorically drop packets.
+[0:37:01]  What does that mean in practice?
+[0:37:03]  I mean, it literally just ignores the zeros and ones.
+[0:37:05]  It doesn't save them to its memory because there's just no room left.
+[0:37:08]  So it's equivalent to sort of dropping the packet.
+[0:37:10]  So suppose now that Brian gets one of four, three of four, and four of four.
+[0:37:16]  What can his computer infer now after receiving those three packets?
+[0:37:21]  One of four, three of four, and four of four.
+[0:37:25]  What's the use there?
+[0:37:25]  Yeah, I think you're signaling with your fingers.
+[0:37:28]  Which one can I call on you?
+[0:37:30]  Yeah, so he's missing two out of four.
+[0:37:32]  So it's second of the packets.
+[0:37:33]  And this is useful now because you could imagine
+[0:37:35]  he can send some message back to Phyllis saying, hey, please retransmit
+[0:37:39]  number two of four without having to redownload the entirety of the cat.
+[0:37:43]  So there's an efficiency there as well.
+[0:37:47]  So TCP IP allows data really to go from point A
+[0:37:50]  to point B while solving a bunch of these problems along the way.
+[0:37:54]  So nowadays, if you ever see mention on your Mac or PC of your so-called IP
+[0:37:58]  address, that is the sort of problem that's being solved.
+[0:38:03]  Questions now on these protocols, these conventions called TCP and IP.
+[0:38:10]  That's the extent to which we'll need to understand them.
+[0:38:12]  Won't have to implement them per se.
+[0:38:13]  We'll just take them hereafter for granted.
+[0:38:17]  Any questions that you've ever been wondering about your home network?
+[0:38:20]  Yeah, a really good question.
+[0:38:29]  How does TCP know that a user got a message?
+[0:38:32]  Another aspect, another feature of TCP, is that Brian's computer,
+[0:38:37]  by design of this protocol, will also acknowledge the packets
+[0:38:40]  that he's received.
+[0:38:41]  And it will do it efficiently.
+[0:38:42]  If Brian receives all four packets in a pretty narrow window of time,
+[0:38:46]  his computer will send to Phyllis's computer
+[0:38:47]  a quick message saying, essentially, received all four.
+[0:38:50]  Otherwise, he'll say the opposite, which is that I'm missing, for instance,
+[0:38:54]  two out of four.
+[0:38:55]  And that just ensures, ultimately, that all of the data
+[0:38:57]  is indeed arrived so that you're not missing, like, a quarter,
+[0:39:02]  a quadrant of the cat in question.
+[0:39:05]  All right, but that's not the only problem
+[0:39:07]  that needs to be solved, ultimately.
+[0:39:09]  We also need to make the internet user friendly, if you will.
+[0:39:13]  And it would be really tedious if you had to visit websites, for instance,
+[0:39:18]  by way of their IP addresses.
+[0:39:21]  1.2.3.4 is pretty memorable.
+[0:39:23]  But there's like 4 billion other possible addresses available.
+[0:39:27]  And it would be super tedious to remember those.
+[0:39:29]  It would be bad marketing to advertise those.
+[0:39:33]  In fact, most of you probably don't even
+[0:39:34]  know the phone numbers of your closest friends and family members
+[0:39:37]  anymore, because you instead store them in your contacts.
+[0:39:40]  You're in your dress book associating with numbers
+[0:39:42]  that are completely opaque with actual names or strings, if you will.
+[0:39:47]  The same goes for the internet, too.
+[0:39:49]  Even though every computer does have and must have a unique IP address
+[0:39:52]  numerically, why?
+[0:39:54]  Well, routers or computers, computers just crunch numbers
+[0:39:56]  very readily, but we humans work better with strings of text.
+[0:40:00]  We need some system for converting user friendly strings like harvard.edu
+[0:40:05]  or yale.edu or google.com to the underlying IP addresses.
+[0:40:09]  And that's where the next acronym comes in today, which is DNS, Domain Name
+[0:40:14]  System.
+[0:40:15]  So this is just another technology that's been in use for some time now.
+[0:40:19]  And it's a collection of servers on the internet whose purpose in life
+[0:40:23]  is to convert domain names to IP addresses.
+[0:40:26]  And maybe vice versa as well.
+[0:40:28]  So let me stipulate for today's purposes.
+[0:40:30]  There are some root DNS servers in the world that, long story short,
+[0:40:34]  know about all of the dot coms, all of the dot edus, all of the dot dot dot,
+[0:40:38]  all of the other top level domains around the world, as well as in the US.
+[0:40:43]  And then there are some smaller DNS servers owned by companies,
+[0:40:47]  owned by universities, and even in your apartments or homes, most likely.
+[0:40:51]  Indeed, if you have a home router plugged into the wall somewhere,
+[0:40:54]  that's not only routing your data in and out of your apartment or home
+[0:40:58]  or dorm room, it's also typically serving as a local, therefore faster, DNS
+[0:41:04]  server, a cache, if you will.
+[0:41:06]  It's sort of locally saving your most frequently accessed websites
+[0:41:09]  and their IP addresses just to avoid bothering the bigger, more expensive,
+[0:41:13]  busier servers all day long.
+[0:41:15]  So there's DNS servers all over.
+[0:41:16]  If you poke around your settings in Windows or macOS or Android or iOS,
+[0:41:21]  you'll see mention of DNS.
+[0:41:23]  And you'll probably see the IP addresses of the servers whose purpose in life
+[0:41:27]  is to do this conversion for you.
+[0:41:28]  But this is a requisite feature if we just
+[0:41:30]  want the internet to be user friendly and allow us to use words instead
+[0:41:35]  of numbers alone.
+[0:41:36]  What's inside of these DNS servers?
+[0:41:38]  It's essentially a spreadsheet.
+[0:41:40]  Or if we can say it more geekily, it's essentially
+[0:41:42]  like a hash table of some sort, which it has keys and values.
+[0:41:46]  Like the key is the domain name, harvard.edu, yale.edu, google.com.
+[0:41:50]  And the value is the corresponding IP address or, in many cases,
+[0:41:54]  IP addresses, plural, of the corresponding servers.
+[0:41:58]  So here already, even though I've drawn it fairly abstractly,
+[0:42:00]  like you would on a chalkboard, it's really probably
+[0:42:03]  implemented as some kind of table.
+[0:42:04]  Maybe a hash table.
+[0:42:05]  Maybe a database table.
+[0:42:07]  Maybe SQL or something like that.
+[0:42:09]  Or maybe it's even just a linked list or an array.
+[0:42:11]  We just have to somehow enable this computer to convert one to the other.
+[0:42:17]  Now, just to be super precise, DNS servers
+[0:42:20]  actually convert what are called fully qualified domain names, which
+[0:42:23]  is generally not just harvard.edu, but more verbosely,
+[0:42:26]  www.harvard.edu and www.google.com.
+[0:42:30]  So the whole thing that you would see as a substring of the URL.
+[0:42:34]  So that's what DNS does.
+[0:42:36]  And that's what your university, your company, your home router
+[0:42:39]  are doing for you.
+[0:42:40]  Let me pause here to see if there are any questions.
+[0:42:46]  This, too, is just a technology now.
+[0:42:47]  We'll take for granted.
+[0:42:49]  Just works.
+[0:42:51]  Questions at all.
+[0:42:54]  All right.
+[0:42:54]  So let's now transition among our protocols, really,
+[0:42:57]  to the last for today, which will set the stage for actually solving
+[0:43:00]  problems with these and writing some code, ultimately, HTTP.
+[0:43:04]  This is something that you see or hear all day long,
+[0:43:07]  even though you rarely have to bother typing it anymore.
+[0:43:09]  Odds are, if you go to harvard.edu, yale.edu, google.com,
+[0:43:13]  you don't bother typing HTTP, let alone HTTPS, manually anymore.
+[0:43:17]  Why?
+[0:43:18]  Because your browser autocompletes, that kind of thing, just to make life easier.
+[0:43:21]  But it is officially at the beginning of every URL you visit,
+[0:43:24]  either HTTP or the more secure HTTPS, whenever you're using your browser
+[0:43:30]  to access some website.
+[0:43:31]  So HTTP stands for Hypertext Transfer Protocol.
+[0:43:37]  And it's easily one of the most popular, dare
+[0:43:40]  say one of the most powerful features of the internet nowadays.
+[0:43:43]  But the mental model to have here is that HTTP, or the web more generally,
+[0:43:47]  is kind of a service that runs on top of the internet.
+[0:43:50]  And maybe Zoom or Microsoft Teams is another service
+[0:43:53]  that runs on top of the internet.
+[0:43:56]  And iMessage and technologies like it is another service
+[0:43:58]  that runs on top of the internet.
+[0:43:59]  So the internet is really like the lower level plumbing,
+[0:44:02]  the TCP IP stuff, the DNS stuff that just gets data from point A to point B.
+[0:44:06]  But now, and we're in a software development class,
+[0:44:09]  ultimately, here in CS50, HTTP is the application level protocol.
+[0:44:14]  It's sort of what programmers use, what companies use,
+[0:44:18]  what developers use ultimately to use the underlying plumbing,
+[0:44:22]  to build interesting and powerful things.
+[0:44:24]  So what does this mean when it comes to accessing services
+[0:44:28]  via HTTP or the more secure HTTPS?
+[0:44:31]  Well, here is a representative URL.
+[0:44:34]  Even though you might not type the whole thing,
+[0:44:36]  if you poke around your address bar, this is what's up there.
+[0:44:38]  With that said, a lot of browsers nowadays are kind of simplifying,
+[0:44:42]  if not dumbing down what you see with your human eyes,
+[0:44:45]  just to shorten the strings, especially on mobile devices.
+[0:44:48]  But almost always, if you click the URL or highlight it,
+[0:44:51]  then you see the whole thing.
+[0:44:52]  But on many browsers, you might only ever see example.com,
+[0:44:56]  but all of this information is there.
+[0:44:57]  It's just getting more and more hidden just for user interfaces' sake.
+[0:45:01]  Well, it turns out when you visit a URL, by default,
+[0:45:05]  especially if you type nothing after the .com in this case,
+[0:45:08]  you're technically implicitly adding a single slash.
+[0:45:11]  So a single slash denotes the root of the server.
+[0:45:14]  That is the default page or folder in the server.
+[0:45:18]  And the slash, whether or not you type it or not,
+[0:45:20]  is implicitly going to be there.
+[0:45:22]  And that just means give me the default.
+[0:45:23]  Whatever is at www.example.com, give me that page or that folder.
+[0:45:28]  But URLs can be longer than this.
+[0:45:30]  And more generally, there can be a path, so to speak.
+[0:45:33]  And this is a term of art.
+[0:45:34]  A path is some sequence of folder and or file names after a URL like this.
+[0:45:40]  And so you might see more specifically that a URL
+[0:45:43]  contains a very specific file.
+[0:45:44]  This isn't as common nowadays anymore, though we will begin today
+[0:45:48]  by using this technique.
+[0:45:50]  But if there is a file called literally file.html or something else
+[0:45:54]  on the server, that file is going to be what this URL pulls up on the computer.
+[0:46:00]  Meanwhile, you might have slash folder slash,
+[0:46:02]  which just means show me whatever is inside of this folder.
+[0:46:05]  Or you might have more verbosely slash folder slash file.html,
+[0:46:08]  which will show you that file in that folder.
+[0:46:12]  And meanwhile, just to give some other terms of art,
+[0:46:14]  this is the so-called fully qualified domain name.
+[0:46:17]  And again, these vocab words don't matter all that much.
+[0:46:19]  But you'll hear or see them over time.
+[0:46:21]  We generally colloquially just refer to this as the domain name,
+[0:46:26]  which is a little less precise but gets the job done,
+[0:46:28]  certainly in conversation.
+[0:46:30]  And this part here I described briefly earlier.
+[0:46:34]  What's the name for this suffix at the very end of the fully qualified domain
+[0:46:39]  the top level domain or TLD.
+[0:46:44]  And this is just some form of categorization of the URLs.
+[0:46:47]  Now, the internet got its start within the United States.
+[0:46:50]  And a lot of the first websites, of course, came from the US.
+[0:46:52]  And so for better or for worse, a sort of stake was planted in the ground.
+[0:46:55]  So generally, .com indicated, at least early on,
+[0:46:59]  that it was some kind of commercial enterprise, a business that
+[0:47:01]  owned a domain name.
+[0:47:02]  .edu is an educational institution.
+[0:47:05]  .net was some kind of network.
+[0:47:07]  .gov was the US government.
+[0:47:09]  Now, there are also country code TLDs, ccTLDs, like .uk or .jp.
+[0:47:16]  Every country in the world has its own two-letter TLD that
+[0:47:21]  might very well be restricted to only servers or companies
+[0:47:24]  or people in that country.
+[0:47:26]  Many of them can be used by anyone.
+[0:47:28]  You've used a lot of URLs in this class, ending in cs50.io.
+[0:47:33]  That doesn't mean input, output.
+[0:47:35]  It actually is a TLD from another country
+[0:47:38]  that lets anyone on the internet pay for and on an annual basis
+[0:47:42]  using that domain.
+[0:47:43]  .tv, for instance, you might see in some cases, like twitch.tv and the like.
+[0:47:48]  That, too, is owned by another country that
+[0:47:51]  allows others in the English-speaking world, in this case,
+[0:47:53]  to use it as though it connotes TV.
+[0:47:55]  But those are just different types of TLDs
+[0:47:57]  that roughly categorize where the domain lives.
+[0:48:00]  But it doesn't necessarily mean it's commercial anymore.
+[0:48:02]  It doesn't necessarily mean it's a network anymore.
+[0:48:05]  For the most part, there are hundreds of TLDs now, for better or for worse,
+[0:48:10]  most of which are less common than these big ones.
+[0:48:13]  But most anyone can buy most of them, with just some restrictions
+[0:48:16]  on things like .edu and .gov that are still very much regulated.
+[0:48:21]  This, meanwhile, is what we might call the hostname, www.
+[0:48:24]  It's obviously a super common convention.
+[0:48:27]  Like, almost every website uses www as its hostname.
+[0:48:30]  But that's a human convention.
+[0:48:32]  It's not a requirement.
+[0:48:33]  And indeed, some websites don't even bother having a hostname.
+[0:48:36]  They just use their domain to advertise their website.
+[0:48:40]  This now is going to be the scheme or the protocol.
+[0:48:43]  And this is just going to indicate via what protocol the computer, your Mac,
+[0:48:49]  your PC, your phone, should use when accessing content at that address.
+[0:48:53]  Because indeed, there are other protocols you can use.
+[0:48:56]  But for the most part, we'll only focus on HTTP or equivalently HTTPS.
+[0:49:02]  All right.
+[0:49:03]  Any questions now on those just definitions, building blocks of URLs,
+[0:49:06]  just so we all sort of share a common vocabulary?
+[0:49:11]  Any questions at all?
+[0:49:12]  Yeah.
+[0:49:16]  Sure, we'll come back to this actually later today.
+[0:49:18]  There's a technical term known as local host, which
+[0:49:21]  is a generic name for your computer, your Mac, your PC, your phone,
+[0:49:25]  especially when you're doing software development.
+[0:49:27]  And by convention, your own computer has not only whatever IP address
+[0:49:30]  you get from your university or your internet service provider,
+[0:49:34]  it also has a reflexive IP address, one that just always refers to itself,
+[0:49:38]  which is 127.0.0.1.
+[0:49:40]  And that's just a human convention.
+[0:49:42]  Humans decided that shall refer always to your computer.
+[0:49:45]  And it's actually going to be useful today and onward
+[0:49:47]  because we can use that when doing development on our own computers
+[0:49:50]  ultimately.
+[0:49:51]  Other questions on URLs, IP, DNS, or any of these building blocks?
+[0:49:58]  All right.
+[0:49:59]  So what do we mean by HTTP being a protocol?
+[0:50:02]  When I extended my hand earlier as a human handshake,
+[0:50:05]  a typical human in healthy times would know to respond in turn.
+[0:50:09]  Well, how does Brian's computer know to respond to Phyllis's envelope,
+[0:50:13]  whatever message is there in?
+[0:50:15]  Well, assuming that Brian is indeed still a web server in the story
+[0:50:18]  and Phyllis was trying to upload a cat or maybe download a cat
+[0:50:21]  from Brian's web server, inside of Phyllis's envelope
+[0:50:25]  would have been a message literally in text.
+[0:50:28]  And it's English for the most part.
+[0:50:30]  And it would contain at the beginning of that message literally
+[0:50:33]  one of these English verbs, either get, which means just that.
+[0:50:36]  Get me the home page.
+[0:50:37]  Get me a picture of a cat.
+[0:50:38]  Get me a picture of a dog or a video or anything else.
+[0:50:41]  Or post, which often means post, that is,
+[0:50:47]  upload a picture of a cat or a dog or something else to the server instead.
+[0:50:51]  That's not strictly the only use cases for these,
+[0:50:54]  but you can generally think them as one is just getting information
+[0:50:57]  and the other is posting from the client, from Phyllis
+[0:51:00]  to the server, in this case, Brian.
+[0:51:01]  So those are the two keywords that we might see.
+[0:51:04]  And why is this useful?
+[0:51:05]  Well, it turns out we can start to see in our own Mac or PC
+[0:51:08]  some of these very same messages.
+[0:51:10]  For instance, if Phyllis were visiting not Brian's, but example.com,
+[0:51:16]  that web server, inside of her metaphorical envelope,
+[0:51:19]  there would be a textual message that literally starts with get slash,
+[0:51:23]  then the word HTTP, then the version she's using, 1.1 is very common,
+[0:51:28]  2 and 3 are becoming more common, but HTTP generally looks like this.
+[0:51:32]  The next line of text in her envelope would probably say host colon,
+[0:51:38]  then literally the fully qualified domain name of the server she's
+[0:51:41]  accessing, just in case.
+[0:51:42]  And this happens super commonly, especially on small websites.
+[0:51:45]  If one server is hosting multiple domain names, multiple websites,
+[0:51:50]  this just distinguishes which one she actually wants.
+[0:51:52]  And then there's usually a whole bunch of other lines of text as well.
+[0:51:56]  So where can you actually see this?
+[0:51:59]  Well, let me actually go ahead and do this.
+[0:52:02]  Give me just a moment.
+[0:52:03]  And I'm going to open up on my computer here
+[0:52:06]  an empty Chrome window in incognito mode.
+[0:52:08]  Generally speaking, incognito mode or private mode
+[0:52:10]  is used when you don't want there to be left remnants of what websites you
+[0:52:13]  visited, and it has the effect for software developers
+[0:52:16]  of just forgetting any things you might have tried already
+[0:52:19]  within your browser, including things called cookies,
+[0:52:22]  more on those another time, your autocomplete history, and the like.
+[0:52:25]  So for development purposes, incognito mode is especially helpful,
+[0:52:28]  because it's sort of like starting with a clean slate every time you
+[0:52:31]  open a new private or incognito mode.
+[0:52:33]  So there's not going to be any remnants of previous testing or code
+[0:52:37]  that you've been playing with.
+[0:52:38]  And I'm going to go ahead and do this.
+[0:52:39]  I'm going to go ahead and right click or Control click on Chrome.
+[0:52:44]  I'm going to choose Inspect, and it's going to pull up this window,
+[0:52:47]  sometimes on the side, sometimes on the bottom.
+[0:52:49]  I'm going to move it to the bottom just so we can see it a little more readily.
+[0:52:52]  And I'm going to zoom in.
+[0:52:53]  And it's going to look a little arcane at first.
+[0:52:56]  And I'm going to just highlight a few of these tabs.
+[0:52:58]  We'll see here along the top that there's elements, console, sources,
+[0:53:03]  network, and a whole bunch of other things as well.
+[0:53:05]  This is sort of the advanced mode in Chrome.
+[0:53:07]  And Safari and Firefox and Edge have their own equivalents of these features.
+[0:53:11]  They've always been there, even if you've never clicked the right button
+[0:53:14]  to enable these features.
+[0:53:15]  And I'm going to focus for a moment on network, like this.
+[0:53:18]  This is a feature of the browser that's going
+[0:53:20]  to allow me, the programmer in this case, or the engineer,
+[0:53:23]  to just kind of look at what messages my browser is actually
+[0:53:26]  sending to a server.
+[0:53:28]  So let me go ahead and do something like this.
+[0:53:30]  Let me go ahead and visit, for instance, in my browser here.
+[0:53:35]  And I'm going to shrink the window just a little bit so we can see it exactly.
+[0:53:39]  I'm going to visit https://www.harvard.edu.
+[0:53:46]  And now I'm going to hit Enter.
+[0:53:48]  And a whole bunch of stuff just happened along the bottom of my screen.
+[0:53:52]  And I'm going to try to pull my window up just a little bit
+[0:53:54]  so we can focus on a subset of this.
+[0:53:57]  Let me pull this up, covering up really the content of the page,
+[0:53:59]  focusing on these lower level details down here.
+[0:54:03]  And what I want to see first is, let me go ahead and reload this page here
+[0:54:12]  after retaining the log so that we can see absolutely everything
+[0:54:15]  on the screen.
+[0:54:16]  And to be clear, I just checked, because I forgot earlier,
+[0:54:19]  preserve log, because I wanted to preserve everything on the screen.
+[0:54:22]  I want to see everything all at once.
+[0:54:24]  And we'll see this.
+[0:54:25]  The very first line of output is completely overwhelming
+[0:54:27]  with detail at first glance.
+[0:54:29]  But what you'll see here, if I start to scroll down, and down, and down,
+[0:54:33]  and down, are the so-called request headers.
+[0:54:37]  And let me zoom in here.
+[0:54:38]  And what you're seeing inside of Chrome, inside of its network tab,
+[0:54:42]  in its so-called developer tools, again, this is just for engineering types,
+[0:54:46]  you'll see all of the headers, all of the lines of text
+[0:54:49]  that magically were sent by my Mac to Harvard.edu,
+[0:54:53]  much like from Phyllis to Brian's server and that story,
+[0:54:57]  so I can see exactly what messengers are being sent.
+[0:55:00]  And a lot of this we haven't talked about yet,
+[0:55:02]  but we do see some mention of get, and we see some mention of slash,
+[0:55:06]  and a bunch of other arcane details.
+[0:55:08]  But notice, they're all sort of key value pairs,
+[0:55:10]  with the colon here indicating what the corresponding value is.
+[0:55:14]  Now, most of this is not going to be interesting,
+[0:55:16]  and we're not going to focus too much on the weeds of all of this.
+[0:55:18]  But it indeed gives us a sense of what's inside of that virtual envelope.
+[0:55:23]  Now, Harvard.edu is one thing, but there's other websites
+[0:55:27]  we might visit as well.
+[0:55:29]  And no matter what they are, we're going to expect, ultimately,
+[0:55:32]  an HTTP response.
+[0:55:34]  So in addition to a computer, like my Mac or Phyllis's computer,
+[0:55:37]  sending a request containing get and host and those details too,
+[0:55:42]  you'll see here in my slide form just representative response
+[0:55:46]  from the server.
+[0:55:47]  And notice that key here is that the server
+[0:55:49]  is responding in the same version of HTTP.
+[0:55:51]  In this example, it's sending back this so-called status code,
+[0:55:54]  just a numeric code that indicates, in this case, that everything's OK.
+[0:55:58]  And it includes this header, this HTTP header,
+[0:56:01]  which again is just a key value pair saying
+[0:56:03]  that the type of this content that's coming back from the server
+[0:56:06]  is text slash HTML, more on HTML in just a little bit.
+[0:56:10]  But for our purposes now, this just means that Harvard.edu
+[0:56:13]  is sending me back a web page.
+[0:56:15]  And indeed, if we hide all of this technical stuff,
+[0:56:18]  that's the web page that we saw up here with all of the usual imagery
+[0:56:22]  and the like.
+[0:56:22]  And in fact, I can see this if I scroll back up not to request headers,
+[0:56:27]  but response headers, you'll see up here that we get back responses,
+[0:56:33]  including the date that the server responded and a whole bunch
+[0:56:36]  of other details as well.
+[0:56:37]  And honestly, this has always been under your fingertips.
+[0:56:40]  And it will soon be useful as we start making web-based applications
+[0:56:43]  ultimately.
+[0:56:44]  But this very quickly gets overwhelming quickly.
+[0:56:46]  And so better than this might actually be a tool
+[0:56:49]  that we can use within our code space itself.
+[0:56:52]  So let me go back to VS Code here.
+[0:56:54]  I didn't open any code tabs.
+[0:56:55]  I'm just going to use my terminal window for a moment.
+[0:56:57]  And I'm going to run a couple of commands that
+[0:56:59]  are going to allow me to actually see what is going on when I request one
+[0:57:04]  website.
+[0:57:04]  Let me go ahead and use a command called curl for connect URL.
+[0:57:08]  And this is like a command line, black and white program,
+[0:57:11]  that's going to pretend to be a browser.
+[0:57:13]  And it's going to connect to the URL, show me the headers,
+[0:57:16]  but it's not going to show me the images of the graphics, which
+[0:57:18]  might very well be useful to the humans, but not to me right now as the developer.
+[0:57:22]  So I'm going to do curl.
+[0:57:23]  I'm going to do dash i.
+[0:57:24]  And then I'm going to do HTTPS colon slash slash www.harvard.edu slash,
+[0:57:30]  as though I'm pretending to be a browser requesting the home page.
+[0:57:34]  And what's nice about curl is, albeit overwhelming too,
+[0:57:38]  you'll get back a whole response from the server containing only
+[0:57:41]  those header values, the key value pairs inside of the envelope.
+[0:57:45]  And we'll ignore almost all of these.
+[0:57:47]  But here is the response from the server.
+[0:57:49]  It responded using a new and improved version of HTTP, in this case version 2.
+[0:57:53]  And it gave me back a 200.
+[0:57:55]  There's my content type, text slash HTML.
+[0:57:58]  And then this char set happens to do with the encoding,
+[0:58:01]  if it's Unicode or ASCII or something else.
+[0:58:03]  And then there's all this other overwhelming detail for now.
+[0:58:06]  But this is the beginnings of my ability to just kind of poke around
+[0:58:09]  and see how the server works.
+[0:58:11]  And it turns out, too, that we'll be able to see other potential responses
+[0:58:16]  as well.
+[0:58:17]  So for instance, HTTP might not only return 100.
+[0:58:22]  What if I do this instead?
+[0:58:24]  Let me go ahead and visit curl dash i HTTP colon slash slash www.harvard.edu.
+[0:58:32]  So notice I deliberately use the insecure version of the URL,
+[0:58:35]  which maybe Harvard's system administration doesn't like anymore.
+[0:58:40]  Well, how can they ensure that I, the end user, the student,
+[0:58:43]  nonetheless use HTTPS, even if I didn't type it myself?
+[0:58:48]  Well, let me run just that command with just HTTP, not HTTPS.
+[0:58:52]  And you'll see that everything is not OK.
+[0:58:54]  It didn't come back with a 200.
+[0:58:56]  It came back with 301 in this message saying Harvard moved permanently.
+[0:59:00]  But here's where you can look for another clue.
+[0:59:03]  Among all of these lines, most of which I don't care about,
+[0:59:06]  there's a location header, colon.
+[0:59:09]  That's a little hint to me that says where Harvard University has apparently
+[0:59:12]  moved to on the web.
+[0:59:13]  And what's different about this URL, just to be clear?
+[0:59:17]  It has the S included.
+[0:59:19]  And what your browser will do by default, because Google and Microsoft
+[0:59:22]  and Mozilla programmed it this way, whenever it sees a 301 response instead
+[0:59:27]  of 200, it won't show you any web page.
+[0:59:30]  It will look for a location header, find that URL,
+[0:59:33]  and then automatically, quote unquote, redirect you there, too.
+[0:59:37]  So this is why it doesn't matter what we type in the browser.
+[0:59:39]  Harvard can have its servers send these semi-secret messages to our browsers,
+[0:59:44]  and then it will just visit a second URL all automatically.
+[0:59:47]  And you can do this with host names as well.
+[0:59:50]  Suppose that Harvard does not want to standardize on harvard.edu.
+[0:59:54]  Why?
+[0:59:55]  They just want it to always be www.
+[0:59:57]  Maybe it's a branding thing.
+[0:59:58]  Maybe it's a technical thing.
+[0:59:59]  We can see that Harvard does not want to standardize on harvard.edu.
+[1:00:04]  Why?

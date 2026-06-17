@@ -1,0 +1,1160 @@
+# Transcripción: chunk_020.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  Let's right click on this, choose Inspect.
+[0:00:02]  That's going to jump to that part of the page.
+[0:00:04]  And notice what you can do here in this Elements tab.
+[0:00:07]  We can be a little playful in return today.
+[0:00:10]  Life at Harvard.
+[0:00:11]  And voila, we've now changed Yale's website, it would seem.
+[0:00:16]  So have we really?
+[0:00:18]  Hopefully hacking is not actually this easy.
+[0:00:21]  What did we actually do based on today's mental model?
+[0:00:26]  I have changed the page, but yeah, I've just changed how it is for me, right?
+[0:00:31]  Because my browser, just like with Phyllis and Brian from the get-go,
+[0:00:34]  requested Yale's web page.
+[0:00:35]  I got back a virtual envelope containing that HTML, as we've now called it.
+[0:00:39]  My browser has a local copy.
+[0:00:40]  It's got its own tree, otherwise known as a DOM,
+[0:00:43]  document object model built up in its memory.
+[0:00:45]  And yeah, I went to town and changed my copy of it.
+[0:00:48]  But of course, hopefully, I've not changed the actual server.
+[0:00:51]  And in fact, if I reload Yale's website now,
+[0:00:54]  hopefully it will revert back to, indeed, what it should be instead.
+[0:00:59]  Life at Yale.
+[0:01:00]  But this ability in your own browser, be it Chrome, or Firefox, or Edge,
+[0:01:04]  or Safari, to have these built-in developer tools
+[0:01:06]  are very powerful, because it's going to enable you to not only diagnose
+[0:01:10]  problems that will invariably arise in the coming weeks with your own code,
+[0:01:13]  but is also going to allow you to learn from other sites, like how you
+[0:01:16]  can do things and tinker as well.
+[0:01:18]  But up until now, we focused only on tags and attributes
+[0:01:21]  and on the structure of a web page.
+[0:01:24]  Let's now focus more on the aesthetics and fine tuning that.
+[0:01:27]  It turns out that HTML has very limited support for anything aesthetic,
+[0:01:31]  like font sizes and colors and so forth.
+[0:01:34]  And in recent years, people have used, necessarily,
+[0:01:37]  a second language called CSS, not a programming language, again,
+[0:01:41]  a markup language, if you will, to just fine tune the aesthetics of a page.
+[0:01:45]  Font sizes, colors, margins, and all of that.
+[0:01:48]  So CSS is going to allow us to define a whole bunch of properties, which
+[0:01:52]  is just another group of people's terminology for key value pairs.
+[0:01:56]  Indeed, ever since week five, key value pairs
+[0:01:58]  are everywhere in the world, not just at Sweetgreen and restaurants,
+[0:02:02]  but indeed in line code and languages and technologies like these.
+[0:02:06]  So properties is the new word in CSS for what a moment ago we
+[0:02:10]  called attributes in HTML.
+[0:02:12]  But it's the same idea, just different vocabulary
+[0:02:14]  that you get used to over time.
+[0:02:16]  A few phrases I might use now and you'll hear in the coming days
+[0:02:20]  would be these, type selector, class selector, ID selector,
+[0:02:22]  attribute selector, which just refer to different techniques we're
+[0:02:25]  about to see that are going to allow you to control more precisely
+[0:02:29]  the aesthetics of specific things on the page.
+[0:02:31]  And the way we're going to do this is we're going to take our basic HTML,
+[0:02:35]  like we saw earlier, and we're going to introduce in the next few minutes
+[0:02:38]  just a couple of more tags and or attributes.
+[0:02:40]  One, we're going to introduce you to a tag called
+[0:02:44]  style, which nicely named allows you to control the style, the aesthetics,
+[0:02:49]  the visuals of the web page.
+[0:02:51]  Or we're going to introduce you to a link tag, which very confusingly
+[0:02:55]  does not give you a link that you can click on.
+[0:02:58]  It just links to another file that then gets automatically
+[0:03:01]  included or imported to borrow our language from C or in Python.
+[0:03:05]  But same idea.
+[0:03:06]  This will allow us to include secondary files.
+[0:03:08]  And we're going to ultimately show you how you can leverage third party
+[0:03:12]  frameworks, libraries that other people wrote,
+[0:03:14]  so as to not get stuck in the weeds of all the fine tuning of aesthetics
+[0:03:17]  and just make pretty things fast.
+[0:03:19]  You can focus really on the intellectually interesting part,
+[0:03:21]  if that's your choice, of building the content of the site out,
+[0:03:24]  the application out yourself.
+[0:03:26]  All right, so with that said, let me go back to VS Code here.
+[0:03:29]  And let me go ahead and create a simple example called home.html,
+[0:03:33]  like a very simple home page for John Harvard, for instance.
+[0:03:36]  Let me give myself three paragraphs initially,
+[0:03:39]  the first of which is just going to have the person's name.
+[0:03:42]  The second paragraph is going to say something like, welcome to my home
+[0:03:45]  page to greet visitors.
+[0:03:48]  And the third is going to be like a little footer, like copyright,
+[0:03:52]  how about John Harvard 1636, or something like that.
+[0:03:57]  All right, let me go back to my other tab as before, reload my index.
+[0:04:00]  There's my new file, home.html.
+[0:04:03]  And I'll click that.
+[0:04:04]  And you'll see, OK, I mean, this is sort of 1636 style web page,
+[0:04:07]  super simple, all text, nothing really interesting going on there.
+[0:04:12]  But we can start to style it a little differently.
+[0:04:14]  Like if the title of the page is John Harvard,
+[0:04:16]  and then it's welcome to my home page, and then this less important footer,
+[0:04:20]  why don't we have the text be large, then medium, then small?
+[0:04:22]  So something arbitrary, but a little more nuanced.
+[0:04:25]  So let me go back to VS Code here.
+[0:04:28]  And in my home.html file, let me introduce not yet the style tag,
+[0:04:33]  but what I'm going to call temporarily the style attribute.
+[0:04:36]  Both indeed exist.
+[0:04:37]  This one's simpler, and it's going to be correct,
+[0:04:39]  but we'll see in a moment not as well designed, arguably,
+[0:04:42]  as is often our narrative.
+[0:04:44]  So inside of the style tag, you can put this language called CSS,
+[0:04:48]  key value pairs, otherwise known as properties.
+[0:04:51]  The only way you know what properties exist, what keys exist,
+[0:04:54]  is by taking a class, reading a book, looking at an online reference,
+[0:04:57]  and we're going to give you just a sampling of what's out there.
+[0:04:59]  So suppose I want to control the font size of this first paragraph.
+[0:05:03]  I can literally say font dash size, in all lower case, colon,
+[0:05:07]  and then a word like large.
+[0:05:09]  Or I can specify 12 point, or 18 point, or something more precise like that,
+[0:05:13]  like from Google Docs or Microsoft Word.
+[0:05:16]  And suppose I want to make this text down here medium.
+[0:05:20]  Well, I'll do, quote unquote, font size, colon, medium.
+[0:05:25]  And down here, I'll do style equals font dash size small.
+[0:05:31]  So I'm going to start with just these three key value pairs.
+[0:05:34]  Same key, but different values.
+[0:05:36]  I'll go back to my page, and in a moment I'll reload.
+[0:05:38]  And it's going to be somewhat subtle, but watch how the font size do
+[0:05:41]  change when I reload now.
+[0:05:44]  All right, so I've got a little bigger.
+[0:05:45]  The middle one's about the same, and the last one is a little smaller.
+[0:05:48]  What if I want to center it, just like many web pages
+[0:05:51]  have the text like this centered?
+[0:05:52]  Well, I can separate these key value pairs with semicolons.
+[0:05:55]  And I'm sorry, semicolons are kind of sort of back with CSS,
+[0:05:58]  but I can do text dash align colon center.
+[0:06:02]  Strictly speaking, I don't need the last semicolon
+[0:06:04]  if there's no more key value pairs, but I'll just do it to be consistent.
+[0:06:08]  Text align colon center, and then down here, after another semicolon,
+[0:06:13]  text align colon center.
+[0:06:16]  All right, let's go back, reload.
+[0:06:18]  Now it's going to be much more obvious, the change.
+[0:06:20]  And we now have the beginnings of a home page.
+[0:06:23]  Still pretty basic, but at least it's a little more interesting.
+[0:06:25]  Turns out we can do a little better with the copyright symbol.
+[0:06:28]  Like most computers actually have support for a circle with a C in it.
+[0:06:32]  But you can't just do that with text like this.
+[0:06:36]  There's different ways to do this.
+[0:06:37]  You could copy paste it from a website that already has it,
+[0:06:39]  so you don't have to figure out the magical keystroke on your Mac or PC.
+[0:06:43]  But there's also in HTML what are called entities.
+[0:06:45]  And you can actually specify, using hexadecimal or decimal codes,
+[0:06:50]  numbers like this, hash 169 semicolon after an ampersand.
+[0:06:55]  And this is a special symbol that you can look up
+[0:06:57]  in any online reference for special characters
+[0:07:00]  that are hard or impossible to type manually at your keyboard.
+[0:07:03]  And this, let me zoom in just so it's obvious.
+[0:07:06]  If I reload now, instead of being two parentheses and a C character,
+[0:07:11]  now it's a proper copyright symbol.
+[0:07:14]  So you'll see these out there.
+[0:07:15]  They're not necessarily that frequently used nowadays,
+[0:07:18]  but it's good to know that they exist.
+[0:07:20]  But let me go back now to my code and propose that, while correct,
+[0:07:24]  this is arguably not very well designed.
+[0:07:27]  And even if you've never seen HTML, never seen CSS before,
+[0:07:30]  what instinct might you have for why this is poorly designed?
+[0:07:37]  Yeah, there's repetition, right?
+[0:07:40]  In general, in the past several weeks, C, Python, SQL,
+[0:07:43]  repetition, generally bad and sloppy, and it's not going to scale well.
+[0:07:47]  So the repetition I think you're probably alluding to
+[0:07:49]  is text-aligned center, text-aligned center, text-aligned center.
+[0:07:53]  Well, we can factor that out in CSS.
+[0:07:55]  The C in CSS means cascading.
+[0:07:58]  And this means that if you move some properties
+[0:08:01]  to a parent or a grandparent, the children or grandchildren
+[0:08:05]  will inherit those properties.
+[0:08:07]  That is, they will cascade down the family tree, so to speak.
+[0:08:11]  And so let me go ahead and remove all of these,
+[0:08:13]  since I claim they're indeed redundant.
+[0:08:16]  And let me preserve just one of them by, well, let me do this.
+[0:08:20]  It's not quite right to put a paragraph inside of a paragraph.
+[0:08:23]  That's just not a thing in English writing or in writing more generally.
+[0:08:27]  So I'm going to do one thing first.
+[0:08:29]  It turns out that these two are arguably not paragraphs, right?
+[0:08:32]  This is like a header, the essence of the page, and then the footer.
+[0:08:36]  So if a paragraph isn't quite the right English semantics,
+[0:08:40]  you can actually use more generically a tag that's all over the internet
+[0:08:43]  called div for division of the page.
+[0:08:46]  And this is just a very generic term for a big rectangular region that
+[0:08:50]  divides the page again and again, just so that you
+[0:08:52]  can think about different regions.
+[0:08:54]  Now that I have div, which really has no more meaning than that,
+[0:08:58]  it's a division of the page, interpret as you will,
+[0:09:00]  now I can have multiple ones of these.
+[0:09:02]  And let me go ahead and open a div tag here.
+[0:09:05]  Let me close a new div tag here.
+[0:09:07]  And then just to keep everything tidy, I'm
+[0:09:09]  going to highlight everything in between and hit Tab,
+[0:09:12]  and that just automatically indents everything for me.
+[0:09:14]  Now I have three divs inside of another div, and that's totally fine.
+[0:09:19]  This is very commonly done.
+[0:09:21]  Now I'm going to do this.
+[0:09:22]  Style equals quote unquote text align colon center, semi colon, or not.
+[0:09:28]  And now I have some cascading capabilities.
+[0:09:31]  Now the parent of those three children, John Harvard,
+[0:09:34]  welcome to my home page, and the copyright
+[0:09:36]  will now all inherit that property.
+[0:09:38]  So when I hit reload, nothing aesthetically has changed.
+[0:09:41]  Whoops, sorry.
+[0:09:44]  I should have done reload slightly earlier.
+[0:09:46]  When you use a div instead of a paragraph,
+[0:09:48]  it actually gets rid of the space between those paragraphs.
+[0:09:51]  It just sandwiches them a little closer together.
+[0:09:53]  I can fix this in another way.
+[0:09:55]  But that aside, everything is still centered,
+[0:09:57]  and the text is still large, medium, and small.
+[0:10:00]  But I should have called out that change in the paragraph spacing.
+[0:10:03]  But we could bring that back before long if we wanted.
+[0:10:06]  Now what more could I do to maybe improve this?
+[0:10:09]  Well, strictly speaking, I don't really need that parent div, right?
+[0:10:13]  Because these three divs inside already had a parent.
+[0:10:16]  So let me actually get rid of that new div just to undo what I did.
+[0:10:20]  I'll highlight this, and if you haven't seen this trick, shift-tab
+[0:10:23]  will unindent nicely, which is perhaps helpful.
+[0:10:26]  I could just put that text align center on the body tag.
+[0:10:29]  So text align colon center, quote unquote, this, too, would work as well.
+[0:10:36]  So long as you go up the family tree, so to speak, reload.
+[0:10:39]  And now, indeed, there's nothing aesthetically that has changed this time.
+[0:10:43]  But it turns out nowadays the web is getting a little more sophisticated.
+[0:10:46]  And even though you will see so many examples online in tutorials and books
+[0:10:50]  using div, div, div, div all over the place, there are newer semantic tags.
+[0:10:54]  Semantic just means they have more meaning
+[0:10:56]  than this generic notion of a division.
+[0:10:58]  And if you look up a documentation for HTML,
+[0:11:01]  you'll see that if you want to have a header on a page, not a heading,
+[0:11:05]  like h1, h2, but a header, there's literally nowadays a header tag.
+[0:11:09]  And this is marginally better because it now says what it is.
+[0:11:12]  Search engines like Google and Bing can detect,
+[0:11:15]  oh, that's the header of the page.
+[0:11:16]  Maybe we should use this and give it more prominence in the search results.
+[0:11:19]  You can then have a main part of the page, so literally a tag called main
+[0:11:23]  nowadays.
+[0:11:24]  You can literally have a footer of the page.
+[0:11:26]  And again, these are often useful for screen readers
+[0:11:29]  to help recite things verbally for folks who might otherwise
+[0:11:31]  not be able to read them.
+[0:11:32]  And probably these screen readers might highlight
+[0:11:35]  the header and the main part, but maybe might not
+[0:11:38]  spend time for the user on the footer, which is arguably
+[0:11:40]  a little less important semantically usually.
+[0:11:43]  Or search engines, again, now know what's the header, what's the footer,
+[0:11:46]  what's the main part of the page, so they know what to search and analyze.
+[0:11:50]  So this would arguably be a better design nowadays as well.
+[0:11:55]  But what else remains as a problem?
+[0:11:58]  Well, this is now getting a little bit more subtle and takes some experience.
+[0:12:02]  But this practice of putting HTML and CSS all in the same file,
+[0:12:07]  it's a little sloppy.
+[0:12:08]  Why?
+[0:12:08]  Because it means I'm co-mingling my data with the presentation thereof,
+[0:12:12]  like the juicy stuff I care about, like John Harvard and the phrase,
+[0:12:15]  welcome to my home page, and all of the aesthetics
+[0:12:18]  that I might want to change over time.
+[0:12:20]  And honestly, because everything is currently in one big file,
+[0:12:23]  it's going to make it really hard for me to collaborate
+[0:12:25]  with a classmate or a colleague at work so that maybe I do the HTML,
+[0:12:29]  they do the CSS.
+[0:12:30]  Like, uh-uh, not if you're all working in the same file.
+[0:12:32]  It would be a nightmare.
+[0:12:33]  Even if you use the VS Code sharing feature like Google Docs,
+[0:12:36]  and both are typing at the same time, you're going to mess up somehow.
+[0:12:39]  It'd be nice if we could separate these two languages.
+[0:12:42]  Well, one way to do that would be as follows.
+[0:12:45]  Let me get rid of all of the style tags, sorry, style attributes
+[0:12:49]  that I've added up until now on all four now of these tags.
+[0:12:54]  And let me introduce the style tag that we saw on the slide earlier instead.
+[0:13:00]  I'm going to go up here into the head of the page, which
+[0:13:02]  is where technically these style tags must go so that they're already
+[0:13:06]  loaded into memory before the body is even analyzed by the browser.
+[0:13:10]  And inside of the style tag, I'm actually
+[0:13:12]  going to select the HTML elements that I want to stylize, if you will.
+[0:13:18]  So if I want to change the body's aesthetics,
+[0:13:20]  I'm going to literally type the name of that tag, body,
+[0:13:23]  and then, I'm sorry, curly braces are back also from C.
+[0:13:27]  Inside of these curly braces, I'm going to put text align center.
+[0:13:32]  So the key value pairs are the same.
+[0:13:33]  The only new thing I've done is I've moved some of the syntax
+[0:13:36]  up to this new style tag in the head.
+[0:13:39]  If I want to now control the header tag as well,
+[0:13:42]  I can use the same curly braces.
+[0:13:44]  This is convention to put the open curly brace on the same line,
+[0:13:47]  the closed curly brace on another.
+[0:13:49]  The browser doesn't really care, but this is a common CSS style convention.
+[0:13:52]  I'm going to do font size large, semicolon.
+[0:13:56]  Then for the main tag, I'm going to do font size medium.
+[0:14:00]  And then for the footer tag, I'm going to do font size small.
+[0:14:04]  So same exact thing.
+[0:14:05]  And it's admittedly a little bit more verbose.
+[0:14:08]  It's taking up more lines of code.
+[0:14:09]  It doesn't all quite fit on the screen.
+[0:14:11]  But if you scroll back down now and you'll acquire an eye for this,
+[0:14:15]  this is just better.
+[0:14:16]  It's just more compact.
+[0:14:18]  It's more readable.
+[0:14:18]  The content, the data jumps out.
+[0:14:21]  And there's no visual distractions like the CSS properties as before.
+[0:14:26]  Upside here, too, is that we don't actually need to.
+[0:14:29]  This doesn't actually change the aesthetics.
+[0:14:31]  If I reload the same page, it still looks the same.
+[0:14:33]  But I've taken a step toward some slightly better design.
+[0:14:37]  But let me propose that there's other ways to do this, too.
+[0:14:40]  We just selected things by way of their type.
+[0:14:44]  So that was a so-called type selector when I literally just specify
+[0:14:47]  a type of tag, body, header, main, footer.
+[0:14:51]  But there's other ways that now we can lay the foundation
+[0:14:54]  for making reusable CSS that you and colleagues and classmates
+[0:14:57]  can use and reuse in multiple files and even in multiple projects.
+[0:15:02]  So let me actually go ahead and do this.
+[0:15:04]  Instead of just very explicitly saying, I want the body to be centered,
+[0:15:07]  let me invent an adjective, if you will.
+[0:15:10]  And let me change this to .centered.
+[0:15:13]  And this new vocabulary word, centered, will
+[0:15:16]  literally mean text-aligned center.
+[0:15:19]  Let me go ahead here.
+[0:15:21]  And I'm just going to create a new adjective called large,
+[0:15:24]  a new adjective called medium, and a new adjective called small.
+[0:15:29]  They are deliberately consistent with what the properties do.
+[0:15:32]  But these are now my own vocabulary words.
+[0:15:35]  And they are called classes.
+[0:15:37]  So a class is just a collection of key value pairs,
+[0:15:41]  a collection of properties that you get to invent for yourself.
+[0:15:44]  And what it lets you do now is this.
+[0:15:47]  Now, if I want the whole body to be centered,
+[0:15:50]  I can add this tag, which we actually saw briefly in Yale's HTML,
+[0:15:54]  class equals center.
+[0:15:56]  Down here in the header, if I want this to be large,
+[0:15:58]  I can say class equals quote unquote large.
+[0:16:01]  Down here on main, I can say class equals quote unquote medium.
+[0:16:05]  And down here, I can have class equals quote unquote small.
+[0:16:09]  Now, I have taken one step backward by re-adding some of the aesthetics
+[0:16:13]  to the page, but it's not the actual properties.
+[0:16:16]  It's not the key value pairs.
+[0:16:17]  It's now more semantically nice, because now I just
+[0:16:19]  know from reading the HTML what these things are going to look like,
+[0:16:23]  whereas the implementation details for all four of those adjectives
+[0:16:27]  is now relegated up above.
+[0:16:28]  And these are literally my words.
+[0:16:30]  I could change it to dot foo and use class equals quote unquote foo.
+[0:16:33]  But obviously, that would not be the best choice of words in this case.
+[0:16:37]  All right.
+[0:16:38]  Any questions on this?
+[0:16:41]  This now is what we would call a class selector
+[0:16:45]  by using literally the dot, even though the dot does not appear elsewhere.
+[0:16:48]  But dot means this is a class.
+[0:16:52]  These are not always the best syntactic design decisions that the world makes.
+[0:16:56]  All right, well, one last trick then.
+[0:16:58]  Notice that this is a little annoying that I'm still working in the same file.
+[0:17:01]  And if my classmate wants to clean up my aesthetics,
+[0:17:03]  make my home page look way better, if my colleague wants to do the same,
+[0:17:06]  wouldn't it be nice if we could actually move all of this code
+[0:17:09]  to a different file like a Python library or a C header file?
+[0:17:13]  Well, you can.
+[0:17:14]  Let me go ahead and delete that whole style tag.
+[0:17:18]  Let me add a confusingly named link tag, the href of which,
+[0:17:23]  let's call a new file styles.css.
+[0:17:27]  And let's say that the relationship of that file is that of stylesheet.
+[0:17:31]  So this is a term of art in the world of web development.
+[0:17:34]  A stylesheet is a text file that contains lots of styles, lots of CSS
+[0:17:37]  properties.
+[0:17:38]  Let me open my terminal real fast and let me do code of styles.css, Enter.
+[0:17:47]  And in this file, I'm going to paste all of those same lines as earlier.
+[0:17:51]  But now they're in a separate file.
+[0:17:53]  And indeed, if I hide my terminal window and I give this file to a colleague,
+[0:17:56]  they can now work on the aesthetics of the page
+[0:17:58]  and make things a lot prettier than this, maybe use specific font sizes,
+[0:18:01]  maybe add colors and the like, whereas I can focus entirely on the HTML
+[0:18:05]  because this file now will reference that other.
+[0:18:08]  And if I go back to my other tab and reload,
+[0:18:10]  the content is going to be exactly the same.
+[0:18:13]  But now I'm using some separate file instead.
+[0:18:18]  Any questions now about these techniques here?
+[0:18:23]  No?
+[0:18:24]  All right, so with that said, let me show just one example now
+[0:18:28]  of what I called a moment ago frameworks.
+[0:18:30]  And this is where web development gets kind of fun,
+[0:18:32]  at least if you like this, especially if you
+[0:18:34]  like the sort of logical design, the presentation of information
+[0:18:36]  you care about.
+[0:18:37]  But you really don't want to struggle with font sizes and colors
+[0:18:40]  and getting everything pixel perfect, so to speak.
+[0:18:42]  Let me propose that I open up here an example in just a moment in VS Code
+[0:18:46]  that I prepared in advance.
+[0:18:49]  And this one is going to be an opportunity
+[0:18:53]  to consider how you might take some of the data from last week,
+[0:18:57]  wherein we collected everyone's favorites,
+[0:19:00]  and lay it out in a really big HTML table.
+[0:19:02]  So I wrote this out in advance because it was a huge amount of data.
+[0:19:05]  But it's the same data from the Google form from last week.
+[0:19:07]  And you'll see already the hints of a table tag and these TRs.
+[0:19:11]  And I added a few other tags for aesthetics.
+[0:19:13]  It turns out when you have a more visually interesting header
+[0:19:16]  for your table, there's another tag called thead.
+[0:19:19]  There's another tag called tbody.
+[0:19:21]  These are not all that intellectually interesting.
+[0:19:23]  I just read the documentation and realized, oh, to make things prettier,
+[0:19:26]  I need a thead, a tbody, and so forth.
+[0:19:28]  But what's interesting here is that if I go to my index here
+[0:19:32]  and open this file called favorites.html, here
+[0:19:35]  is all of the data from last week's Google spreadsheet, which we exported
+[0:19:39]  as CSV and I manually before class converted to just HTML.
+[0:19:44]  It's indeed a table, but it's really not pretty.
+[0:19:46]  The columns are really close together.
+[0:19:48]  It's kind of hard to distinguish one row from another.
+[0:19:51]  But this is just raw HTML written by me.
+[0:19:53]  Now, I could use CSS and some of the tricks
+[0:19:56]  we just saw to maybe change font size.
+[0:19:58]  There's ways to change color, background color,
+[0:20:00]  and a lot of things like that.
+[0:20:02]  But honestly, surely other people in the world
+[0:20:05]  have presented tabular data in pretty ways, right?
+[0:20:07]  I've been to many websites that have prettier tables than mine.
+[0:20:10]  Can I maybe use someone else's framework, someone else's CSS,
+[0:20:15]  include it in my page, but then stand on their shoulders
+[0:20:18]  and just make my stuff look prettier?
+[0:20:20]  Well, I dare say I can.
+[0:20:22]  Let me go ahead here and semi-secretly open up VS Code again
+[0:20:26]  and let me grab a slightly different version of favorites.html
+[0:20:30]  that I also opened in advance wherein I add this line of code instead.
+[0:20:37]  Give me just a moment to foreground this version.
+[0:20:39]  And the data is all the same as before, but I've added one of these link tags.
+[0:20:43]  And I'm not linking to my own styles.css.
+[0:20:46]  I'm using a popular library called Bootstrap.
+[0:20:50]  And Bootstrap is just one of many popular libraries out there free
+[0:20:53]  at that that has a whole bunch of CSS files and soon JavaScript files
+[0:20:57]  that you can just use for free in your own projects,
+[0:21:00]  personally or professionally, that just make things look and behave better
+[0:21:04]  without you having to reinvent wheels.
+[0:21:07]  Now, to access their CSS, I had to read their documentation
+[0:21:10]  and grab this very long URL here.
+[0:21:12]  But it's the same idea.
+[0:21:13]  Link a for tref equals quote unquote something.
+[0:21:16]  And I read their documentation, and they told me to add this.
+[0:21:19]  They told me that if I want my tables to be prettier,
+[0:21:22]  I have to add a class attribute to my own table tag
+[0:21:26]  and specify, a little weirdly, but this is what Bootstrap told me to do,
+[0:21:29]  a class called table.
+[0:21:31]  And that will make it a prettier Bootstrap table.
+[0:21:33]  And if I want to stripe it like every other row is gray instead of white
+[0:21:37]  just to make it pop a little more visually,
+[0:21:39]  I can also add a second class separated by a space called table striped.
+[0:21:44]  That's all I did.
+[0:21:45]  I added line five, and I changed line nine, and that is it.
+[0:21:49]  The rest of the hundreds of lines in favorites.html are the same.
+[0:21:53]  But if I go back here now and reload the browser, now, thanks to Bootstrap,
+[0:21:57]  voila, it gets much prettier.
+[0:22:00]  Now I can zoom out, and that changes the font size just locally for me.
+[0:22:03]  And even if you don't love their aesthetics,
+[0:22:05]  I mean, this is easily better than my own there.
+[0:22:09]  And it turns out we can do even better by adding interactivity to this too.
+[0:22:12]  But to do that, we're going to need one final language for today.
+[0:22:16]  And this one is an actual programming language.
+[0:22:19]  And we won't use it all that much in CS50,
+[0:22:20]  but we introduce it here as we begin web stuff
+[0:22:23]  because there's just so many free libraries and professional libraries
+[0:22:26]  that you can use just to make your web applications fancier
+[0:22:29]  and more interactive.
+[0:22:31]  Mobile applications as well increasingly use HTML, CSS, and JavaScript
+[0:22:36]  to power our iPhones and Android devices as well.
+[0:22:39]  So a quick tour of some syntax, and then we'll
+[0:22:41]  conclude with just some hopefully inspiring examples
+[0:22:44]  to give you a taste of what JavaScript can do.
+[0:22:46]  So JavaScript supports conditionals, just like C and Python before it.
+[0:22:50]  If we rewind to our scratch days here, of course, as a conditional,
+[0:22:54]  here is the corresponding JavaScript code as of today.
+[0:22:57]  It's pretty much identical to C with the syntax here.
+[0:23:00]  If we had an if else in scratch, it looked like this.
+[0:23:04]  In JavaScript, it's going to look like this instead.
+[0:23:06]  So it's a bit of a regression vis-a-vis Python,
+[0:23:09]  like the parentheses are back, the curly braces are back,
+[0:23:12]  the semicolons I mentioned in CSS are also back in JavaScript potentially.
+[0:23:15]  But it's familiar, is the point here.
+[0:23:17]  And it's a different language that's frequently used for the web,
+[0:23:21]  whereas you can't use Python in the ways we're about to use JavaScript.
+[0:23:24]  It just wasn't designed for that purpose.
+[0:23:27]  Meanwhile, if you have an if else in scratch, well, in JavaScript,
+[0:23:32]  just like in C, it's going to look like this instead.
+[0:23:35]  Variables in JavaScript, of course, are a thing too.
+[0:23:37]  And in scratch, we might have initialized a counter variable to 0.
+[0:23:40]  In JavaScript, a few different ways to do this.
+[0:23:43]  And just for now, the key word is let.
+[0:23:45]  It's sort of a polite way of asking for a variable.
+[0:23:48]  Let counter equal 0 semicolon.
+[0:23:51]  So you don't mention the type, but you do use a keyword here
+[0:23:54]  in this case called let.
+[0:23:55]  If you want to increment counter by 1, a few different ways.
+[0:23:58]  In JavaScript, you can do this, just like in C. In JavaScript,
+[0:24:01]  you can do this, just like in C and in Python.
+[0:24:03]  In JavaScript, you can also get this.
+[0:24:05]  So plus plus is back.
+[0:24:06]  So maybe that counter balances the other syntax as well.
+[0:24:09]  That was not the case in Python.
+[0:24:11]  Loops are back, of course, in JavaScript, whereas in scratch,
+[0:24:15]  you could repeat three times like this.
+[0:24:16]  In JavaScript, it's pretty much just like C. The only difference
+[0:24:19]  here is that you say let instead of int for an example like this.
+[0:24:23]  Meanwhile, if you want to do something forever
+[0:24:25]  in scratch in JavaScript, just like in C, you say while true in this case.
+[0:24:30]  So this is to say we're sort of comfortable spending relatively
+[0:24:33]  little time on JavaScript, at least for today's purposes,
+[0:24:36]  because syntactically, it's really the same as we've seen before,
+[0:24:40]  with maybe a slight variance here or there.
+[0:24:42]  But what's interesting today, arguably, is just
+[0:24:44]  what kinds of things you can do with it.
+[0:24:47]  So with that said, what kinds of things can we do?
+[0:24:51]  It all comes back to this picture.
+[0:24:53]  If this is a simple web page on the left,
+[0:24:56]  and this is the corresponding tree, or DOM, document object model
+[0:25:00]  on the right, that is the tree the browser automatically creates in memory
+[0:25:03]  or RAM for you, JavaScript is now a proper programming language that
+[0:25:07]  lets us dynamically manipulate, like read data from this, change this.
+[0:25:13]  And this is how Google, for instance, implements your inbox.
+[0:25:15]  They might have in your inbox, it's like a table.
+[0:25:18]  So tr, tr, tr, tr probably, something like that, or heck, maybe div, div,
+[0:25:22]  div, div.
+[0:25:23]  Using JavaScript, any time they realize someone sent you new mail,
+[0:25:26]  they can create a new node, a new rectangle in memory,
+[0:25:30]  and you, the human, see a new div or a new tr again and again and again.
+[0:25:35]  So with JavaScript, you just have the ability
+[0:25:37]  to control the user's experience instead of, like I've been doing,
+[0:25:41]  constantly hitting reload in the page to see some new content.
+[0:25:44]  To see some new content, JavaScript can be running 24-7
+[0:25:48]  so that you can actually see all of these changes live.
+[0:25:51]  All right, so let's go about writing some JavaScript code now.
+[0:25:54]  Instead of writing it on the server and executing it on the server,
+[0:25:57]  we're going to actually use a very common paradigm,
+[0:26:00]  whereas JavaScript is actually executed in the browser client side.
+[0:26:04]  That is to say, we can actually start writing some JavaScript code inside
+[0:26:07]  of our own .html file so that when a user visits that web page with their browser,
+[0:26:12]  not only is the HTML and any CSS downloaded to the user's browser,
+[0:26:16]  so is that JavaScript code so that it's executed, indeed, client side
+[0:26:20]  on the browser rather than server side, as has been the case with Python
+[0:26:25]  in previous weeks.
+[0:26:26]  Well, where do we go about writing some JavaScript code?
+[0:26:29]  Let's go ahead and revisit hello.html, which previously
+[0:26:32]  was a completely static example that literally just said, hello, title.
+[0:26:36]  Hello, body.
+[0:26:37]  Indeed, if I open this up using HTTP server and view it now in a separate tab,
+[0:26:41]  all it said was exactly that, hello, title in the tab
+[0:26:44]  and hello, body in the main part of the viewport, so to speak.
+[0:26:47]  Well, let's make this example a little more dynamic
+[0:26:50]  so it doesn't just say hello, body, but maybe says hello to an actual person.
+[0:26:54]  So let's go ahead and do this.
+[0:26:56]  Let's go ahead and remove the hard-coded hello, body.
+[0:26:59]  And let's actually go ahead here and use a form tag.
+[0:27:03]  But we're not going to use this form in the usual way, whereby the data gets
+[0:27:06]  sent all the way back to the server.
+[0:27:08]  We're going to leverage control over this form client side instead.
+[0:27:12]  So I'm going to go ahead and create this open form tag, close form tag.
+[0:27:16]  Inside of that, let me give myself a text input that's
+[0:27:18]  going to have autocomplete equals quote unquote off just
+[0:27:22]  to ensure that what I previously typed in my examples
+[0:27:24]  doesn't reappear accidentally.
+[0:27:26]  We're going to autofocus it so that the cursor is
+[0:27:29]  blinking right there in that text box.
+[0:27:31]  And this time, I'm going to go ahead and give it
+[0:27:33]  how about a placeholder of quote unquote name
+[0:27:38]  to make clear that I'm prompting the user for their name.
+[0:27:41]  And then the type of this text box will be the default or more explicitly here
+[0:27:44]  text.
+[0:27:45]  And then I'm going to have, as we've seen before,
+[0:27:47]  a button, the type of which is submit, also our typical default.
+[0:27:51]  And then inside of this button is going to be the label.
+[0:27:54]  How about something like how about we'll call this greet.
+[0:27:58]  So that's what the button will actually say.
+[0:28:00]  Well, let me actually go back into my browser tab.
+[0:28:03]  Let me reload this page.
+[0:28:04]  And we should now see a relatively simple form whereby
+[0:28:07]  I have the cursor blinking on a text input prompting the user for their name
+[0:28:11]  and then a greet button that I can click.
+[0:28:13]  But if I click this button now, it's not going to do anything useful
+[0:28:16]  because I haven't written any code to tell the browser what
+[0:28:19]  to do when I click that button.
+[0:28:21]  But it turns out there's all sorts of events in the world of JavaScript
+[0:28:24]  that you can listen for, so to speak.
+[0:28:26]  In fact, here's just a list of some of them
+[0:28:28]  any time something changes in a form field,
+[0:28:31]  any time the user clicks or drags on something,
+[0:28:33]  any time the user presses a key and maybe lifts their finger up,
+[0:28:37]  any time the mouse goes down or over or up on top of something,
+[0:28:41]  or any time a form is submitted, those are events in the same way
+[0:28:45]  that we talked about events back in week 0 in Scratch and in JavaScript,
+[0:28:49]  just like in Scratch, where you can do something when green flag clicked.
+[0:28:53]  In JavaScript, you can write code that actually listens
+[0:28:55]  for any of these events or more.
+[0:28:58]  So with that said, let's go back to VS Code here
+[0:29:00]  and let's make a couple of changes instead.
+[0:29:03]  Let's go ahead and add to this form a new attribute.
+[0:29:05]  That's not the best way to do it, but it's perhaps
+[0:29:07]  the simplest for version 1 here.
+[0:29:09]  And let's say on submit, do the following.
+[0:29:12]  So on submit is an HTML attribute.
+[0:29:14]  And curiously, its value inside of the quotes
+[0:29:17]  there can actually be some JavaScript code.
+[0:29:20]  And let's go ahead now and let's assume there
+[0:29:22]  exists a function in the world called greet.
+[0:29:25]  And what I want to do is call that function right then and there.
+[0:29:29]  Well, now in JavaScript, how do I go about making that function exist?
+[0:29:32]  It doesn't come out of the box just like print might or say might in Python
+[0:29:36]  or Scratch respectively.
+[0:29:38]  But I can do this.
+[0:29:39]  Let me go up into the head of this page.
+[0:29:41]  Inside of a script tag here, both open and closed,
+[0:29:44]  let me actually write some JavaScript code.
+[0:29:46]  And just so it stands out, I'm going to give myself a couple of blank lines,
+[0:29:49]  though not strictly necessary.
+[0:29:50]  And let me define a new function in JavaScript called greet.
+[0:29:54]  And this is the syntax in JavaScript for creating your own function,
+[0:29:57]  similar in Python.
+[0:29:58]  Instead of saying def in JavaScript, you just say function,
+[0:30:01]  then the name of the function, and any arguments within the parentheses
+[0:30:05]  thereafter.
+[0:30:05]  But I'm not going to pass in any here.
+[0:30:07]  Then inside of curly braces, what I'm going to do
+[0:30:09]  is use a built-in JavaScript function that comes with any browser called alert.
+[0:30:13]  It's not the best or prettiest user interface.
+[0:30:15]  But for now, it's going to get the job done.
+[0:30:18]  What do I want to say to the user?
+[0:30:19]  Well, let's first just say something simple like hello, comma, world,
+[0:30:23]  close quote, semicolon, thereby alerting the user with precisely that message.
+[0:30:29]  Now, what I'm going to do down here is make one other change.
+[0:30:33]  I don't want this form to actually get submitted to the server.
+[0:30:36]  Just like we've seen in the past, when you submit a form,
+[0:30:38]  it often goes to something like google.com slash search.
+[0:30:42]  I actually want my JavaScript code to take control
+[0:30:45]  over the entire user experience of this form
+[0:30:48]  so that I'm just using the form as a user input mechanism,
+[0:30:51]  not to actually send via get or post this data to some other server,
+[0:30:56]  including my own.
+[0:30:57]  So this is going to look a little ugly.
+[0:30:59]  But after calling greet, I'm actually going
+[0:31:01]  to do this, which I've read the documentation about.
+[0:31:03]  And I know that if you actually hard code return false here, that just
+[0:31:07]  tells the browser, please don't actually submit the form.
+[0:31:10]  Only call the greet function.
+[0:31:12]  All right, well, let me go back to my browser here.
+[0:31:15]  Let me reload this, because I need to download the latest
+[0:31:17]  version of the JavaScript code.
+[0:31:19]  And I'm just going to go ahead, without even typing my name,
+[0:31:21]  I'm going to click on the greet button.
+[0:31:23]  And you'll see that, albeit a little cryptically at the top,
+[0:31:26]  we see an alert that says hello, world.
+[0:31:28]  There's my ugly URL of my code space there at the moment.
+[0:31:31]  But we do indeed see that string.
+[0:31:33]  But what I haven't, of course, done is taken any actual name from the user.
+[0:31:37]  So how can we go about doing that?
+[0:31:39]  Well, ideally, I want to alert the user with hello, David, or hello, Carter,
+[0:31:44]  whatever name I type into that box.
+[0:31:46]  So how can I go about doing that?
+[0:31:48]  Well, let me create a variable called name.
+[0:31:50]  And let me set it equal to this function call, document.querySelector,
+[0:31:58]  that comes with JavaScript itself.
+[0:32:00]  Let me then, in parentheses, pass in an argument that is going to be, huh,
+[0:32:04]  the ID, the unique ID.
+[0:32:05]  I need a unique identifier for the thing I want to select.
+[0:32:09]  So let me actually go back to my HTML code here.
+[0:32:11]  And instead of giving this form field a name, like Q for query,
+[0:32:16]  let me actually use another HTML attribute called ID,
+[0:32:19]  where now I can call this anything I want.
+[0:32:21]  And for clarity, I'm just going to call this input element uniquely name.
+[0:32:27]  Now, up here in querySelector, just like in CSS,
+[0:32:31]  where you can use hashes and dots and other symbology in order
+[0:32:34]  to select certain nodes in your DOM, that
+[0:32:37]  is, rectangles in that memory tree.
+[0:32:39]  Well, I can go ahead and select hash name, which, again,
+[0:32:42]  is just the syntax for uniquely selecting the element whose ID is,
+[0:32:46]  in this case, name.
+[0:32:48]  So you have the hash up here.
+[0:32:49]  You don't need the hash as the value of the attribute down here on line 20.
+[0:32:54]  And now, if I want to actually get the value of that text box,
+[0:32:57]  I literally just say dot value.
+[0:32:58]  So document refers to the whole web page itself.
+[0:33:01]  QuerySelector is a function that's built into that object, so to speak.
+[0:33:05]  And the value, accessible via dot value, just like a C struct or even
+[0:33:09]  a Python class, allows me to go inside of that text field
+[0:33:12]  and get whatever the value the user has typed in.
+[0:33:16]  Now, as I've been able to do in languages like Python pretty
+[0:33:21]  fairly readily, I can concatenate this name
+[0:33:23]  onto the string, hello, comma, space, so as to form a complete phrase.
+[0:33:28]  And you'll notice here that I'm actually using single quotes
+[0:33:31]  in my JavaScript, double quotes in my HTML.
+[0:33:33]  This is perhaps a common convention.
+[0:33:36]  In JavaScript, the language does not care if you use double quotes
+[0:33:39]  or single quotes, but I dare say single quotes are just more common.
+[0:33:42]  And so that's what I've done here.
+[0:33:44]  All right, now as always, I'm going to cross my fingers, go back to this page.
+[0:33:47]  I'm going to reload, because I've changed the JavaScript,
+[0:33:49]  and I need my browser to download it.
+[0:33:51]  And now I'm going to type in my name, for instance, d-a-v-i-d,
+[0:33:55]  click greets with fingers crossed, and voila, now I see hello, comma, David.
+[0:34:01]  All right, so it turns out that while functional,
+[0:34:03]  this isn't the best design.
+[0:34:05]  And co-mingling your HTML with your JavaScript code,
+[0:34:09]  as with this on-submit attribute, isn't particularly clean.
+[0:34:12]  It's better, as with CSS, to keep your HTML over here, your CSS over here,
+[0:34:17]  and your JavaScript now over here, so to speak,
+[0:34:20]  and better still, perhaps even in some separate files.
+[0:34:23]  So how can I go about changing this a little bit?
+[0:34:25]  Well, let me go ahead and actually, let's go ahead and delete
+[0:34:28]  all of this code for just a moment, and let
+[0:34:31]  me go and get rid of this on-submit handler down here,
+[0:34:34]  and really just distill my HTML only into the HTML and the attributes
+[0:34:39]  therefor.
+[0:34:40]  And what I'm instead going to do now is do this.
+[0:34:44]  I can use JavaScript to achieve the listening for that submit event,
+[0:34:49]  or that on-submit event.
+[0:34:51]  I don't need to actually use HTML for that.
+[0:34:53]  I can use JavaScript entirely.
+[0:34:56]  So it turns out I can access some other member of this document
+[0:35:00]  by doing document.querySelector again.
+[0:35:03]  But this time, let's select the actual form tag.
+[0:35:06]  And it doesn't have an ID, because it has no ID in its HTML,
+[0:35:10]  but it does have a tag name.
+[0:35:11]  So just like in CSS, when you can target elements by way of their name,
+[0:35:15]  I'm just going to select the one and only form on this page
+[0:35:18]  by using that same querySelector function.
+[0:35:20]  And now I'm going to use another function that just comes with JavaScript
+[0:35:23]  in the context of browsers, whereby once you select an element like that form,
+[0:35:28]  I can call addEventListener, which is similar in spirit
+[0:35:32]  to Scratch's when green flag clicked or any block like that.
+[0:35:36]  You can then tell the browser what event you want to listen for.
+[0:35:39]  I want to listen for the submit event.
+[0:35:41]  So you don't say on-submit here.
+[0:35:42]  Now that we're in pure JavaScript, you just say submit.
+[0:35:45]  And now I can do something like this.
+[0:35:48]  I can go ahead and say, call the following function.
+[0:35:50]  And I'm not even going to bother giving this function a name.
+[0:35:53]  And that is allowed to in JavaScript, as we saw briefly in Python.
+[0:35:57]  And what I'm going to do now inside of curly braces after that keyword
+[0:36:01]  function is the same kind of code as before.
+[0:36:04]  I'm going to do let name equals document.querySelector.
+[0:36:08]  I'm going to select that same name ID as before and get its value.
+[0:36:14]  And then I'm going to do alert and then pass in hello comma a single quote
+[0:36:19]  again after that, concatenate with that the name, and then semicolon.
+[0:36:24]  But I need to do one other thing.
+[0:36:26]  It turns out that this function, and if you
+[0:36:27]  read the documentation for this technique,
+[0:36:30]  actually takes automatically a special argument called by convention event.
+[0:36:34]  And this is just a variable, if you will,
+[0:36:37]  that refers to whatever event just happened.
+[0:36:39]  In this case, it's, of course, going to be submit.
+[0:36:41]  But in other contexts, it might be a click event, a mouse down event,
+[0:36:44]  or something else entirely.
+[0:36:46]  So this allows me now to do this, which is a little cryptic,
+[0:36:48]  but you get used to these conventions.
+[0:36:50]  I can use that event, whatever it is, and then
+[0:36:53]  prevent whatever the default behavior is by calling a special function called
+[0:36:56]  prevent default with a capital D. This is the alternative
+[0:37:00]  to that messier return false semicolon that I had inside of my HTML before.
+[0:37:06]  So all I've done here now is I've left all of my HTML as pure HTML down here,
+[0:37:11]  and I put all of my JavaScript code as pure JavaScript up here.
+[0:37:15]  This sort of separation of concerns similar to what we started doing with CSS
+[0:37:18]  just a bit ago in order to keep those two languages separate, too.
+[0:37:22]  Well, let me go back to my browser here, reload the page.
+[0:37:26]  And unfortunately, there's a subtle mistake I've made here.
+[0:37:28]  Let me go ahead and type in d-a-v-i-d and click greet.
+[0:37:32]  And unfortunately, nothing actually seems to happen.
+[0:37:34]  Well, maybe it's just my name, Carter, greet.
+[0:37:37]  And nothing seems to happen.
+[0:37:39]  That alert does not come up.
+[0:37:40]  Well, why is that?
+[0:37:41]  Well, let me go back to VS Code here and point out
+[0:37:45]  that order of operations in JavaScript matters similar in spirit to C.
+[0:37:49]  Because on line 7, I'm selecting the form
+[0:37:52]  and trying to add an event listener for submitting that form,
+[0:37:55]  unfortunately, the form had better exist at that moment in time.
+[0:37:58]  But it doesn't.
+[0:37:59]  Because just like in C, and in some cases Python,
+[0:38:02]  where the compiler or the interpreter reads the code top to bottom,
+[0:38:06]  notice that the form doesn't actually exist
+[0:38:08]  and therefore get loaded into the computer's memory until line 19.
+[0:38:12]  So we've got to kind of reorder these somehow.
+[0:38:14]  Now, maybe the simplest way to do this would just
+[0:38:17]  be to perhaps do something like this.
+[0:38:20]  Let me scroll back up to my script tag and perhaps a little more explicitly
+[0:38:24]  move it into the order in which I want it to be executed.
+[0:38:28]  So I'm going to go below my form and inside of my body, which
+[0:38:31]  is actually OK for JavaScript here, and just use that same code.
+[0:38:35]  And assuming I didn't make any typos, let's go back to the browser,
+[0:38:38]  click reload again to get the latest, type in my name again
+[0:38:41]  using that purely JavaScript solution.
+[0:38:43]  And the only change I made was I moved the code from up here to down here,
+[0:38:47]  clicking greet now.
+[0:38:48]  And wow, it's now back.
+[0:38:49]  We get the alert with hello, comma, David.
+[0:38:52]  So those kinds of things, those kinds of principles
+[0:38:54]  matter at least when we're back in this world.
+[0:38:56]  But there's other solutions too.
+[0:38:58]  And just so that you've seen it, because it's a common convention in libraries
+[0:39:01]  as well, let me undo that change and put that script tag back in the head
+[0:39:06]  or really anywhere else in the page where it might be.
+[0:39:08]  And let me propose that there's one other way
+[0:39:10]  to solve this problem to postpone that code on line 7 through 11
+[0:39:15]  getting executed until really the whole DOM, the tree, is ready to go.
+[0:39:20]  And the syntax for this might be as follows.
+[0:39:23]  I can do document, and I can add to the document an event listener that's
+[0:39:28]  going to listen for something a little special.
+[0:39:30]  And I always have to look this up myself to remember
+[0:39:31]  the spelling and the capitalization.
+[0:39:33]  But it turns out that the browser itself, once it's done loading all
+[0:39:36]  of your HTML, top to bottom, left to right,
+[0:39:39]  it will raise an event called DOM content loaded,
+[0:39:44]  capitalized exactly as such.
+[0:39:46]  And if you want to call some function, and I don't even
+[0:39:48]  need an event argument in this case, you can open curly braces just as before
+[0:39:53]  and put inside of those curly braces the code
+[0:39:55]  that you want to execute only once the DOM's content has
+[0:39:59]  been loaded top to bottom.
+[0:40:00]  And now let me just finish my thought with a close curly brace,
+[0:40:03]  close parenthesis, and semicolon.
+[0:40:05]  It gets a little annoying to visually line all of this up,
+[0:40:07]  but I think I'm still good.
+[0:40:09]  And now, even though this code is at the top of my file
+[0:40:12]  or really above the form tag itself, I think we're OK.
+[0:40:17]  So let's go back to the browser here, reload the page, type in d-a-v-i-d,
+[0:40:21]  and click greet, and we still get the same correct behavior.
+[0:40:25]  And so this is just a very common paradigm
+[0:40:26]  to use these kinds of events to listen and listen and listen
+[0:40:30]  for something to happen, and then only do something
+[0:40:32]  once that thing has transpired.
+[0:40:35]  All right, well, let's take one more step with JavaScript code
+[0:40:37]  before we take a look at what's really fun about this language
+[0:40:40]  and what you can do with browsers in particular
+[0:40:43]  by just cleaning things up a little bit further.
+[0:40:45]  I'm going to go back into the code here,
+[0:40:47]  and I'm actually going to remove or cut all of this code out
+[0:40:51]  of the hello.html file itself.
+[0:40:54]  And I'm going to change my script tag to have nothing
+[0:40:56]  in between the open and close tag, but I am going to give it a source attribute.
+[0:41:01]  And let's go ahead and call this, for instance, hello.js.
+[0:41:04]  So .js would be the convention for the file extension for a JavaScript file.
+[0:41:08]  And even though this is a little weird that we have the script tag
+[0:41:11]  and a source attribute, then nothing in between the open and close tag,
+[0:41:15]  this is indeed the convention when you want to put all of your code
+[0:41:18]  in a separate file.
+[0:41:19]  And let me go ahead and do that.
+[0:41:20]  Let me go ahead and open my terminal window,
+[0:41:23]  create a new file called hello.js.
+[0:41:26]  And then in that file, I'm just going to paste the very code that I just
+[0:41:29]  cut from the previous file.
+[0:41:31]  So no changes to the code.
+[0:41:32]  All I'm doing is factoring it out.
+[0:41:34]  And now I'm doing something just like our CSS factorization
+[0:41:38]  which confusingly used the link tag.
+[0:41:39]  This uses the script tag.
+[0:41:41]  This just now allows me to collaborate with someone
+[0:41:43]  like Carter or someone else so that they can do the JavaScript code.
+[0:41:46]  I can do the HTML.
+[0:41:47]  Maybe a third person can do the CSS.
+[0:41:49]  And indeed, maybe we can build even grander things
+[0:41:52]  by designing things in this way.
+[0:41:55]  All right, well, let me go back to my browser again, reload the page.
+[0:41:59]  I shouldn't see any visual changes.
+[0:42:01]  But if I type in my name again, David, and click Greet, this still now works.
+[0:42:06]  And what my browser has just done underneath the hood
+[0:42:08]  is not only download the hello.html file as always,
+[0:42:13]  because there's now this script tag that's referencing
+[0:42:16]  the source of another file, just like an image tag might
+[0:42:18]  reference the source of an image, the browser
+[0:42:20]  is automatically helping me out by loading that into its memory as well.
+[0:42:26]  And now, how about one final example?
+[0:42:28]  And for this one, I'm going to go ahead and not write it live,
+[0:42:31]  but open it up as prepared in advance just
+[0:42:33]  to show you what you can do by listening
+[0:42:35]  for some of these other events as well, like the key up, the finger going down,
+[0:42:39]  the finger going up, and listening for exactly that.
+[0:42:41]  So as the user is typing something, you can do something interesting as well.
+[0:42:45]  I'm going to go back into my directory listing here.
+[0:42:47]  And I click on this source8 directory, which has all of the examples
+[0:42:51]  that I wrote here in advance.
+[0:42:52]  And I'm going to scroll down to one called hello5.html.
+[0:42:57]  And in hello5 now, we've gotten rid of the button,
+[0:42:59]  and we just have this text box.
+[0:43:01]  But notice now what happens if I start typing my name as d-a-v-i-d.
+[0:43:08]  I'm not typing enter at all.
+[0:43:09]  And in fact, if I start deleting and I change my mind
+[0:43:12]  and start typing Carter's name, notice now
+[0:43:14]  that the web page, the DOM inside of the computer's memory,
+[0:43:17]  is now automatically updating itself.
+[0:43:20]  So it's not even listening, it would seem, for a submit event anymore,
+[0:43:23]  but maybe for a key up event instead.
+[0:43:26]  So let me go back to VS Code here, open my terminal window,
+[0:43:30]  and in my source8 directory, let me open up hello5.html.
+[0:43:35]  Inside of the script tag, you'll see some code
+[0:43:37]  that's similar in spirit to before, whereby
+[0:43:39]  I'm adding an event listener to the document,
+[0:43:42]  waiting for the whole DOM's content to be loaded.
+[0:43:44]  But then inside of that function, I'm now doing this.
+[0:43:48]  I'm creating a variable called input and selecting from the document
+[0:43:52]  the one and only input tag that we saw just a moment ago.
+[0:43:56]  I'm then adding on line 11 an event listener
+[0:43:59]  for key up, which is exactly that gesture,
+[0:44:01]  so that I can execute some additional code any time
+[0:44:04]  the human lifts their finger from the keyboard after typing a key.
+[0:44:07]  What do I then do?
+[0:44:08]  Well, I'm going to go ahead, it seems, and declare another variable called name,
+[0:44:12]  and I'm just going to select some p tag on the page.
+[0:44:14]  And now, we didn't really see a p tag, so I
+[0:44:16]  think it's time to look at the HTML.
+[0:44:18]  If I scroll down to the bottom of the page where my actual HTML is,
+[0:44:22]  you'll see that there's just a form tag and no on submit handler anymore
+[0:44:26]  as before.
+[0:44:26]  There's just an input tag and no button at all,
+[0:44:30]  but there is on line 29 here an open and close p tag,
+[0:44:33]  just so I have an empty placeholder in which
+[0:44:35]  to put something like hello, David, or hello, Carter.
+[0:44:38]  So that's why now on line 12, I can define a variable called name,
+[0:44:42]  and I can select that p tag so that what do I want to do?
+[0:44:46]  Well, if inside of the input, there's a value.
+[0:44:49]  So this is essentially checking for null or the absence of a string.
+[0:44:53]  So if input.value does not equal nothing,
+[0:44:56]  that is, there is a value in that text box,
+[0:44:59]  well, this syntax here on line 14 is a very clever way
+[0:45:02]  of doing the following.
+[0:45:03]  Go into that name tag, that is to say the empty paragraph,
+[0:45:08]  change the inner HTML of it, the HTML inside of it, to be literally this.
+[0:45:13]  Hello, comma, and then just so you've seen an additional piece of syntax,
+[0:45:18]  this is similar to Python's f strings.
+[0:45:20]  The syntax is a little weird in JavaScript.
+[0:45:22]  You actually use not single quotes, not double quotes, but back ticks,
+[0:45:25]  which on a US English keyboard are typically the top left-hand key
+[0:45:28]  of your keyboard or thereabouts.
+[0:45:30]  And using dollar sign curly braces, just like the curly braces alone in Python,
+[0:45:36]  allows us to plug in whatever the value is of that input.
+[0:45:39]  However, if there's no value there, it looks
+[0:45:41]  like I'm just going to say hello, whoever you are.
+[0:45:44]  And in fact, we can see that behavior now as I delete, delete, delete,
+[0:45:47]  delete, delete, delete, and nothing's there.
+[0:45:50]  Now that if condition is no longer true, and so we see this default value
+[0:45:54]  instead.
+[0:45:55]  So this is only to say that by harnessing these various events that
+[0:45:59]  are constantly happening on most any web page, we can now register code,
+[0:46:03]  just like we did way back in Scratch, to actually listen for those events
+[0:46:06]  and do something with them.
+[0:46:09]  Now, it turns out we can do some interesting things even using
+[0:46:12]  third-party code.
+[0:46:13]  And just as we use Bootstrap a bit ago to make our table prettier,
+[0:46:16]  allow me to propose that we also take a look at this version of favorites
+[0:46:21]  as well.
+[0:46:21]  Let me go back into my source8 directory and open up
+[0:46:24]  favorites2, which I made in advance, which looks almost the same,
+[0:46:27]  though I've zoomed in here a bit.
+[0:46:29]  But you'll notice, somewhat subtly, over the leftmost column in this table,
+[0:46:35]  you'll see now this arrow in gray pointing up and pointing down.
+[0:46:39]  Previously, those were not there.
+[0:46:40]  All I had was a static HTML table with all of this data sorted
+[0:46:44]  in whatever order it was inputted the other day in that form.
+[0:46:47]  But now, notice what I can do.
+[0:46:49]  If I want to sort in one order, I can click this arrow.
+[0:46:53]  Or the other order, I can sort in this arrow,
+[0:46:55]  so essentially doing it chronologically forward or backward.
+[0:46:58]  Now, how is that sorting happening?
+[0:47:00]  It's presumably based on all of the timestamps
+[0:47:03]  that were registered when we submitted that Google Form just a bit ago when
+[0:47:08]  it was live.
+[0:47:09]  But now, using JavaScript, it turns out that we can use some logic somehow
+[0:47:13]  and sort this data by the same.
+[0:47:15]  And you don't get that automatically just by using HTML alone.
+[0:47:18]  Now, how did I achieve that?
+[0:47:19]  Well, it turns out, if I go ahead and close these hello files
+[0:47:22]  and in VS Code, let's open up favorites2.html,
+[0:47:28]  you'll see that all of the HTML is actually
+[0:47:30]  the same if I scroll down and down through this file.
+[0:47:32]  But I added a little something interesting at top.
+[0:47:35]  I copied and pasted the appropriate URLs and HTML tags
+[0:47:39]  from Bootstrap's documentation.
+[0:47:41]  And you'll see here that I have a file called not only bootstrapmin.css,
+[0:47:45]  but also bootstrap.bundle.min.js, as well as a couple of other things
+[0:47:50]  that allows me, ultimately, using third party libraries
+[0:47:54]  to add some special HTML attributes that those libraries told me to add.
+[0:47:59]  And then, as soon as those libraries detect the presence of these attributes
+[0:48:02]  now on my own raw data, they do their thing and JavaScriptify,
+[0:48:06]  not a technical term, the entire table and now make it interactive and not
+[0:48:10]  static.
+[0:48:11]  So you'll see here that the aesthetics of the table
+[0:48:13]  are as before, table and table striped.
+[0:48:16]  But I'm adding now another HTML attribute called
+[0:48:18]  data toggle, whose value is table.
+[0:48:20]  And I know that only from the documentation of these libraries,
+[0:48:23]  indicating that that's how I can now enable this table to be interactive,
+[0:48:27]  as I can, too, by adding data sortable equals,
+[0:48:30]  quote unquote, true on specifically the timestamp column.
+[0:48:34]  And the only thing unfamiliar here, perhaps,
+[0:48:36]  is I'm using th for table heading, as opposed to td, as I do elsewhere.
+[0:48:41]  But that's all that it takes to now focus on the raw data you want to present
+[0:48:45]  and let someone else do the heavy lifting of actually implementing the logic.
+[0:48:49]  Well, let's end with just a look at what more you can do with JavaScript
+[0:48:54]  and just how powerful it is when you combine a language like this
+[0:48:57]  with the data and the user interface you want to convey.
+[0:49:01]  Let's go ahead and open up within source 8 directory
+[0:49:04]  something called background.html.
+[0:49:06]  Now, this interface here is quite simple.
+[0:49:08]  It just has three buttons, R, G, and B. And the background, of course,
+[0:49:12]  noticed by default is just white.
+[0:49:13]  But when I click on the R, the background turns red.
+[0:49:16]  When I click on the G, it turns green.
+[0:49:18]  And the blue, it turns blue.
+[0:49:19]  And again and again.
+[0:49:21]  So how is this working?
+[0:49:22]  Well, if you think back again to the available events,
+[0:49:25]  perhaps I'm just listening for a click on those buttons
+[0:49:28]  and then doing something with maybe the CSS of the page
+[0:49:31]  to allow me to see those different colors.
+[0:49:34]  So in fact, let's go back to VS Code here and let's open up background.html.
+[0:49:39]  And in here, you'll see some simple HTML at the top, just three buttons.
+[0:49:43]  But I've given each a unique ID so that I can reference it in code.
+[0:49:47]  And then inside of a script tag here below,
+[0:49:50]  because I didn't bother with the DOM content loaded event here,
+[0:49:54]  notice that I'm doing the following.
+[0:49:56]  I'm creating a variable called body that lets me select the body tag.
+[0:50:00]  I then have in these three lines some code that handles red.
+[0:50:03]  What am I doing?
+[0:50:04]  Well, I'm selecting from the document whatever HTML tag has unique ID of red.
+[0:50:09]  And then I'm adding an event listener for any click on that button.
+[0:50:12]  Anytime someone clicks on that red button, I call this function anonymously.
+[0:50:17]  It doesn't even have or need a name.
+[0:50:19]  And this syntax here is powerful because now in JavaScript,
+[0:50:22]  I can alter the CSS of my page by doing body, which is the tag that I selected
+[0:50:27]  two lines ago, accessing its style, accessing its background color property,
+[0:50:32]  and setting it equal to quote unquote red.
+[0:50:35]  And I do the same down below for green.
+[0:50:36]  I do the same down below for blue.
+[0:50:38]  And the only thing worth noting here is that in CSS,
+[0:50:41]  it turns out it's the case that the CSS property for the background color
+[0:50:45]  of a page is actually background dash color,
+[0:50:48]  in all lowercase with a hyphen in between.
+[0:50:50]  Unfortunately, in the world of JavaScript,
+[0:50:52]  a hyphen would be mistaken for subtraction,
+[0:50:55]  like background minus color, which would be wrong.
+[0:50:58]  So the convention in JavaScript is when you're trying to manipulate CSS,
+[0:51:01]  you take whatever the property name is, font size, background color,
+[0:51:06]  and you change it into so-called camel case here.
+[0:51:09]  You get rid of the hyphen, and you capitalize the subsequent words,
+[0:51:12]  like color in this case here.
+[0:51:14]  All right, how about another?
+[0:51:15]  Well, it turns out back in the day, back in my day,
+[0:51:18]  there was a HTML tag that would actually allow you to do this,
+[0:51:22]  create blinking text on a screen.
+[0:51:24]  It's rather unpleasant at this rate, certainly.
+[0:51:26]  But how might this work?
+[0:51:27]  Well, it turns out in JavaScript, if we take a look at the blink.html file
+[0:51:32]  here, we'll see that you can, in your HTML,
+[0:51:36]  do something literally as simple as hello, world, and the body.
+[0:51:40]  But then you can call this function here.
+[0:51:42]  Turns out, just like document, there's another global special variable
+[0:51:45]  you can use in JavaScript and browsers called window, which refers to all
+[0:51:49]  things related to the window itself.
+[0:51:51]  The window comes with a setInterval function,
+[0:51:53]  which lets you do exactly that.
+[0:51:54]  Set an interval in milliseconds, and after every expiration
+[0:51:58]  of that interval, some function will be called for you.
+[0:52:01]  So in this case, it's saying every 50 milliseconds.
+[0:52:04]  But let's actually slow that down now to 500 milliseconds, or one half
+[0:52:07]  a second, call a function called blink.
+[0:52:10]  Notice, I do not have parentheses after the blink name,
+[0:52:13]  because I don't want to call blink now.
+[0:52:15]  I want to tell JavaScript to call the function called
+[0:52:18]  blink every 500 milliseconds.
+[0:52:19]  Now, we'll see in a moment what that code looks like.
+[0:52:21]  But let's go back to the page and reload.
+[0:52:23]  And you'll see now that it's a more pleasant blinking,
+[0:52:26]  if that's even the case, every half second,
+[0:52:28]  because I'm now firing that event.
+[0:52:30]  That is, I'm calling that function now every 500 milliseconds instead.
+[0:52:36]  How am I doing that?
+[0:52:36]  Well, in the same script tag, I've invented my own blink function.
+[0:52:40]  This has the distinction, back in the day, of actually being an HTML tag,
+[0:52:44]  and among the few tags that the world removed and got rid of,
+[0:52:48]  so that it's no longer used, because it's not all that user friendly.
+[0:52:51]  But down here, what am I doing?
+[0:52:53]  I'm getting the body of the document itself with this variable.
+[0:52:57]  And then I'm checking two CSS properties that we didn't talk about before,
+[0:53:00]  but it turns out that you can check and set
+[0:53:02]  the visibility of an element in JavaScript by going into that tag,
+[0:53:06]  checking its style, and getting its visibility property.
+[0:53:11]  And if it happens to equal hidden, the next line of code here, 13,
+[0:53:15]  sets it equal to visible instead.
+[0:53:17]  Else, if it's not hidden, it must already be visible.
+[0:53:20]  And so line 17 flips it the other way and changes it to hidden.
+[0:53:24]  Here, left hand, right hand, clearly not talking.
+[0:53:26]  No idea why the opposite of visible is not invisible.
+[0:53:30]  It's indeed visible in hidden, but this just
+[0:53:32]  allows you, every time this function is called,
+[0:53:34]  to change the property from one value to another,
+[0:53:37]  achieving that blinking effect.
+[0:53:39]  You can do even more powerful things that you
+[0:53:41]  and I take for granted every day.
+[0:53:42]  Let's go into source 8 and go to autocomplete.html, which I wrote in
+[0:53:46]  advance.
+[0:53:47]  And this is a page that also loads into memory a really big dictionary
+[0:53:52]  that you might recall from problem set 5.
+[0:53:55]  And if I go ahead and type in something like C, A, T,
+[0:53:59]  you'll notice dynamically an unordered, bulleted list appearing
+[0:54:03]  below the text box that shows you all of the words in that dictionary
+[0:54:07]  from pset 5 that start with C, and then C, A, and then T,
+[0:54:11]  just like the autocomplete you see every day on your phone
+[0:54:14]  in Google or websites like it.
+[0:54:16]  How is that working?
+[0:54:17]  Well, probably I'm listening for the key press going up.
+[0:54:20]  As soon as that key is pressed, I'm probably
+[0:54:22]  searching through a big array, really, of all of those words,
+[0:54:26]  maybe using linear search, maybe binary search if faster than that,
+[0:54:29]  and then looking for any string in that array that starts with C or C, A
+[0:54:34]  or C, A, T. And then I'm generating automatically the HTML therefor.
+[0:54:39]  But perhaps most familiar nowadays is just
+[0:54:41]  how much your phone and your laptop know about you.
+[0:54:44]  And let me go into a final example here in source 8 called geolocation.html,
+[0:54:50]  which is a term of art that just refers to figuring out your geography,
+[0:54:53]  for instance, your GPS coordinates.
+[0:54:55]  Now, here we have a third and final global variable
+[0:54:58]  that your browser provides you with called navigator.
+[0:55:01]  And in navigator, there's a special object called geolocation
+[0:55:04]  that comes with a function called getCurrentPosition.
+[0:55:07]  So if you call navigator.geolocation.getCurrentPosition
+[0:55:12]  and then pass in a function of your own that doesn't need a name
+[0:55:15]  but does take an argument, in this case, I called it position,
+[0:55:18]  as soon as the browser or as soon as the phone has figured out
+[0:55:21]  where in the world that user is with that browser at some latitude
+[0:55:25]  and longitude, the browser will automatically call that function for you.
+[0:55:30]  And you can do anything you want with the position that comes back,
+[0:55:32]  the latitude and longitude, respectively.
+[0:55:34]  So I'm going to use a function that's not often that helpful.
+[0:55:37]  But for our purposes today, it's just going
+[0:55:38]  to write to the document itself, to my big rectangular region,
+[0:55:42]  whatever the latitude is, then a comma, and then the longitude as well.
+[0:55:46]  So if we go back with this final flourish into source 8,
+[0:55:50]  open up geolocation.html, you'll see that my browser first
+[0:55:54]  wants my permission to let this website, my own, know my location.
+[0:55:59]  I'm going to go ahead and click Allow, crossing my fingers,
+[0:56:01]  because it might take a moment for the phone or the laptop to figure it out.
+[0:56:04]  And it looks like, according to Google, I am right this moment with my Mac
+[0:56:09]  at latitude longitude 42.375 comma negative 71.11.
+[0:56:14]  Let's go ahead and highlight and copy that.
+[0:56:16]  Let's go to a website like googlemaps.com, crossing our fingers.
+[0:56:20]  If you've never done this, you can search for GPS coordinates too.
+[0:56:22]  Let's hit Enter, and amazing.
+[0:56:26]  We are, indeed, in Sanders Theater, roughly there,
+[0:56:30]  standing on this stage on Halloween.
+[0:56:33]  And that, then, is week 8.
+[0:56:34]  We will see you next time.
+[0:56:36]  Happy Halloween.
+[0:56:38]  How'd it go?
+[0:56:40]  Offering?
+[0:56:40]  OK.
+[0:56:46]  And now all the testimony.
+[0:56:52]  No, oh, wait.
+[0:56:59]  That was amazing, Josh.
+[0:57:05]  Sophie.
+[0:57:12]  Amazing.
+[0:57:15]  That was perfect.
+[0:57:22]  Amazing.
+[0:57:32]  Thank you all.
+[0:57:32]  That was so good.
+[0:59:29]  This is CS50, and this is already week 9, which is our second to last.
+[0:59:33]  Indeed, this is really the last week where you'll learn in this class
+[0:59:37]  how to program.
+[0:59:38]  But indeed, it's this week that's really meant
+[0:59:40]  to be the pedagogical climax of all of these various languages we've
+[0:59:44]  been looking at, all of these various techniques, all of this syntax,
+[0:59:47]  so that at the end of CS50, in just a few weeks,
+[0:59:49]  you indeed feel that you didn't take a class on C,
+[0:59:51]  and you didn't take a class on Python, but you really more generally
+[0:59:54]  took a class on programming.
+[0:59:56]  Because indeed, we know already about half of you
+[0:59:58]  will go on to study computer science.

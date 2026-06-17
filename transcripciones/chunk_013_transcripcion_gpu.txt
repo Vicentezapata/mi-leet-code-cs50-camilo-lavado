@@ -1,0 +1,1211 @@
+# Transcripción: chunk_013.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  you to be ordered from smallest to largest.
+[0:00:03]  I've highlighted now in yellow the middle elements here.
+[0:00:06]  And if we were telling the story of we two going left or going right,
+[0:00:09]  let me highlight in red the middle elements of the left half
+[0:00:13]  and the right half.
+[0:00:14]  And then let me further highlight in green the other elements
+[0:00:17]  in between those.
+[0:00:19]  And there's actually a pattern here, as you might notice,
+[0:00:22]  whereby there's one yellow in the middle,
+[0:00:23]  and then there's the two red and the four green.
+[0:00:26]  There's kind of an implicit structure there, if you will.
+[0:00:28]  And what if I do start to think in two dimensions,
+[0:00:31]  and instead of laying out an array of lockers like this on the x-axis only,
+[0:00:36]  what if I kind of slide the four up and pull the one, the three, the five down
+[0:00:42]  and kind of draw this in two dimensions instead?
+[0:00:46]  Well, let me do that, as by separating these things like this,
+[0:00:50]  such that now let me propose that each of these squares,
+[0:00:54]  maybe it doesn't have to be contiguous.
+[0:00:56]  It can be anywhere in the computer's memory.
+[0:00:58]  But I can't have these crazy gaps among them.
+[0:01:01]  How could I perhaps keep these things connected conceptually?
+[0:01:05]  What should I add to the picture, if you will?
+[0:01:10]  Yeah.
+[0:01:11]  Say again?
+[0:01:12]  So branches, metaphorically here, and more technically in the language of C,
+[0:01:17]  maybe just some arrows, some pointers.
+[0:01:19]  So I won't bother drawing things as rectangles constantly.
+[0:01:22]  Let me propose that we're now just abstracting away what a node is.
+[0:01:25]  But let me claim that each of these squares now is a node.
+[0:01:27]  And a node might have a number, but it might also have a pointer.
+[0:01:30]  Heck, maybe even two or more pointers.
+[0:01:33]  And let me draw those now.
+[0:01:34]  I don't care about addresses like 0x123, 456, 789 anymore.
+[0:01:38]  Let's just draw our pointers with arrows.
+[0:01:40]  But now let me propose that we could very well think about this as a tree
+[0:01:47]  storing what was previously array data.
+[0:01:51]  But now each of these nodes can be anywhere in memory.
+[0:01:55]  And moreover, even though I've kind of painted myself
+[0:01:57]  into a corner visually on the screen, so long
+[0:01:59]  as there's more memory in the computer, I could put the number 0 over here.
+[0:02:03]  I could put the number 8 over here.
+[0:02:05]  And if I'm smart, I could probably, if I want to insert other numbers,
+[0:02:09]  like 2.5 or 1.5 or values in between, I bet we could kind of make room
+[0:02:14]  by swiveling things around and just kind of hanging things off
+[0:02:17]  of these branches slightly differently.
+[0:02:20]  And so what does this gain me?
+[0:02:22]  Well, if I instead start to model my data, not single dimensionally,
+[0:02:25]  but in two dimensions, and I connect those nodes with these pointers,
+[0:02:31]  what can I now do?
+[0:02:32]  I think I just gave myself back binary search.
+[0:02:34]  Why?
+[0:02:35]  Suppose I'm searching for the number 5.
+[0:02:36]  How do I find it?
+[0:02:37]  Well, just like in a family tree where you might visually
+[0:02:40]  start reading from top to bottom, I'm always
+[0:02:42]  going to start from the so-called root of a binary search tree.
+[0:02:45]  This is just like the list pointer that kicks off the whole linked list
+[0:02:49]  process.
+[0:02:50]  This is the so-called root.
+[0:02:51]  All right, here I am at the number 4.
+[0:02:53]  I want to find the number 5.
+[0:02:55]  What decision can I make when I see that I'm currently at the number 4,
+[0:02:58]  just like the phone book from week 0?
+[0:03:00]  Where is 5 not?
+[0:03:04]  It's not to the left.
+[0:03:05]  And if I had built a little mobile here or something,
+[0:03:08]  we could very dramatically snip off this branch.
+[0:03:11]  This is very low budget animation.
+[0:03:13]  These nodes could fall to the ground, and we're
+[0:03:16]  left with half of, essentially, a tree.
+[0:03:19]  But what do I now know?
+[0:03:20]  It's obviously the 5 to the right.
+[0:03:21]  So let me go to the right.
+[0:03:23]  6 is obviously not the one I'm looking for,
+[0:03:25]  but what do I now know about the 5?
+[0:03:27]  Well, 5 is less than the 6.
+[0:03:29]  So I can sort of snip this off here, because I
+[0:03:32]  know it's not going to be down there.
+[0:03:34]  And I can follow the remaining arrow here, and voila, I just found it.
+[0:03:38]  And now without getting into the weeds of the math,
+[0:03:40]  I've got here, what, 7 elements?
+[0:03:42]  That's roughly 8 if I round up, and if I do some log base 2.
+[0:03:45]  Actually, 1, 2, 3 is the key detail here.
+[0:03:48]  The height of this tree is 3, because I took a list of size 7,
+[0:03:52]  and I halved it, and I halved it in order
+[0:03:55]  to let it dangle in these two dimensions, plus or minus 1 for rounding's sake.
+[0:03:59]  So what do I get back?
+[0:04:00]  I now have binary search, but it's not like the middle
+[0:04:04]  of the middle of the middle.
+[0:04:06]  I now follow these arrows in one of two directions.
+[0:04:08]  So each of these nodes now has an int and maybe a left pointer
+[0:04:12]  and a right pointer, but you can call them anything you want.
+[0:04:15]  And so I've gotten back binary search and dynamism,
+[0:04:18]  because if you want to add 0 or 8 or 9 or 10,
+[0:04:22]  we can just dangle them at the bottom of the binary search tree.
+[0:04:25]  So what would this look like in code, but we won't actually
+[0:04:28]  implement it line by line?
+[0:04:29]  Well, here was, previously, our definition
+[0:04:32]  of a node for a linked list, which was one dimensional, if you will,
+[0:04:36]  even though it might bounce up and down on the screen.
+[0:04:38]  It was still just a line, if you will.
+[0:04:40]  Well, let me get rid of the single pointer in the linked list.
+[0:04:43]  Let me make a little bit of room here in this typedef,
+[0:04:46]  and let me propose that we just add two pointers, each of which
+[0:04:49]  is a struct node star.
+[0:04:51]  One will be called left by convention, one
+[0:04:53]  will be called right by convention.
+[0:04:56]  And so long as someone, not me, not today, not in class,
+[0:04:59]  writes the code that stitches together this data structure, too,
+[0:05:03]  handling both the left child and the right child, so to speak,
+[0:05:06]  I think we can indeed stitch together that two dimensional structure.
+[0:05:10]  And moreover, once you have this in memory,
+[0:05:13]  you can translate pretty elegantly to code binary search itself using
+[0:05:17]  a principle we talked about recently, too.
+[0:05:21]  Here is, for instance, a function that I'll
+[0:05:23]  write by just clicking through steps called
+[0:05:26]  search, whose purpose in life is to return a Boolean, true or false,
+[0:05:30]  the number I'm looking for is in the tree.
+[0:05:33]  This search function, therefore, takes two arguments,
+[0:05:35]  the number I'm looking for, called number, and then a pointer to the tree,
+[0:05:39]  the so-called root of the tree.
+[0:05:41]  Now, how can I implement binary search in code?
+[0:05:44]  Well, recall our brief discussion of recursion.
+[0:05:46]  It turns out recursion is a beautiful technique,
+[0:05:49]  and honestly more obvious technique when you
+[0:05:51]  have two dimensional structures, which finally, after five plus weeks,
+[0:05:55]  we now do.
+[0:05:56]  Here's maybe my first line of code here.
+[0:05:58]  If the tree is null, then obviously return false.
+[0:06:01]  You've handed me an empty tree.
+[0:06:02]  There's nothing going on.
+[0:06:03]  Obviously, the number you're looking for is not going to be here.
+[0:06:06]  So that's my safe base case to make sure I don't screw up and recurse
+[0:06:09]  infinitely.
+[0:06:10]  Well, what else might be the case?
+[0:06:12]  Well, if the number I'm looking for is less than the tree's own number.
+[0:06:18]  And now recall that tree is a node star.
+[0:06:20]  So even though I'm calling it a tree, it's really the current node
+[0:06:23]  that's been passed in.
+[0:06:24]  So if the number I'm looking for is less than the current node's number,
+[0:06:29]  then I must know that the number I'm looking for is to the left, so to speak.
+[0:06:33]  So how can I solve that?
+[0:06:34]  Well, this is where the magic of recursion.
+[0:06:37]  Just return whatever the answer is to calling search again,
+[0:06:41]  but on a subtree, if you will.
+[0:06:43]  This is the sort of equivalent of snipping off half of the tree.
+[0:06:46]  Pass in the left subtree, if you will, with the same number.
+[0:06:50]  Else, if the number you're looking for isn't less than the current node's
+[0:06:54]  number, but greater than, snip off the other subtree instead
+[0:06:58]  and just return whatever search says it finds in the right subtree here.
+[0:07:03]  And then there's a fourth and final case.
+[0:07:04]  What else could be true logically?
+[0:07:07]  Yeah, perfect.
+[0:07:11]  If the number you're looking for equals equals the number in this node,
+[0:07:16]  then I'm just going to return true.
+[0:07:18]  And you might recall from our recurring discussions of design,
+[0:07:23]  I don't strictly need to ask that explicitly.
+[0:07:25]  Either there's no node, it's to the left, it's to the right,
+[0:07:27]  or you found it, so I can just whittle that down as usual to an else.
+[0:07:32]  And this now returns my true.
+[0:07:34]  So here, too, this is where recursion, once you get comfy with it,
+[0:07:37]  sort of gets pretty elegant and cool in the sense
+[0:07:40]  that, wow, even though there's a lot of lines here,
+[0:07:42]  I mean, there's only a few interesting lines.
+[0:07:44]  A lot of it's like curly braces at that, which, strictly speaking,
+[0:07:47]  I could get rid of.
+[0:07:48]  And so recursion lends itself to elegance
+[0:07:50]  when it comes to traversing these two-dimensional data structures as well.
+[0:07:55]  So that is in code how you might implement something like search.
+[0:08:01]  Questions, then, on these trees?
+[0:08:05]  We have dynamism.
+[0:08:06]  We can insert more nodes to them.
+[0:08:08]  They're faster because we get boundary search back.
+[0:08:10]  But, but, but, there's got to be a price paid.
+[0:08:12]  Any downsides or question or downside?
+[0:08:15]  OK, let me come back to that in just one sec.
+[0:08:17]  Downside, though, what price have we paid for this dynamism
+[0:08:20]  and for this binary searchability?
+[0:08:23]  Even though I've abstracted it away in the picture?
+[0:08:28]  Say again?
+[0:08:30]  We're using a lot of memory, right?
+[0:08:32]  I'm kind of misleading you now because I'm just
+[0:08:33]  drawing these little squares with the simple numbers.
+[0:08:36]  But there's actually three things in there, a 4-byte integer,
+[0:08:39]  an 8-byte left pointer, a 8-byte right pointer.
+[0:08:42]  So we're already up to 1620 bytes now to store individual ints.
+[0:08:46]  That's probably OK, though, if memory is relatively
+[0:08:48]  cheap and voluminous as it nowadays is.
+[0:08:51]  But these are the kinds of trade-offs.
+[0:08:53]  And here, too, you see a hint of why some people still do like and use C.
+[0:08:58]  And, in fact, it's so omnipresent because when you have C,
+[0:09:01]  you can really fine tune how much memory is being used.
+[0:09:03]  For better or for worse, under the hood, as we transition soon to Python,
+[0:09:07]  these decisions get made for you.
+[0:09:08]  And you have much, much less control about how much memory
+[0:09:12]  is being used by your program because someone else
+[0:09:14]  made those design decisions for you.
+[0:09:16]  Question, is it bad if we don't know the parent node?
+[0:09:23]  Not necessarily.
+[0:09:23]  There's no reason why you need to have pointers in both directions.
+[0:09:28]  However, that can lend itself to efficiency by spending more space
+[0:09:31]  and having arrows go up, too.
+[0:09:33]  You can actually save more time when searching
+[0:09:35]  the tree in other contexts.
+[0:09:36]  This, though, would be the canonical way, the typical way to implement it.
+[0:09:40]  But absolutely, just like a doubly linked list,
+[0:09:42]  that could help you solve other problems, too.
+[0:09:45]  All right, so turns out I'm kind of overselling binary search trees.
+[0:09:50]  There are perversions of them, so to speak,
+[0:09:52]  whereby they won't actually behave as advertised.
+[0:09:55]  For instance, here's a good situation.
+[0:09:57]  Suppose you've got an empty tree initially, and you insert the number 2.
+[0:10:01]  Well, it's got to go somewhere, so it might as well become
+[0:10:03]  the root of this binary search tree.
+[0:10:05]  And let's assume that someone wrote the code to do this.
+[0:10:08]  Now you want to insert the number 1, and you want to maintain
+[0:10:11]  the searchability of this tree.
+[0:10:12]  Well, it's important to note that binary search tree is different from tree.
+[0:10:17]  If you've just got a tree in memory, there
+[0:10:19]  is no social contract with where the numbers need to go.
+[0:10:22]  They can be completely random all over the place.
+[0:10:25]  Binary search tree means that you can do binary search,
+[0:10:28]  means that any node here is going to be greater than every node here
+[0:10:32]  and less than every node here.
+[0:10:35]  And that's a definition.
+[0:10:36]  It's a recursive structural definition that
+[0:10:38]  must be true to be a binary search tree or BST.
+[0:10:42]  So if we maintain that property ourselves, let me insert 2.
+[0:10:45]  Let me insert 1.
+[0:10:46]  1 belongs there by that definition.
+[0:10:48]  Let me insert 3.
+[0:10:49]  3 belongs there by that definition.
+[0:10:51]  But I kind of got lucky in that I, in the story, inserted 2, and then 1,
+[0:10:57]  and then 3.
+[0:10:58]  Let me propose a sort of perversion of the algorithm,
+[0:11:00]  whereby we just get unlucky.
+[0:11:02]  Let me propose that we insert 1 first.
+[0:11:06]  And then we insert 2.
+[0:11:08]  Well, where does 2 go?
+[0:11:09]  Well, logically, it goes to the right, because it's larger.
+[0:11:11]  All right, now the user inserts 3.
+[0:11:14]  Where does it go?
+[0:11:15]  OK, it goes there, logically.
+[0:11:17]  And how does this story unfold?
+[0:11:19]  The user inserts 4, 5, 6.
+[0:11:21]  It's wonderfully sorted in advance by luck.
+[0:11:24]  But this is a perversion of the structure in what sense?
+[0:11:29]  It's still technically a binary search tree.
+[0:11:32]  But what does it look more like?
+[0:11:36]  It really is devolving, if you will, into a linked list.
+[0:11:39]  And so if you, the programmer, don't implement a binary search
+[0:11:43]  tree with some kind of repairs going on,
+[0:11:46]  such that as soon as something gets, whoa, a little too long and stringy,
+[0:11:49]  I think I can fix this.
+[0:11:50]  It's going to be an annoying number of lines of code,
+[0:11:52]  which we're not going to write here or in a pset.
+[0:11:55]  But we could kind of pivot this thing, right?
+[0:11:57]  And we could just rejigger things so that the 2 becomes the new root,
+[0:12:01]  the 1 becomes the left child, the 3 becomes the right child.
+[0:12:04]  But that's what, like 2, 3 plus lines of code.
+[0:12:07]  It's possible.
+[0:12:07]  It's doable.
+[0:12:08]  But it's extra work.
+[0:12:09]  It's extra code.
+[0:12:11]  So unless you write that code, though, and maintain balance of these trees,
+[0:12:15]  just because it's a binary search tree does not
+[0:12:18]  mean its height is going to be log base 2 of n.
+[0:12:20]  The height could be n, in which case you don't get those properties.
+[0:12:25]  So when it comes to looking up in a balanced binary search tree,
+[0:12:29]  yes, it's log n.
+[0:12:30]  But if it's unbalanced, if you don't add that additional logic
+[0:12:33]  in those repairs, so to speak, it could devolve into big O of n.
+[0:12:37]  And this is a whole category of algorithms and fanciness
+[0:12:40]  that you would explore in a higher level course on algorithms and data
+[0:12:43]  structures.
+[0:12:44]  There's lots of way to do that sort of fixing
+[0:12:46]  that I'm alluding to in the picture there on the screen.
+[0:12:50]  All right.
+[0:12:51]  A few other data structures, if you will.
+[0:12:53]  Toward an end of a sort of computer science holy grail.
+[0:12:56]  So log n is repeatedly a really good place to end up.
+[0:13:01]  We started in week 0 when we got log n.
+[0:13:03]  We lost it earlier today by introducing linked list,
+[0:13:06]  but we just got it back, albeit at the price of spending more space.
+[0:13:10]  But the holy grail, so to speak, when it comes to algorithms,
+[0:13:13]  would not be big O of n, certainly.
+[0:13:15]  Definitely not n squared, like our bubble sorts and selection sorts,
+[0:13:18]  and not even big O of log n.
+[0:13:20]  What's better than all of those?
+[0:13:24]  It's big O of 1, constant time.
+[0:13:26]  That's the holy grail, because if we could store huge amounts of data
+[0:13:29]  but find it instantly in one step or two steps, or heck, even 10 or 20 steps,
+[0:13:34]  but independent of the size of the data structure, that's pretty powerful.
+[0:13:38]  That's the secret sauce of the Googles and the Twitters of the world,
+[0:13:41]  trying to get back results really, really fast.
+[0:13:44]  Well, it turns out another abstract data type or abstract data structure
+[0:13:48]  might be something called a dictionary, just
+[0:13:50]  like the Merriam-Webster or Oxford English dictionaries
+[0:13:52]  that you might know, which associate, say, words with definitions.
+[0:13:56]  Well, you can think of a dictionary really abstractly as this, like two
+[0:13:59]  columns, maybe on a spreadsheet of sorts, where the left column represents
+[0:14:03]  something and the right column represents something else,
+[0:14:05]  like the word is on the left and its definition is on the right.
+[0:14:08]  And that's almost literally what a dictionary is on paper.
+[0:14:10]  You've got all the words and all the definitions right next to it.
+[0:14:13]  But more generally, in computing, a dictionary really just
+[0:14:17]  has not words and definitions per se, but key-value pairs.
+[0:14:21]  This is a term of art.
+[0:14:22]  And we're going to see this again and again,
+[0:14:24]  especially as we transition to web programming, keys and values.
+[0:14:27]  Key is what you use to look for something.
+[0:14:30]  The value is what you find, ultimately, via that key.
+[0:14:34]  So that's the generic term there.
+[0:14:36]  We've seen key-value pairs really in the past.
+[0:14:38]  In week 0, we talked about your contacts in your iPhone or Android phone
+[0:14:42]  being an app that has a whole bunch of contacts,
+[0:14:44]  presumably alphabetized by first name or last name or the like.
+[0:14:48]  Well, one of those contact cards ultimately has someone's number,
+[0:14:51]  for instance, like John Harvard in this case.
+[0:14:54]  So in that type of application, the keys is the name, like John Harvard,
+[0:14:58]  that you use to find information.
+[0:15:00]  And the value is the number that you find there.
+[0:15:03]  If there's more information, like where he lives and email address
+[0:15:06]  and the like, the whole contact card could be the value thereof.
+[0:15:10]  The key is what you use to look up John Harvard.
+[0:15:13]  Now, back in week 0, oh, and rather, the corresponding table, then,
+[0:15:17]  if we draw this in two columns, wouldn't be word and definition
+[0:15:19]  or key-value generically.
+[0:15:21]  It would be name and number, for instance.
+[0:15:23]  So we're just slapping some new terminology on this old contacts problem.
+[0:15:27]  Well, this is the picture we drew way back in week 0,
+[0:15:29]  whereby I claim that log of n was really, really good.
+[0:15:33]  And indeed, it was and has been since.
+[0:15:35]  But the Holy Grail would indeed be something more like this,
+[0:15:38]  in this dashed green line, constant time.
+[0:15:41]  And maybe not literally one step, but a fixed number of steps
+[0:15:44]  that even as the problem gets huge and you go way, way out
+[0:15:47]  on the right of the x-axis, the problem does not depend on the size.
+[0:15:54]  The time to solve the problem does not depend at all
+[0:15:57]  on the size of the problem itself.
+[0:15:59]  You can have 1,000 contacts or 100,000 contacts.
+[0:16:02]  Constant time means it takes the same number of steps no matter what.
+[0:16:06]  Well, how can we get to that point?
+[0:16:08]  Well, there's a couple of final building blocks today.
+[0:16:10]  And there's one called hashing.
+[0:16:11]  And this is something that will recur a few times.
+[0:16:13]  But for now, hashing is all about taking as input some value
+[0:16:19]  and outputting a simpler version thereof.
+[0:16:22]  So for instance, here's a gratuitously large deck
+[0:16:25]  of cards, which are all the more visible as a result.
+[0:16:28]  And in a deck of cards, typically, you've
+[0:16:30]  got like what, 52 cards plus maybe the jokers and whatnot.
+[0:16:33]  And each of those cards has a number of sorts and a suit on it.
+[0:16:36]  And here are literally four buckets on the stage.
+[0:16:39]  And how might I go about sorting these cards, not just by number,
+[0:16:42]  but also by suit?
+[0:16:44]  Well, you could certainly spread them all out and make a mess of things
+[0:16:47]  and just reason your way through it and get everything in order according
+[0:16:50]  to suit and quartered by number.
+[0:16:52]  But most of us, even if you don't have four buckets at home,
+[0:16:54]  probably you're going to do something a little more intuitive,
+[0:16:57]  feels like an optimization, where if I find like the nine of hearts,
+[0:17:01]  I'm going to put that into the hearts bucket.
+[0:17:03]  The king of spades, I'm going to put that into the spades bucket.
+[0:17:05]  The jack of diamonds over here.
+[0:17:08]  And I'll do this with the queen of diamonds and the ace of clubs here
+[0:17:12]  and the three here and the 10 here.
+[0:17:14]  And even though it's still going to be 52 steps, why am I, and maybe at home,
+[0:17:18]  why would you perhaps do this step first?
+[0:17:23]  What's the value of bucketizing the values in this way?
+[0:17:26]  And that actually is kind of a term of art.
+[0:17:29]  What's the value of doing this first before you sift through and try
+[0:17:32]  to sort the numbers?
+[0:17:33]  Yeah, yeah, it's easier to make sure you're not missing anything.
+[0:17:39]  And it's taking a problem of size 52 and shrinking it into four problems
+[0:17:43]  of size 13, if you will.
+[0:17:45]  And so that just kind of helps simplify things,
+[0:17:47]  maybe reduces the probability of errors or the like.
+[0:17:50]  And what I'm doing here to give it a technical term is that I'm hashing
+[0:17:53]  the values.
+[0:17:53]  I'm taking as input a card like this, and I'm
+[0:17:56]  reducing it more simply from a larger domain to a much smaller range,
+[0:18:02]  if you will.
+[0:18:02]  So here's a domain of like 52 possibilities.
+[0:18:06]  I want to map that to a range of four possible outcomes, the diamonds,
+[0:18:10]  the clubs, the carts, or the spades here.
+[0:18:13]  And by doing that, I'm just shrinking the size of the problem.
+[0:18:15]  So hashing does that.
+[0:18:16]  It's like literally an f of x type arrangement,
+[0:18:19]  whereby you pass something in and you get back a simpler known value.
+[0:18:23]  Well, a hash function, more technically, is the algorithm, or even the math,
+[0:18:28]  or even the code that implements that idea, converting something bigger
+[0:18:32]  to something smaller to this indeed finite range of values.
+[0:18:36]  And it turns out that hash tables are a wonderful application of arrays
+[0:18:43]  and linked lists to try to leverage the best of both worlds,
+[0:18:47]  the goal being theoretically to achieve that holy grail of constant time.
+[0:18:52]  That's going to be a bit of an overstatement,
+[0:18:54]  because you're not always going to achieve it exactly,
+[0:18:56]  but at least we can get a little closer there too.
+[0:18:58]  So with hash tables, you have something that looks like this.
+[0:19:01]  This is just an array.
+[0:19:03]  This is an artist's rendition of drawing it vertically instead
+[0:19:06]  of horizontally, but that's just a detail graphically.
+[0:19:09]  And this array, for instance, maybe is of size 26.
+[0:19:14]  And where am I going with this?
+[0:19:15]  Well, how does Apple, how does Google store your context alphabetically
+[0:19:20]  in your phone and search for things quickly?
+[0:19:22]  Well, they probably alphabetize at least in English according to a through z.
+[0:19:27]  Or if we convert that to numbers, it's like, what, 65 through whatever?
+[0:19:30]  Or really, 0 through 25 suffices.
+[0:19:32]  If we're using an array of size 26, we start counting at 0, and we count up to 25.
+[0:19:37]  But let's abstract that away as just letters of the alphabet.
+[0:19:40]  So maybe what Google and Apple are doing in your phone
+[0:19:42]  is storing all of the a's up there, all of the z's down there,
+[0:19:46]  and everything else in between.
+[0:19:48]  So this works pretty well if you start adding your friends and your family.
+[0:19:51]  So for instance, and I'll get rid of the letters so as to not distract,
+[0:19:55]  Albus might go in that first spot because a, you subtract the 65, maps to 0.
+[0:19:59]  So we put him in the first bucket, the a bucket.
+[0:20:02]  Maybe Zacharias ends up all the way at the end there.
+[0:20:04]  And then in the middle might here be Hermione.
+[0:20:06]  And if we do this dot, dot, dot, you keep adding all of your classmates,
+[0:20:09]  you might get a contacts database that has all of this data here in.
+[0:20:14]  Now, each of these nodes, they're drawn differently
+[0:20:17]  because this is just another artist's rendition.
+[0:20:19]  These rectangles, these long rectangles, represent a contact card,
+[0:20:23]  like John Harvard's that's got the name, maybe email, definitely phone number,
+[0:20:26]  and things like that.
+[0:20:28]  So this seems great.
+[0:20:30]  Why?
+[0:20:31]  How can I find Albus?
+[0:20:33]  Well, I go to the a bucket.
+[0:20:34]  How do I find Zacharias?
+[0:20:35]  I go to the z bucket.
+[0:20:36]  How do I find Hermione?
+[0:20:37]  I go to the h bucket.
+[0:20:39]  But, but, but, I've done this very deliberately.
+[0:20:42]  What problem will arise eventually?
+[0:20:46]  Assuming you have enough classmates.
+[0:20:51]  Yeah, there'll be too many people, too many contacts
+[0:20:54]  for all of the available spaces in the array.
+[0:20:57]  There's still some room here.
+[0:20:58]  But I'm pretty sure if I think back to this particular class,
+[0:21:02]  we've got not Hermione, but also Harry, who's also in h, Hagrid,
+[0:21:07]  who's also in h.
+[0:21:08]  So where do I put them?
+[0:21:09]  I could just put them arbitrarily in any of the open spots.
+[0:21:13]  But then you lose the immediacy of jumping right to the h, right to the a,
+[0:21:16]  right to the z.
+[0:21:17]  But now that we have linked lists, we can kind of combine these ideas, right?
+[0:21:20]  Use an array to get to the first letter of the name you care about.
+[0:21:24]  And then if you have a collision, so to speak,
+[0:21:27]  whereby someone's already there, you don't do something stupid
+[0:21:30]  like put Harry down here just because it's available,
+[0:21:33]  or maybe Hagrid down here just because it's available,
+[0:21:35]  because then you're losing the immediacy of the lookup.
+[0:21:38]  Why don't you just kind of stitch them together in a linked list?
+[0:21:42]  Now, what does this mean?
+[0:21:43]  This means for most of the characters here,
+[0:21:46]  you have constant time lookup.
+[0:21:47]  You look up Albus, boom, you're done.
+[0:21:49]  Zechariah's, boom, you're done.
+[0:21:50]  OK, Harry, Hermione, Hagrid, it might be one, two, or three steps.
+[0:21:55]  So that's actually devolving into something linear.
+[0:21:58]  But here we make a distinction today between theoretical running times,
+[0:22:01]  which we keep talking about, and honestly,
+[0:22:03]  clock on the wall running times that actual humans care about.
+[0:22:07]  This is way faster than a linked list because you
+[0:22:11]  don't have to search every name.
+[0:22:13]  It's even faster than an array because you
+[0:22:16]  don't need to do binary search.
+[0:22:18]  You can literally, for most of the names,
+[0:22:20]  find them in constant time, one step.
+[0:22:24]  And again, it's not theoretically constant
+[0:22:25]  because if you only befriend people who have h names,
+[0:22:28]  it's going to be a crazy long linked list anyway.
+[0:22:31]  So again, it really kind of depends on what the nature of the data is here.
+[0:22:35]  But this is pretty close to constant time.
+[0:22:37]  And in fact, how could we get even closer?
+[0:22:39]  How could we reduce the probability of collisions
+[0:22:42]  for the h's or any other letters?
+[0:22:45]  How could we avoid putting too many h names together?
+[0:22:52]  Say a little letter?
+[0:22:58]  OK, yeah, so we could add another dimension if you will.
+[0:23:00]  But let's not add a third dimension per se.
+[0:23:02]  But let's indeed look at not just the first letter of everyone's name,
+[0:23:05]  but the first and the second.
+[0:23:06]  And in fact, let's see if that gets us a little further along.
+[0:23:10]  So let me go ahead and propose, if you go through the whole Harry Potter
+[0:23:13]  universe, there's actually a lot of collisions if we keep going.
+[0:23:16]  And so we've got the l's here, the r's, the s's, and so forth.
+[0:23:19]  Well, let's clean this up here.
+[0:23:20]  Hermione originally went to the h location.
+[0:23:23]  But let's decrease the probability of collisions there and everywhere else.
+[0:23:27]  Instead of putting Hermione, Harry, and Hagrid all together,
+[0:23:31]  let's go ahead and do this instead.
+[0:23:33]  Instead of labeling these buckets a through z,
+[0:23:36]  let's just give ourselves more buckets.
+[0:23:37]  So in fact, this might be h.
+[0:23:39]  Well, instead of h, maybe this should be ha.
+[0:23:41]  And then this should be hb, hc, hd, he, hf.
+[0:23:45]  Now, some of those are a little nonsensical,
+[0:23:47]  because I can't think of names that match most of those.
+[0:23:49]  But it's deterministic.
+[0:23:51]  At least we know the bucket will be there, which is important, even if it's empty.
+[0:23:55]  And now we can put Hermione here.
+[0:23:57]  We can put Harry here.
+[0:23:59]  But uh-oh, we didn't do this perfectly well.
+[0:24:01]  Hagrid still collides.
+[0:24:02]  So let me come back to you.
+[0:24:04]  How can we reduce the probability of Harry and Hagrid colliding?
+[0:24:08]  Yeah, so we could look at the third letter.
+[0:24:10]  OK, so let me try that.
+[0:24:11]  Instead of ha, let's look at haa, hab, hac, dot, dot, dot, haq, dot, dot,
+[0:24:17]  heq, herhes, and so forth.
+[0:24:20]  And now I think those names, and probably all of the others we saw,
+[0:24:24]  are now much more cleanly distributed.
+[0:24:27]  There is much lower probability of collisions,
+[0:24:30]  unless two people have almost the same names,
+[0:24:32]  or one is like a prefix of the other.
+[0:24:34]  But, but, but, even though we're now closer than ever to constant time,
+[0:24:39]  because the odds that we hit a collision and have to devolve to a linked list
+[0:24:42]  are much lower, what's the downside?
+[0:24:45]  It's not completely obvious from how I've depicted this on screen.
+[0:24:50]  What's the price I'm paying here?
+[0:24:51]  Yeah.
+[0:24:53]  This is a huge amount of memory.
+[0:24:55]  The number of cells here in the array is now what?
+[0:24:58]  26 times 26 times 26 for the first, the second, and the third possible
+[0:25:03]  characters, all combinatorically combined here.
+[0:25:05]  That's a lot.
+[0:25:06]  I didn't even draw them.
+[0:25:07]  I have the dot, dot, dot, could you evoke that instead?
+[0:25:10]  That's a huge amount of memory.
+[0:25:11]  This is a very sparse data set now.
+[0:25:13]  And odds are you're going to waste so much memory,
+[0:25:16]  even for the names like H-A-E, H-A, like H-E-Q.
+[0:25:20]  Like, I can't even think of names.
+[0:25:22]  So many of those buckets are going to be empty,
+[0:25:24]  not to mention the A-A-A, and the Z-Z-Z, and everything else in between.
+[0:25:28]  So it's a trade-off.
+[0:25:29]  And it might be too expensive a trade-off.
+[0:25:31]  And so you might have to tolerate something like the collisions we had
+[0:25:34]  earlier, whereby even though they might very well happen,
+[0:25:37]  at least you are decreasing the probability
+[0:25:41]  by perhaps having more buckets like this.
+[0:25:44]  And in fact, if I rewind now to where we might have gone with this,
+[0:25:47]  here's how we might represent these nodes in the tree.
+[0:25:50]  Previously, in the past, we've had a person
+[0:25:53]  who had a string name and a string number, AKA now char star.
+[0:25:56]  And so here now might be how, in this hash table,
+[0:26:00]  we represent someone's name and number, as well as a pointer
+[0:26:04]  to the next element in the list.
+[0:26:06]  Let me rewind just to the picture here.
+[0:26:08]  We keep drawing different shapes, because again, these are abstractions.
+[0:26:11]  Who really cares if they're to scale now?
+[0:26:13]  We've got enough room for the person's name.
+[0:26:15]  Not pictured on the screen is Hermione's number.
+[0:26:17]  But that's somewhere in this rectangle.
+[0:26:19]  But yes, pictured here in this little square
+[0:26:21]  is a pointer to the next node in the list.
+[0:26:24]  So by storing name and number, maybe her address, maybe her mailing address,
+[0:26:27]  whatever, in addition to a pointer, allows each of these nodes
+[0:26:31]  to be connectable, just like the nodes in a linked list.
+[0:26:35]  But where they're starting is in an array.
+[0:26:37]  So the array narrows the problem from size 26 to 1,
+[0:26:44]  gets us to the linked list in question.
+[0:26:45]  Hopefully, it's a single person.
+[0:26:47]  Or perhaps it has more than that.
+[0:26:49]  Meanwhile, what is the hash table itself?
+[0:26:52]  The hash table, the whole thing, is literally just an array.
+[0:26:56]  I've hard coded the simplest version of size 26.
+[0:26:59]  But what do each of those boxes in the vertical array represent?
+[0:27:03]  Just a pointer to potentially a node, a node in the linked list.
+[0:27:06]  And if there's no one there, if there's no one in location y or x
+[0:27:10]  or the like in that universe, well, it's just a null pointer,
+[0:27:12]  signifying there's no one there.
+[0:27:15]  But if there is, it's going to be a pointer to a valid node, from which
+[0:27:18]  we can get to any of the others as well.
+[0:27:21]  And that so-called hash function, just like the one
+[0:27:23]  I did with the greeting cards, well, it's just a black box, if you will,
+[0:27:27]  but implemented somewhere in code, like in C.
+[0:27:30]  And so if you pass in albis, what is the hash value of albis?
+[0:27:34]  Well, in the first version of the story with 26 buckets, it should be a 0.
+[0:27:38]  If you pass in Zacharias, it should be 25.
+[0:27:41]  And so just as my cards were being hashed to one of 1, 2, 3, 4 values,
+[0:27:46]  now these names are being hashed to one of 26 possibilities, or 26 times 26,
+[0:27:51]  or 26 to the third power, if you have more and more granularity than that.
+[0:27:57]  Questions on this implementation now of this idea of a hash table?
+[0:28:14]  If you say that again with the null?
+[0:28:29]  Oh, well, good question.
+[0:28:29]  So if there's so much sparseness, there's all of these empty cells in the array,
+[0:28:33]  couldn't you just go in and free them, or delete them,
+[0:28:35]  or just kind of shrink the array and not have a, a, a, a, and a, a, b,
+[0:28:40]  and a, a, c only have the prefixes, two or three characters that you need?
+[0:28:44]  You absolutely could do that.
+[0:28:46]  But now what you lose is the arithmetic benefit
+[0:28:49]  of being able to map each letter to a number.
+[0:28:52]  If you start freeing up unused space, you
+[0:28:56]  don't know that Zacharias is necessarily at location 25.
+[0:28:59]  Albus is still going to be at location 0.
+[0:29:01]  But if you've deleted some of the elements in the middle,
+[0:29:04]  Zacharias could be at 24 if you've deleted one, 23 if you've deleted another.
+[0:29:08]  And so you don't have that arithmetic immediacy
+[0:29:11]  that you need in order to index into the array with constant time.
+[0:29:14]  And the same is going to be true if it's two letters or three letters.
+[0:29:18]  You need to be able to trust that you can do some quick math
+[0:29:21]  and jump to the right index in constant time.
+[0:29:24]  And that's, again, the appeal of these arrays.
+[0:29:26]  So when it comes to the running time of a hash table,
+[0:29:29]  inserting values into it, searching for values they're in,
+[0:29:32]  at the end of the day, it technically is big O of n.
+[0:29:35]  Because in the craziest case, you might have a huge fancy hash table,
+[0:29:39]  but everyone in the universe has a name starting with H.
+[0:29:42]  And then it just evolves into a really long length list,
+[0:29:45]  just like a binary search tree could do the same.
+[0:29:48]  But if you choose a smarter hash function, maybe you mitigate that,
+[0:29:50]  and you don't rely only on the first letter, but on the second,
+[0:29:53]  or the third as well, or some other combination of that input,
+[0:29:57]  and make your hash function smarter, odds
+[0:29:59]  are if you get a good hash function, you
+[0:30:01]  want to get it to be more of like order of n divided by k,
+[0:30:04]  where k means constant mathematically.
+[0:30:06]  And so k is the number of buckets.
+[0:30:08]  So ideally, you want like a uniform distribution.
+[0:30:11]  You want like this many people here, this many people here.
+[0:30:14]  You don't want there to be some or no people.
+[0:30:16]  You want a uniform statistical distribution.
+[0:30:19]  And maybe you get that from human names.
+[0:30:21]  Maybe you don't, but that's kind of the challenge of a hash function.
+[0:30:24]  Of course, big O of n over k is not a thing,
+[0:30:26]  because we always throw away constants like k.
+[0:30:29]  So it's still big O of n.
+[0:30:31]  But again, the distinction today is that, OK, yes, academically,
+[0:30:34]  you learned in CS50 that sure, it's big O of n.
+[0:30:36]  But my god, it's 26 times faster if you do the hash function well,
+[0:30:41]  and you spread everyone out over the hash table.
+[0:30:44]  And that's the appeal of these kinds of structures.
+[0:30:47]  We've got one more for you, if I may, something now known as a trie.
+[0:30:53]  So it turns out that a trie is even cooler,
+[0:30:56]  if you like this kind of thing, in that it does not devolve into big O of n.
+[0:31:02]  It is truly constant time.
+[0:31:04]  But there's going to be a price.
+[0:31:06]  There's going to be a gotcha.
+[0:31:07]  A trie is sort of a fancier tree.
+[0:31:11]  And it's short for retrieval, but pronounced trie
+[0:31:14]  for weird historical reasons.
+[0:31:16]  But a trie is a tree, each of whose nodes is an array.
+[0:31:21]  So this is all like crazy mashups now.
+[0:31:23]  People started inventing data structures just by combining different ones.
+[0:31:25]  So unfortunately, a lot of the good ideas are taken.
+[0:31:27]  But you just have benefits from certain aspects of those data structures.
+[0:31:32]  And combining them ideally gives you the best of both worlds, so to speak.
+[0:31:36]  So here might be the root of a trie.
+[0:31:38]  It's literally a big node, a big rectangle, but it's actually an array.
+[0:31:41]  So there's like 26 locations in this picture here.
+[0:31:44]  And here's how you use a trie, for instance, to store names,
+[0:31:48]  just like the hash table.
+[0:31:50]  You treat each of the elements of that array in that node
+[0:31:54]  as like a letter of the alphabet, so A through Z, or 0 through 25.
+[0:31:57]  And if you want to store someone's name in here, you do so as follows.
+[0:32:02]  If you want to store like an H, you index into the H location.
+[0:32:07]  And if you want to store the second letter of someone's name, like an A,
+[0:32:11]  well, you add another node below it.
+[0:32:13]  And such one is connected to the other.
+[0:32:15]  And you then identify the A in that array.
+[0:32:18]  And then you go on and maybe put a G, if the goal is to store,
+[0:32:21]  spoiler now, Hagrid in this data structure.
+[0:32:25]  And then the R, and the I, and then the D.
+[0:32:28]  But when you get to the D, the end of the name,
+[0:32:30]  you have to somehow flag that this is the end of a name
+[0:32:33]  that we've embedded into this data structure.
+[0:32:35]  So whereas all of these are called out in white just
+[0:32:38]  to make obvious what we're connecting to what,
+[0:32:40]  green has to be like a bool that's true, that just indicates
+[0:32:43]  like the buck stops here, like D is the last letter in someone's actual name.
+[0:32:48]  And what's kind of cool now about a try is
+[0:32:52]  that we can repeat this for other names as well.
+[0:32:54]  So for instance, here's where we might put Harry as well.
+[0:32:58]  And notice they share a common prefix, H-A for Hagrid, H-A for Harry.
+[0:33:03]  So we're reusing some of these nodes, some of these arrays.
+[0:33:06]  We can even slip Hermione in here too, borrowing only the H.
+[0:33:10]  But she gets the H, then the E, then R-M-I-O-N-E, and so forth.
+[0:33:16]  And we mark at the end of her name too that she's in there.
+[0:33:19]  Now what's the takeaway here?
+[0:33:21]  Well, what is the running time of a try?
+[0:33:25]  How many steps does it take to find someone in this data structure?
+[0:33:29]  And let me zoom out so that it sort of suddenly
+[0:33:31]  becomes a massive data structure with even more in it.
+[0:33:34]  Maybe it looks, sorry, I'll keep it on this one.
+[0:33:36]  Maybe it looks a little something like this with just these three names.
+[0:33:39]  But how many steps does it take to find Hagrid, or Harry, or Hermione,
+[0:33:45]  no matter how many names are in this data structure?
+[0:33:48]  There's three at the moment, but it takes what?
+[0:33:51]  H-A-G-R-I-D. So six steps to find Hagrid.
+[0:33:56]  H-A-R-R-Y, five steps to find Harry.
+[0:33:59]  H-E-R-M-I-O-N-E, eight steps to find Hermione.
+[0:34:05]  But notice that those steps are only dependent on what?
+[0:34:08]  The lengths of the human's names.
+[0:34:10]  And let's assume that no one's going to have an infinitely long name.
+[0:34:14]  It's going to max out at, what, like eight, maybe 18, maybe 20, 30.
+[0:34:18]  There's actually some pretty long human names out there,
+[0:34:20]  but it's going to be finite.
+[0:34:22]  You know it's abounded, whereas most contexts n could grow forever.
+[0:34:27]  So what's compelling here is if you assume that the longest name is,
+[0:34:30]  I don't know, 50 for the sake of a theme here,
+[0:34:33]  then you know that finding anyone in this data structure
+[0:34:36]  will take you no more than 50 steps.
+[0:34:38]  50 is thus a constant, which means you have big O of one running time.
+[0:34:43]  It doesn't matter if there's a million people in this phone book
+[0:34:46]  or a billion people in this phone book.
+[0:34:48]  That's going to definitely add more nodes to it,
+[0:34:50]  but it's still going to take you H-A-R, I'm sorry, H-A-G-R-I-D,
+[0:34:54]  six steps to find Hagrid, H-A-R-R-Y, five steps to find Harry,
+[0:34:58]  even if there's a billion other people in that data structure.
+[0:35:02]  So now we actually do seem to have constant time.
+[0:35:06]  If you assume that there's going to be a bound on the length of the name.
+[0:35:09]  Why don't we use tries for everything, then?
+[0:35:12]  What's the price we're paying for this data structure,
+[0:35:15]  even though we've represented just three characters here?
+[0:35:18]  Yeah.
+[0:35:20]  It's a lot of memory, yeah.
+[0:35:22]  And you can see it even with these three names.
+[0:35:24]  Most of the squares on the screen are empty,
+[0:35:26]  like bytes and bits that are there and are allocated.
+[0:35:29]  And they need to be there because you need
+[0:35:31]  to be able to do that arithmetic thing of this being 0, this being 25.
+[0:35:34]  So you can jump from boom, boom, boom, boom
+[0:35:36]  based on each of the letters.
+[0:35:37]  But it's a hugely sparse data structure, which
+[0:35:40]  means it takes up a crazy amount of memory.
+[0:35:43]  Now, maybe that's tolerable, especially for short names.
+[0:35:46]  But that's going to be the trade off as well.
+[0:35:48]  And this is such a tension in computing.
+[0:35:49]  Almost any time you want to improve time,
+[0:35:52]  you want to speed up the efficiency, the speed of your algorithm,
+[0:35:55]  you're going to spend space.
+[0:35:57]  If, by contrast, you want to decrease the amount of space,
+[0:36:00]  you might very well have to increase the running time.
+[0:36:03]  It is indeed this seesaw back and forth.
+[0:36:05]  And you, your colleagues, your company need
+[0:36:07]  to decide what resource is the most precious.
+[0:36:10]  Heck, it might be much harder to code one of these data structures
+[0:36:13]  than another.
+[0:36:14]  You're a human.
+[0:36:15]  Your time is valuable.
+[0:36:16]  Do you really want to spend hours implementing a try when, hey,
+[0:36:19]  in 30 minutes I can bang out an array nowadays or a linked list even?
+[0:36:23]  There too, development time is going to be yet another resource.
+[0:36:25]  And why sometimes there's good code or bad code,
+[0:36:28]  it depends on what you're prioritizing.
+[0:36:30]  So what do each of these nodes look like in a try?
+[0:36:33]  Well, we can keep calling it a node.
+[0:36:34]  This is a very generic term for just a container in these data structures.
+[0:36:38]  In this story, though, let me claim that everyone
+[0:36:41]  has a number, like a phone number, a string, aka char star.
+[0:36:46]  Every node has 26 children, or technically an array of size 26,
+[0:36:51]  that can point to more of these nodes.
+[0:36:53]  Notice that I don't need to store the name of someone in a try
+[0:36:58]  because it's implicit in the path that you take to find them.
+[0:37:01]  So that's a minor optimization, but it saves us some space.
+[0:37:04]  But this would be just a different data structure
+[0:37:07]  we could use to actually solve this problem as well,
+[0:37:11]  albeit at a very expensive cost.
+[0:37:12]  And what do we need our variable to be that stores the try?
+[0:37:15]  Just like before, we just need a single pointer
+[0:37:18]  that hangs on to the root of this structure that's null if it's empty
+[0:37:22]  or non-null if it's actually pointing at something.
+[0:37:26]  Any questions then on tries?
+[0:37:29]  And if it's feeling like a lot, the fire hydrant, it is.
+[0:37:32]  We started with arrays, then linked lists, then tries.
+[0:37:36]  But questions on how we've just assembled from these basic building blocks?
+[0:37:39]  Yeah?
+[0:37:44]  A good question, why is this not size 26?
+[0:37:48]  It's just like with the link list before.
+[0:37:52]  It just tends to be in code convenient to have a separate additional
+[0:37:56]  pointer that's small that just points to the beginning of the data structure
+[0:37:59]  because that way it can be null, thereby clearly indicating
+[0:38:02]  there are no nodes, the whole structure is empty.
+[0:38:04]  If you allocated one of those nodes, you absolutely could.
+[0:38:08]  But then you'd be just wasting space even if it's empty
+[0:38:10]  and it creates an ambiguity.
+[0:38:12]  So just having a single pointer linked to the beginnings of all of these things
+[0:38:16]  is a good thing.
+[0:38:17]  Other questions now on tries or trees or hash tables or arrays?
+[0:38:26]  So what problems might arise?
+[0:38:28]  Well, here's a counter example.
+[0:38:30]  What names are manifest in this try here?
+[0:38:36]  Feel free to just call it out.
+[0:38:41]  What do you say?
+[0:38:43]  Danielle and Daniel.
+[0:38:46]  So presumably if these are two names here, one of which
+[0:38:49]  is a prefix of another, notice that the data structure still works.
+[0:38:52]  And I chose a friend's name and then appended a couple of more characters
+[0:38:56]  to it that's also a name because we have here D-A-N-I-E-L.
+[0:39:00]  And the green technically is implemented as a bool or something
+[0:39:03]  like that that indicates a word stops here.
+[0:39:05]  But we don't want to preclude storing Danielle as well, who's a superstring,
+[0:39:09]  if you will, of Daniel.
+[0:39:10]  And so that's OK, too, so long as the structure allows
+[0:39:13]  for the pointers to keep going.
+[0:39:15]  So even that works out OK, whereas it might not have otherwise.
+[0:39:19]  And in terms of the running time, just to be clear, at the end of the day,
+[0:39:22]  tries do give you actual constant time for insertions, lookups, deletions,
+[0:39:29]  and the like because it's dependent only on the length of the input,
+[0:39:32]  the key, if you will, and not on how many other people are
+[0:39:36]  in your phone or address book.
+[0:39:39]  And now thought we'd conclude with a visual.
+[0:39:42]  If you've gotten out into the square, anyone recognize this?
+[0:39:46]  OK, Sweetgreen, a local salad place, what are we looking at here
+[0:39:49]  and what's its connection to today?
+[0:39:51]  You're about to become all the geekier in the real world
+[0:39:54]  because you will start to see data structures everywhere.
+[0:39:57]  What is this?
+[0:39:59]  Or how does this work maybe in salad form?
+[0:40:02]  Who's been to Sweetgreen?
+[0:40:04]  OK, either of you.
+[0:40:06]  So how does this work?
+[0:40:16]  OK, good.
+[0:40:16]  So if you order a salad for someone named L, when it's ready,
+[0:40:19]  they put it in the L section here.
+[0:40:22]  And so this is kind of a set of key value pairs, right?
+[0:40:24]  If L is the first letter of someone's name,
+[0:40:27]  the value hopefully is the salad.
+[0:40:28]  And so what you kind of have here is a dictionary, key value pairs,
+[0:40:32]  where it's not words and definitions, it's names and salads.
+[0:40:35]  And you can think of this too as kind of a hash table.
+[0:40:37]  Why?
+[0:40:38]  Even though it actually doesn't fit on one long shelf
+[0:40:41]  because the store is only so big, this is really an array.
+[0:40:43]  And apparently, A is missing, or maybe it's around the corner.
+[0:40:46]  But this array just happens to wrap onto multiple lines.
+[0:40:49]  But it's still conceptually a single dimension.
+[0:40:52]  But suppose two people have the name L. What do they do typically?
+[0:40:59]  Yeah, so maybe they, well, if they want to put that much effort into it,
+[0:41:03]  they might look at the second letter and then the third letter.
+[0:41:05]  Odds are this is not that interesting a problem
+[0:41:07]  to solve optimally in that way.
+[0:41:08]  But they probably do start stacking the salads on top of each other,
+[0:41:12]  maybe scooching it over just a little bit.
+[0:41:14]  And so what do you have there?
+[0:41:15]  Well, now if you start to view the lens through CS50 glasses,
+[0:41:18]  like, OK, you have an array.
+[0:41:20]  And then you have these linked lists that are sort of growing here.
+[0:41:22]  But even then, you run into a problem.
+[0:41:23]  Why?
+[0:41:24]  Because it's not really a linked list because at some point,
+[0:41:26]  you're going to hit the boundary here.
+[0:41:27]  So it's kind of like an array of arrays because you can only
+[0:41:30]  fit, what, like three or four salads here.
+[0:41:32]  And so long story short, we started today deliberately
+[0:41:35]  talking about real world things like stacks and queues.
+[0:41:37]  And even though it did escalate quickly into binary search
+[0:41:40]  trees and hash tables and tries, even those things
+[0:41:43]  are everywhere, even though they don't call them as such,
+[0:41:46]  these are just solutions to problems.
+[0:41:47]  And now, with this final week of C under your belt,
+[0:41:50]  you have all the more of a technical toolkit by which to implement
+[0:41:53]  these things in code.
+[0:41:54]  Next week, we'll be able to trust that someone else solved all these problems.
+[0:41:58]  We'll introduce Python.
+[0:41:59]  And lines of code like this will finally become lines of code like that.
+[0:42:03]  So that's the promise ahead.
+[0:42:04]  And we'll see you next time.
+[0:43:58]  This is CS50.
+[0:43:59]  And this is week six, wherein we finally transition from scratch
+[0:44:04]  to C to now Python.
+[0:44:05]  And indeed, this is going to be somewhat of a unique experience
+[0:44:09]  in that just like a few weeks past, perhaps for the first time and now
+[0:44:14]  today, you're going to learn a new language.
+[0:44:16]  But the goal isn't just to throw another fire hose of content and syntax
+[0:44:20]  and whatnot at you, but rather to really equip you all to actually teach
+[0:44:24]  yourself new languages in the future.
+[0:44:26]  And so indeed, what we'll do today, what we'll do this coming week,
+[0:44:28]  is sort of prepare you to stand on your own.
+[0:44:31]  And once Python is passé and the world has moved on to some other language
+[0:44:34]  in some number of years, you'll be well equipped
+[0:44:36]  to figure out how to wrap your mind around some new syntax, some new
+[0:44:39]  language, and solve problems as well.
+[0:44:41]  Now you recall in week zero, this is where we started,
+[0:44:43]  just saying hello to the world.
+[0:44:46]  And that quickly escalated just a week later in C
+[0:44:48]  to be something much, much more cryptic.
+[0:44:51]  And if you've still sort of struggled with some of the syntax,
+[0:44:54]  find yourself checking your notes, your previous code,
+[0:44:56]  that's totally normal.
+[0:44:57]  And that's one of the reasons why there are languages besides C out there.
+[0:45:02]  Among them, this language called Python.
+[0:45:03]  Humans over the decades have realized, gee,
+[0:45:06]  that wasn't necessarily the best design decision.
+[0:45:08]  Or humans have realized, wow, you know what?
+[0:45:10]  Now that computers have gotten faster with more memory and more faster CPUs,
+[0:45:15]  we can actually do more with our programming languages.
+[0:45:17]  So just as human languages evolve, so do actual programming languages.
+[0:45:21]  And even within a programming language, there's typically different versions.
+[0:45:25]  We, for instance, have been using version C11 of C, which was updated in 2011.
+[0:45:31]  But Python itself continues to evolve.
+[0:45:33]  And it's now up to version 3 plus.
+[0:45:35]  And so there, too, these things will evolve in the coming days.
+[0:45:38]  Thankfully, what you're about to see is hello world for the third time.
+[0:45:42]  But it's going to be literally this.
+[0:45:44]  None of the crazy syntax above or below.
+[0:45:46]  Fewer semicolons, if any.
+[0:45:49]  Fewer curly braces.
+[0:45:50]  And really, a lot of the distractions get out of the way.
+[0:45:53]  So to get there, let's consider exactly how
+[0:45:56]  we've been programming up until now.
+[0:45:57]  So you write a program in C. And you've got, hopefully, no syntax error.
+[0:46:01]  So you're ready to build it.
+[0:46:03]  That is compile it.
+[0:46:03]  And so you've run make, and then you've run the program like dot slash hello.
+[0:46:07]  Or if you think back to week two, where we took a peek underneath the hood
+[0:46:11]  of what make is doing, it's really running the actual compiler, something
+[0:46:14]  called Clang, maybe with some command line arguments,
+[0:46:17]  creating a program called hello.
+[0:46:18]  And then you could do dot slash hello.
+[0:46:21]  So today, you're going to start doing something similar in spirit,
+[0:46:23]  but fewer steps.
+[0:46:25]  No longer will you have to compile your code and then run it,
+[0:46:27]  and then maybe fix or change it, and then compile your code and run it,
+[0:46:30]  and then repeat, repeat.
+[0:46:32]  The process of running your code is going
+[0:46:34]  to be distilled into just a single step.
+[0:46:37]  And the way to think of this for now is that whereas C is frequently used
+[0:46:41]  as, indeed, a compiled language, whereby you convert it first to zeros and ones,
+[0:46:45]  Python's going to let you speed things up, whereby you, the human programmer,
+[0:46:49]  don't have to compile it.
+[0:46:50]  You're just going to run what's called an interpreter, which, by design,
+[0:46:54]  is named the exact same thing as the language itself.
+[0:46:56]  And by running this program, installed in VS Code
+[0:46:59]  or eventually on your own Macs or PCs, this
+[0:47:02]  is just going to tell your computer to interpret this code
+[0:47:05]  and figure out how to get down to that lower level of zeros and ones.
+[0:47:08]  But you don't have to compile the code yourself anymore.
+[0:47:11]  So with that said, let's consider what the code
+[0:47:14]  is going to look like side by side.
+[0:47:16]  In fact, let's look back at some scratch blocks,
+[0:47:18]  just like we did with C in week one, and do some side by sides.
+[0:47:21]  Because even though some of the syntax this week and beyond
+[0:47:23]  is going to be different, the ideas are truly going to be the same.
+[0:47:27]  There's not all that much intellectually new just yet.
+[0:47:30]  So whereas in week zero, we might have said hello to the world
+[0:47:33]  with this purple puzzle piece, today, of course, or rather in week one,
+[0:47:36]  it looked like this in C. But today, moving forward,
+[0:47:41]  it's going to quite simply look like this instead.
+[0:47:43]  And if we go back and forth for just a moment,
+[0:47:45]  here again is the version in C, noticing the very C-like characteristics.
+[0:47:50]  And just at a glance here, in Python, I claim it's now this.
+[0:47:53]  What do you apparently need not worry about anymore?
+[0:47:57]  What's gone?
+[0:47:59]  So semicolon is gone.
+[0:48:00]  And indeed, you don't need those to finish most of your thoughts anymore.
+[0:48:03]  Anything else?
+[0:48:05]  So the backslash n is absent.
+[0:48:07]  And that's kind of curious, because we're still going to get a new line.
+[0:48:10]  But we'll see that it's become the default.
+[0:48:11]  And this one's a little more subtle.
+[0:48:13]  But now the function is called print instead of printf.
+[0:48:16]  So it's a little more familiar in that sense.
+[0:48:18]  All right, so when it comes to using libraries, that is code
+[0:48:22]  that other people have written, in the past,
+[0:48:24]  we've done things like hash include CS50.h to use CS50's own header file
+[0:48:28]  or standard IO or standard lib or string or any number of other header files
+[0:48:32]  you have all used.
+[0:48:33]  Well, moving forward, we're going to give you for this first week
+[0:48:36]  a similar CS50 library, just very short term training wheels that
+[0:48:40]  will quickly take off.
+[0:48:41]  Because in reality, it's a lot easier to do things in Python, as we'll see.
+[0:48:45]  But the syntax for this now is going to be to import the CS50 library in this way.
+[0:48:50]  And when we have now this ability, we can actually
+[0:48:52]  start writing some code right away.
+[0:48:54]  In fact, let me switch over to VS Code here.
+[0:48:57]  And just as in the past, I'll create a new file.
+[0:48:59]  But instead of creating something called .c,
+[0:49:01]  I'm going to go ahead and create my first program
+[0:49:03]  called hello.py using code space hello.py.
+[0:49:07]  That, of course, gives me this new tab.
+[0:49:08]  And let me actually quite simply do what I proposed, print, quote unquote,
+[0:49:13]  hello world, without the backslash n, without the semicolon,
+[0:49:16]  without the f in print.
+[0:49:18]  And now let me go down to my terminal window.
+[0:49:20]  And I don't have to compile it.
+[0:49:22]  I don't have to do dot slash.
+[0:49:24]  I instead run a program called Python whose purpose in life
+[0:49:27]  is now to interpret my code top to bottom, left to right.
+[0:49:30]  And if I run Python of hello.py, crossing my fingers as always, voila.
+[0:49:35]  Now I have printed out hello world.
+[0:49:37]  So we seem to have gotten the new line for free in this sense,
+[0:49:41]  where it's automatically happening.
+[0:49:42]  The dollar sign isn't weirdly on the same line
+[0:49:44]  like it once was in week one.
+[0:49:46]  But that's just a minor detail here.
+[0:49:49]  If we switch back to now some other capabilities, well, indeed,
+[0:49:52]  with the CS50 library, you can also not just import the library itself,
+[0:49:56]  but specific functions.
+[0:49:57]  And you'll see that temporarily we're going
+[0:49:59]  to give you a helper function called getString, just like in C,
+[0:50:03]  that just makes it work exactly the same way as in C.
+[0:50:05]  And we'll see a couple of other functions that will just make life easier
+[0:50:08]  initially, but quickly will we take those training wheels off so that nothing
+[0:50:12]  is indeed CS50 specific.
+[0:50:14]  All right, well, how about functions more generally in Python?
+[0:50:17]  Let's do a whirlwind tour, if you will, much like we did in that first week
+[0:50:21]  of C comparing one to the other.
+[0:50:23]  So back in our world of Scratch, one of the first programs we wrote
+[0:50:26]  was this one here, whereby we asked the human their name.
+[0:50:30]  We then used the return value that was sort of automatically stored
+[0:50:34]  in this answer variable as a second argument
+[0:50:37]  to join so that we could say hello, David, or hello, Carter.
+[0:50:41]  So this was back in week one, week zero.
+[0:50:44]  In week one, we converted it to this.
+[0:50:46]  And here's a perfect example of things like escalating quickly.
+[0:50:48]  And again, this is why we start in Scratch.
+[0:50:50]  There's just so much distraction here to achieve the same idea.
+[0:50:53]  But even today, we're going to chip away at some of that syntax.
+[0:50:56]  So in C, we had to declare the variable as a string here.
+[0:51:02]  We, of course, had the semicolon and more.
+[0:51:04]  Well, in Python, the comparable code now is
+[0:51:07]  going to look more simply like this.
+[0:51:10]  So semicolon is, again, gone on both lines, for that matter.
+[0:51:14]  So that's good.
+[0:51:15]  What else appears to have changed or disappeared?
+[0:51:18]  Yeah?
+[0:51:20]  Yeah, so I didn't have to specifically say that answer is now a string.
+[0:51:24]  And indeed, Python is dynamically typed.
+[0:51:26]  And in fact, it will infer from context exactly what it
+[0:51:30]  is you are storing in that variable.
+[0:51:32]  Other details that seem a little bit different, a little bit different.
+[0:51:39]  What else jumps out at you here?
+[0:51:40]  I'll go back.
+[0:51:41]  This was the C version.
+[0:51:43]  And maybe focus now on the second line, because we've rather exhausted the first.
+[0:51:47]  Here's now the Python version.
+[0:51:49]  What's different here?
+[0:51:50]  Yeah?
+[0:51:55]  Yeah, there's no percent s anymore.
+[0:51:57]  There's no second argument at the moment, per se, to print.
+[0:52:01]  Now, it is still a little weird.
+[0:52:02]  It's as though I've deployed some addition here, arithmetically.
+[0:52:05]  But that's not the case.
+[0:52:06]  Some of you have programmed before.
+[0:52:07]  And plus, some of you might know means what in this context?
+[0:52:11]  So to combine or more technically, anyone know the buzzword?
+[0:52:14]  Yeah?
+[0:52:16]  To concatenate.
+[0:52:16]  So to concatenate is like the fancy way of what Scratch calls joining,
+[0:52:20]  which is to take one string on the left, one string on the right,
+[0:52:23]  to join them together, to glue them together, if you will.
+[0:52:26]  So this is not addition.
+[0:52:27]  It would be if it were numbers involved instead.
+[0:52:30]  But because we've got a string, hello, comma,
+[0:52:31]  and another string implicitly in this variable
+[0:52:34]  based on what the human typed in in response to this getString function,
+[0:52:38]  that's going to concatenate hello, comma, space, and then David, or Carter,
+[0:52:42]  or whatever the human has typed in.
+[0:52:44]  But it turns out there's going to be different ways to do this in Python.
+[0:52:47]  And we'll show you a few different ones.
+[0:52:48]  And here, too, try not to get too hung up on or frustrated
+[0:52:51]  by all of the different ways you can solve problems.
+[0:52:54]  Odds are you're going to be picking up tips and techniques for years
+[0:52:57]  to come if you continue programming.
+[0:52:58]  So let's just give you a few of the possible ways.
+[0:53:01]  So here's a second way.
+[0:53:02]  You could print out hello, comma, David, or hello, comma, Carter.
+[0:53:06]  But what has changed?
+[0:53:07]  In the previous version, I used concatenation explicitly.
+[0:53:10]  And the space here is important, grammatically,
+[0:53:13]  just so we get that in the final phrase.
+[0:53:15]  Now I'm proposing to get rid of that space
+[0:53:18]  to add a comma outside of the double quotes as well.
+[0:53:21]  But if you think back to C, this probably just
+[0:53:24]  means that print, similar in spirit to printf,
+[0:53:27]  can take not just one argument, but even two.
+[0:53:29]  And in fact, because of this comma in the middle
+[0:53:31]  that's outside of the double quotes, it's hello, comma.
+[0:53:35]  And then it will be automatically concatenated with,
+[0:53:37]  even without using the plus, to whatever the value of answer is.
+[0:53:41]  And by default, just for grammatical prettiness,
+[0:53:44]  the print function always gives you a space
+[0:53:46]  for free in between each of the multiple arguments you pass in.
+[0:53:49]  We'll see how you can override that down the line.
+[0:53:51]  But for now, that's just another way to do it.
+[0:53:53]  Now perhaps the better, if slightly cryptic, way to do this,
+[0:53:57]  or just the increasingly common way, is probably
+[0:53:59]  this third version, which looks a little weird too.
+[0:54:03]  And probably the weirdness jumps out.
+[0:54:05]  We've suddenly introduced these curly braces,
+[0:54:08]  which I promised were mostly gone.
+[0:54:10]  And they are.
+[0:54:10]  But inside of this string here, I've done a curly brace, which might mean what?
+[0:54:16]  Just intuitively.
+[0:54:17]  And here is sort of an example of how you learn a new language.
+[0:54:20]  Just kind of infer from context how Python probably works.
+[0:54:24]  What might this mean?
+[0:54:25]  Yeah.
+[0:54:30]  Yeah, so this is an indication, because the curly braces,
+[0:54:33]  because this is the way Python was designed,
+[0:54:35]  that we want to plug in the value of answer, not literally A-N-S-W-E-R.
+[0:54:40]  And the fancy word here is that the answer variable will be interpolated.
+[0:54:44]  That is, substituted with its actual value.
+[0:54:46]  But, but, but, and this is actually weird looking.
+[0:54:49]  This was introduced a few years ago to Python.
+[0:54:51]  What else did I have to change to make these curly braces work, apparently?
+[0:54:56]  Yeah.
+[0:54:58]  Yeah, there's this weird F. And so it's sort of like part of print F,
+[0:55:02]  but now it's inside the curly, it's inside the parenthesis there.
+[0:55:06]  This is just the way Python designed it.
+[0:55:07]  So a few years ago, when they introduced what are called format strings,
+[0:55:10]  or F-strings, you literally prefix your quoted string with the letter F.
+[0:55:16]  And then you can use trickery like this, like putting curly braces,
+[0:55:20]  so that the value will be substituted automatically.
+[0:55:22]  If you forget the F, you're going to literally see hello, comma,
+[0:55:25]  curly brace, answer, close curly brace.
+[0:55:28]  If you add the F, it's indeed interpolated.
+[0:55:30]  The value is plugged in.
+[0:55:32]  All right, questions on how we can just say hello to the world via Python,
+[0:55:36]  in this case?
+[0:55:37]  Yeah.
+[0:55:39]  If you do this without the F, if you omit the F,
+[0:55:44]  you will literally see H-E-L-L-O, comma, curly brace, A-N-S-W-E-R,
+[0:55:48]  close curly brace.
+[0:55:49]  So in fact, let's do this.
+[0:55:50]  Go back to VS code here quickly.
+[0:55:53]  I've still got my file called hello.py open.
+[0:55:56]  And let me go ahead and change this ever so slightly.
+[0:55:59]  So I'm going to go ahead and let's say from CS50 import get string.
+[0:56:05]  And that's just the new syntax I propose using
+[0:56:07]  to import a function from someone else's library.
+[0:56:10]  I'm going to now go ahead and ask the question.
+[0:56:15]  Let's go ahead and use get string, storing the result and answer.
+[0:56:18]  So get string, quote unquote, what's your name, question mark.
+[0:56:22]  And then on this line, I'm going to deliberately make a mistake here,
+[0:56:25]  exactly to your question.
+[0:56:27]  Let me just say hello, comma, answer, and just this.
+[0:56:31]  Now, even though answer is a variable, Python's
+[0:56:33]  not going to be so presumptuous as to just plug
+[0:56:35]  in the value of a variable called answer.
+[0:56:38]  What it's going to do, of course, is if I type in my name,
+[0:56:41]  whoops, I typed too fast, let me go ahead and rerun that again.
+[0:56:45]  If I run Python of hello.py, type in my name and hit Enter,
+[0:56:49]  I get hello, comma, answer.
+[0:56:50]  Well, let me do one better.
+[0:56:51]  Let me apply these curly braces as before.
+[0:56:55]  Let me rerun Python of hello.py, what's your name, d-a-v-i-d,
+[0:56:59]  and here's again the answer to your question.
+[0:57:01]  Now we get literally the curly braces.
+[0:57:03]  So the fix here, ultimately, is just going to be to add the f there,
+[0:57:07]  rerun my program again with d-a-v-i-d, and now hello, comma, David.
+[0:57:11]  So this is admittedly a little more cryptic
+[0:57:13]  than the ones with the plus or the comma,
+[0:57:15]  but this is just increasingly common.
+[0:57:17]  Why?
+[0:57:17]  Because you can read it left to right.
+[0:57:18]  It's nice and convenient.
+[0:57:19]  It's less cryptic than the percent s's.
+[0:57:21]  So it's sort of a new and improved version, if you will, of printf in C,
+[0:57:24]  based on decades of experience of programmers doing things like this.
+[0:57:29]  Questions on printing in this way?
+[0:57:34]  We're now on our way to programming in Python.
+[0:57:37]  Anything?
+[0:57:38]  All right.
+[0:57:38]  Well, what more can we do with this language here?
+[0:57:41]  Well, let me propose that we consider that we have, for instance,
+[0:57:47]  a few other features that we can add to the mix as well, namely, let's say,
+[0:57:55]  some data types as well.
+[0:57:57]  So let me flip over here to back to the slides.
+[0:58:00]  And there's different data types in Python, as we'll soon see,
+[0:58:03]  but they're not as explicit as we already saw by using a string from getstring.
+[0:58:07]  You don't have to explicitly state what it is,
+[0:58:09]  but you saw recall in C all of these various data types.
+[0:58:13]  And then in Python, kind of nicely enough,
+[0:58:16]  this list is about to get shorter.
+[0:58:18]  And so here is our list in C. Here is an abbreviated list in Python.
+[0:58:22]  So we're still going to have strings, but they're
+[0:58:24]  going to be more succinctly called STRs now, S-T-R.
+[0:58:27]  We're still going to have ints for integers.
+[0:58:29]  We're still going to have floats for floating point values.
+[0:58:32]  We're even going to have bools for true and false.
+[0:58:34]  But what's missing now from the list is long and floats.
+[0:58:38]  And why is that?
+[0:58:39]  Or rather, long and double?
+[0:58:40]  Well, recall that in C, those used more bits.
+[0:58:43]  Well, in Python, the smaller data types previously, int and float,
+[0:58:47]  themselves just use more bits for you.
+[0:58:49]  And so you don't need to distinguish between small and large.
+[0:58:52]  You just use one data type, and the language
+[0:58:54]  gives you a bigger range than before.
+[0:58:56]  It turns out, though, there's going to be some other features as well
+[0:59:00]  of Python, these data types, one of which will be called range, another of which
+[0:59:03]  will be list.
+[0:59:04]  So gone will be arrays.
+[0:59:05]  We'll actually use something literally called a list.
+[0:59:08]  Tuple, sort of like x, y pairs for coordinates and things like that.
+[0:59:12]  Dict for dictionaries.
+[0:59:14]  So we'll have built-in capabilities for storing keys and values, we'll see.
+[0:59:18]  And even a set, sort of mathematically, a set
+[0:59:19]  is like a collection of values, but it automatically
+[0:59:22]  gets rid of duplicates for you.
+[0:59:23]  So all of these things, we could absolutely implement in C if we wanted.
+[0:59:28]  And indeed, in problem set five, you've been implementing your very own spell
+[0:59:32]  checker using some form of hash table.
+[0:59:35]  Well, it turns out that in Python, you can solve those same problems,
+[0:59:38]  but perhaps a little more readily.
+[0:59:40]  In fact, let me go back over here to VS code,
+[0:59:43]  and let me propose that I do the following.
+[0:59:46]  Let me go ahead and create a file called dictionary.py.
+[0:59:50]  Let me propose that I try to implement, say, problem set five, our spell
+[0:59:55]  checker, in Python instead of C, and achieve ultimately the same kind of

@@ -1,0 +1,1234 @@
+# Transcripción: chunk_012.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  And in fact, let me go ahead and do this.
+[0:00:02]  Instead of using malloc this second time on line 18,
+[0:00:06]  in addition to the first time I used it on line 6,
+[0:00:09]  I'm actually going to try and introduce another function called realloc,
+[0:00:13]  which, as the name suggests, tries to reallocate memory for you.
+[0:00:17]  And it works a little differently for malloc.
+[0:00:19]  Realloc expects two arguments.
+[0:00:22]  The first one is, what is the chunk of memory
+[0:00:24]  that you want to try to grow or shrink, that is reallocate
+[0:00:28]  to be a different size?
+[0:00:29]  And then you specify what size you would want.
+[0:00:32]  And indeed, in this case, I want 4 times size of int.
+[0:00:37]  And that will now give me, hopefully, a new address of a chunk of memory
+[0:00:42]  that's big enough to fit all four numbers.
+[0:00:45]  But what's wonderful about realloc is that it will handle all of the copying
+[0:00:52]  for me.
+[0:00:52]  So in fact, I'm going to go down here.
+[0:00:54]  I'm going to get rid of all of this, this extra for loop.
+[0:00:58]  And what I'm simply going to do instead is this.
+[0:01:01]  Once I can trust, after lines 18 through 23, that realloc worked,
+[0:01:08]  and it didn't return null because I'm out of memory,
+[0:01:10]  I can just say, OK, just immediately remember
+[0:01:13]  that the new list points at this new chunk of memory instead.
+[0:01:17]  And then I can still now do this line, but I can tweak the semantics here
+[0:01:21]  and just say list bracket 3, the new final location in the new list is 4.
+[0:01:29]  I don't need to free this here.
+[0:01:31]  I don't need to do this.
+[0:01:32]  All I need now at the bottom is the final for loop
+[0:01:35]  to just print out these values.
+[0:01:36]  So in short, even though that was somewhat quick,
+[0:01:39]  using realloc just moves the entire copying process
+[0:01:43]  that I implemented myself a moment ago using a for loop.
+[0:01:46]  It just moves it to realloc and lets it deal with the copying for me.
+[0:01:49]  It's no more efficient, but at least means
+[0:01:51]  I'm writing less code, which is more pleasant.
+[0:01:53]  And hopefully, the people who wrote malloc or realloc are smarter than me,
+[0:01:56]  and they just will introduce bugs with lower probability too.
+[0:02:02]  That was a lot.
+[0:02:02]  Any questions?
+[0:02:08]  Good question.
+[0:02:08]  Why do you still need to make list equal temp as I did on line 24?
+[0:02:14]  So ideally, I would do this.
+[0:02:17]  Ideally, I would just change this line 18 to be list.
+[0:02:22]  That is to say, or actually even better, ideally, I
+[0:02:25]  would just say realloc this list to be of this new size.
+[0:02:28]  But again, things can go wrong when allocating memory.
+[0:02:30]  You need to check a return value to see if it was successful or not.
+[0:02:35]  And so we need to use a return value.
+[0:02:37]  OK, so let's not introduce temp.
+[0:02:39]  Let's just use list.
+[0:02:40]  But here's where a memory leak might happen.
+[0:02:42]  In the off chance, realloc fails and doesn't have enough memory
+[0:02:47]  for your four bytes.
+[0:02:48]  Therefore, it returns by definition null.
+[0:02:51]  You can't overwrite the original value of list with null to then check it.
+[0:02:56]  Why?
+[0:02:57]  Because now who remembers where the original three bytes were?
+[0:03:00]  If you prematurely change the value of list, you've lost.
+[0:03:04]  You've leaked memory in that sense.
+[0:03:06]  And so that's why, let me undo this change,
+[0:03:08]  I declare a temporary pointer for the sole purpose of making sure I
+[0:03:12]  can check the return value.
+[0:03:14]  And then once it's good, now I'll update the value of list.
+[0:03:17]  So it's sort of doing a switcheroo by making sure first
+[0:03:20]  that you have a new value to swap with the old.
+[0:03:24]  Other questions?
+[0:03:26]  On this code, yeah.
+[0:03:33]  Indeed, realloc automatically frees the previous memory for you.
+[0:03:36]  And better yet, it's even smarter than that if you get lucky
+[0:03:40]  and there happens to be space right after your existing chunk of memory.
+[0:03:44]  So 1, 2, 3 garbage value.
+[0:03:46]  Instead of 1, 2, 3 hello world, realloc won't even
+[0:03:49]  bother copying things from old to new.
+[0:03:52]  It will just say, OK, I'm going to now reserve for you more bytes
+[0:03:55]  than you originally asked for.
+[0:03:57]  So it doesn't have to waste time doing that copying.
+[0:03:59]  And so in that sense, this version is now not only still correct,
+[0:04:02]  it's even better designed because we're not
+[0:04:04]  wasting time with that for loop.
+[0:04:06]  We might have to resort to it if there is, in fact, hello world
+[0:04:08]  or something else in the way.
+[0:04:10]  But hopefully, we'll get lucky and save those steps.
+[0:04:13]  Other questions on this manipulation of code here?
+[0:04:19]  Yeah, in the middle.
+[0:04:26]  What if you want to resize a two-dimensional array,
+[0:04:29]  so very similar in spirit whereby you can use the same trickery.
+[0:04:33]  Let me wave my hand at that for now just because I
+[0:04:36]  think that's going to sort of significantly increase the complexity
+[0:04:39]  but very same primitives.
+[0:04:40]  Ultimately, a two-dimensional array is essentially
+[0:04:43]  just a doubly long or quadratically longer list of memory
+[0:04:47]  that using square bracket notation is doing some of that mental math for you.
+[0:04:51]  But it's fundamentally no different of what's going on underneath the hood.
+[0:04:56]  All right.
+[0:04:57]  So with that said and that code under our belt,
+[0:05:00]  even though that's not going to be something you'll frequently
+[0:05:03]  need to code yourself, let's propose now how we might go about building.
+[0:05:08]  Some actual data structures ourselves, the new ingredient here
+[0:05:11]  being this reality that if you want to resize a chunk of memory
+[0:05:16]  so as to make room for things, we now have that ability.
+[0:05:19]  Memory addresses and pointers just give us the ability
+[0:05:21]  to point around at things and move things around in memory.
+[0:05:24]  But now that we have malloc and even realloc,
+[0:05:27]  you can imagine maybe rewinding.
+[0:05:29]  And you could implement that stack, that queue, using not an array per se
+[0:05:33]  because you have to commit to an array size in advance.
+[0:05:36]  But if you implement your stack or your queue using a pointer
+[0:05:39]  and then malloc and realloc and maybe someone else
+[0:05:42]  writes all that code for you, perhaps now you
+[0:05:44]  can imagine that, OK, now the stack can grow or shrink
+[0:05:48]  by using realloc accordingly.
+[0:05:50]  You don't have to preemptively say, give me five bytes or 50 or 500 or 5,000.
+[0:05:56]  You can say, just give me one initially.
+[0:05:58]  And if I need more, I'll realloc, realloc, realloc.
+[0:06:01]  And if you keep popping things off the stack,
+[0:06:03]  you can realloc in the other direction and ask for fewer and fewer bytes.
+[0:06:07]  And the operating system can take that memory back as well.
+[0:06:09]  So we now have this building block.
+[0:06:11]  Let's see what we can do with it.
+[0:06:13]  So we've had a few pieces of syntax in recent weeks,
+[0:06:15]  all of which we're going to combine now in just a slightly more clever way.
+[0:06:19]  So struct is this keyword in C that lets us build our own structure in memory,
+[0:06:23]  like a collection of two or three or more variables,
+[0:06:25]  like a person that we've seen before.
+[0:06:27]  The dot operator, recall we've used when you do have a struct, like a person,
+[0:06:34]  and you want to go inside of it.
+[0:06:36]  So like a person dot name or person dot number.
+[0:06:40]  We did this a few weeks ago now.
+[0:06:42]  But the dot operator just allows you to go inside of a structure
+[0:06:45]  and get the individual variables within.
+[0:06:47]  And then the star operator, unfortunately, has a lot of uses now.
+[0:06:50]  One was multiplication.
+[0:06:52]  My god, that was easy back in the day.
+[0:06:54]  Now it's used to declare pointers.
+[0:06:56]  It's also used to dereference pointers.
+[0:06:58]  So to make one exist and then go to that address.
+[0:07:02]  Unfortunately, it's the same symbol for all of those, but it's all related.
+[0:07:06]  But with these three symbols, it turns out
+[0:07:08]  you're going to get one last one today.
+[0:07:10]  And my god, it finally looks like the concept.
+[0:07:13]  It turns out there's a clever way, any time you
+[0:07:16]  want to use the dot and the star together, that is to go somewhere
+[0:07:20]  and go to an address and then look inside of a structure,
+[0:07:23]  you can actually literally use an arrow symbol on your keyboard.
+[0:07:26]  It's not a single keystroke.
+[0:07:28]  It's a hyphen and then an open angle bracket.
+[0:07:31]  But at least it looks like an arrow.
+[0:07:32]  And we'll see indeed in code today, the things
+[0:07:34]  I was drawing pictorially on the screen last time with yellow arrows,
+[0:07:38]  you can actually now express as well in code.
+[0:07:40]  And so here we have our next data structure called a linked list.
+[0:07:45]  And this is one of the most useful, powerful concepts in C.
+[0:07:48]  It's the kind of thing that you can take for granted in Java and Python
+[0:07:51]  and higher level languages.
+[0:07:53]  But today we'll see how we or others can actually build these things just
+[0:07:57]  using these same primitives.
+[0:07:59]  So a linked list is going to allow us to actually do what we used a foam
+[0:08:04]  finger for last week, allow us to link together, for instance,
+[0:08:07]  these three values, maybe with that fourth value over there.
+[0:08:09]  And then if there's a fifth, maybe this other foam finger
+[0:08:12]  points even farther over way to that fifth value.
+[0:08:15]  The key being that you can stitch together fancier data structures
+[0:08:19]  without having to pick all of these up and find new space.
+[0:08:22]  You just have to at least connect the dots somehow.
+[0:08:25]  We just need to somehow point from one to the other.
+[0:08:27]  And that's going to make things much more efficient, it would seem.
+[0:08:30]  So how do we get there?
+[0:08:32]  So here's my computer's memory as always.
+[0:08:33]  Suppose that I'm storing the value 1 somewhere in there,
+[0:08:37]  and it's at 0x123 address, whatever.
+[0:08:39]  And I'm storing the number 2 somewhere else in memory, 0x456,
+[0:08:43]  and number 3 at address 0x789.
+[0:08:46]  This is not an array by definition y, even though it's the only three
+[0:08:51]  things on the screen.
+[0:08:52]  What makes this not an array?
+[0:08:54]  It's not contiguous.
+[0:08:55]  So this violates the definition of an array.
+[0:08:58]  But you know, especially since they're sequential,
+[0:09:01]  it kind of looks to a human like a list.
+[0:09:03]  So it would be nice if there were a data type called list.
+[0:09:06]  And there isn't in C. There will be in Python.
+[0:09:09]  But you know what?
+[0:09:10]  If I could somehow stitch together these three values
+[0:09:13]  so I can get from one to the next to the next,
+[0:09:15]  then I think we could achieve the idea, the concept of a list,
+[0:09:19]  without this really annoying constraint that they all
+[0:09:21]  be contiguous as in an array.
+[0:09:24]  So how do I do that?
+[0:09:25]  Well, at the end of the day, I only have memory at my disposal.
+[0:09:29]  There's no more training wheels to take off here.
+[0:09:32]  This is what we've got underneath the hood of a computer.
+[0:09:35]  So if all I have is memory, I think the solution
+[0:09:38]  to this problem of stitching together those values in a list
+[0:09:41]  must be to spend a bit more memory.
+[0:09:44]  That's literally the only resource we have right now.
+[0:09:47]  So let me propose that if we want to create a list conceptually out
+[0:09:50]  of three values that are in random, although pictorially pretty,
+[0:09:54]  positions in memory, let me just add a little bit more memory to the picture.
+[0:09:58]  So in addition to storing the one, I'm going to leave myself
+[0:10:01]  some room, a little scratch pad, if you will, to use some other bits as well.
+[0:10:05]  Same for the two, same for the three.
+[0:10:07]  And you can perhaps see where this is going based on last week.
+[0:10:11]  If I want to somehow connect the one to the two,
+[0:10:17]  any instincts as to what I should write in this box
+[0:10:20]  here that would lead me effectively from one to the two?
+[0:10:25]  What could go here?
+[0:10:26]  Yeah, we could store the address of two.
+[0:10:32]  And so specifically, what would you have me write here?
+[0:10:38]  Perfect.
+[0:10:39]  Ideally, I would just put in this box another integer, one
+[0:10:42]  that happens to be represented in hexadecimal,
+[0:10:44]  but that's just a base system.
+[0:10:46]  It's just a human thing for us to look at.
+[0:10:48]  I'm going to put the value 0x456 here.
+[0:10:51]  So let me go ahead and reveal that.
+[0:10:52]  0x456 goes there.
+[0:10:54]  You can perhaps see further where this is going.
+[0:10:56]  Well, if I want to get from the two to the three,
+[0:10:58]  I think I need to put below the two the address of the three, which
+[0:11:02]  gives me 0x789.
+[0:11:04]  Now, if three is the end of the list, I don't
+[0:11:06]  want to let it be some garbage value, because that would imply that it,
+[0:11:09]  who knows where it's pointing.
+[0:11:11]  I need some definitive value.
+[0:11:12]  And just what would your instincts be?
+[0:11:14]  If I want to make clear with some special sentinel value
+[0:11:18]  that the buck stops here, what do I put?
+[0:11:20]  What might my options be?
+[0:11:22]  Yeah, so null.
+[0:11:23]  Not N-U-L per se, but N-U-L-L, which was the new keyword we introduced
+[0:11:28]  last week, which just represents an empty pointer, if you will.
+[0:11:32]  Technically, the address 0x0.
+[0:11:35]  So literally, the 0 address.
+[0:11:37]  And what humans did years ago, they just decided, you know what?
+[0:11:39]  Nothing should ever live at address 0 in memory.
+[0:11:43]  We're just going to reserve that one special byte
+[0:11:45]  to be a special signal, a sentinel value, such
+[0:11:48]  that if you ever see a 0 address in a pointer, it just means it's invalid.
+[0:11:52]  It does not exist.
+[0:11:54]  Now, we write that, though, a little more pleasantly for the eyes
+[0:11:56]  as just N-U-L-L in all caps.
+[0:11:59]  And that's a keyword in C as well.
+[0:12:00]  But of course, last week I claimed that who cares where things are in memory?
+[0:12:04]  And honestly, this quickly gets tedious even worrying about these values.
+[0:12:08]  So let me abstract this away and propose
+[0:12:09]  that if we want to remember where all of these numbers are in memory,
+[0:12:14]  let's give ourselves one final piece of memory that just allows
+[0:12:17]  us to start the whole process.
+[0:12:20]  Let me allocate on the left-hand side here not room for a number,
+[0:12:24]  like 1, 2, 3, just room for a pointer that, henceforth, I think
+[0:12:28]  I'll call list by convention, and then store in that one additional pointer
+[0:12:34]  a value that just kickstarts the whole process.
+[0:12:36]  This is the sort of treasure map, if you will, that you get handed.
+[0:12:39]  And this has the address of the very first actual node in memory.
+[0:12:44]  Now, technically, we could just start with this.
+[0:12:46]  But it turns out, we'll see, it's just a little cleaner
+[0:12:49]  to use a simple single pointer that leads to the things you care about,
+[0:12:53]  as opposed to just starting with the first element.
+[0:12:55]  Why?
+[0:12:56]  Well, if you ever want to get rid of this element,
+[0:12:58]  it'd be nice if you could at least still hang onto an empty sheet of paper that
+[0:13:01]  indicates that the list is empty, would be one argument for that.
+[0:13:04]  So again, who cares about these addresses now?
+[0:13:06]  Now, with the wave of the hand, let's just abstract it away.
+[0:13:10]  And there are our pointers.
+[0:13:12]  Each of those addresses in the squares at the bottom
+[0:13:15]  are simply pointing to the next element in the list.
+[0:13:19]  The jargon to introduce here would be that now that we have these integers,
+[0:13:23]  1, 2, 3, but they're in these wrappers, if you will,
+[0:13:26]  these structures that have metadata that is additional data that is related to,
+[0:13:31]  but not the data you actually care about.
+[0:13:33]  This is data.
+[0:13:34]  This is metadata.
+[0:13:35]  This thing here, rectangularly, we'll call a node, an ODE.
+[0:13:39]  And it's just a term of art that means it's
+[0:13:41]  like a container in code for storing some values.
+[0:13:45]  This, then, is a linked list.
+[0:13:47]  And this, then, is the sort of graphical incarnation
+[0:13:51]  of one node pointing to the other.
+[0:13:53]  In this case, they happen to be, by chance and by design of this desk,
+[0:13:57]  contiguous initially.
+[0:13:58]  But there's no requirement that they be such.
+[0:14:00]  The one could be over there, the two over there, the three over there.
+[0:14:03]  I would just need more foam fingers to point at one to the next.
+[0:14:06]  Questions on this concept of a linked list?
+[0:14:11]  Yeah, in back.
+[0:14:17]  Can you say that again?
+[0:14:24]  A good question, do traditional arrays start with a pointer that's
+[0:14:27]  outside of the structure?
+[0:14:28]  Short answer, no.
+[0:14:29]  Arrays are special in C and certain other languages.
+[0:14:33]  And the name of an array is technically a symbol, if you will,
+[0:14:37]  that the program knows maps to a specific location in memory.
+[0:14:41]  It's just a label, a synonym for a memory address.
+[0:14:45]  It does not take up space.
+[0:14:47]  So to be clear, the name of an array does not take up space,
+[0:14:50]  like that extra square on the left.
+[0:14:52]  But you do need that extra square on the left
+[0:14:54]  when implementing a linked list so that you
+[0:14:56]  can determine if the list is of size 0, there's
+[0:14:59]  nothing being pointed at, or size 3 in this case.
+[0:15:02]  We're sort of taking on more responsibility ourselves.
+[0:15:06]  Yeah, how do you point to the next element?
+[0:15:14]  Can you elaborate?
+[0:15:21]  Good question.
+[0:15:21]  If each of these elements is pointing to the next,
+[0:15:23]  how does 3 point to the others?
+[0:15:25]  Short answer, it doesn't.
+[0:15:27]  At least in this design, we have more technically
+[0:15:29]  what's called a singly linked list.
+[0:15:31]  And as the arrows imply, it only goes in one direction.
+[0:15:34]  So if you somehow find in code, maybe a for loop, maybe a while loop,
+[0:15:38]  somehow you're sort of in code over here,
+[0:15:40]  you have no way in code to go backwards unless we change this
+[0:15:45]  to a doubly linked list where I add another box that lets me
+[0:15:49]  have arrows in both directions.
+[0:15:50]  Or maybe I just kind of make it circular,
+[0:15:54]  and I connect the 3 back to the 1, which you can totally do,
+[0:15:58]  but that tends to make life harder because now you
+[0:16:00]  have to figure out when you're stuck in a loop in your data structure,
+[0:16:03]  but it's doable as well.
+[0:16:04]  But as is, it's a dead end by design.
+[0:16:07]  Other questions on this design here?
+[0:16:13]  All right, well, how might we implement this structure in code?
+[0:16:15]  Well, let me just connect the dots to something like we've seen before here.
+[0:16:19]  This is how, a couple of weeks ago, we introduced
+[0:16:21]  the notion of a person, and we claimed a person
+[0:16:25]  might have a name and a number.
+[0:16:26]  Last week, of course, we took off some of these training wheels,
+[0:16:29]  and a string is really technically a char star in both cases.
+[0:16:32]  But really, there's no conceptual difference beyond that.
+[0:16:35]  But let's use this same paradigm to implement a node,
+[0:16:39]  as I described it in that picture.
+[0:16:40]  So let me get rid of the name and the number
+[0:16:42]  because that's related only to a person.
+[0:16:44]  And let me rename this structure, for discussion's sake, to node.
+[0:16:48]  That then invites the question, well, what
+[0:16:50]  needs to go inside of a node?
+[0:16:53]  Well, minimally, an integer.
+[0:16:56]  But this is now where we need to think a little harder, just conceptually,
+[0:17:00]  even if you have no idea how to type it at the keyboard,
+[0:17:03]  what else needs to be part of a node based on these rectangular pictures
+[0:17:07]  that we've drawn?
+[0:17:09]  What more do we need?
+[0:17:10]  Yeah.
+[0:17:13]  Yeah, we need a pointer to another node.
+[0:17:15]  So if I don't know how to implement this yet,
+[0:17:19]  it could be something like pointer to another node.
+[0:17:22]  How do I do that?
+[0:17:23]  Well, you know what?
+[0:17:24]  It turns out you would ideally say this.
+[0:17:26]  If you know that the next node is itself a node by definition,
+[0:17:32]  well, any time we've needed a pointer, we just use the data type and a star.
+[0:17:36]  And I'm going to arbitrarily, but I think reasonably, call this second square
+[0:17:40]  at the bottom of those rectangles next as the name of my attribute here.
+[0:17:45]  But node star just connotes that the next variable is
+[0:17:49]  going to be not a node, per se, but the address of a node.
+[0:17:52]  And that's exactly what we did.
+[0:17:53]  You had me put 0x456, 0x789 in that box, which is the address of another node.
+[0:17:59]  So the way we would express this in code would be node star next.
+[0:18:04]  But we could call the variable anything we want.
+[0:18:07]  Now, this is a bit of a white lie, but we'll fix this right now.
+[0:18:10]  This code won't actually compile.
+[0:18:12]  C takes you pretty literally, recall.
+[0:18:15]  And if you use some term at the top of your file
+[0:18:18]  that you don't define until later in your file,
+[0:18:20]  you're going to see some error message.
+[0:18:22]  We've seen this when I've messed up and I forgot
+[0:18:24]  to include the function prototypes at the top of my code.
+[0:18:26]  This is related in spirit.
+[0:18:28]  I seem here on my 1, 2, 3, 4th line of code,
+[0:18:31]  I'm trying to use this new term of art that I invented here
+[0:18:34]  in my code called node, even though it's a CS term as well.
+[0:18:37]  But nowhere above this, it would seem, did I even define what a node is.
+[0:18:41]  It's not a data type in C. Every computer scientist know what a node is,
+[0:18:44]  but it doesn't come for free with the language.
+[0:18:47]  So I need to do something else.
+[0:18:49]  I need this word here to come first so that I can use it here.
+[0:18:53]  And so we have this sort of catch-22.
+[0:18:55]  How can a structure be self-referential, that is,
+[0:18:59]  point to another version of itself if the word doesn't yet exist?
+[0:19:03]  So the solution to this in C, which we didn't need for a person
+[0:19:07]  because there was no notion of connecting as a list,
+[0:19:11]  we need one more keyword here that we didn't need for a person,
+[0:19:14]  and we reuse that keyword here.
+[0:19:16]  So kind of an annoying detail.
+[0:19:18]  But if we preemptively call this whole thing struct node,
+[0:19:23]  you can now refer to the thing on the inside as a struct node star,
+[0:19:27]  but then you can shorten the name of the whole thing
+[0:19:30]  from struct node to just node.
+[0:19:33]  Sort of an annoying sequence of steps, but in short,
+[0:19:35]  any time you're building a node, a linked list in memory,
+[0:19:38]  this is just the paradigm.
+[0:19:39]  You use typedef struct, the name of the thing you want to define, like node.
+[0:19:43]  You use that name on the inside if you want to point from one to another,
+[0:19:47]  and then you can shorten it down here to just be called node.
+[0:19:52]  Questions, then, on this code here?
+[0:19:56]  Questions on what we just did?
+[0:19:59]  Well, if I rewind just a moment to that final picture,
+[0:20:04]  what would be the upside to be clear of having jumped through these hoops
+[0:20:07]  and added this complexity, if you will?
+[0:20:10]  What problem did we just solve by linking together these three values,
+[0:20:14]  to be clear?
+[0:20:15]  Yeah, making lists that are not contiguous, if you will.
+[0:20:23]  So making lists that are not contiguous in memory, the upside of which
+[0:20:27]  is that if I want to add the number 4 to this list,
+[0:20:29]  it looks like I can choose from any chunks of available memory on the screen.
+[0:20:33]  I just need to sort of point from the end of the current list
+[0:20:37]  to wherever that other one is in memory.
+[0:20:39]  What I don't need to do, to be clear, is copy the 1, the 2, or the 3.
+[0:20:43]  Everything can just stay put, which means timewise,
+[0:20:46]  I can do this much more quickly, it would seem,
+[0:20:48]  without copying things again and again, and even
+[0:20:50]  without using realloc to let it do all of the copying potentially for me.
+[0:20:55]  All right, but as we'll start seeing even more in the coming weeks,
+[0:20:57]  every time we benefit and solve some problem, we pay a price.
+[0:21:01]  There's a trade-off.
+[0:21:03]  What is a downside, as you might perceive now,
+[0:21:05]  of using a linked list instead of an array?
+[0:21:09]  Yeah.
+[0:21:11]  Yeah, I mean, we use twice as much memory,
+[0:21:13]  because now in addition to storing the integers 1, 2, 3,
+[0:21:15]  I also need to store a pointer for each of those.
+[0:21:18]  And honestly, even this picture is a bit of simplification.
+[0:21:21]  Technically, in most systems today, each int would be 4 bytes.
+[0:21:25]  Technically today, most pointers, though, would be 8 bytes.
+[0:21:28]  I just didn't want to draw this weird shape on the board
+[0:21:30]  where the bottom square is even bigger than the top square.
+[0:21:32]  But technically, we're using even more than twice
+[0:21:35]  as much space for these pointers.
+[0:21:36]  So there's that trade-off.
+[0:21:37]  Now thankfully, decades after C was invented,
+[0:21:40]  memory is generally much cheaper nowadays.
+[0:21:42]  And so it's OK to sort of spend more of it if you need to.
+[0:21:45]  And it depends on what you want to optimize for,
+[0:21:47]  but I absolutely hear a downside.
+[0:21:50]  What's another downside of having transitioned to a linked list?
+[0:21:55]  You can't index into it.
+[0:21:57]  Now, I haven't even tried in code, but when you have a linked list,
+[0:22:01]  you can no longer use square bracket notation.
+[0:22:05]  Because why?
+[0:22:06]  Well, square bracket notation just assumes the contiguousness of memory.
+[0:22:09]  Location 0 is here.
+[0:22:11]  Location 1 is literally 1 to the right.
+[0:22:13]  Location 2 is literally 1 to the right, 1 to the right.
+[0:22:16]  These things, even though I've drawn it from right to left
+[0:22:18]  to keep things pretty, there are gaps here.
+[0:22:21]  And this is just my interpretation of this.
+[0:22:23]  These gaps could be big.
+[0:22:24]  They could be narrow.
+[0:22:25]  They could be down here, up here.
+[0:22:27]  They could be anywhere so long as we're linking things together in this list.
+[0:22:30]  The computer can't just use bracket 0, bracket 1, bracket 2 anymore
+[0:22:34]  because it can't do simple arithmetic and jump to the middle.
+[0:22:37]  And now here's perhaps the worst price we've paid.
+[0:22:40]  If you don't have square bracket notation,
+[0:22:42]  or really you don't have contiguousness, what algorithm
+[0:22:46]  did we just sacrifice for this dynamism?
+[0:22:49]  If you rewind even back to week 0 and we gave it a name in week 3,
+[0:22:57]  what algorithm can we not use now if we can't assume that the memory is
+[0:23:00]  back to back to back to back?
+[0:23:03]  Binary search.
+[0:23:05]  Why?
+[0:23:05]  Because binary search, just like the phone book back in the first week,
+[0:23:09]  requires being able to arithmetically jump right to the middle, right?
+[0:23:13]  Take the total length of it, divide by 2, and boom,
+[0:23:15]  you're right there in the middle with some simple arithmetic.
+[0:23:18]  Here, they might be laid out, again, with these big or small gaps.
+[0:23:22]  There's no simple math I can do to just jump immediately
+[0:23:25]  to the one in the middle.
+[0:23:26]  And in fact, again, if this TV were bigger,
+[0:23:28]  the two could technically be in memory, be way down here or even way over here.
+[0:23:32]  The foam finger could be pointing in any number of directions.
+[0:23:34]  Depending on where Malok put the thing, there's
+[0:23:36]  just no way to do binary search.
+[0:23:38]  And so it would seem that we've paid another price indeed
+[0:23:41]  in terms of the performance.
+[0:23:43]  We're now talking about linear time again.
+[0:23:46]  So that's a regression.
+[0:23:47]  Now, that's also a lot.
+[0:23:49]  It feels like a good time for some muffins and fruit out in the lobby.
+[0:23:52]  And when we come back, we'll try to solve the problem we just created.
+[0:23:54]  So see you in 10.
+[0:23:56]  So we are back.
+[0:23:57]  And let's see if we can't now take some of these higher level concepts
+[0:24:00]  of stitching together these nodes in memory
+[0:24:03]  and translate it to some actual code.
+[0:24:05]  But we'll do it step by step first before I actually
+[0:24:07]  start writing it in VS code.
+[0:24:08]  So if Carter, you wouldn't mind helping me step through with some visuals,
+[0:24:11]  let me propose that line by line, we solve some of the problems
+[0:24:14]  that we've just created for ourselves in building this thing in memory.
+[0:24:17]  So let's go ahead and first consider how we could build a linked list
+[0:24:23]  containing the numbers, indeed, 1, then 2, then 3.
+[0:24:26]  And let's translate each of those steps to code.
+[0:24:28]  And then we'll put it all together into something that actually runs.
+[0:24:31]  So how about first step here will just be this,
+[0:24:33]  to declare a pointer called list that initially has no value,
+[0:24:37]  at least at this point in the story.
+[0:24:39]  List is the name of the variable.
+[0:24:40]  Node star just means that this is essentially
+[0:24:43]  going to be our little square over here that
+[0:24:45]  points to the beginning of the list.
+[0:24:48]  Of course, it's ideal if it ultimately has a value,
+[0:24:50]  because when we initially call this line of code,
+[0:24:54]  it just gives us, indeed, that square over here on the left.
+[0:24:57]  But it's got a garbage value, because there's no equal sign
+[0:24:59]  on the other side there.
+[0:25:01]  So let's propose that we do one more step here
+[0:25:03]  and actually initialize it to null, so that if only we
+[0:25:07]  know that it's not garbage, it at least has some known value.
+[0:25:10]  And null is a good way of signifying that at this point in the story,
+[0:25:13]  the list is empty.
+[0:25:14]  Indeed, null indicates there's no nodes in the list.
+[0:25:17]  So that picture would now look like this, whereby let's just draw.
+[0:25:20]  Instead of writing null everywhere, I'll just leave the squares blank
+[0:25:23]  when it's not a garbage value per se.
+[0:25:24]  It's literally 0x0 or null.
+[0:25:27]  All right, so that's it for building a linked list of size 0.
+[0:25:30]  We're sort of done then, but we want to now add a 1, and then a 2, then a 3.
+[0:25:34]  So next step here might be this.
+[0:25:36]  If I want to allocate the first of my rectangles on our previous picture,
+[0:25:41]  I'm going to call malloc, and I'm going to ask for enough memory
+[0:25:44]  to fit a whole node.
+[0:25:45]  Now, technically, I think that's going to be like four bytes for the int
+[0:25:48]  and eight bytes for the pointer, even though I did not
+[0:25:51]  draw it to scale on the board.
+[0:25:52]  So that's technically going to be, what, 12 bytes?
+[0:25:55]  But again, size of node just figures out how many bytes I actually
+[0:25:58]  need dynamically.
+[0:25:59]  That's going to return to me the address of that chunk of memory, which
+[0:26:03]  apparently I'm going to store inside of a temporary variable called
+[0:26:06]  n for short for node.
+[0:26:08]  But let's see what this does pictorially.
+[0:26:10]  So when this line of code is executed, I first
+[0:26:12]  get on the left that variable n.
+[0:26:15]  It's got a garbage value by default because I haven't executed
+[0:26:18]  the whole thing from right to left.
+[0:26:20]  Meanwhile, on the right-hand side of the expression,
+[0:26:22]  I've got now a node somewhere in memory.
+[0:26:24]  It happened to be free here.
+[0:26:25]  This is where malloc put it for me.
+[0:26:27]  But it does have two garbage values initially.
+[0:26:29]  But because it's a node, per my typedef earlier,
+[0:26:32]  every node I proposed is going to have a number and a next pointer.
+[0:26:37]  So we can see those labeled here.
+[0:26:39]  But they've got two garbage values initially.
+[0:26:40]  But all I care about initially is that ultimately n
+[0:26:44]  is pointing at that chunk of code.
+[0:26:46]  So initially, if we could back up two steps, we have two steps.
+[0:26:51]  So we have initial one step forward.
+[0:26:54]  We have this line of code gives us this variable here, which has garbage.
+[0:26:59]  When this side of the expression is executed, that allocates the memory.
+[0:27:03]  And then when we copy from right to left the address of that chunk of memory,
+[0:27:07]  that's what gives us, conceptually, this arrow.
+[0:27:09]  And the garbage goes away because it's a valid pointer now.
+[0:27:12]  Of course, there's still two garbage values there
+[0:27:14]  because we haven't set this node to store a number like the number one.
+[0:27:17]  So let's go ahead and execute one other line of code like this, which,
+[0:27:20]  while cryptic looking, is just an application of ideas
+[0:27:23]  we've seen in week four and prior.
+[0:27:25]  Star n means to start at this variable and go there.
+[0:27:29]  Follow the arrow is what the star or the d reference operator does for us.
+[0:27:33]  And then the dot operator, recall, when we first introduced structs,
+[0:27:36]  like for a person struct, allows us to go at the number field or the next field.
+[0:27:41]  So if I do star n, and then in parentheses
+[0:27:44]  to make sure order of operations is preserved, dot number,
+[0:27:47]  and then assign it the actual number one, which
+[0:27:49]  puts the one in the top of that rectangle.
+[0:27:51]  Now, admittedly, this syntax is not very user friendly.
+[0:27:54]  It's annoying to remember.
+[0:27:55]  You have to have the parentheses.
+[0:27:56]  So there's another syntax for this.
+[0:27:58]  Whenever you're doing two things like this in code,
+[0:28:01]  dereferencing a pointer that is going to an address
+[0:28:04]  and then further using the dot notation to go inside of the structure,
+[0:28:08]  you find that wonderfully C gives us this syntax, whereby you can just
+[0:28:12]  change the star and the parentheses and the dot to just be an arrow.
+[0:28:16]  And again, it's not a single character on your keyboard.
+[0:28:18]  It's a hyphen and then an open angle bracket.
+[0:28:21]  But I kind of like the semantics of this because this code now
+[0:28:24]  pretty much matches the picture.
+[0:28:25]  And arrow leads you to the value that you want to access or ultimately
+[0:28:29]  change in this way.
+[0:28:31]  There's one step, though, we've forgotten, of course,
+[0:28:33]  which is that we can't leave this garbage value here because the garbage
+[0:28:37]  value is some unknown value that effectively is pointing who knows where.
+[0:28:41]  And we don't want to accidentally misinterpret that garbage
+[0:28:44]  value as being a valid address and risk going there.
+[0:28:47]  So of course, what value should we put here instead?
+[0:28:51]  Our old friend null, just to signify that this is indeed the end of the list.
+[0:28:54]  And we could do that with a line of code like this.
+[0:28:57]  And again, we'll connote as much by just leaving that empty box blank.
+[0:29:00]  So now we have a list of size one.
+[0:29:02]  Let's go ahead and add the second number to it as with these lines here.
+[0:29:06]  List equals n allows us to remember that indeed we have this list here.
+[0:29:12]  So if we can step forward, here's what the picture now looks like.
+[0:29:16]  And technically, let's go one step further here.
+[0:29:18]  This is now really what's going on in memory once my list of size one exists.
+[0:29:23]  My main variable called list is pointing at exactly that first node.
+[0:29:28]  At this point in the story, I don't need to know or care
+[0:29:30]  about the temporary variable that I called n,
+[0:29:32]  even though it might very well still be there.
+[0:29:34]  But indeed, this now represents that linked list.
+[0:29:37]  Let's now indeed add the number two.
+[0:29:39]  So with the same line of code as before, I'm
+[0:29:41]  going to allocate another node, size of node.
+[0:29:43]  Ideally, I would be checking for null here.
+[0:29:45]  But we're doing the juicy parts only on the slides.
+[0:29:48]  Let's now go ahead and depict that.
+[0:29:49]  So what happens with this?
+[0:29:51]  This brings back our n pointer, which might have been there the whole time.
+[0:29:55]  But we're doing this step by step.
+[0:29:56]  It's a garbage value, though, because we haven't yet
+[0:29:58]  copied from right to left.
+[0:29:59]  malloc, of course, gives us a second chunk of memory,
+[0:30:01]  which maybe ends up there with two garbage values by default.
+[0:30:05]  I've omitted the labels now just because they're still going to be
+[0:30:07]  number and next respectively.
+[0:30:10]  Once we copy from right to left, the garbage value indeed becomes an arrow.
+[0:30:13]  Oscar disappears because it's now indeed a valid pointer pointing here.
+[0:30:18]  Now, the values themselves, number and next, are invalid garbage values.
+[0:30:22]  So here is where we can now start using our new syntax,
+[0:30:25]  like the arrow notation or the star and the dot, if you prefer.
+[0:30:28]  And we can change the value of n, follow the arrow, to number.
+[0:30:33]  And that becomes 2.
+[0:30:34]  Similarly, we can do this again and set n arrow next.
+[0:30:38]  So start at n, follow the arrow, access the next field, and set that equal to null.
+[0:30:44]  Now, we're not quite done yet because we haven't actually linked things together.
+[0:30:48]  So here is now where things get interesting.
+[0:30:50]  How do I combine these two?
+[0:30:51]  Well, let me propose this.
+[0:30:53]  Let me propose on our next line here.
+[0:30:55]  We actually update for now list equal to n.
+[0:30:59]  That is to say, whatever address this is, whatever it's pointing at,
+[0:31:03]  change list to be the same address.
+[0:31:05]  That is, point at the same thing.
+[0:31:06]  So if n is pointing here, let's change list to point here.
+[0:31:10]  And go ahead and do that, Carter, if you could.
+[0:31:12]  I don't like this.
+[0:31:14]  Can you go one further step?
+[0:31:16]  This is bad.
+[0:31:17]  What is wrong about my sequence of operations
+[0:31:20]  here where I updated list to point at my new node?
+[0:31:24]  Yeah?
+[0:31:27]  We lost the pointer to the other node.
+[0:31:29]  So I don't even care about the ordering, 2, 1 or 1, 2.
+[0:31:33]  The bigger problem now, as the lack of arrows over there suggests,
+[0:31:36]  is that I have a memory leak.
+[0:31:38]  I have orphaned my original node in the sense
+[0:31:41]  that nothing is pointing at it anymore.
+[0:31:43]  Now, absolutely, I could fix this by adding some temporary variables.
+[0:31:46]  I could add it to the mix.
+[0:31:47]  But at this point in the story, I have not done any such recollection thereof.
+[0:31:51]  So let me back this up.
+[0:31:52]  And let's go forward in the slides.
+[0:31:54]  This is where we left off a moment ago.
+[0:31:56]  I think I need to take into account order of operations.
+[0:31:59]  And I'm going to keep this simple.
+[0:32:00]  I'm not going to care about the order of the numbers for now.
+[0:32:03]  I'm fine with a list that is 2 and then 1.
+[0:32:06]  So with that said, let me go ahead and update, I think, this box here
+[0:32:11]  to point at my original node.
+[0:32:12]  So let's see how we can do this in code.
+[0:32:15]  OK, n arrow next.
+[0:32:17]  So n arrow next should equal the current list.
+[0:32:22]  And this is a little weird again, but recall what list is.
+[0:32:25]  List is this pointer here that just contains
+[0:32:27]  the address of the original address of the list.
+[0:32:31]  Or equivalently, it contains this arrow, whatever it's pointing at.
+[0:32:34]  So what this means in this line of code, n bracket next means start at n,
+[0:32:38]  follow the arrow, access the next pointer,
+[0:32:41]  and set it equal to whatever list equals.
+[0:32:44]  So if list is pointing here, then next should point there as well.
+[0:32:49]  This, I think, is safe because now we have redundancy.
+[0:32:52]  Now we've got two pointers pointing at the original list.
+[0:32:55]  And now I think we can do another step whereby we update list to equal n.
+[0:33:00]  Same line of code before that got us into trouble,
+[0:33:02]  but I'm doing it second now instead of first.
+[0:33:04]  When I execute list equals n, this now sets list equal to the same thing
+[0:33:09]  that n equals.
+[0:33:11]  And so now I have successfully inserted my new node containing 2 into the list.
+[0:33:17]  And in fact, if we advance one more, we can just clear up the clutter,
+[0:33:20]  assume that the temporary variable is gone from the story.
+[0:33:23]  Now we have a linked list where, admittedly, ordering is wrong.
+[0:33:26]  It's 2, 1 instead of 1, 2.
+[0:33:27]  But at least it's linked correctly.
+[0:33:29]  And I didn't orphan or leak any memory.
+[0:33:33]  Questions on this sequence of steps here?
+[0:33:37]  Yeah, in back.
+[0:33:45]  Yeah, spot on.
+[0:33:46]  So this would fall under that category of a stack, if you will,
+[0:33:50]  although I've not called it that by name,
+[0:33:52]  because I just pushed the number 2 onto this data structure, if you will.
+[0:33:56]  And indeed, it ended up at the beginning of the list instead of the end.
+[0:33:59]  And so here's where we see a distinction between an abstract data structure,
+[0:34:02]  which is where we began.
+[0:34:03]  A stack is a thing like the pile of sweaters
+[0:34:06]  that just has push and pop properties and LIFO access, last in, first out.
+[0:34:12]  How do you implement something like that in memory?
+[0:34:14]  Well, it would seem that you could implement the notion of a stack here,
+[0:34:18]  not for sweaters but for numbers, using a linked list,
+[0:34:21]  so long as you implement insertion, a.k.a.
+[0:34:24]  pushing, by prepending new values to the list, by prepending again and again.
+[0:34:29]  And if, Carter, you don't mind hitting the keyboard one more time,
+[0:34:32]  if I wanted to add the number 3 now, you could
+[0:34:34]  imagine prepending it to the list.
+[0:34:36]  Why?
+[0:34:37]  Well, honestly, especially as this list gets longer and longer,
+[0:34:40]  I kind of like the appeal of prepending these elements.
+[0:34:43]  Why?
+[0:34:44]  Because even if this list gets crazy long and way, way out here,
+[0:34:48]  you didn't notice me following all of the arrows
+[0:34:50]  earlier to do the insertions.
+[0:34:52]  If I want to insert a fourth number, a fifth number, a sixth number,
+[0:34:55]  all I have to do is insert it here, if you will,
+[0:34:58]  point it at the original start of the list, then update this pointer, and done.
+[0:35:03]  And I would say that's like two steps, give or take.
+[0:35:06]  It's not going to be n steps, as it would be if I had to append the new nodes
+[0:35:10]  to the end of the list.
+[0:35:12]  Now, of course, we've sacrificed ordering of these numbers.
+[0:35:14]  They're literally in the opposite order or whatever order they were inserted in.
+[0:35:18]  But that might very well be OK, depending on the goal at hand.
+[0:35:21]  All right, thank you to Carter for stepping through this.
+[0:35:23]  What if now we wanted to translate this?
+[0:35:25]  Oh, sure, thank you.
+[0:35:30]  It's all for you, none for me in this example.
+[0:35:32]  So here we have perhaps a way of translating this now to some actual code.
+[0:35:36]  And this will be the last of the sort of intense code
+[0:35:39]  here just to give you a sense of how we can translate this idea now
+[0:35:42]  to actual steps.
+[0:35:43]  So this is list.c in VS code here.
+[0:35:46]  Let me go ahead and make a couple of changes up top.
+[0:35:48]  Let me go ahead and how about declaring a node using
+[0:35:53]  typedef struct node using our new framing as before.
+[0:35:58]  I'm going to give every node a number, as I proposed,
+[0:36:00]  and every node a pointer to the next element, which
+[0:36:04]  is going to be implemented just as before.
+[0:36:07]  And I'm going to simplify the whole name as just node.
+[0:36:09]  So all that is is the exact same typedef that we proposed earlier.
+[0:36:13]  Now, let me go ahead and get rid of all of this code, which we wrote earlier.
+[0:36:18]  And recall that this was the most recent version that was not a linked list.
+[0:36:21]  This was just an array that we allocated and then reallocated.
+[0:36:25]  So this is sort of the old way of doing things.
+[0:36:27]  But it was inefficient because we might have to lean on a for loop
+[0:36:31]  or lean on realloc to copy everything around.
+[0:36:34]  We're now going to re-implement the notion of a list
+[0:36:36]  as an actual linked list, not as an array.
+[0:36:41]  So my main function now might do something like this.
+[0:36:43]  And I'm going to really just copy the lines of code
+[0:36:45]  that we just stepped through on the board.
+[0:36:47]  So let me give myself a special variable called list that's
+[0:36:51]  going to be initialized to null.
+[0:36:52]  And this is just my pointer, the square on the left-hand side of the screen,
+[0:36:55]  that represents the start of the list.
+[0:36:57]  And if it's null, it means the list is empty.
+[0:36:59]  So done.
+[0:37:00]  I'm done implementing a linked list of size 0.
+[0:37:03]  Well, now, how do I want to run this code?
+[0:37:05]  Well, let me propose for the sake of discussion
+[0:37:07]  that this version of the program will take command line arguments.
+[0:37:10]  So I want to be able to do something like this.
+[0:37:12]  I want to run this program ultimately and type in three command line
+[0:37:16]  arguments like this, 1, 2, 3.
+[0:37:18]  And I want my program in a couple minutes to allocate 1, 2, 3 nodes
+[0:37:23]  and stitch them together, just like the visualization on the board.
+[0:37:27]  I could use get int, but it's just going to be faster
+[0:37:29]  if we use command line arguments.
+[0:37:31]  So again, I'm just borrowing some concepts from week 2.
+[0:37:33]  But none of that's possible yet until I change my code here.
+[0:37:36]  So let's do this, int argc string arg v. But you know what?
+[0:37:43]  We know that strings are not actually a thing anymore.
+[0:37:45]  So I can change my command line argument definition to be what it really is.
+[0:37:49]  It's really char star, but it's the exact same thing as in week 2.
+[0:37:53]  Just strings are no more, at least without the training wheels
+[0:37:56]  on any more like last week.
+[0:37:58]  And now let me do this.
+[0:38:00]  For int i equals 1, i is less than argc, i plus plus.
+[0:38:06]  So what I'm doing with this loop is I just
+[0:38:08]  want to iterate over the command line argument.
+[0:38:10]  So I have one number at a time from the prompt.
+[0:38:13]  What else do I want to do here?
+[0:38:16]  Well, let's go ahead and how about do this.
+[0:38:21]  Let's get a number.
+[0:38:22]  So int number equals arg v bracket i.
+[0:38:26]  So a couple of notes here.
+[0:38:27]  One, I'm starting my for loop at 1 instead of 0, but I'm going up to argc.
+[0:38:33]  Argc is argument count, how many words are at the prompt.
+[0:38:35]  Why am I starting at 1 instead of 0, though, given my goal?
+[0:38:41]  Why am I starting at 1?
+[0:38:42]  Yeah.
+[0:38:49]  So the first value in arg v is actually the name of the program.
+[0:38:53]  That's obviously not a number.
+[0:38:54]  So I want the second value.
+[0:38:55]  So I'm going to start iterating over those command line arguments at i
+[0:38:58]  equals 1.
+[0:38:59]  So that's all.
+[0:38:59]  I just want to get the actual numbers at the prompt.
+[0:39:02]  Unfortunately, arg v bracket i is a string, aka char star.
+[0:39:07]  That is not an int.
+[0:39:08]  So this line of code won't work.
+[0:39:09]  But can anyone think back to week 2 where
+[0:39:12]  we had a function for converting strings to integers?
+[0:39:16]  Anyone?
+[0:39:18]  Yeah, so a to i is a function that converts ascii to an integer,
+[0:39:21]  assuming what you give it as an argument looks like a number,
+[0:39:24]  like 1 or 2 or 3.
+[0:39:26]  So let me fix this.
+[0:39:26]  Let me actually do the conversion.
+[0:39:28]  If I were really being careful, I would error check this,
+[0:39:31]  make sure that there's no digits, just like you might have in problem set 2.
+[0:39:34]  But for today's purposes, I'm just going to assume the honor system
+[0:39:37]  that the user, me, is going to run the program correctly.
+[0:39:40]  All right, so now that I have a variable containing
+[0:39:43]  the number from the command line, let's just allocate a node for it.
+[0:39:46]  So let me do node star n, just like we did in the visualization,
+[0:39:50]  and let's malloc enough space for the size of one such node here.
+[0:39:55]  I now need to just be super safe.
+[0:39:57]  So if n equals equals null, like if I'm out of memory, you know what?
+[0:40:02]  Let me go ahead and just immediately return 1 here.
+[0:40:06]  Otherwise, if that's not the case, let me go ahead and update
+[0:40:10]  the number field of this new node, which line 24 does exist,
+[0:40:15]  because it did not return null.
+[0:40:17]  So I did not exit early with return.
+[0:40:19]  And let me just store whatever number the human typed in first.
+[0:40:22]  So the return value of a to i, which, per line 17,
+[0:40:26]  is in my variable called number.
+[0:40:28]  And then let me go ahead and just prepend this to the list.
+[0:40:35]  Let me go ahead and say that this next field first has a known value null,
+[0:40:42]  just so that we get rid of that second garbage value.
+[0:40:44]  And let me go ahead and now prepend it to the list.
+[0:40:47]  So if I want to prepend it, that means this new node
+[0:40:50]  must have a next field that points to the current beginning of the list.
+[0:40:57]  And again, the goal here is to prepend, prepend, prepend.
+[0:40:59]  So whatever the current list is, let's change it
+[0:41:02]  so that this new node points to that existing list.
+[0:41:06]  And now step two, as before, was to update the actual list
+[0:41:10]  to point at this node.
+[0:41:12]  So recall, in red on the screen before, I screwed up originally.
+[0:41:16]  And I only did this line by moving the pointer too early, if you will.
+[0:41:20]  But I fixed that once Carter helped me rewind.
+[0:41:22]  And we got rid of the red line, which indicated error.
+[0:41:25]  And I just do n arrow next to change the next field of this new node
+[0:41:30]  to point to the existing list.
+[0:41:31]  So I'm not orphaning anything.
+[0:41:33]  All right, at this point in the story, I think my code is correct.
+[0:41:39]  Not batting very well, though, today.
+[0:41:41]  But I think my code is correct.
+[0:41:42]  The program doesn't do anything interesting.
+[0:41:44]  So it would be nice to kind of now iterate
+[0:41:46]  over this linked list in memory, whatever its order is, and print things out.
+[0:41:50]  Well, how do we do that?
+[0:41:51]  Well, it turns out, if you want to iterate over a linked list,
+[0:41:54]  the general paradigm is to do something like this.
+[0:41:56]  To define a temporary variable, I could call it temp,
+[0:41:59]  but another convention that you might as well see is called pointer, PTR,
+[0:42:02]  for short.
+[0:42:03]  But you can call it anything you want.
+[0:42:05]  And you can have a temporary variable first point
+[0:42:07]  at the first node in the list.
+[0:42:09]  And then in some kind of loop, like a while loop,
+[0:42:11]  you point it at the second node in the list.
+[0:42:13]  And then you keep iterating.
+[0:42:14]  You point it at the last node in the list.
+[0:42:15]  And then eventually, you iterate too far, effectively pointing at null,
+[0:42:19]  at which point your while loop can presumably terminate.
+[0:42:22]  So how do I implement that idea of allocating a temporary pointer that
+[0:42:25]  just points at each node in the list and lets
+[0:42:28]  me print out, ultimately, each of those numbers?
+[0:42:30]  Well, let's go back to my code here and let me do this.
+[0:42:33]  Let me go ahead and declare this temporary pointer, which
+[0:42:37]  is going to be a node star also.
+[0:42:39]  Why?
+[0:42:39]  Because it's the address of a node, the first, the second, the third.
+[0:42:42]  And I'm going to set that equal to whatever the beginning of the list is.
+[0:42:45]  So that is going to be equivalent to this version of the picture
+[0:42:48]  here, where pointer is just temporarily pointing
+[0:42:50]  at the first node in the list.
+[0:42:52]  It's not pointing at list, per se.
+[0:42:54]  It's pointing at the first node in the list,
+[0:42:56]  which list is also pointing at itself.
+[0:42:58]  All right, once I've done this, I think I
+[0:43:00]  can translate this to code that's a little new,
+[0:43:02]  but it's conceptually familiar perhaps now,
+[0:43:06]  while that pointer does not equal null.
+[0:43:10]  So while I have a valid pointer, like my finger or that arrow
+[0:43:13]  is pointing at an actual node in memory, well,
+[0:43:16]  let me go ahead and print it out.
+[0:43:17]  So let me print out with %i, backslash n,
+[0:43:20]  whatever is in the current node at the number field within.
+[0:43:26]  And again, this is going to have the effect, hopefully,
+[0:43:28]  of first printing the three.
+[0:43:30]  And I think I just need to now update the pointer so that on the next
+[0:43:35]  iteration, it's pointing at the next value.
+[0:43:37]  So if this is where the story is, how do I update pointer
+[0:43:41]  to point at the second element of the list?
+[0:43:43]  Well, I want pointer to point at the two,
+[0:43:45]  and I want pointer to eventually point at the three.
+[0:43:48]  Well, how do I do that?
+[0:43:49]  Well, the way in code I can follow these arrows is as follows.
+[0:43:52]  If I currently have pointer pointing at this node,
+[0:43:55]  but I want to point it at the next node, I can borrow this pointer here.
+[0:44:00]  So whatever this address is in the first node,
+[0:44:03]  a.k.a. the next field, I can copy that into pointer,
+[0:44:07]  because then pointer will point at whatever this is pointing at
+[0:44:10]  by just setting one equal to the other.
+[0:44:12]  So once I've done that, the picture will become this.
+[0:44:18]  And how do I translate that to code?
+[0:44:20]  It, while new syntax, is surprisingly straightforward.
+[0:44:23]  All I need do is say pointer, after printing it,
+[0:44:26]  equals whatever pointer currently is, but grab its next field instead.
+[0:44:33]  And this is a very common paradigm.
+[0:44:35]  When iterating over a linked list and you're
+[0:44:37]  using some temporary variable like pointer,
+[0:44:39]  you can simply set pointer equal to pointer next.
+[0:44:42]  And what that means here is as follows.
+[0:44:45]  If this is pointer pointing from here down to here,
+[0:44:50]  pointer next is follow the arrow, grab the next field.
+[0:44:53]  So if you set pointer equal to this thing,
+[0:44:55]  that's the same thing as pointing this at this same box.
+[0:44:59]  And indeed, if I advance to the next slide,
+[0:45:02]  even though the arrows are technically pointing
+[0:45:05]  at different parts of the rectangles, that's just for graphics sake,
+[0:45:08]  pointer is now pointing at the second node.
+[0:45:09]  And when I do this again on my next iteration, it points at this.
+[0:45:12]  And then this last step, notice, when I keep doing pointer equals pointer next,
+[0:45:18]  this will become eventually this value.
+[0:45:20]  But what's this value in this linked list?
+[0:45:23]  It's null, technically.
+[0:45:25]  So this arrow will eventually take on this value
+[0:45:28]  when I set pointer equal to pointer next.
+[0:45:30]  And at that point, ptr, my temporary pointer, is going to be null.
+[0:45:35]  So it might as well look like this pictorially.
+[0:45:38]  And what does that mean for my loop?
+[0:45:41]  Once pointer is null, because you've walked off the end of the linked list,
+[0:45:44]  what's going to be true of this loop here started in line 32?
+[0:45:50]  Any observations here?
+[0:45:54]  What's going to be true?
+[0:45:55]  What will happen now as soon as we hit the end of the list?
+[0:45:59]  The loop is going to break out.
+[0:46:01]  Why?
+[0:46:01]  Because line 32, which is constantly asking,
+[0:46:03]  while pointer does not equal null, well, if pointer finally equals null,
+[0:46:07]  three steps later, the while loop is now done.
+[0:46:11]  And so what I can do at the end of this program,
+[0:46:13]  once I've printed out those values, well, first, let's go ahead
+[0:46:16]  and open my terminal window.
+[0:46:17]  Let's make list, compile, dot slash list.
+[0:46:20]  And let me try the same values, 1 and 2 and 3.
+[0:46:24]  That's going to, again, allocate 1 node, 2 node, 3 nodes
+[0:46:27]  by prepending, prepending, prepending each of those values.
+[0:46:30]  And it's then going to iterate over them from left to right.
+[0:46:33]  And so when I hit Enter now, what should I see on the screen
+[0:46:36]  if my code is correct?
+[0:46:40]  What will I see if I were to just call it out?
+[0:46:44]  3, 2, 1, because I've prepended, presumably.
+[0:46:47]  And here we go.
+[0:46:49]  I indeed see 3, 2, 1.
+[0:46:50]  So the list is backwards, but all of the elements are there.
+[0:46:53]  Now, technically, if I ran Valgrind on this,
+[0:46:55]  Valgrind would not be happy, because I have never freed any of my memory.
+[0:46:58]  So I should probably now have a second loop here
+[0:47:01]  that does something like this.
+[0:47:02]  Let me, again, set pointer equal to list.
+[0:47:05]  I don't need to re-declare it, because I've already created this thing on line 31.
+[0:47:09]  I just want to reset it to be the beginning of the list again.
+[0:47:11]  And now I can do the same kind of thing.
+[0:47:13]  While ptr not equals null, go ahead and do this.
+[0:47:18]  Well, I don't want to just do free pointer
+[0:47:21]  and then do pointer gets pointer next y.
+[0:47:27]  My goal is to free all of my memory, but I
+[0:47:29]  think this is going to get me in trouble.
+[0:47:31]  Pointer equals list just gives me a temporary pointer that points at the 3,
+[0:47:35]  and then eventually the 2 and then the 1.
+[0:47:36]  How?
+[0:47:37]  Well, while pointer not equal null, I'm freeing the pointer.
+[0:47:40]  So this is like saying to malloc, free that node, free that node,
+[0:47:43]  free that node.
+[0:47:44]  But what's the problem with what I've just done here?
+[0:47:49]  This code is technically buggy.
+[0:47:51]  Yeah.
+[0:47:55]  Exactly.
+[0:47:56]  After you call free on pointer, you are, by social contract,
+[0:48:00]  would see not allowed to touch pointer anymore.
+[0:48:03]  It is invalid.
+[0:48:04]  Now, it's still going to be a number.
+[0:48:05]  It's still going to be a pattern of bits, but it's invalid.
+[0:48:08]  And you'll very often get a segmentation fault
+[0:48:11]  if you tempt fate in that way.
+[0:48:13]  So I can't free the pointer and then use it literally the next line.
+[0:48:17]  The solution here, kind of like our swapping of the liquids last time,
+[0:48:20]  was to maybe just have a temporary variable so I can do a switcheroo.
+[0:48:23]  And so a common way to solve this problem,
+[0:48:26]  to get the order of operations right, would be to do something like this.
+[0:48:29]  Give yourself a temporary pointer, like node star next.
+[0:48:33]  Set it equal to the place you want to go next, so one step ahead.
+[0:48:38]  Now you can free pointer.
+[0:48:40]  And then you can update pointer to be that next value.
+[0:48:43]  So essentially, you need two hands now.
+[0:48:46]  You create on line 41 another pointer that if this
+[0:48:48]  is pointing at the first node, the 3, your new pointer
+[0:48:52]  is pointing at the 2 temporarily.
+[0:48:54]  So now you can tell malloc, via free, release this memory.
+[0:48:58]  But I haven't forgotten where I want to go next.
+[0:49:01]  And so I can now continue on.
+[0:49:03]  So a common paradigm for just iterating over these nodes
+[0:49:07]  and then freeing them, a couple of observations.
+[0:49:09]  Strictly speaking, I could have consolidated this.
+[0:49:12]  I don't need two loops to print the nodes and then free the nodes.
+[0:49:15]  I could do that all at once.
+[0:49:17]  But let's assume that there's other stuff of interest in my program.
+[0:49:20]  And I don't want to just immediately free it.
+[0:49:21]  There's one other bug that I should probably address here.
+[0:49:24]  There is still a potential memory leak up here.
+[0:49:27]  And this one is super subtle.
+[0:49:29]  The Valgrind would help you find it.
+[0:49:31]  Notice that in this loop here, when I'm calling malloc,
+[0:49:35]  this line of code is fine if the first line of malloc fails and returns null
+[0:49:39]  because I immediately return and I'm done.
+[0:49:41]  But what if the second call, but not the first, or the third call,
+[0:49:45]  but not the first or second fail?
+[0:49:47]  This line of code has me returning immediately.
+[0:49:50]  You really need to do some garbage collection, so to speak,
+[0:49:53]  whereby you really need to go in and free any nodes that you did allocate
+[0:49:57]  successfully earlier.
+[0:49:58]  Honestly, that's going to be a pain in the neck.
+[0:49:59]  We won't do that here.
+[0:50:00]  But probably what I'd want to do is write a function called free list
+[0:50:04]  or something like that and call that function to free any nodes I
+[0:50:07]  had previously created.
+[0:50:09]  So it's not quite at the finish line, but the building blocks are indeed here.
+[0:50:14]  Questions on this code?
+[0:50:17]  And I think it's safe for me to promise that it
+[0:50:20]  won't escalate further from that.
+[0:50:24]  Questions on this?
+[0:50:28]  No?
+[0:50:29]  Well, let me show you one alternative that you might prefer.
+[0:50:31]  And I'm pretty sure this isn't an escalation.
+[0:50:33]  It's just an alternative formulation.
+[0:50:34]  Another way you can iterate over nodes in a list
+[0:50:37]  could be this instead of a while loop, for instance.
+[0:50:40]  Let me actually show you one other piece of syntax here.
+[0:50:42]  You could technically use a for loop.
+[0:50:44]  You could give yourself a node pointer here
+[0:50:46]  that is initialized to the list.
+[0:50:48]  You can then check in your for loop that it's not equal to null.
+[0:50:51]  And then you can do your update as usual like this.
+[0:50:54]  Either of these are equivalents, even though this one I suspect looks scarier.
+[0:50:58]  It's doing the exact same thing in one line instead of two.
+[0:51:02]  But there's no reason we can't use for loops instead of while loops
+[0:51:05]  to achieve the same idea.
+[0:51:06]  But I'll leave these two as demonstrations of one approach or the other.
+[0:51:09]  But that's just like in week one, for loops, while loops,
+[0:51:12]  whatever looks simpler to you, even though admittedly neither of these
+[0:51:16]  probably looks super clean.
+[0:51:19]  All right, so let's take things back to things more conceptual here.
+[0:51:23]  Up until now, we've been inserting elements into this linked list
+[0:51:26]  by prepending them.
+[0:51:27]  Let's consider what the running time, then, is of these operations.
+[0:51:31]  So if I've got a linked list of size 3 or size n, more generally,
+[0:51:34]  time has passed and I've added a lot of things to it,
+[0:51:37]  what's going to be the running time, for instance,
+[0:51:39]  of searching a linked list for some value?
+[0:51:41]  And I'll tell you already, it's not log n,
+[0:51:43]  because again, binary search is off the table as per before break.
+[0:51:48]  So what might the running time be of searching a linked list for some value,
+[0:51:53]  like 2, or 3, or 1, or 50?
+[0:51:56]  What might the running time be?
+[0:52:01]  I heard it over here, O of n and Y. Who was that?
+[0:52:04]  O in the middle here?
+[0:52:05]  Why O of n?
+[0:52:06]  Exactly.
+[0:52:11]  You're going to have to go through every other name in the list,
+[0:52:13]  starting from the left, from the beginning, which
+[0:52:15]  is how we've been drawing things and connecting the dots.
+[0:52:17]  And in the worst case, the element might very well be at the very end,
+[0:52:20]  so it's going to be big O of n.
+[0:52:21]  What about insertion?
+[0:52:23]  How many steps, in terms of big O notation,
+[0:52:26]  has it been taking me to insert elements into the linked list
+[0:52:29]  using this prepend design?
+[0:52:33]  Yeah, so it's technically constant time, big O of 1.
+[0:52:37]  And again, 1 is just representative of any constant.
+[0:52:39]  It could technically be two steps, or three steps, or even 10 steps,
+[0:52:42]  or 100 steps.
+[0:52:43]  But if it's always finite and fixed, then, indeed, you
+[0:52:47]  can say it's in big O of 1.
+[0:52:49]  Now, why is that?
+[0:52:50]  Well, again, no matter how long this list gets,
+[0:52:52]  so long as there's memory available for me,
+[0:52:54]  I can just kind of create a little splice at the beginning of the list
+[0:52:58]  to put in the new node, update the original list, and I'm on my way.
+[0:53:01]  And it keeps getting longer, even though it might not be spread out in memory.
+[0:53:04]  So big O of 1 is possible with these linked lists if I, indeed, prepend
+[0:53:09]  things.
+[0:53:10]  Of course, if I prepend things, everything's
+[0:53:12]  going to get out of order, potentially.
+[0:53:14]  And we're going to have maybe the stack property instead of a queue property.
+[0:53:16]  So we might want to do things slightly differently.
+[0:53:19]  So instead of doing this, whereby we kept prepending, prepending,
+[0:53:23]  prepending, suppose we append to the end of the list instead.
+[0:53:27]  So if we now insert the 1, the 2, and the 3,
+[0:53:29]  as we might want to for a queue to maintain that fairness property,
+[0:53:33]  we might start with an empty list.
+[0:53:34]  We might add the 1.
+[0:53:36]  We might append the 2, append the 3.
+[0:53:39]  And so it just sort of laid out differently in memory.
+[0:53:41]  And again, if I can come to you in the middle,
+[0:53:43]  what's the running time of search, again, when the linked list uses
+[0:53:46]  this append implementation?
+[0:53:50]  Yeah, still big O of n, because in the worst case,
+[0:53:52]  you're going to have to go through the whole list just to find it.
+[0:53:55]  And notice, it doesn't matter if you have an intuition now
+[0:53:58]  that the bigger numbers might very well be at the end.
+[0:54:00]  You have no way to jump to the end.
+[0:54:02]  You have no way to jump to the middle or do anything resembling binary search.
+[0:54:06]  Every search has to start from the left and follow the arrows again and again.
+[0:54:11]  All right, so I don't think we've done any better there.
+[0:54:13]  And in fact, what is insertion's running time now in big O
+[0:54:16]  when we're appending to the list in this way,
+[0:54:18]  as we might to implement a queue instead of a stack?
+[0:54:22]  What's the running time of inserting a new value?
+[0:54:26]  Big O of?
+[0:54:29]  So not big O of 1 in this case, but big O of n,
+[0:54:33]  because if I'm appending, by definition, I
+[0:54:35]  have to start here and traverse the whole thing looking for the end.
+[0:54:39]  Now, this is a bit of an overstatement, right?
+[0:54:41]  You could obviously optimize this slightly
+[0:54:43]  by maybe adding another variable that always points to the last element,
+[0:54:47]  sort of a cheat sheet, a shortcut that gets you all the way to the end.
+[0:54:50]  That's totally fine.
+[0:54:51]  It doesn't really fit the traditional definition of a singly linked list.
+[0:54:55]  But there's absolutely smart engineering solutions
+[0:54:57]  to these kinds of problems.
+[0:54:58]  As designed, it would indeed be big O of n
+[0:55:00]  to insert to if you've got to go all the way to the end
+[0:55:03]  and you're not using a little extra memory to get yourself there quickly.
+[0:55:07]  Well, what if we want to take things one last step and not just append
+[0:55:11]  blindly, because even though I inserted 1, 2, 3,
+[0:55:14]  if I inserted them in random order, they would end up in random order.
+[0:55:18]  What if you want to maintain a sorted list from smallest to largest?
+[0:55:22]  Well, then you might want to insert numbers like this.
+[0:55:24]  Starting from an empty list, we might have a 2.
+[0:55:27]  Then we might try inserting a 1, but we want to keep it sorted.
+[0:55:31]  So now we're going to prepend in our code.
+[0:55:33]  But then you might want to insert a 4.
+[0:55:36]  So you would append the 4, because you're probably
+[0:55:38]  going to look for the right spot to insert it.
+[0:55:40]  Then we're going to insert a 3.
+[0:55:42]  And this one's getting a little annoying,
+[0:55:44]  because now you have to iterate over the list, look for the right spot,
+[0:55:48]  and then do a little smarter of a splice.
+[0:55:51]  But it's possible, but you don't want to orphan the 4, for instance.
+[0:55:54]  And then ultimately, we get back to this question.
+[0:55:57]  What would the performance be of your linked list
+[0:55:59]  if you're trying to maintain sorted order?
+[0:56:03]  Well, search, I think, is going to be big O of n for the same reasons
+[0:56:06]  as before.
+[0:56:07]  What about insertion?
+[0:56:10]  Big O of what for inserting into a sorted linked list?
+[0:56:17]  Yeah, in the worst case?
+[0:56:19]  Yeah, it's still big O of n.
+[0:56:21]  So it's no worse then, but it's not really any better than appending.
+[0:56:24]  But we gain the additional property of maintaining a sorted list, which
+[0:56:28]  might very well be useful if you're sorting your contacts in your phone
+[0:56:31]  or something like that, where it just makes sense to maintain sorted order.
+[0:56:35]  Now, in the code for online today, if you
+[0:56:37]  take a look at some of the final versions of code,
+[0:56:39]  like list6.c and list5.c, as we'll post on the website,
+[0:56:43]  you can actually see code that will solve all three of these problems.
+[0:56:47]  The prepend version that we wrote live, the append version,
+[0:56:49]  which we talked through, as well as this sorted order one.
+[0:56:52]  But I think I'll avoid showing it live, just because I do think
+[0:56:55]  that starts to escalate quickly.
+[0:56:57]  But I think we have enough of a building block
+[0:56:59]  if we're comfortable with prepending to at least solve some real world
+[0:57:02]  problems with these linked lists.
+[0:57:05]  Questions then on linked lists, which we'll now leave behind on their own,
+[0:57:10]  but now use this technique to solve fancier problems, but much less code.
+[0:57:17]  Questions on linked lists.
+[0:57:20]  All right, so to recap, we've kind of taken a sidestep with linked lists.
+[0:57:25]  We have this dynamism now, where we can grow and shrink our chunks of memory
+[0:57:29]  without over-allocating or accidentally under-allocating,
+[0:57:32]  as in the world of an array.
+[0:57:33]  We don't have to worry about copying values endlessly,
+[0:57:36]  because once you allocate the node, it can just stay wherever it is in memory.
+[0:57:40]  And you can just stitch it together somehow.
+[0:57:43]  But unfortunately, we've sacrificed what we started the class with in week 0,
+[0:57:47]  which was like binary search, divide and conquer, which
+[0:57:50]  gave us that log n running time, which was really compelling.
+[0:57:53]  If you think back to the demonstrations and the rituals,
+[0:57:57]  can we get the best of both worlds?
+[0:57:59]  Can we get the sort of speed of binary search, something logarithmic,
+[0:58:04]  but the dynamism of something like a linked list?
+[0:58:06]  Well, we can actually, I think, if we start
+[0:58:08]  to think not in a single dimension, just the x-axis, if you will,
+[0:58:12]  but two dimensions, such that our data structures can maybe now
+[0:58:16]  have width and height, if you will.
+[0:58:18]  And so a tree is perhaps the right term here.
+[0:58:20]  Much like a family tree, if you have sort of your elders up here in the tree
+[0:58:24]  and then the branches below them for their children and grandchildren
+[0:58:27]  and the like, that's actually what a computer scientist means
+[0:58:30]  when they talk about trees, not a tree that grows up like this,
+[0:58:33]  but really one that typically is depicted growing down,
+[0:58:35]  although this is just an artist's depiction no matter what.
+[0:58:38]  But there are certain types of trees in the world called binary search trees
+[0:58:42]  that are structured on paper and visually like a family tree,
+[0:58:47]  but they have a special property that lends themselves
+[0:58:50]  to exactly that feature, binary search.
+[0:58:52]  So for instance, here is an array back from week two.
+[0:58:55]  And I've sorted a whole bunch of numbers here in from 1 to 7.
+[0:58:59]  We know we can do binary search on this structure
+[0:59:03]  if it's implemented as an array.
+[0:59:05]  But what feature do arrays, to be clear, not have that linked lists do?
+[0:59:10]  Today's kind of a seesaw.
+[0:59:11]  What did we just gain by adding linked lists that arrays do not allow?
+[0:59:17]  Yeah.
+[0:59:21]  You can insert more elements without having
+[0:59:23]  to copy or moving everything else around.
+[0:59:26]  Like right now, in this single dimension,
+[0:59:28]  if these values to the left and or right are already used,
+[0:59:31]  then you have to move everything.
+[0:59:33]  And that's where we started today's story.
+[0:59:34]  So arrays kind of paint you into a corner
+[0:59:36]  because you have to, by definition, decide in advance how big they are.
+[0:59:40]  Well, couldn't we have some kind of array that can still grow,
+[0:59:44]  but still is contiguous so we can do binary search in some way?
+[0:59:48]  Well, yes, if we sort of rethink how we implement binary search.
+[0:59:52]  Let me propose that this.
+[0:59:54]  I've chosen these seven elements in the array, much like the lockers
+[0:59:59]  from week two.

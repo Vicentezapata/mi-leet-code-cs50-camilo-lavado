@@ -1,0 +1,1252 @@
+# Transcripción: chunk_011.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  Code ran, so it's not like some bug in that sense.
+[0:00:03]  But because I don't quite understand what's going on underneath the hood,
+[0:00:06]  at least as of right now or prior weeks, this code here is indeed buggy in some
+[0:00:12]  way.
+[0:00:13]  But does anyone have an intuition, perhaps based on today's discussion,
+[0:00:16]  as to why this code, while logically correct, clearly works in reality,
+[0:00:20]  apparently does not work in C?
+[0:00:23]  Any intuition?
+[0:00:24]  Yeah.
+[0:00:28]  Perfect.
+[0:00:28]  And to summarize, here's that term of art I promised.
+[0:00:30]  When you call a function and pass in two arguments,
+[0:00:33]  like a and b, you're passing those arguments by value.
+[0:00:36]  So copies of those values, effectively.
+[0:00:39]  And so when swap is actually called here, sorry, when you pass in x and y,
+[0:00:44]  we call them a and b, but that's just a convention.
+[0:00:46]  We can call the parameters anything we want.
+[0:00:49]  What a and b are, are indeed the values of x and y, respectively,
+[0:00:53]  but copies of the values.
+[0:00:55]  So this code here is very successfully, in VS Code 2,
+[0:00:59]  swapping the values of a and b.
+[0:01:01]  But as you note, because I'm passing them in by value, literally one,
+[0:01:05]  literally two, and not by another term of art, by reference,
+[0:01:08]  a.k.a. by their addresses, swap has no capability in C
+[0:01:13]  to go to those locations, swap the actual locations,
+[0:01:16]  just like we did successfully in reality.
+[0:01:19]  But I think we really have the syntax already
+[0:01:21]  for solving this if we consider that, really, this is just an issue of scope.
+[0:01:24]  And we've talked a bit about scope in the past,
+[0:01:26]  whereby scope refers to the context in which a variable lives.
+[0:01:30]  And generally, I've claimed that a variable exists
+[0:01:32]  between the most recent curly braces.
+[0:01:34]  And that's pretty much true for the swap function,
+[0:01:36]  because a and b, I now claim again, exist only
+[0:01:39]  in the context of these curly braces.
+[0:01:41]  They have no effect on main up top, which has different variables, x and y.
+[0:01:46]  But we can consider now what's really going on underneath the hood.
+[0:01:48]  And here's that same picture of memory as we've seen in the past.
+[0:01:51]  If we zoom in and see on these little black chips,
+[0:01:53]  this is a bunch of bytes of memory.
+[0:01:55]  If I create a grid out of it just to kind of highlight
+[0:01:57]  that we can address each of these bytes, throw away the plastic circuit board,
+[0:02:01]  and focus only on those bytes, what's going on underneath the hood
+[0:02:05]  when functions are called in C, which you've been doing for weeks now?
+[0:02:09]  Well, this rectangle of memory, if we kind of abstract it away further,
+[0:02:13]  is generally broken up into different regions, or segments,
+[0:02:16]  like I called them earlier.
+[0:02:18]  And different things get put in different parts of the computer's memory.
+[0:02:21]  And without getting too into the weeds, when
+[0:02:24]  you double click a program on your Mac or PC,
+[0:02:26]  or when you do dot slash something on a Linux,
+[0:02:30]  you are loading your machine code into the computer's memory
+[0:02:33]  from the computer's hard drive.
+[0:02:35]  So all the zeros and ones that compose Microsoft Word or Chrome or whatever
+[0:02:39]  are loaded into the computer's memory or RAM.
+[0:02:42]  And by convention, it's put up top in the so-called machine code area.
+[0:02:45]  And that's how the CPU has access to them, quickly, at that.
+[0:02:48]  Below that are what are going to be our globals.
+[0:02:51]  So global variables, which we haven't used very much in C,
+[0:02:54]  but you can declare them outside of main, at the very top of your files.
+[0:02:58]  If you have globals, they end up up there as well, just FYI.
+[0:03:01]  And then there's this big chunk of memory
+[0:03:03]  that we saw Valgrin mention indirectly earlier called the heap.
+[0:03:06]  And it's kind of like heap, literally, like it's a heap of memory
+[0:03:09]  that you can use as you see fit.
+[0:03:11]  And the heap is where malloc grabs memory from.
+[0:03:15]  So initially, there's nothing in the heap.
+[0:03:16]  It's just a big chunk of free space.
+[0:03:18]  Anytime you call malloc, malloc kind of carves out from the heap area
+[0:03:22]  more and more bytes.
+[0:03:23]  And malloc keeps track of, essentially, which
+[0:03:25]  bytes have already been allocated.
+[0:03:27]  So initially, it looks empty.
+[0:03:29]  But different bytes, squares, if you will,
+[0:03:31]  keep getting requested again and again as a program runs,
+[0:03:33]  thanks to functions like malloc.
+[0:03:35]  And it grows, if you will, conceptually down.
+[0:03:37]  So the more and more memory you request for malloc, it starts up here.
+[0:03:41]  But then the next chunk you get is down here, conceptually.
+[0:03:43]  The next chunk is down here, down here.
+[0:03:45]  So it kind of fills the available space in the computer's overall memory.
+[0:03:49]  But there's this other chunk of memory called the stack.
+[0:03:52]  And just like a stack of trays in like Annenberg or a cafeteria
+[0:03:56]  kind of grow upward, so does the stack of memory.
+[0:03:59]  And it turns out the stack is where functions have variables
+[0:04:04]  and have arguments stored temporarily.
+[0:04:07]  So whenever you call a function and it has variables inside of it
+[0:04:11]  or has arguments there, too, this is the chunk of memory
+[0:04:14]  in the computer's overall block of memory that are used for functions.
+[0:04:17]  But anytime you call malloc, it's memory up here.
+[0:04:20]  At the end of the day, they just had to pick a direction.
+[0:04:22]  Top, bottom, and technically, it's an artist's rendition.
+[0:04:24]  You could circle this thing around any orientation you want.
+[0:04:27]  But you're just using a finite amount of memory in this conventional way.
+[0:04:30]  Malloc starts here.
+[0:04:32]  Functions start here.
+[0:04:33]  Now, you can kind of see where bad things can happen.
+[0:04:36]  And indeed, one of the other reasons programs computers can crash
+[0:04:39]  is if you ask for way too much memory from the heap
+[0:04:41]  by calling malloc many, many, many times.
+[0:04:44]  Or if you call way too many functions or accidentally per last week,
+[0:04:47]  you recurse infinitely many times.
+[0:04:49]  You might have a segmentation fault.
+[0:04:51]  And that's because you're using too much stack memory.
+[0:04:54]  So this is bound to be a problem eventually.
+[0:04:56]  And the onus is on the programmer to just minimize the probability
+[0:05:00]  of doing that and really avoid the possibility of doing that by just
+[0:05:03]  checking return values, like checking if malloc or get string return null.
+[0:05:07]  Because you can proactively, with conditionals,
+[0:05:10]  make sure that these two things do not collide by just making sure
+[0:05:13]  that you get back non-null values.
+[0:05:16]  So let's consider the stack in the context of swap
+[0:05:19]  and what's really happening here.
+[0:05:20]  Carter, if you wouldn't mind helping me animate the screen here,
+[0:05:23]  when I call the main function of any program,
+[0:05:27]  it is allocated a slice of memory called a frame at the bottom of this stack.
+[0:05:31]  So if Carter, you want to go ahead and advance here,
+[0:05:33]  here's like the first slice of memory that will always be used by main,
+[0:05:37]  whether it has command line arguments or local variables.
+[0:05:40]  It just ends up here in memory.
+[0:05:42]  Suppose now per our swap.c program that main calls swap.
+[0:05:46]  Well, where does the memory for swap end up?
+[0:05:48]  Like right up here.
+[0:05:49]  So swap had two arguments, A and B. And it also had a temporary variable.
+[0:05:55]  So all of those end up in here in memory.
+[0:05:57]  And if you want to go ahead and advance again, Carter,
+[0:05:59]  once swap is done executing, whether it just returns,
+[0:06:02]  because there's no more lines of code, or you explicitly return,
+[0:06:05]  this memory is just freed up automatically.
+[0:06:08]  You don't call free.
+[0:06:09]  You don't undo malloc.
+[0:06:10]  This just all happens automatically.
+[0:06:12]  It has been since week one.
+[0:06:14]  Now, technically, it's still there, even though we've
+[0:06:16]  removed it from the picture.
+[0:06:18]  And there's your first hint of garbage values, right?
+[0:06:20]  Like there's still 0's and 1's there.
+[0:06:22]  And they're left in the previous configuration.
+[0:06:25]  And so the reason you get random values in the memory
+[0:06:28]  is because even though we haven't drawn swap here,
+[0:06:30]  there was stuff there a moment ago.
+[0:06:31]  It's going to be there the next time you use that same memory.
+[0:06:34]  Now, let's go ahead and step through this a little more methodically.
+[0:06:37]  Main has two variables called x and y, 1 and 2.
+[0:06:41]  So let's advance and represent x as 1, y as 2,
+[0:06:44]  taking up these two chunks of memory.
+[0:06:46]  When we call swap now, swap gets a new slice of memory
+[0:06:49]  that then gives us three variables, a and b, technically the arguments,
+[0:06:54]  and temp.
+[0:06:54]  So what happens?
+[0:06:55]  Well, because functions automatically pass in values by value,
+[0:06:59]  or rather pass in arguments by value, x gets copied into a,
+[0:07:04]  y gets copied into b.
+[0:07:06]  And then once we start executing the algorithm,
+[0:07:08]  I'll allow the watered glasses.
+[0:07:09]  Well, what happens here?
+[0:07:11]  So if I execute the first line of code, temp equals a, temp gets a copy of a.
+[0:07:15]  What happens next?
+[0:07:16]  a equals b.
+[0:07:17]  So a takes on a copy of b.
+[0:07:20]  And now we do the final swap in the glasses.
+[0:07:21]  b equals temp.
+[0:07:23]  b gets a copy of temp.
+[0:07:25]  Now, we don't have to change temp because it's essentially empty,
+[0:07:27]  although there's the garbage value.
+[0:07:29]  1 is always now going to be there until we reuse that memory.
+[0:07:32]  The important thing, though, is that a and b have been swapped.
+[0:07:35]  But what obviously has not been swapped, as is
+[0:07:37]  manifest as when swap returns, x and y are untouched,
+[0:07:41]  because copies thereof were passed in.
+[0:07:43]  So we need a solution to this problem.
+[0:07:45]  And if we advance one more time, if you don't mind,
+[0:07:47]  let me step over here but then call you back in a second.
+[0:07:49]  This code here is logically correct.
+[0:07:52]  This is what you did, but this is now a detail of c.
+[0:07:55]  You can't just swap the things by value because you're only
+[0:07:58]  changing it in the scope of the swap function.
+[0:08:00]  But I think if we change it to this and add some annoying syntax,
+[0:08:04]  we can solve the problem.
+[0:08:06]  Just like you can declare variables as storing addresses,
+[0:08:09]  you can declare arguments to functions, aka parameters, as taking addresses.
+[0:08:14]  This new version of swap means that a shall be the address of an integer.
+[0:08:19]  b shall be the address of an integer.
+[0:08:21]  And now it gets a little cryptic here.
+[0:08:23]  temp is the same because it's just an integer like it was in week one.
+[0:08:26]  No thing special about temp.
+[0:08:28]  But if you want to get the value at a, you do star a.
+[0:08:32]  And that goes to the address, grabs the number 1, presumably.
+[0:08:35]  If you want to change the value of a, you go to that address,
+[0:08:38]  you follow the treasure map to the other mailbox,
+[0:08:40]  and you set it equal to whatever is at the value of b.
+[0:08:43]  You go to b as well.
+[0:08:45]  Last line, you go to b now and change it to be
+[0:08:47]  whatever the temporary variable was, which happened to be the same as a.
+[0:08:51]  So that's where the final value gets swapped.
+[0:08:53]  But here, there's a lot more criss-crossing metaphorically
+[0:08:55]  across the stage where you're going to all of these different addresses
+[0:08:58]  in the swap function to make these changes.
+[0:09:01]  So if we advance now to the pictorial version of this,
+[0:09:03]  here's the same story as before with main.
+[0:09:05]  And x and y are 1 and 2, respectively.
+[0:09:07]  When swap gets called now, notice, and I'll do it with arrows here,
+[0:09:11]  a is effectively pointing to x.
+[0:09:13]  b is effectively pointing to y.
+[0:09:15]  If we really get into the weeds, these are actually like addresses.
+[0:09:18]  But who cares about the specifics?
+[0:09:20]  It's really just the concept here.
+[0:09:21]  So now what happens?
+[0:09:22]  Int temp gets star a.
+[0:09:24]  Star a means start at a and go there.
+[0:09:26]  Follow the arrow, if you will, sort of Schutzen Ladder style.
+[0:09:29]  And then that's 1, so we put 1 in temp.
+[0:09:32]  All right, star a equals star b.
+[0:09:34]  So let's do it from right to left.
+[0:09:35]  Star b means follow the arrow.
+[0:09:37]  It's 2.
+[0:09:38]  And then what do you do?
+[0:09:39]  Follow the arrow.
+[0:09:40]  It's now 2, because you copy one to the other from right to left.
+[0:09:43]  And then lastly, star b gets temp.
+[0:09:45]  So start at b, go to b, and now store whatever the value is in temp.
+[0:09:50]  So just by having this basic new syntax of like ampersands and stars
+[0:09:53]  and so forth, we can actually now go to places
+[0:09:56]  and circumvent what is otherwise a feature of c,
+[0:09:58]  that these variables are locally scoped,
+[0:10:01]  but you can still access things in other functions as well.
+[0:10:04]  So thank you so much for helping step through this.
+[0:10:06]  So we now have an application of this that
+[0:10:09]  explains why now in this version of the C code,
+[0:10:12]  this would actually now work.
+[0:10:13]  So in fact, let me go back to my swap code here,
+[0:10:17]  and let me change the function ever so slightly in VS code.
+[0:10:20]  So let me scroll down, leaving main the same,
+[0:10:22]  and let me change swap's prototype to taking in addresses.
+[0:10:27]  Let me go to a here.
+[0:10:28]  Let me go to a here.
+[0:10:30]  Let me go to b here.
+[0:10:31]  And let me go to b here as well.
+[0:10:33]  But nothing else changes.
+[0:10:35]  This change here in particular is enough of a clue
+[0:10:37]  to see that means when you call swap and pass in true values,
+[0:10:41]  I'm expecting addresses now, not integers.
+[0:10:45]  But now that I've made this change, I do need to go up to main
+[0:10:48]  and make one change.
+[0:10:51]  Does anyone have the intuition for what now need change in main
+[0:10:55]  so that I pass in x and y by reference?
+[0:10:58]  That is, by address rather than by value or copy?
+[0:11:02]  Yeah, in back?
+[0:11:06]  So close.
+[0:11:07]  So on the swap line, it's not star that I
+[0:11:09]  want in front of the x and the y.
+[0:11:11]  It's instead, what's the other one?
+[0:11:16]  It's the ampersand.
+[0:11:17]  Why?
+[0:11:17]  Because if I want to enable swap to go somewhere,
+[0:11:20]  just like Carter and I played this game with the mailboxes,
+[0:11:22]  I need to inform swap of the address of x and the address of y.
+[0:11:26]  And again, per the beginning of today's class,
+[0:11:28]  ampersand is the syntax via which we do that.
+[0:11:30]  So I add an ampersand here to get the address of x,
+[0:11:33]  ampersand here to get the address of y.
+[0:11:34]  And now this code lines up with the picture
+[0:11:37]  that Carter just helped us walk through.
+[0:11:39]  And so when I run make swap here, I have a mistake.
+[0:11:43]  Oh, what did I do wrong?
+[0:11:44]  Not intentional, but I guess worth pointing out.
+[0:11:48]  I screwed up here.
+[0:11:49]  It doesn't like ampersand x because of something
+[0:11:53]  on line three, which is way early in the code.
+[0:11:57]  What did I screw up?
+[0:11:58]  Yeah, in the middle?
+[0:12:01]  Yeah, so this is why you should not copy paste,
+[0:12:04]  even though it's necessary for things like function prototypes.
+[0:12:06]  If I change swap at the bottom, I need to change its prototype.
+[0:12:10]  So let me add the star there, add the star there,
+[0:12:12]  or just recopy paste it at the top of the file.
+[0:12:14]  Now let me do make swap again.
+[0:12:16]  Let me now do dot slash swap.
+[0:12:17]  And I should now see x is 1, y is 2.
+[0:12:20]  And hopefully, x is 2, y is 1, which I now do.
+[0:12:24]  So the logic is the same.
+[0:12:26]  The algorithm is the same.
+[0:12:27]  All the week 0 stuff is the same, except now in week 4,
+[0:12:30]  you just have a bit more expressiveness via which
+[0:12:32]  you can tell the computer exactly what you want to manipulate and how.
+[0:12:38]  Any questions, then, on this technique here?
+[0:12:43]  No, all right.
+[0:12:44]  Well, when we fix this, there's still going to be problems.
+[0:12:47]  And just so you've seen some terms of art here,
+[0:12:49]  this is bad whenever you have two arrows pointing at one another,
+[0:12:51]  certainly if you might use and reuse more and more memory.
+[0:12:54]  And it turns out there's some terms of art that might suddenly now make
+[0:12:56]  sense, especially if you've programmed before.
+[0:12:58]  Bad things can happen by this design, but there's really
+[0:13:02]  only this kind of design, because it's a finite amount of memory.
+[0:13:04]  So at some point, bad things are going to happen no matter what
+[0:13:06]  if a computer runs out of memory.
+[0:13:08]  So it's not that this was a poor decision.
+[0:13:09]  It's just sort of a necessary one, given finite amounts of memory
+[0:13:12]  in a computer.
+[0:13:13]  But a heap overflow, so to speak, is when you actually overflow the heap
+[0:13:17]  and touch memory that you shouldn't up there.
+[0:13:19]  Stack overflow is when you somehow overflow the stack and touch memory
+[0:13:22]  that you shouldn't down there.
+[0:13:23]  So with that said, these are really just problems that can happen.
+[0:13:26]  And they're specific incarnations of what are generally called buffer overflows.
+[0:13:30]  A buffer, like in the YouTube sense, is just like a chunk of memory
+[0:13:33]  that, in the case of YouTube, stores the next few seconds or minutes of video.
+[0:13:37]  But generally speaking, a buffer is just a chunk of memory
+[0:13:39]  that the computer is using for some purpose, be it the stack, be it the heap,
+[0:13:43]  be it an array in the computer.
+[0:13:45]  And so buffer overflows are what happens when you just
+[0:13:48]  have logical bugs in your code.
+[0:13:51]  But with these primitives now in mind, we
+[0:13:53]  wanted to conclude with the final revelations.
+[0:13:56]  And that's how some functions like these here work.
+[0:13:58]  The other thing in the CS50 library, besides the typedef for quote unquote
+[0:14:02]  string, is, of course, all of these functions.
+[0:14:04]  And we give you these functions because, honestly, in C, it is hard.
+[0:14:07]  It's annoying.
+[0:14:08]  It's painful.
+[0:14:09]  It's difficult to get user input correctly.
+[0:14:12]  It's very easy when you don't know how much the human's going to type
+[0:14:16]  to write buggy code when it comes to it.
+[0:14:18]  And indeed, it's really hard to store it correctly
+[0:14:20]  without accidentally having some kind of buffer overflow.
+[0:14:23]  So for instance, let me show you a program here.
+[0:14:26]  I'm going to go ahead and write this one from scratch.
+[0:14:28]  So let me go ahead and open a file called get.c, wherein I'm going to go ahead
+[0:14:32]  and mimic the idea of getting integers manually without the CS50 library.
+[0:14:36]  So I'm going to conclude standard io.h only.
+[0:14:38]  I'm going to define main as not taking any command line arguments.
+[0:14:41]  And then I'm going to do something like this.
+[0:14:43]  Give me a variable x with no value yet.
+[0:14:46]  And normally, I would do something like get int.
+[0:14:48]  But let me take that away.
+[0:14:49]  No more training wheels for get int either.
+[0:14:51]  So let me just define the int x.
+[0:14:54]  Let me then just print out something like a prompt.
+[0:14:58]  And I'll just do x colon just to make it obvious to the human
+[0:15:00]  what we're waiting for.
+[0:15:02]  And now I'm going to use a built-in C function to get user input.
+[0:15:05]  I'm going to call a function called scanf, which sort of scans
+[0:15:08]  the user's keyboard for input.
+[0:15:10]  I'm going to scan it for an integer.
+[0:15:12]  So just like printf, I'm going to use percent i because I expect an int.
+[0:15:16]  And then I want to tell scanf where to put the human's integer from the keyboard.
+[0:15:21]  It is not correct, though, to say x.
+[0:15:24]  Because if I say x, I run into the same swap problem.
+[0:15:26]  scanf, no function, can change the value of x
+[0:15:29]  unless I pass it not by value but by reference.
+[0:15:34]  So we're back to our ampersand friend.
+[0:15:36]  And now it has a treasure map to the actual location of x
+[0:15:40]  and can therefore change it.
+[0:15:42]  And so now at the very end of this program, let me do something simple.
+[0:15:45]  Let's just go ahead and print out with printf the value of x using percent i,
+[0:15:51]  as always, plugging in x.
+[0:15:53]  Not ampersand x.
+[0:15:54]  This is now week one stuff.
+[0:15:55]  I want to print the actual integer value of x.
+[0:15:58]  So the only change here is that instead of using get int,
+[0:16:01]  I'm now using this new function that as of today exists called scanf.
+[0:16:05]  So let me go ahead and run get, make get to create this program, dot slash get.
+[0:16:11]  And let's go ahead and type in a value for x.
+[0:16:13]  50, Enter.
+[0:16:15]  And it just works.
+[0:16:16]  So it turns out get int is pretty simple to implement.
+[0:16:19]  However, notice what does not work.
+[0:16:21]  If I type in cat, for instance, cat gets converted to 0.
+[0:16:24]  And meanwhile, get int, recall, will reprompt the user.
+[0:16:28]  If a human does not type an actual integer,
+[0:16:31]  you get automatically reprompted.
+[0:16:32]  So that's one of the features we, for CS50,
+[0:16:34]  added to get int just to make your programs more user friendly.
+[0:16:36]  But otherwise, get int is pretty straightforward
+[0:16:39]  to re-implement using scanf.
+[0:16:41]  Unfortunately, that's not true for strings.
+[0:16:44]  Because how do you know when you write your code what word the human's
+[0:16:47]  going to eventually type in, how long they're greeting, like hi is,
+[0:16:50]  if their name is David or Carter or anything else?
+[0:16:54]  You just don't know in advance how much memory you need.
+[0:16:56]  So how might we do this with strings?
+[0:16:59]  Well, let me go ahead and declare a string s, although you know what?
+[0:17:03]  There's no CS50 library, so we do char star s today instead.
+[0:17:07]  And that gives me not a string per se, but a pointer that
+[0:17:11]  will point, presumably, to a string.
+[0:17:13]  Ideally, I would use this, get string.
+[0:17:15]  But again, we've taken that training wheel away.
+[0:17:18]  So now that I have a pointer s, suppose I prompt the human for a value for s,
+[0:17:22]  just like before.
+[0:17:23]  Let me use scanf now and tell the user that I
+[0:17:25]  expect to read a string, percent s from the keyboard, and store it in s.
+[0:17:32]  Now, this is subtle.
+[0:17:33]  I don't technically need an ampersand here, even though I did for an int
+[0:17:38]  and I would for a float and a double and a long and a bool and a char.
+[0:17:42]  Why do I not need an ampersand in this story to pass by reference?
+[0:17:48]  Because s is already an address.
+[0:17:51]  Again, strings are just special.
+[0:17:52]  Strings now are always addresses, so you
+[0:17:55]  don't need to additionally add an ampersand here.
+[0:17:57]  That's the only subtle difference here.
+[0:17:59]  But now, if I go ahead and print out at the very end what the value of s is,
+[0:18:02]  using percent s as before, this program looks like it's
+[0:18:07]  almost the same as the int version.
+[0:18:09]  But let's do make get.
+[0:18:11]  And OK, so this is not good.
+[0:18:13]  All right, so it doesn't like an initialized value.
+[0:18:15]  So let me make it happy.
+[0:18:17]  I said earlier to always initialize my variable.
+[0:18:19]  So let's initialize it to null so that at least something is there.
+[0:18:22]  That's your good default value nowadays.
+[0:18:24]  Now, if I do dot slash get, now we're good.
+[0:18:26]  And let me type in something like cat.
+[0:18:30]  OK, cat is not x.
+[0:18:31]  Well, let me try another word.
+[0:18:33]  Maybe it's just cat is wrong, dog.
+[0:18:35]  OK, let me try David.
+[0:18:36]  It just doesn't seem to be working.
+[0:18:38]  Moreover, it's printing it as a 0.
+[0:18:41]  What logically, though, is the bug here?
+[0:18:44]  scanf worked a moment ago for integers, but it's not working for strings.
+[0:18:48]  And it seems to be forgetting cat.
+[0:18:50]  It's forgetting dog.
+[0:18:51]  It's forgetting d-a-v-i-d.
+[0:18:52]  Why?
+[0:18:54]  What's happening here?
+[0:18:58]  Think back to our yellow pictures of memory.
+[0:19:02]  Yeah.
+[0:19:04]  It might be reading just the null itself because s is being initialized to null.
+[0:19:08]  And what step have I forgotten from just a few minutes ago?
+[0:19:12]  What did I not actually request of the computer?
+[0:19:15]  Actual memory to store the cat, the d-o-g, the d-a-v-i-d, right?
+[0:19:20]  There's nowhere have I asked the computer for some amount of memory.
+[0:19:24]  And so technically, it might be reading it into some garbage location.
+[0:19:28]  And that's really the problem here.
+[0:19:30]  S is initialized to null now.
+[0:19:32]  And so in fact, it is printing 0 as null.
+[0:19:34]  But I'm not seeing any of the other letters
+[0:19:36]  because there was nowhere to put them, cat, d-o-g, d-a-v-i-d,
+[0:19:39]  because I didn't ask for 3 bytes, 4 bytes, 5 bytes, 100 bytes.
+[0:19:42]  There's no use of malloc.
+[0:19:43]  There's no use of an array.
+[0:19:45]  There's no memory allocated for anything other than the pointer itself.
+[0:19:49]  And this is where, honestly, life gets hard with scanf.
+[0:19:52]  If I could solve this problem in a couple of ways,
+[0:19:54]  let me go ahead and do this.
+[0:19:55]  Instead of declaring S to be a pointer, let
+[0:19:58]  me declare S to actually be an array of four chars.
+[0:20:02]  And now, let me go ahead and recompile the code.
+[0:20:05]  So make get dot slash get.
+[0:20:08]  And I'll type in cat now.
+[0:20:09]  That now works.
+[0:20:10]  Why?
+[0:20:11]  Well, I'm allocating an explicit array of size 4,
+[0:20:14]  enough for a 1, 2, 3 letters plus a null character.
+[0:20:18]  Here's where, to someone's question earlier,
+[0:20:20]  it turns out that in some context, you can treat arrays
+[0:20:23]  as though they are pointers themselves.
+[0:20:25]  See, we'll sort of do the conversion for you.
+[0:20:28]  But for now, just assume that S is just an array of size 4.
+[0:20:31]  And if you pass it in to scanf, that's like a treasure map
+[0:20:34]  that leads to those 4 bytes.
+[0:20:36]  So scanf can now successfully fill it with cat, d-o-g, but let's try this
+[0:20:42]  again.
+[0:20:43]  Let's type in David.
+[0:20:44]  And here, OK, we got lucky, but I technically
+[0:20:47]  touched memory that I should not.
+[0:20:49]  And in fact, if I typed in a long enough string,
+[0:20:51]  and I don't think I could do it very easily without typing this thousands
+[0:20:55]  or hundreds of times, still OK.
+[0:20:58]  But you'll notice that it's forgotten the rest of it now.
+[0:21:01]  So somewhere, we went beyond the boundary of the array,
+[0:21:03]  and we just don't have enough storage space for that entire thing.
+[0:21:06]  So what do you do in your program?
+[0:21:07]  If you don't know how long the person's name or the animal name
+[0:21:10]  is going to be, what do you do?
+[0:21:11]  40, 400, 4,000, 40,000?
+[0:21:14]  At some point, you have to draw a line in the sand.
+[0:21:16]  And that's why getting user input is so annoying in a language like C,
+[0:21:21]  and that's why getString exists.
+[0:21:22]  What we do, if you're curious, is we look at the user's input,
+[0:21:26]  and we take baby steps.
+[0:21:27]  We look at it one character at a time, and every time we see another character,
+[0:21:31]  we actually call malloc again and say, no, I need more than one byte.
+[0:21:34]  I need two.
+[0:21:35]  Oh, wait, they typed in three letters.
+[0:21:36]  I need three instead of two.
+[0:21:37]  Oh, I need four instead of two.
+[0:21:39]  And we have this crazy loop, essentially,
+[0:21:41]  that keeps asking for more and more memory, but by taking baby steps.
+[0:21:44]  And honestly, if you all had to do that in week one, my god,
+[0:21:47]  we couldn't even write hello world anymore.
+[0:21:49]  And so that's why these training wheels exist, at least early on.
+[0:21:52]  And that's why in higher level languages like in Python,
+[0:21:56]  you don't have to do this at all.
+[0:21:57]  It just works as you'd expect.
+[0:21:59]  So what more can we do?
+[0:22:01]  Well, you'll see in problems set for this coming week,
+[0:22:04]  if I open up an example like this, phonebook.c,
+[0:22:07]  you'll see that you can manipulate files now,
+[0:22:10]  that you have a vocabulary for pointers.
+[0:22:11]  It's going to be new quickly, but here we have an example of how.
+[0:22:16]  I have a program using some familiar libraries here.
+[0:22:18]  But as I claim in my comment, this saves names and numbers to a CSV file.
+[0:22:21]  All of my examples thus far, I type in some words,
+[0:22:24]  I type in some names and some phone numbers,
+[0:22:26]  and they disappear because we only store them in memory.
+[0:22:28]  But if you want to store data in like a CSV file, comma, separated values,
+[0:22:32]  which is like a simple spreadsheet, like Excel and Apple numbers
+[0:22:35]  and Google Sheets can open, you can actually do this yourself.
+[0:22:37]  So just as a teaser for this week, here on line 9,
+[0:22:40]  I'm using a new data type, not a CS50 thing.
+[0:22:42]  This is a C thing called file.
+[0:22:44]  But if you want to manipulate files, you need
+[0:22:46]  to use addresses that is pointers.
+[0:22:48]  So here is me creating a variable called file
+[0:22:51]  that's going to point to an actual file on the hard drive,
+[0:22:54]  on the server or your Mac or PC.
+[0:22:56]  fopen is going to be a new function you'll use that will open a file.
+[0:22:59]  And it will return effectively a pointer there too in memory.
+[0:23:03]  The file name I want to open is phonebook.csv.
+[0:23:05]  And in this example, it's going to be append mode.
+[0:23:08]  It will keep allowing me to add more and more names and numbers
+[0:23:10]  to this file.
+[0:23:11]  Here's some old get string stuff, because I'm not going to reinvent
+[0:23:14]  get string with scanf.
+[0:23:15]  But down here is a slightly new function.
+[0:23:17]  It's not printf, but fprintf.
+[0:23:19]  And it turns out it's very easy to print things not to the screen,
+[0:23:22]  but to a file with fprintf.
+[0:23:23]  And it takes an additional argument.
+[0:23:25]  Instead of starting with the quoted string,
+[0:23:27]  you'll have to say what file you want to write to.
+[0:23:30]  And fprintf will figure out how to get the bits into that file,
+[0:23:34]  passing in something like name, comma, number.
+[0:23:37]  So if I run this somewhat quickly here, let me do this.
+[0:23:40]  Let me pre-create a file called phonebook.csv.
+[0:23:45]  And in phonebook.csv, I'm going to create a temporary row here, name, comma,
+[0:23:49]  number, just so that there's something in this file.
+[0:23:52]  And now let me go ahead and do this and split my screen here.
+[0:23:56]  If I have phonebook.csv on the right and phonebook.c on the left,
+[0:24:00]  let me compile, make phonebook, which is the C version, dot slash phonebook.
+[0:24:05]  And now I'm prompted for a name and a number.
+[0:24:07]  I'll type in David.
+[0:24:08]  And then, for instance, plus 1, 9, 4, 9, what is it, 4, 6, 8, 2, 7, 5, 0.
+[0:24:15]  Enter.
+[0:24:16]  Oh, damn it.
+[0:24:17]  Bug.
+[0:24:18]  Pretend that didn't happen.
+[0:24:19]  I forgot to hit Enter in the file.
+[0:24:21]  So let's do this again.
+[0:24:22]  If I run the program again, David, and plus 1, 9, 4, 9, 4, 6, 8, 2, 7, 5, 0.
+[0:24:31]  Enter.
+[0:24:32]  It's been saved now to the file.
+[0:24:35]  And if I close this file and I reopen code of phonebook.csv,
+[0:24:41]  you'll see that the file is persisting.
+[0:24:43]  And if I downloaded this to my Mac or my PC,
+[0:24:46]  I could double click the CSV file and voila,
+[0:24:47]  Excel would open up, or Apple numbers, or the like.
+[0:24:50]  And I've actually created an actual CSV file.
+[0:24:52]  If you're smiling because I keep repeating my phone number out loud,
+[0:24:55]  I would encourage you to call or text that number sometime.
+[0:24:57]  It might very well be an Easter egg of sorts.
+[0:25:00]  But via these functions here, do we have now
+[0:25:02]  the ability to write files, input, and output.
+[0:25:06]  And among the goals then for this week, as we'll see,
+[0:25:08]  are to actually play with images in the spirit of something like Instagram
+[0:25:11]  filters or the like.
+[0:25:12]  And we'll introduce you, for instance, to a file format called
+[0:25:15]  BMPs, which to come full circle to the start of class are just maps of bits,
+[0:25:20]  but more than just single bits for white and black,
+[0:25:22]  but rather colorful patterns as well.
+[0:25:24]  And we'll give you images like this of the week's bridge
+[0:25:26]  here across the river at Harvard.
+[0:25:27]  And you've run, after writing your own code in C
+[0:25:30]  and understanding how the data is stored in the computer's memory,
+[0:25:34]  you'll be able to apply your own Instagram-like filters to make things
+[0:25:37]  grayscale instead, or sepia in this case.
+[0:25:39]  You can even flip the bits around so that the thing is a mirror image.
+[0:25:42]  You can blur things further.
+[0:25:44]  Or if you really are feeling more comfortable,
+[0:25:46]  you can even write code that finds the edges of the image
+[0:25:49]  and creates works of art like these.
+[0:25:51]  So all that and more in problem set four.
+[0:25:53]  We will see you next time.
+[0:25:55]  All right, this is CS50.
+[0:27:48]  And this is week five, which is going to be our last week in C.
+[0:27:53]  But what that means is that we'll have, OK.
+[0:27:58]  But with this week, with last week, and really all of the weeks prior,
+[0:28:02]  have you been hopefully acquiring, if slowly, and with some challenge,
+[0:28:05]  like some fundamental building blocks that are still
+[0:28:07]  going to underlie everything we continue doing in the semester,
+[0:28:10]  even as we transition to so-called higher level languages?
+[0:28:13]  Next week, indeed, we'll introduce Python, a very popular language that
+[0:28:16]  does not have pointers, does not have memory management
+[0:28:19]  at this very low level.
+[0:28:20]  But that's really just because someone else wrote the code that
+[0:28:23]  will do that for you.
+[0:28:24]  And it's going to make our lives easier.
+[0:28:25]  Because it means when you want to solve a problem conceptually up here
+[0:28:28]  to just get real work done or build something amazing,
+[0:28:31]  you don't have to really get into the same weeds
+[0:28:33]  as we have been deliberately this week and now last.
+[0:28:36]  But the goal, ultimately, is that you better understand and can better
+[0:28:39]  harness than all that a computer can do, even in those higher level languages.
+[0:28:44]  So today, we're going to focus particularly on data structures,
+[0:28:47]  how you might structure your data in memory, which really amounts
+[0:28:49]  to building things digitally, stitching together ideas and concepts in memory
+[0:28:54]  using this new building block from last week, which, of course, are these pointers.
+[0:28:58]  Pointers allow you to store addresses in memory, like in variables.
+[0:29:02]  But with those simple addresses, we can sort of leave these breadcrumbs.
+[0:29:05]  We can point from here to there.
+[0:29:06]  And we can conceptually stitch pieces of data together.
+[0:29:10]  But there's going to be different ways of doing that.
+[0:29:12]  And today, we'll focus first on what's generally known as an abstract data
+[0:29:15]  type.
+[0:29:16]  And similar to a type in C more generally,
+[0:29:18]  it does actually have some properties in it.
+[0:29:20]  But the underlying implementation details of an abstract data type
+[0:29:23]  are ultimately up to you.
+[0:29:25]  That is to say, an abstract data type can represent one thing
+[0:29:28]  and can do something.
+[0:29:29]  But how you implement it allows you some discretion underneath the hood.
+[0:29:33]  So for instance, in the world of computer science,
+[0:29:36]  a queue is actually a technical term.
+[0:29:38]  This is a type of data structure that we could theoretically
+[0:29:41]  build in code in C or really any other language.
+[0:29:44]  But a queue has properties just like queues in the real world.
+[0:29:48]  For instance, if you've ever lined up for something
+[0:29:50]  to get food in a restaurant or go into a store
+[0:29:54]  or wait for the airport to clear you, well, you've lined up in a queue.
+[0:29:57]  A queue being some sort of line.
+[0:29:59]  But what's noteworthy about queues are specific properties.
+[0:30:03]  They are first in, first out data structures, either virtually
+[0:30:08]  or in the human world.
+[0:30:09]  Which is to say, the first person in the line
+[0:30:11]  should ideally be served first at the restaurant.
+[0:30:13]  Or the first person in the line should get through airport security first.
+[0:30:17]  By contrast, if it weren't first in, first out,
+[0:30:19]  you can imagine how frustrated you would be if you
+[0:30:22]  have this sort of inherent unfairness.
+[0:30:24]  In fact, if you've ever been in line at a store or a supermarket
+[0:30:27]  or the like and all of a sudden they maybe open a new line
+[0:30:29]  and now the person behind you gets to kind of cut ahead and go forward,
+[0:30:33]  that's because they've broken the concept of the queue.
+[0:30:35]  So it has this inherent potential for unfairness
+[0:30:38]  unless you maintain this first in, first out property.
+[0:30:42]  This would be true, too, for like a to-do list, just for productivity's sake.
+[0:30:45]  If you're in the habit on paper or virtually making a to-do list,
+[0:30:49]  ideally you probably want to go through that list top to bottom
+[0:30:52]  so that you actually get the first stuff you thought of done first,
+[0:30:55]  rather than always focusing on your most recent thought.
+[0:30:58]  Now, within the world of queues, there's certainly two operations,
+[0:31:03]  two functions, if you will, that any queue would have,
+[0:31:05]  either in the real world or in the virtual.
+[0:31:07]  Enqueue is usually the technical term to mean adding something to a queue,
+[0:31:11]  but specifically it means adding it to the end of the queue
+[0:31:14]  so that someone isn't cutting in line, for instance, to go up front.
+[0:31:18]  And then dequeue is just the opposite.
+[0:31:19]  When it's time for the first person in line to be served,
+[0:31:22]  the time for the first person in line to go through security,
+[0:31:25]  they are dequeued, so to speak.
+[0:31:27]  So a technical concept, ultimately, as it's implemented in code,
+[0:31:30]  but it's really just a real world concept.
+[0:31:33]  And these are in contrast to another abstract data type
+[0:31:36]  that we might call a stack.
+[0:31:38]  And a stack, much like a stack of trays in the cafeteria,
+[0:31:41]  has sort of fundamentally different properties.
+[0:31:44]  You can still add and remove things from them, but consider what happens.
+[0:31:47]  Whenever they clean all the trays in the cafeteria or the dining hall,
+[0:31:50]  they put one of the trays down here, and then the next one on top of it,
+[0:31:53]  and then the next one on top of it, it, it, and so forth.
+[0:31:56]  But of course, which tray do you presumably
+[0:31:58]  take as a user of that physical stack?
+[0:32:02]  The top one, presumably, right, like you're not going to futz down here
+[0:32:05]  and try to pull one out.
+[0:32:06]  And so that would seem to have an opposite property, LIFO.
+[0:32:09]  Last in, first out, is what characterizes something like a stack.
+[0:32:13]  And that just makes sense, certainly in the physical world,
+[0:32:16]  of stacking all of those cafeteria trays,
+[0:32:17]  because it just makes more sense to grab the most recently added one,
+[0:32:21]  the last added one, first.
+[0:32:23]  And at least in that context, the trays don't necessarily
+[0:32:26]  care what order they're used in.
+[0:32:28]  But even then, you could imagine that maybe there's some old, dirty, nasty
+[0:32:31]  tray at the very bottom that never gets used,
+[0:32:34]  because you're constantly replenishing the stack.
+[0:32:36]  So there might very well be side effects of these kinds of features.
+[0:32:40]  You might be familiar with using Gmail, for instance,
+[0:32:42]  or really any email program.
+[0:32:44]  What you're looking at in your inbox is technically a stack,
+[0:32:48]  at least if you've left the defaults configured.
+[0:32:50]  Why?
+[0:32:50]  You get a new email.
+[0:32:51]  Where does it end up?
+[0:32:52]  Not like five pages of emails later, presumably right at the top,
+[0:32:56]  and the next one's right at the top, right at the top, right at the top.
+[0:32:58]  And so if you're like me, you're guilty of eventually losing track
+[0:33:01]  of some emails.
+[0:33:02]  Why?
+[0:33:02]  Because you've pushed so many more emails onto the stack
+[0:33:05]  that you sort of lose track of the things you got earliest.
+[0:33:08]  Last in, first out, though, is maintained.
+[0:33:10]  The most recent email you get might very well
+[0:33:12]  be the first one you reply to.
+[0:33:14]  But that's not necessarily good for responsiveness
+[0:33:16]  to everyone else out there.
+[0:33:18]  Similarly, if you store all of your sweaters in a stack like this,
+[0:33:23]  like a pile of black ones below, which is a red and then a blue,
+[0:33:26]  stack might be perfectly fine for keeping things organized.
+[0:33:29]  It's sort of the same way to do it if you just
+[0:33:31]  have a shelf in your dorm room or home.
+[0:33:32]  But what's going to be a side effect of using a stack to store your sweaters
+[0:33:36]  if there are these in this way, as opposed to a queue?
+[0:33:41]  Yeah, it's harder to get the red and blue ones.
+[0:33:44]  So presumably, you're going to much more often
+[0:33:47]  wear, for instance, if you will, black instead there.
+[0:33:50]  Now, the operations for adding things to a stack are similar in spirit,
+[0:33:54]  but just different vocabulary.
+[0:33:56]  You push something on top of a stack, even though it's more like in the tray
+[0:34:00]  world, you sort of place it or rest it.
+[0:34:02]  But pushing means adding something to the top of the stack.
+[0:34:04]  And popping means removing something also from the top of the stack.
+[0:34:09]  So it's not a matter of enqueuing at the end
+[0:34:12]  and dequeuing at the beginning with a stack.
+[0:34:14]  Everything's happening on top.
+[0:34:16]  You're pushing onto the top and then popping off of the top.
+[0:34:19]  Now, when it comes to actual code, how might we
+[0:34:21]  implement something like this?
+[0:34:22]  Well, let's just focus on really how you might implement the data structure
+[0:34:26]  itself.
+[0:34:26]  And we won't implement any functions.
+[0:34:28]  You might implement the notion of a stack like this.
+[0:34:30]  We've seen typedef before.
+[0:34:31]  It just means define a new type of my own.
+[0:34:34]  Struct means here comes a structure, a.k.a.
+[0:34:36]  a data structure of one or more variables within.
+[0:34:40]  And let's suppose, like last time, we defined already a person data type
+[0:34:45]  using a separate typedef.
+[0:34:46]  And every person has a name and a number or whatever.
+[0:34:49]  Let me just stipulate that person exists already.
+[0:34:51]  So here you might have to implement a stack, an array called
+[0:34:55]  people of some capacity.
+[0:34:57]  Maybe it's an array of size 10 or 100 or whatever.
+[0:35:01]  This is a constant here in this context, capacity.
+[0:35:04]  And every element in that array is a person structure.
+[0:35:07]  And I now have this, too, size.
+[0:35:10]  Now, this almost seems like a synonym for capacity.
+[0:35:13]  But maybe intuitively, anyone want to propose
+[0:35:15]  why I'm apparently maintaining separately the capacity of the stack
+[0:35:20]  but also the size of the stack?
+[0:35:22]  Why these two distinctions here?
+[0:35:26]  Yeah.
+[0:35:35]  Perfect.
+[0:35:35]  The capacity is how high the stack could be,
+[0:35:38]  like how much room is there for those sweatshirts in my closet,
+[0:35:42]  for instance, whereas size is just literally at this moment in time
+[0:35:45]  how many sweatshirts are in the stack.
+[0:35:47]  It's either capacity or fewer, presumably, in total there.
+[0:35:51]  So what is capacity?
+[0:35:52]  Well, we could implement this in perhaps a familiar way.
+[0:35:55]  I might just define a const somewhere else in my code of type int
+[0:35:59]  that just defines it to be capacity 50.
+[0:36:01]  But what perhaps is going to be the downside of implementing
+[0:36:04]  a stack in this way, of using an array inside here?
+[0:36:10]  What's a downside now of implementing a stack using an array
+[0:36:13]  and this size variable within?
+[0:36:18]  What's a caveat here, perhaps?
+[0:36:21]  Any hands?
+[0:36:22]  Yeah.
+[0:36:25]  OK.
+[0:36:25]  So it's going to be harder to reach elements that aren't the last one.
+[0:36:28]  That is the most recently added one.
+[0:36:29]  So there could be some sweatshirts, so to speak, way down below.
+[0:36:32]  So we've seen that before, too.
+[0:36:34]  But at some point, too, a limitation of this design
+[0:36:36]  is what it's going to be finite, right?
+[0:36:38]  I can maximally fit, in this example, 50 sweatshirts or 50 emails
+[0:36:42]  or 50 cafeteria trays, which is fine, but at least it's indeed finite.
+[0:36:46]  And at least in the computer's memory, it
+[0:36:48]  might be nice to use more and more and more,
+[0:36:51]  maybe as more things are getting added to the computer.
+[0:36:53]  So maybe I make this 500.
+[0:36:55]  Or heck, why don't I make it 5,000 or 50,000?
+[0:36:58]  Well, what's the trade-off there?
+[0:37:00]  If I want to have enough room to grow, it
+[0:37:02]  seems like I should just crank up the value of capacity endlessly.
+[0:37:06]  But why might I not want to change the 50 to 500 or 5,000 or 50,000?
+[0:37:12]  What's the trade-off there, perhaps, just intuitively?
+[0:37:15]  Yeah.
+[0:37:20]  OK, you don't want to touch memory that you're not supposed to be touching.
+[0:37:23]  And in this case, that wouldn't be a risk, per se,
+[0:37:26]  unless you indeed overflow the stack.
+[0:37:27]  But there's a related issue in asking for that much memory.
+[0:37:31]  What would another downside be?
+[0:37:39]  Yeah, OK, exactly.
+[0:37:41]  So if you've got a capacity of 5,000, but you're only
+[0:37:43]  using one of those elements, it's awkward to say it non-technically,
+[0:37:47]  which is just to say very, very wasteful, right?
+[0:37:49]  That's just bad design.
+[0:37:50]  It's correct.
+[0:37:51]  It will work for up to 5,000 elements.
+[0:37:53]  But my gosh, you're wasting 4,999 extra spots.
+[0:37:56]  And that's not going to end well, especially
+[0:37:58]  if you're using more data structures in memory, like your Mac, your PC,
+[0:38:01]  your phone is surely going to run out of memory if you ask for that much.
+[0:38:04]  So it'd be nice if there was a bit more dynamism there,
+[0:38:07]  whether it's a stack or a queue, both of which
+[0:38:10]  might be implemented a little similarly in spirit.
+[0:38:12]  But let's conclude this abstraction by comparing, thanks to a friend of ours,
+[0:38:16]  Professor Shannon Duvall of Elon University,
+[0:38:19]  who kindly put together this graphical animation that's
+[0:38:21]  just under two minutes long that paints a picture of these two
+[0:38:24]  types of abstract data structures.
+[0:38:25]  And then we'll dive in underneath to how we might implement problems like these,
+[0:38:30]  if we could dim the lights dramatically.
+[0:38:37]  Once upon a time, there was a guy named Jack.
+[0:38:40]  When it came to making friends, Jack did not have the knack.
+[0:38:43]  So Jack went to talk to the most popular guy he knew.
+[0:38:46]  He went up to Lou and asked, what do I do?
+[0:38:49]  Lou saw that his friend was really distressed.
+[0:38:51]  Well, Lou began, just look how you're dressed.
+[0:38:54]  Don't you have any clothes with a different look?
+[0:38:57]  Yes, said Jack, I sure do.
+[0:38:59]  Come to my house, and I'll show them to you.
+[0:39:01]  So they went off to Jack's, and Jack showed Lou the box,
+[0:39:04]  where he kept all his shirts and his pants and his socks.
+[0:39:07]  Lou said, I see you have all your clothes in a pile.
+[0:39:10]  Why don't you wear some others once in a while?
+[0:39:13]  Jack said, well, when I remove clothes and socks,
+[0:39:16]  I wash them and put them away in the box.
+[0:39:19]  Then comes the next morning, and up I hop.
+[0:39:21]  I go to the box and get my clothes off the top.
+[0:39:24]  Lou quickly realized the problem with Jack.
+[0:39:27]  He kept clothes, CDs, and books in a stack.
+[0:39:30]  When he reached for something to read or to wear,
+[0:39:32]  he chose the top book or underwear.
+[0:39:35]  Then when he was done, he would put it right back.
+[0:39:37]  Back it would go on top of the stack.
+[0:39:40]  I know the solution, said a triumphant Lou.
+[0:39:42]  You need to learn to start using a queue.
+[0:39:45]  Lou took Jack's clothes and hung them in a closet,
+[0:39:48]  and when he had emptied the box, he just tossed it.
+[0:39:51]  Then he said, now Jack, at the end of the day,
+[0:39:53]  put your clothes on the left when you put them away.
+[0:39:56]  Then tomorrow morning when you see the sun shine,
+[0:39:58]  get your clothes from the right from the end of the line.
+[0:40:01]  Don't you see, said Lou, it will be so nice.
+[0:40:04]  You'll wear everything once before you wear something twice.
+[0:40:08]  And with everything in queues in his closet and shelf,
+[0:40:10]  Jack started to feel quite sure of himself, all thanks to Lou
+[0:40:14]  and his wonderful queue.
+[0:40:19]  All right.
+[0:40:20]  So that paints a picture of these two abstract data structures.
+[0:40:25]  But if we really were to dive underneath the hood,
+[0:40:27]  we could implement them in a number of different ways.
+[0:40:30]  But we really, I think, need some building blocks
+[0:40:32]  via which we could solve problems like those.
+[0:40:34]  And we'll see today, too, some others as well.
+[0:40:36]  So let's rewind back to week two, when we introduced you
+[0:40:40]  to your very first data structure.
+[0:40:41]  That is an array.
+[0:40:42]  And an array, recall, was just a chunk of memory,
+[0:40:46]  whereby elements were stored by design back to back to back.
+[0:40:49]  It's an array of contiguous memory, specifically.
+[0:40:53]  So with an array, we could certainly store not just one thing,
+[0:40:56]  but two or three or even more.
+[0:40:58]  And so for instance, if we treat my computer's memory
+[0:41:01]  as this sort of abstraction here, and pictured here
+[0:41:03]  are three bytes or some multiplication thereof,
+[0:41:06]  suppose we're storing in the computer's memory an array of size 3,
+[0:41:10]  storing the digits 1, 2, and 3.
+[0:41:12]  Well, remember that if we zoom out per last week,
+[0:41:16]  there's other stuff going on in memory.
+[0:41:18]  So even if we want to add another number to this array
+[0:41:21]  that we didn't think of when we first started the program,
+[0:41:24]  like the number 4, ideally, we would put it right here next to it.
+[0:41:27]  Otherwise, it's no longer an array.
+[0:41:29]  So by definition, if we're using an array,
+[0:41:30]  it's got to end up right there after the 3.
+[0:41:33]  But what else is going on inside of your computer's memory?
+[0:41:35]  Well, assuming your program is of any length,
+[0:41:38]  and you've got other variables, other functions,
+[0:41:40]  you've been running it for a while, there's a lot going on,
+[0:41:42]  and your memory is being used and reused.
+[0:41:44]  So for instance, somewhere in memory might be immediately
+[0:41:47]  adjacent to this, like hello, comma, world,
+[0:41:50]  backslash, 0, the null character, just because maybe you
+[0:41:53]  have another variable somewhere in there that
+[0:41:55]  is storing that particular string alongside your existing array of size
+[0:41:59]  3.
+[0:41:59]  And all of these Oscar the Grouches here really
+[0:42:01]  just represent what we called last week garbage values.
+[0:42:04]  There's obviously bits there, because they don't disappear.
+[0:42:06]  They're always going to be inside of the computer somehow implemented.
+[0:42:10]  But we don't really know or care what they are.
+[0:42:11]  They're the remnants of those bytes having
+[0:42:13]  been used for other older variables, previous function calls, or the like.
+[0:42:17]  But the problem clearly here is that, OK, 1, 2, 3 is there, but the h is here.
+[0:42:22]  And unless I want to start taking a byte out of my string
+[0:42:25]  by overriding the h with a 4, we just can't fit it right there.
+[0:42:30]  And yet, even though there's Oscars all over the place,
+[0:42:32]  those are indeed garbage values.
+[0:42:33]  And therefore, we could use that space, because it's technically unused.
+[0:42:37]  We just don't know or care what the values are.
+[0:42:39]  So where could I put 1, 2, 3, 4?
+[0:42:42]  Well, my gosh, I have all this memory down here that's unused.
+[0:42:45]  I could certainly change those garbage values to be 1, 2, 3, 4.
+[0:42:50]  But to do that, I might need to do a bit of work here, right?
+[0:42:54]  It's not just a matter of just saying, boom, and it happens.
+[0:42:58]  Now with C and with code, I'd have to do this a little more methodically.
+[0:43:01]  So let me abstract away everything else that's a distraction.
+[0:43:04]  Let me assume that there is indeed at least four bytes available
+[0:43:07]  for four numbers just down here, though we could have put them
+[0:43:10]  in a bunch of different spots.
+[0:43:11]  What's involved now in moving the 1, 2, 3 to this new chunk of memory?
+[0:43:17]  So we can add the 4.
+[0:43:18]  Well, I think conceptually, we're going to have to copy the 1 from old to new,
+[0:43:22]  copy the 2 from old to new, copy the 3 from old to new.
+[0:43:26]  And then ultimately, we can get rid of the old memory.
+[0:43:29]  Those three original bytes could now look like Oscar the Grouch
+[0:43:32]  and just be garbage values for all intents and purposes.
+[0:43:35]  But now I have room for a fourth byte wherein I can put the number 4.
+[0:43:40]  So this is nice, but what's a downside of this approach?
+[0:43:45]  What's a downside of solving the problem in this way,
+[0:43:48]  where the problem at hand is just to grow the array, so to speak,
+[0:43:51]  to increase its size to fit one or more numbers?
+[0:43:57]  Seems pretty straightforward, but yeah.
+[0:44:05]  OK, maybe it's out of order, but I think that's OK,
+[0:44:07]  because the order just matters that it's relative.
+[0:44:09]  So so long it's still contiguous, back to back to back
+[0:44:12]  in a different chunk of memory, I think we're OK there.
+[0:44:14]  It's not like I changed it for 4, 3, 2, 1, but a reasonable hunch, yeah.
+[0:44:22]  Yeah, like I didn't really plan ahead here.
+[0:44:24]  Like if I have to add another number, like 5 or anything else,
+[0:44:27]  well, I might have to jump through these hoops again.
+[0:44:29]  Maybe I get lucky, and maybe there's space there,
+[0:44:31]  but not if I have other variables and other things going on.
+[0:44:34]  That, too, might be used at some point.
+[0:44:36]  Other thoughts?
+[0:44:37]  Yeah.
+[0:44:40]  Slow efficiency, why?
+[0:44:44]  Yeah, I mean, it's just inefficient.
+[0:44:47]  It's sort of bad design, arguably.
+[0:44:49]  Why?
+[0:44:50]  Because I had to copy all of my original work down here.
+[0:44:53]  And as you note, if I want to add a fifth number,
+[0:44:55]  I'm going to have to copy it again and again and again
+[0:44:57]  and do things n times again and again.
+[0:45:01]  Now, maybe that's necessary.
+[0:45:02]  We'll soon see for sure, but it feels like this is not going to end well,
+[0:45:06]  especially if the array isn't of size 3 or 4, but 300, 400.
+[0:45:09]  Your computer ends up spending so much time just spinning its wheels.
+[0:45:13]  Honestly, better might be this.
+[0:45:15]  If this is my same array, physically incarnated now, 1, 2, 3,
+[0:45:19]  it's literally on the edge of the shelf, so there's no room for the number 4,
+[0:45:24]  maybe where we could take this story is, well, let's just find room for the 4.
+[0:45:28]  Let's just put the 4, for instance, over here,
+[0:45:31]  replacing some available garbage value, some spare byte over here.
+[0:45:35]  But now, wait a minute.
+[0:45:36]  I've broken the definition of an array.
+[0:45:39]  I can't have 1, 2, 3, and then 4 over here.
+[0:45:41]  So maybe there could be a mechanism, if I put this thing on again,
+[0:45:45]  where when you get to the end of the existing elements,
+[0:45:48]  maybe I just somehow digitally point to the fourth array.
+[0:45:52]  And maybe we can kind of stitch together all of these different values
+[0:45:55]  in memory so that if you follow the arrows, so to speak,
+[0:45:58]  we can reconstruct exactly what the order is,
+[0:46:01]  even without having to find or make room here or pick up all of these numbers
+[0:46:05]  and move all of them over there.
+[0:46:07]  So that's perhaps the direction in which we'll go here.
+[0:46:09]  So let's see how we might get to that spot as follows.
+[0:46:14]  Let me go ahead and open up, say, VS code here.
+[0:46:17]  Let me open up a program called list.c in my terminal.
+[0:46:21]  And let me go ahead and whip up a relatively simple program that
+[0:46:25]  just demonstrates what we did back in week 2
+[0:46:27]  when we introduced arrays as follows.
+[0:46:29]  Let me include standard io.h so we can print stuff out.
+[0:46:34]  Let me do int main void, no command line arguments for now.
+[0:46:37]  Let me give myself an array called list of size 3.
+[0:46:43]  And I'll just hard code it to keep it simple for lecture sake,
+[0:46:46]  each of which is going to be an integer.
+[0:46:47]  And now just so we have some specifics to talk about,
+[0:46:50]  let me put it list bracket 0, the number 1, list bracket 1, the number 2,
+[0:46:54]  and list bracket 2, the number 3.
+[0:46:56]  So I'm just translating into code what we just
+[0:46:59]  had pictorially on the screen and also physically here
+[0:47:02]  with these numbers on the desk.
+[0:47:04]  Now let's just do something mildly useful for this.
+[0:47:06]  How about we do 4, int i get 0, i is less than 3, i plus plus.
+[0:47:12]  Let's just print each of these numbers out just
+[0:47:14]  to make sure they're indeed in memory as I intended.
+[0:47:16]  So percent i backslash n comma i and then a semicolon.
+[0:47:20]  And I think that's it for now.
+[0:47:21]  So nothing interesting, no problem solved just yet, just a proof of concept
+[0:47:25]  so that now when I clear my terminal and run make list,
+[0:47:29]  no apparent errors at the terminal.
+[0:47:32]  And so when I now do dot slash list, I should see,
+[0:47:34]  hopefully, from left to right, 1, 2, 3.
+[0:47:37]  But of course, if I want to add a fourth number now,
+[0:47:40]  there's no mechanism for such, certainly in the code that I just wrote.
+[0:47:44]  I could go back in here and change this to a 4.
+[0:47:47]  I could go down here and change lists bracket 3 equals 4.
+[0:47:51]  I could just manually change the code, recompile the code.
+[0:47:54]  But of course, that doesn't give me any additional runway
+[0:47:56]  for the fifth or sixth number.
+[0:47:58]  So let me try to take a different approach,
+[0:48:00]  drawing some inspiration from last week.
+[0:48:02]  If I want to allocate memory dynamically,
+[0:48:06]  maybe because I don't know when I wrote the program how many bytes I want,
+[0:48:10]  we have another function, as of last week,
+[0:48:12]  that does not require that you commit in advance
+[0:48:14]  to a certain number of bytes.
+[0:48:15]  Via what function can you just ask the operating system for a chunk of memory?
+[0:48:20]  OK, so malloc to allocate memory.
+[0:48:22]  Now, an array is just a chunk of memory.
+[0:48:24]  And even though since week two, we've been using this syntactic sugar,
+[0:48:28]  this convenience of just using square brackets and indexing into it,
+[0:48:32]  it's just making it easier to manipulate a chunk of memory that's contiguous,
+[0:48:36]  altogether, back to back to back.
+[0:48:38]  So today, just like last week, we can take those sort of training wheels off
+[0:48:41]  and maybe be a little more deliberate in how we allocate memory.
+[0:48:44]  Let me go, for instance, and do this.
+[0:48:47]  Let me delete my contents of my main function here, go back into main,
+[0:48:52]  and let me propose now that I declare, for instance, how about my list,
+[0:48:57]  no longer as an array, but as a pointer.
+[0:48:59]  So int star list.
+[0:49:02]  And I'm going to go ahead and initialize this to be, how about a chunk
+[0:49:06]  of three integers for now?
+[0:49:08]  So I'm still going to hard code it, but I'm taking a step toward more dynamism
+[0:49:11]  for now.
+[0:49:12]  So let me allocate three times whatever the size is of an int.
+[0:49:16]  But it's usually going to be four bytes, as we know.
+[0:49:18]  So this is really going to be three times four equals 12.
+[0:49:21]  But it's a little more dynamic.
+[0:49:22]  And now, what can I do down here?
+[0:49:24]  Well, this is just a chunk of memory.
+[0:49:26]  So I can do literally list bracket 0 equals 1, list bracket 1 equals 2,
+[0:49:34]  list bracket 2 equals 3, and voila, achieve the exact same effect.
+[0:49:40]  Because again, an array is just a chunk of contiguous memory.
+[0:49:43]  But malloc gives you any old chunk of contiguous memory,
+[0:49:47]  so you can rather treat one like the other here.
+[0:49:50]  Now, if you really want to be cool, you could do something like this instead.
+[0:49:53]  You could dereference the address in list and go there.
+[0:49:57]  You could go down here and dereference list plus 1 and go there.
+[0:50:02]  But honestly, no one really writes code like this.
+[0:50:04]  It's just too cryptic.
+[0:50:05]  It's a little too far over the line, at least for most people.
+[0:50:08]  And so I think the syntactic sugar, as I keep describing it,
+[0:50:11]  just the more user-friendly square bracket notation
+[0:50:13]  does the exact same thing, figures out the pointer arithmetic,
+[0:50:16]  and puts each of these integers in the right chunks they're in.
+[0:50:20]  Now, just to be super pedantic, let me make sure
+[0:50:23]  if something went wrong.
+[0:50:24]  So if list equals equals null, that means that something went wrong,
+[0:50:28]  like my computer is out of memory, which we should check for typically.
+[0:50:31]  So let me just immediately return 1, signaling anything other than 0,
+[0:50:35]  which means success typically, just to get out of this program
+[0:50:38]  because something's wrong.
+[0:50:39]  But now let me propose that I've had a, well, let's do this.
+[0:50:43]  For int i gets 0, i less than 3, i plus plus,
+[0:50:48]  though a better design would always be to use a const,
+[0:50:50]  but I'm just doing this for demonstration sake.
+[0:50:52]  Let's print out each of these ints, too, and just make
+[0:50:55]  sure I didn't mess anything up.
+[0:50:56]  And let me open my terminal window again.
+[0:50:59]  Let me do make list again.
+[0:51:02]  OK.
+[0:51:02]  Huh.
+[0:51:03]  Implicitly declaring library function malloc
+[0:51:06]  with type void star something something implicitly declaring
+[0:51:10]  is the operative words there.
+[0:51:12]  What did I mess up?
+[0:51:14]  Yeah.
+[0:51:17]  Yeah, I forgot the header file in which malloc is declared.
+[0:51:20]  I remember now, OK, that's in standard lib.h,
+[0:51:23]  and it's fine to look stuff like that up if you forget.
+[0:51:25]  So let me include standard lib.h.
+[0:51:28]  Now let me clear my terminal, run make list again.
+[0:51:32]  OK, now we're good, dot slash list.
+[0:51:34]  And now, what did I do wrong?
+[0:51:41]  Oh, OK.
+[0:51:42]  Not intended, but teachable moment.
+[0:51:44]  What did I do wrong?
+[0:51:45]  Yeah.
+[0:51:48]  Yeah, I'm printing the values of i instead
+[0:51:50]  of what is at location i in the array.
+[0:51:53]  So what I actually meant to do was print this out.
+[0:51:55]  Thank you.
+[0:51:56]  So now let me recompile make list, dot slash list.
+[0:51:59]  And now, OK, those are the three values I was expecting,
+[0:52:02]  not the indices thereof.
+[0:52:04]  Now let me propose that for the sake of discussion
+[0:52:06]  that I regret having only allocated space for three integers.
+[0:52:11]  And maybe I really should have allocated enough space for four.
+[0:52:14]  Now this is not how you would do this in practice,
+[0:52:16]  because presumably if you have a change of thought,
+[0:52:18]  just go back in and correct the code.
+[0:52:20]  But let me propose that somewhere in here
+[0:52:22]  is a more complicated program and time passes, dot, dot, dot.
+[0:52:25]  There's a lot of other interesting code there.
+[0:52:27]  But at some point, I might want to give myself more memory.
+[0:52:30]  So how can I do this?
+[0:52:31]  Well, let me just ask the operating system
+[0:52:33]  now for four new bytes of memory so that we can, at least in version one,
+[0:52:37]  implement the ID on the board where I just copied the three bytes
+[0:52:40]  into the new four bytes and then added a fourth value.
+[0:52:43]  So I'm going to use malloc again.
+[0:52:45]  And I'm going to say, here's a new pointer.
+[0:52:47]  I'll call it temp tmp for short, which is quite common when you just
+[0:52:50]  need it briefly.
+[0:52:52]  I'm going to then call malloc again.
+[0:52:54]  I'm going to say, give me four integers using size of.
+[0:52:58]  Let me again make sure.
+[0:52:59]  So if temp equals equals null, something went wrong.
+[0:53:03]  So let me just immediately return one.
+[0:53:05]  And for good measure, before I return one,
+[0:53:08]  let me free the original list so that I don't leak memory.
+[0:53:12]  So I'm not just immediately returning one.
+[0:53:14]  I'm being a good citizen and remembering, well,
+[0:53:17]  if this malloc call did succeed, and indeed I got as far as line 18,
+[0:53:22]  but then line 18 failed, I should free the memory that I previously malloced.
+[0:53:27]  So again, that's the rule of thumb.
+[0:53:29]  If you allocate it, you should be the one to free it,
+[0:53:31]  even before you're about to quit.
+[0:53:33]  Now, once I've done that, I think I need to do what we did pictorially
+[0:53:36]  on the screen, where I need to copy the one, the two, the three
+[0:53:39]  from the old array into the new.
+[0:53:42]  So how might I do this?
+[0:53:43]  Well, let me give myself a loop.
+[0:53:45]  So for int i get 0, i less than 3, i plus plus,
+[0:53:48]  because the size of the original is still the same.
+[0:53:51]  Let me go ahead and treat the new chunk of memory, called temp,
+[0:53:56]  as an array itself.
+[0:53:57]  And so I can absolutely use these square brackets just like before.
+[0:54:00]  It's just a chunk of memory.
+[0:54:01]  I'm treating it like an array.
+[0:54:03]  And let me add to that value whatever is at the original list at location i
+[0:54:07]  as well.
+[0:54:08]  So this, again, is just this exercise of copying from old to new,
+[0:54:14]  step by step, the one, the two, and the three.
+[0:54:17]  But I still need one additional step if my goal at hand
+[0:54:20]  now is to have, ultimately, a fourth value here.
+[0:54:24]  Well, I'm just going to hardcose this for demonstration sake.
+[0:54:26]  And I'm going to go to the very last location of temp, which is of size 4,
+[0:54:31]  which means the last element in temp is temp bracket 3,
+[0:54:37]  because it's 0 indexed.
+[0:54:38]  But there's four total spaces there.
+[0:54:40]  And I'm just going to arbitrarily, for the sake of discussion,
+[0:54:43]  put the number 4 there.
+[0:54:44]  And that is what happened when we proposed changing the final garbage
+[0:54:50]  value there to that 4.
+[0:54:51]  But now I need to do what the slide did for us sort of magically on the screen.
+[0:54:55]  I should now do a couple of final things.
+[0:54:57]  I should free the original list, which I've not done yet,
+[0:55:00]  because I only called free earlier in cases of error.
+[0:55:03]  And that was just to be safe.
+[0:55:05]  I can now free the list.
+[0:55:07]  And now if I want to inform the computer that I want list, quote unquote,
+[0:55:13]  my variable called list to point at not the old chunk like it originally did,
+[0:55:18]  but the new chunk, I think I can just do this, list equals tmp.
+[0:55:23]  And again, that's just saying that if list is a pointer, which it was,
+[0:55:26]  because look at the very top line here, on line 6,
+[0:55:31]  I declared list to be a pointer to a chunk of memory.
+[0:55:36]  Temp, meanwhile, is a separate pointer to a chunk of memory.
+[0:55:39]  So down here, this line 33 is just a matter of my saying, OK, now henceforth,
+[0:55:45]  because I've already freed the old chunk of memory,
+[0:55:47]  my list variable should point not at this chunk of 3 bytes,
+[0:55:50]  but this chunk of 4 bytes, or really 12 in total now, or rather 16 now,
+[0:55:57]  because we have four such bytes.
+[0:55:59]  Questions now on this code, the point of which
+[0:56:03]  was quite simply to demonstrate how we could implement in code
+[0:56:07]  this idea of fairly correctly but inefficiently allocating
+[0:56:11]  a new array of sufficient size and then populating it
+[0:56:14]  with a new fourth value.
+[0:56:17]  Questions on what we've just done here?
+[0:56:22]  Yeah, good question.
+[0:56:33]  At this point in the story, with line 33,
+[0:56:36]  do I not have two different variables pointing at the same chunk of memory?
+[0:56:40]  Short answer, yes, but here's where the semantics are perhaps compelling.
+[0:56:44]  List is the variable that I intend to use longer term and keep around
+[0:56:47]  in memory, and again, assume that there's even more code going on here
+[0:56:51]  that we just didn't write yet, so it's useful to have that variable.
+[0:56:54]  Temp was just kind of a necessary evil, because up here,
+[0:56:58]  it would not have been correct to do this.
+[0:57:01]  It would not have been correct to say list on line 18
+[0:57:04]  equals the new chunk of memory, because this would have represented
+[0:57:07]  a memory leak.
+[0:57:09]  If I prematurely change temp to point not at the old chunk,
+[0:57:14]  but the new chunk, at that point, no one's pointing at the old chunk,
+[0:57:17]  and so I've lost those three bytes.
+[0:57:19]  Valgrind, for instance, would yell at you for having
+[0:57:21]  lost as many bytes in memory.
+[0:57:24]  So in this case here, I do leave this as temp.
+[0:57:27]  Yes, it's duplicative at this point, but it's not a huge deal
+[0:57:30]  if it was just meant semantically to be a temporary value.
+[0:57:33]  But down here, at the risk of one more line of code,
+[0:57:37]  I still want to, to be a good citizen, free list,
+[0:57:40]  and maybe just for good measure, return 0 explicitly.
+[0:57:43]  But notice, it's not doing it twice per se on line 31.
+[0:57:49]  What am I freeing?
+[0:57:50]  The original address of list, the three integer version.
+[0:57:55]  Then I change what list points at.
+[0:57:57]  So it's pointing at a completely different chunk of memory, this one
+[0:57:59]  of size 4.
+[0:58:00]  So eventually, when I'm all done using this memory for this demonstration,
+[0:58:04]  I still need to free list.
+[0:58:05]  But at this point in the storyline 40, it's
+[0:58:07]  pointing at the new chunk of memory, which I similarly
+[0:58:10]  need to hand back to the operating system by free.
+[0:58:13]  Yeah.
+[0:58:17]  When would temp equal null?
+[0:58:19]  So let me scroll back up slightly.
+[0:58:21]  This is being a good citizen and a good programmer.
+[0:58:24]  Whenever it comes to using malloc, malloc can return null
+[0:58:29]  if the computer is out of memory.
+[0:58:31]  So this is maybe a much bigger program.
+[0:58:32]  You've got other things going on in it.
+[0:58:34]  And so you just don't have enough memory available to be handed.
+[0:58:37]  Malloc needs to signal to you that there's some error.
+[0:58:40]  And so it will, by convention, per the documentation,
+[0:58:43]  per the manual pages, return null.
+[0:58:45]  So this is just me being a good citizen.
+[0:58:47]  Otherwise, here's another error that might
+[0:58:49]  cause your program to crash with a segmentation fault if you get back
+[0:58:52]  null, but you assume that it's good memory.
+[0:58:55]  Going to address 0, AKA null, will crash your program intentionally.
+[0:59:01]  Yeah.
+[0:59:09]  Correct.
+[0:59:09]  If I were to change my final line 40 here to be free temp,
+[0:59:15]  this would also work as well.
+[0:59:17]  And here, this is really a matter of design.
+[0:59:19]  It's a very nitpicky thing.
+[0:59:21]  We could probably debate it.
+[0:59:22]  But because at this point in the story, my main variable
+[0:59:26]  for remembering where the list is is called list.
+[0:59:29]  This is sort of the more responsible way to do it, freeing the list,
+[0:59:32]  just so that my colleagues, my TA, doesn't sort of wonder,
+[0:59:35]  why are you freeing temporary memory that you already freed?
+[0:59:38]  It just is a semantic thing at this point.
+[0:59:40]  But good instinct.
+[0:59:40]  It would also work, correct?
+[0:59:43]  Maybe just not good design.
+[0:59:44]  All right.
+[0:59:45]  So it turns out that this gets annoying quickly,
+[0:59:47]  as it did in the picture of doing all of this duplication.
+[0:59:50]  And even though, technically, it's necessary to copy those values
+[0:59:53]  if you need a newer, bigger chunk of memory,
+[0:59:55]  there is at least a function in C that simplifies a lot of this.

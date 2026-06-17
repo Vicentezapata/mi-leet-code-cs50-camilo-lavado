@@ -1,0 +1,1250 @@
+# Transcripción: chunk_021.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  science further, but half of you will not.
+[0:00:01]  And indeed, all of your programming chops here on out, theoretically,
+[0:00:05]  will have a foundation in what we've been doing these past many weeks.
+[0:00:08]  But here on out, it's really going to be up to you to learn some new fangled
+[0:00:11]  language when it comes out or to follow some new trend when some language
+[0:00:15]  eclipses the ones we've been using as more popular, as more appropriate
+[0:00:19]  for problems you want to solve.
+[0:00:20]  And so today really is about synthesizing so many of the past few weeks,
+[0:00:24]  but doing it in the context of web programming, which for better or for worse
+[0:00:27]  is so very much in vogue nowadays, both on our laptops and phones.
+[0:00:31]  And indeed, the languages we looked at in recent weeks
+[0:00:33]  are used not only to make websites, but also full-fledged applications
+[0:00:37]  in app stores and the like.
+[0:00:39]  So this really will be the culmination of those past several weeks.
+[0:00:42]  And indeed, we'll even talk about some familiar concepts
+[0:00:44]  like shopping carts when you're on Amazon and these things
+[0:00:47]  called cookies when you're visiting websites.
+[0:00:49]  All of those topics, too, will come into play.
+[0:00:51]  And you'll have an understanding of what all that means from the ground up.
+[0:00:54]  So how did we get here?
+[0:00:56]  Well, just last week, we focused on HTML and CSS
+[0:00:59]  primarily, which are not programming languages.
+[0:01:01]  They're just about aesthetics, structuring your data,
+[0:01:04]  presenting your data, and so forth.
+[0:01:06]  And we served the web pages we wrote using this program, HTTP server.
+[0:01:11]  This is just one such program.
+[0:01:12]  There's dozens, hundreds of different web servers
+[0:01:15]  that you can use out there.
+[0:01:17]  This is just a super simple one we pre-installed in your code space
+[0:01:19]  for you in VS Code so that you can just serve up web pages.
+[0:01:23]  At the end of last week, too, though, we teased JavaScript,
+[0:01:26]  a full-fledged programming language that you
+[0:01:28]  can use to manipulate the user's experience for the better,
+[0:01:32]  to make things more dynamic and interactive by actually running
+[0:01:35]  code in the user's browser on their Mac, their PC, their phone,
+[0:01:39]  as opposed to server side, which up until now is where all of our code
+[0:01:42]  in C and Python has been written.
+[0:01:44]  So you're writing code on a server.
+[0:01:46]  You're serving code from a server.
+[0:01:48]  But now with HTML, CSS, and JavaScript, it's getting executed in a browser.
+[0:01:52]  But today, we're going to give you one final feature of Python,
+[0:01:56]  or really languages like it, that you can also
+[0:01:58]  use code on the server to generate automatically, dynamically,
+[0:02:02]  the HTML, the JavaScript, the CSS that you actually want the user to receive.
+[0:02:06]  You don't have to hard code everything as you
+[0:02:08]  have when making your own home page.
+[0:02:10]  Well, let's consider what some of the building blocks were last week.
+[0:02:14]  So here's a sample URL.
+[0:02:15]  And over here, slash is sort of the default page on any web server.
+[0:02:19]  It might be index.html.
+[0:02:21]  It might be something else.
+[0:02:22]  That's just a convention.
+[0:02:23]  But it refers to whatever the default actually is.
+[0:02:25]  You can visit, of course, with any browser,
+[0:02:27]  like a URL that ends in file.html or something else.html.
+[0:02:32]  And that literally means your browser wants this file on this server.
+[0:02:36]  Or of course, we saw that it can be a folder.
+[0:02:38]  And inside of that folder is presumably some default file name,
+[0:02:42]  like again, index.html.
+[0:02:44]  Or you can be more explicit, like folder slash file.html.
+[0:02:47]  And these more generally we just called paths.
+[0:02:49]  And indeed, a path is just a location on your Mac,
+[0:02:52]  your PC, or on a server of some piece of information.
+[0:02:55]  But today, we're just going to rename this only
+[0:02:57]  to use other common terminology.
+[0:02:59]  But they're really just synonyms.
+[0:03:00]  Today, we're going to refer to those same things as routes.
+[0:03:03]  Because now today, we're going to ultimately replace
+[0:03:05]  HTTP server, which just serves up static content that you all write,
+[0:03:09]  with your own web server.
+[0:03:11]  Like now you will be the ones controlling what
+[0:03:14]  it is the server does in response to the user's request
+[0:03:18]  so that you can respond interactively and dynamically.
+[0:03:20]  But we're still going to see techniques like this.
+[0:03:23]  These were our so-called HTTP parameters.
+[0:03:26]  They're everything that comes after a question mark in a URL.
+[0:03:28]  And it can be like key equals value.
+[0:03:30]  And an example was what?
+[0:03:31]  When we played with Google, what was the key and what was the value
+[0:03:36]  that I first tried?
+[0:03:37]  Any recollection?
+[0:03:41]  I was searching for cats.
+[0:03:42]  And so the key I figured out was Q, because that's
+[0:03:45]  what Larry and Sergey, who created Google years ago,
+[0:03:47]  decided the name would be of the HTML text box
+[0:03:51]  that you type your query into.
+[0:03:53]  And if I type cat for cat, the value of that
+[0:03:55]  would end up in the URL for Google as being question mark cat equals value.
+[0:03:59]  And I mentioned that it's often the case that you want to send two
+[0:04:02]  different inputs to a server.
+[0:04:03]  And this is why I propose that you just keep an eye out for ampersands.
+[0:04:06]  And ampersands separate these key value pairs.
+[0:04:08]  But again, this is the same darn paradigm as before.
+[0:04:11]  And we've seen this so many times, key value pairs in dictionaries in Python.
+[0:04:14]  We've seen HTML attributes and their values.
+[0:04:18]  We've seen CSS properties and their values.
+[0:04:21]  It's all the same thing, associating something with something else.
+[0:04:24]  Even though every language, every person seems
+[0:04:26]  to have their own vernacular for it, it really is just the same idea.
+[0:04:30]  This associating of something with something else we'll continue to see.
+[0:04:34]  And here, to be concrete, were the HTTP lines of text
+[0:04:39]  that were in those virtual envelopes, if you will.
+[0:04:41]  If I were, indeed, selecting, trying to search for something
+[0:04:44]  like cats on Google, this recall was the message
+[0:04:47]  that got sent to the server by my browser in order
+[0:04:50]  to tell Google to please search for not dogs, but in this case, cats.
+[0:04:54]  Now, what has HTTP server been doing for us?
+[0:04:57]  Well, it's just been serving up HTML files, CSS files,
+[0:04:59]  maybe some JS or JavaScript files.
+[0:05:02]  But it has been ignoring any HTTP parameters.
+[0:05:05]  Like, HTTP server does not take user input.
+[0:05:08]  Why?
+[0:05:08]  Well, what's it going to do with it?
+[0:05:10]  Because you already wrote the HTML.
+[0:05:11]  You already wrote the CSS.
+[0:05:12]  There's no decisions to be made until we introduce a proper programming
+[0:05:16]  language on the server.
+[0:05:17]  And so we're going to move away now from this simple HTTP server program
+[0:05:21]  and introduce you to your own server that's going to handle the parsing,
+[0:05:26]  that is, the extraction of these key value pairs
+[0:05:28]  so that you and I don't have to write Python code all of a sudden that
+[0:05:31]  analyzes this stuff, figures out what pages requested the key value pairs.
+[0:05:35]  All of that we're still going to get for free by just using the right framework.
+[0:05:39]  And so today, we revisit Python, which we've now used in some form
+[0:05:44]  the past few weeks.
+[0:05:45]  And indeed, it's kind of been the glue that allows us to stitch together
+[0:05:48]  some of our own logic.
+[0:05:49]  We saw it with SQL.
+[0:05:50]  We're going to now see it with HTML, CSS, and even JavaScript if we want.
+[0:05:54]  And we're also going to see another language today, not a programming
+[0:05:56]  language, called Jinja.
+[0:05:58]  And this is going to be a common paradigm in the real world whereby
+[0:06:01]  different languages, different libraries, different frameworks often
+[0:06:05]  borrow from each other.
+[0:06:06]  Or they use technologies that someone else wrote just so they
+[0:06:09]  don't have to reinvent that wheel.
+[0:06:11]  So Flask is just a framework.
+[0:06:12]  That is, a third-party library.
+[0:06:14]  It's pretty popular nowadays.
+[0:06:15]  It's relatively simple, which is why we use it in CS50.
+[0:06:18]  If you've programmed before CS50, Django is another popular framework or library
+[0:06:22]  in the Python space.
+[0:06:24]  But it's a little more complicated.
+[0:06:25]  So we focus on Flask.
+[0:06:26]  And Jinja, we'll see, is not a programming language.
+[0:06:29]  It's just going to be some syntax, thankfully familiar with curly braces,
+[0:06:33]  that allow us to use placeholders in our actual web pages.
+[0:06:37]  So again, you'll wrap your minds all eventually
+[0:06:39]  around where the lines are among these various technologies.
+[0:06:42]  But these are not the interesting ideas.
+[0:06:43]  The interesting ideas are the ones we'll focus on in code.
+[0:06:47]  But starting today, instead of running HTTP server to serve up a static website,
+[0:06:52]  we'll have you start running literally Flask space
+[0:06:55]  run in your terminal window to run your own web server that's implemented
+[0:07:00]  in Python using this Flask framework.
+[0:07:03]  So Bootstrap was a library for making your CSS and JavaScript prettier
+[0:07:08]  and more interactive.
+[0:07:09]  Flask is a framework or library for just making your Python code
+[0:07:13]  more pleasant to use since you're borrowing features from someone else.
+[0:07:17]  All right, so how can we go about doing this?
+[0:07:19]  Well, if you were to write your very own web application, your own amazon.com,
+[0:07:23]  your own google.com in Python using Flask,
+[0:07:26]  minimally you need to have a file called app.py by convention, which
+[0:07:30]  is where all your Python code goes, and then a folder called templates, which
+[0:07:33]  is where all of your templates go.
+[0:07:35]  And for now, your templates are just your HTML files.
+[0:07:38]  So if we're going to now start building more interesting interactive things
+[0:07:41]  like google.com or amazon.com, we need to be able to execute code on the server.
+[0:07:46]  And so this is the convention.
+[0:07:47]  It's not index.html anymore necessarily.
+[0:07:49]  It's these two things at the top level.
+[0:07:51]  With that said, we'll quickly see that there's some other conventions.
+[0:07:54]  And in my examples online and in the problem set nine,
+[0:07:58]  you'll see another file called requirements.txt,
+[0:08:01]  which is just a text file that allows you to enumerate all
+[0:08:03]  of the third party libraries your application might want to use.
+[0:08:07]  It's a convention so that the server can automatically install things for you
+[0:08:11]  without you having to do it manually.
+[0:08:12]  And then static is going to be where literally your static content goes.
+[0:08:16]  So if you've got images for your web application,
+[0:08:18]  if you've got JavaScript files, CSS files, by convention that goes in static.
+[0:08:23]  These are just conventions.
+[0:08:24]  All of this can be changed, but this is the way to do things.
+[0:08:27]  So we'll introduce you to the defaults.
+[0:08:29]  All right, so what does this mean?
+[0:08:31]  How, for instance, could I go about implementing my own web application
+[0:08:35]  using Python that somehow spits out a message like hello world?
+[0:08:40]  All right, well, turns out just this.
+[0:08:43]  Now, we'll tease this apart in just a moment.
+[0:08:45]  But this is the content of a sample app.py file
+[0:08:49]  that apparently uses some library stuff, like familiar syntax
+[0:08:52]  from something, import something else.
+[0:08:54]  We've seen that before with CSVs and other libraries.
+[0:08:57]  This is somewhat new syntax, but it's kind of copy paste for now.
+[0:09:00]  This is definitely new syntax and kind of weird with the at sign here.
+[0:09:03]  But we'll see this again and again today.
+[0:09:05]  And it's just copy paste initially until you
+[0:09:07]  understand what it's doing for you.
+[0:09:08]  But at least there's some familiar stuff here.
+[0:09:11]  Like index.html is still going to be with us,
+[0:09:14]  but it's going to be up to us when and how to show it to the user.
+[0:09:17]  So let's make this more real.
+[0:09:18]  Let me go over to VS code here.
+[0:09:21]  And let me go ahead and create a how about we'll do this in hello.
+[0:09:26]  Let me do make dir hello to make a new folder called hello.
+[0:09:29]  And I'm going to CD into it just to isolate all of these files
+[0:09:32]  to the same directory so that we have different apps today
+[0:09:34]  in different folders.
+[0:09:35]  And now I'm going to do code of let's do this.
+[0:09:39]  Actually, let's do our make dir templates.html.
+[0:09:42]  Sorry, not templates.html.
+[0:09:44]  Let me rename that to templates using the mv command.
+[0:09:47]  This has nothing to do with web programming.
+[0:09:49]  This is me making typos.
+[0:09:50]  So if I type ls now, I've got a folder called templates.
+[0:09:54]  All right, in there, let's create a file called index.html
+[0:09:58]  that is going to be super simple and pretty much copy paste from last week.
+[0:10:01]  Let me hide my terminal window.
+[0:10:03]  And let me just very quickly whip up a simple hello world
+[0:10:06]  page using my HTML tag lang will equal English.
+[0:10:10]  Then inside of this, I'm going to have a head tag.
+[0:10:14]  Inside of this, I'm going to have a title tag.
+[0:10:16]  And I'm just going to call this thing hello.
+[0:10:18]  I'm going to then have a body.
+[0:10:19]  And in this, I'm only going to say something simple like hello comma world.
+[0:10:23]  And just so this is mobile friendly, recall
+[0:10:25]  that we touched on these meta tags.
+[0:10:26]  So just in case you, after class, play with your mobile device
+[0:10:29]  instead of your laptop, I'll do name equals quote unquote viewport.
+[0:10:34]  Viewport and then content equals, and I never remember this.
+[0:10:38]  I'm literally reading it off of a cheat sheet.
+[0:10:39]  Initial scale equals 1, width equals device width.
+[0:10:45]  And this is just this magical incantation that says to the browser,
+[0:10:48]  size things appropriately for the size of the device.
+[0:10:51]  It blows up the font sizes a bit.
+[0:10:53]  All right, so that's what I would have done last week.
+[0:10:56]  And I would have served this web page by running HTTP server
+[0:10:59]  in the same directory.
+[0:11:00]  And boom, I would see that HTML.
+[0:11:01]  But let's now start to take some control over the user's experience.
+[0:11:04]  And for now, it's going to be underwhelming.
+[0:11:06]  It's just going to always say hello world.
+[0:11:08]  But in a moment, version 2 is going to say hello David or hello Carter
+[0:11:12]  a bit more dynamically.
+[0:11:14]  And we'll quickly escalate from there to just more interesting applications
+[0:11:17]  as well, culminating with things like cookies and shopping carts and the like.
+[0:11:21]  So let me go back into my terminal window.
+[0:11:23]  And as promised, let me create another file called app.py.
+[0:11:28]  And this is where now I need to implement the web server
+[0:11:31]  I'm going to run using this Flask framework.
+[0:11:33]  And for now, I'm just going to kind of do some copy paste from what
+[0:11:37]  we saw on the slide a moment ago.
+[0:11:39]  From the Flask library, which we've pre-installed for you,
+[0:11:42]  I'm going to import a function called Flask, capital F. It's subtle,
+[0:11:48]  but it's important there.
+[0:11:49]  And I'm also going to import a few other things,
+[0:11:51]  a function called render templates and another variable called request.
+[0:11:57]  And the only way I know this is from having taught this before,
+[0:12:00]  read the documentation, followed a tutorial.
+[0:12:02]  You wouldn't know this unless someone told you or you read how to do this.
+[0:12:05]  But what this means is that this library called Flask has three things in it,
+[0:12:10]  a function called Flask, capital F, a function called render template,
+[0:12:13]  and a variable built into it called request.
+[0:12:15]  And this is going to be all the building blocks
+[0:12:17]  I need to implement my own web server.
+[0:12:20]  The convention in Flask when you want to create a web app in Python
+[0:12:23]  is you create a variable by convention called app.
+[0:12:26]  And then you assign it the return value of that Flask function, capital F,
+[0:12:31]  and pass into it, underscore, underscore, name, underscore, underscore.
+[0:12:35]  Which is weird, but we have seen this before.
+[0:12:37]  A few weeks ago, anyone recall when and why
+[0:12:40]  we mentioned underscore, underscore, name, underscore, underscore?
+[0:12:44]  Yeah.
+[0:12:50]  Yeah, if we wanted to check if the name of the file was itself main so that we
+[0:12:57]  avoided a situation where if you're writing your own library code,
+[0:13:00]  you don't want your code to be executed automatically.
+[0:13:03]  You want to potentially execute the main function.
+[0:13:06]  And that was a solution to that problem here.
+[0:13:08]  For today's purposes, this is just the way you do it.
+[0:13:10]  Underscore, underscore, name, underscore, underscore
+[0:13:12]  refers to the current file.
+[0:13:13]  And so this is just a little trick that says turn this file
+[0:13:16]  into a Flask application.
+[0:13:18]  That's all it is.
+[0:13:19]  And for now, that line suffices.
+[0:13:21]  All right, what do I want to do after that?
+[0:13:23]  Well, now I'm in charge of the web server.
+[0:13:25]  I need to write the code that decides, based on the browser's request,
+[0:13:30]  what file or files I'm going to send from the server to the browser.
+[0:13:34]  Last week, HTTP server did all of this for us, just based on the file name.
+[0:13:37]  But today, I'm going to take over control over that process.
+[0:13:40]  And the way I do that is as follows.
+[0:13:42]  I say app.route with, weirdly, an at sign in front of it.
+[0:13:47]  This is known in Python as a decorator.
+[0:13:49]  And it's a feature of Python, not a Flask that we just
+[0:13:52]  didn't introduce in weeks past.
+[0:13:53]  But it's a special, it's a handy trick to do what we're about to do.
+[0:13:57]  The route I want to define is, quote unquote, slash.
+[0:14:00]  So that is, here is code I want the server to execute whenever a user
+[0:14:05]  visits forward slash, the default page of the website.
+[0:14:09]  Well, what code do I want them to execute?
+[0:14:10]  Well, I want them to execute a function.
+[0:14:12]  And I can, therefore, define in Python a function.
+[0:14:15]  I can technically call this thing anything I want, x or y or z.
+[0:14:18]  But because they're accessing the default page, otherwise known
+[0:14:21]  as the index of the site, I'm going to just more reasonably call
+[0:14:24]  this function index.
+[0:14:25]  But just a convention, you could call it anything you want.
+[0:14:28]  But x, y, or z is probably a bad stylistic choice.
+[0:14:31]  It doesn't need to take any arguments in this case.
+[0:14:33]  And the only thing this code, this function, is going to do is, for now,
+[0:14:39]  let's go ahead and have it return hello world, quote unquote.
+[0:14:44]  And that's it.
+[0:14:46]  All right, now let me go into my terminal window.
+[0:14:49]  Let me go ahead and do Flask run in the same directory that has app.py
+[0:14:53]  and hit Enter.
+[0:14:54]  I'm going to see some cryptic output, but including a URL of my code space.
+[0:14:58]  And if I open that URL after hovering over it,
+[0:15:00]  I'll indeed see hello world, as you might hope.
+[0:15:03]  But let me do this.
+[0:15:04]  Let me go ahead and right click on the page
+[0:15:06]  and click View Page Source, which, if you haven't done before,
+[0:15:09]  shows you all of the HTML for a page, however pretty or messy it is.
+[0:15:14]  And that's it.
+[0:15:14]  There's no HTML that I've spit out.
+[0:15:16]  It's just, quote unquote, hello world.
+[0:15:19]  Well, if I actually want to spit out a full web page, which is not a big deal
+[0:15:23]  because who cares?
+[0:15:23]  It's just the text anyway.
+[0:15:25]  But if I want to spit out a whole file, let me do this.
+[0:15:29]  I want to return, essentially, the contents of index.html,
+[0:15:33]  which have all of the tags I want, the mobile-friendly stuff and all of that.
+[0:15:36]  Well, I can't just return index.html, but I can return this.
+[0:15:40]  Render template, quote unquote, index.html.
+[0:15:45]  And per the documentation for Flask, this render template function
+[0:15:48]  will go find that file for me in my templates folder by convention.
+[0:15:51]  It will open it up, and then it will spit the whole thing out
+[0:15:54]  to the browser for me.
+[0:15:56]  So I can keep all my HTML in one place and all my Python code in this one place.
+[0:16:00]  So now, if I go back to my browser and reload,
+[0:16:04]  I don't think I'll really see a difference,
+[0:16:06]  because it's the same text, ultimately.
+[0:16:08]  But if I View Page Source now, notice that, ah, there
+[0:16:12]  is all of the HTML that was just sent to the browser.
+[0:16:16]  So this is only to say we have the building blocks, the puzzle pieces,
+[0:16:19]  if you will, via which to now store all of our HTML in one place,
+[0:16:22]  and presumably CSS, JavaScript, and so forth,
+[0:16:24]  but then serve up whatever we want, even though I'm just
+[0:16:28]  blindly spitting out index.html.
+[0:16:31]  So before we proceed, any questions on this, which, again, I claim
+[0:16:35]  is like my manual version of what HTTP server was doing for us
+[0:16:39]  automatically last week.
+[0:16:40]  But this is how you do it yourself.
+[0:16:43]  Any questions?
+[0:16:45]  All right, well, let's make it more interesting,
+[0:16:47]  which we could not do with HTTP server and HTML alone.
+[0:16:51]  Why don't we go ahead and do this?
+[0:16:54]  Let me visit the same URL, and I'm going to zoom in.
+[0:16:57]  And your URL will differ from my code space,
+[0:16:59]  but it's going to end similarly here.
+[0:17:01]  I'm going to do slash question mark, name equals David, for instance,
+[0:17:06]  or Q equals Katz, or name equals Carter.
+[0:17:09]  Any key value pair I want, I'm going to append
+[0:17:11]  after a slash and a question mark, thereby providing user input
+[0:17:14]  to the server, albeit in a very user unfriendly way.
+[0:17:17]  No one's going to normally do this in their browser.
+[0:17:19]  Enter.
+[0:17:20]  Nothing changes here.
+[0:17:21]  It just says, hello, world.
+[0:17:22]  But wouldn't it be nice if it says, hello, David?
+[0:17:25]  Or equivalently, if I zoom in here again and change David to Carter
+[0:17:28]  and hit Enter, wouldn't it be nice if it says, hello, Carter instead?
+[0:17:32]  So we need some dynamism there.
+[0:17:34]  And here's where now Python is going to be our friend.
+[0:17:37]  If I want to access the HTTP parameters that the user has provided via the URL,
+[0:17:44]  be it Q equals Katz or name equals David,
+[0:17:47]  I can use this special variable I already preemptively imported earlier.
+[0:17:51]  And I can do this.
+[0:17:52]  If there is an HTTP parameter called name in what I'm going to call request.args,
+[0:17:58]  then I'm going to go ahead and create a variable called name.
+[0:18:02]  And I'm going to set it equal to request.args bracket name.
+[0:18:06]  Else, if there is no quote unquote name key in this special variable called
+[0:18:11]  request.args, I'm going to just assume that the user's name is
+[0:18:13]  world by default.
+[0:18:15]  Now, what's going on here?
+[0:18:16]  Well, it turns out that Flask provides us with this special variable
+[0:18:20]  called request.args.
+[0:18:21]  And in there is all of the key value pairs
+[0:18:24]  that might have come in via the URL.
+[0:18:27]  So if you had to guess what type of data or what data type is request.args,
+[0:18:34]  that's its name.
+[0:18:34]  And here it is in context.
+[0:18:36]  Line 9 might provide a clue.
+[0:18:38]  In Python, what data type might request.args be?
+[0:18:45]  It's not going to be an array or a list, because those are always,
+[0:18:48]  in every language we've seen, numerically indexed.
+[0:18:50]  But you're close.
+[0:18:53]  Someone else?
+[0:18:55]  It's a dictionary.
+[0:18:56]  So a dictionary is similar syntactically to a list in Python.
+[0:18:59]  But instead of numeric indices like 0, 1, 2,
+[0:19:02]  you can literally use strings like quote unquote name.
+[0:19:05]  Now, that's a bit of a white lie.
+[0:19:06]  It is a dictionary.
+[0:19:07]  But it's Flask's special fancy version of a dictionary.
+[0:19:09]  But the syntax via which you can access it is exactly the same.
+[0:19:13]  And actually, this is a typo.
+[0:19:14]  I didn't mean to say names there.
+[0:19:16]  I meant to say name singular.
+[0:19:18]  But otherwise, I think the code is correct.
+[0:19:20]  This is going to, on line 8, check if there's
+[0:19:23]  a key called name in request.args.
+[0:19:25]  And if so, it's going to set it equal to that value.
+[0:19:28]  Otherwise, it's going to default to world.
+[0:19:30]  I deliberately did not do this.
+[0:19:33]  I added this if else and did not do this why.
+[0:19:38]  What error might happen if I just blindly grab name?
+[0:19:45]  Exactly.
+[0:19:46]  If there was nothing at the end of the URL that was of the form
+[0:19:49]  question mark name equals someone, then there would be no name key.
+[0:19:53]  And this is a couple of weeks back.
+[0:19:55]  But this would give you one of those annoying key errors
+[0:19:58]  when you get a trace back because you screwed up because you used
+[0:20:00]  a string that doesn't exist.
+[0:20:01]  That's why I'm just proactively trying to avoid that situation,
+[0:20:04]  just like I might have a couple of weeks ago.
+[0:20:06]  So even though it's more verbose, this is just much more defensive
+[0:20:10]  so that I don't accidentally index into a dictionary
+[0:20:12]  where there is no key.
+[0:20:14]  But we'll see how we can tighten this up to be not four lines,
+[0:20:16]  but one.
+[0:20:17]  But I think now I can do this.
+[0:20:19]  Wouldn't it be nice if now in my index.html file, which
+[0:20:23]  recall is in my templates folder, wouldn't it
+[0:20:26]  be nice if I could do the equivalent in C of like a percent S here,
+[0:20:30]  for instance, or in Python something like this name?
+[0:20:34]  Well, it's close.
+[0:20:35]  And this is just because different humans invent different languages,
+[0:20:38]  invent different frameworks.
+[0:20:40]  The syntax for this in Flask is to actually do, whoops, two curly braces
+[0:20:47]  and then name of the variable inside of it.
+[0:20:50]  Why?
+[0:20:51]  It's because probably someone figured, what
+[0:20:53]  are the odds that a normal person is ever going to use two curly braces
+[0:20:56]  at once versus just one?
+[0:20:57]  So this is probably decreasing the probability
+[0:20:59]  that people actually want to output literal curly braces like this.
+[0:21:03]  So it's similar in spirit to Python's F strings.
+[0:21:05]  It's similar in spirit to C's percent S. It's similar in spirit
+[0:21:08]  to SQL's question marks.
+[0:21:10]  Same idea, slightly different syntax.
+[0:21:12]  And this there is ginger.
+[0:21:14]  So it's not programming code per se.
+[0:21:16]  It's just a template.
+[0:21:17]  And indeed, that's why this folder is called templates.
+[0:21:20]  It is sort of like a blueprint for what I want to be spit out to the user.
+[0:21:24]  But I've got these placeholders like this variable
+[0:21:26]  that I want to plug into that value.
+[0:21:29]  Now, this alone is not enough.
+[0:21:31]  Watch what happens if I go back to my other browser
+[0:21:34]  and I reload the page after changing up here.
+[0:21:37]  Let's do name equals David again.
+[0:21:39]  Enter nothing outputs after the hello comma.
+[0:21:44]  So it seems that the name variable doesn't exist yet.
+[0:21:48]  And that's why, indeed, if I do view page source,
+[0:21:50]  you can see what was sent to the browser.
+[0:21:52]  Something's wrong with my placeholder.
+[0:21:54]  But I just need to be a little more explicit as to what I want to send where.
+[0:21:57]  So it turns out that the render template function takes not just one argument,
+[0:22:02]  the name of the template you want to spit out,
+[0:22:04]  but it takes after that with commas all of the placeholders
+[0:22:08]  that you want to plug in.
+[0:22:10]  So for instance, if you want the placeholder to be this, literally placeholder
+[0:22:15]  inside of those curly braces, you can then
+[0:22:17]  specify as the second argument to render template,
+[0:22:21]  a placeholder named argument equals whatever the name is.
+[0:22:26]  So name is the variable in the lines above.
+[0:22:29]  Placeholder is the name of my literal placeholder in the curly braces.
+[0:22:33]  And so now, if I go back to my browser and reload this with still
+[0:22:38]  question mark name equals David in the URL,
+[0:22:41]  now I indeed see hello, David.
+[0:22:44]  And if I zoom in here, and let me move over here,
+[0:22:47]  and let me type in Carter and hit Enter, now I see hello Carter instead.
+[0:22:52]  Now, this is a little unnecessary to explicitly call the placeholder
+[0:22:55]  placeholder, especially if you want to have two or three of them.
+[0:22:58]  So you can actually call this anything you want.
+[0:23:00]  And I'm going to change it back to name, which
+[0:23:01]  is a little more straightforward.
+[0:23:03]  The only weird thing here is that now you'll
+[0:23:05]  see that you're writing code like this.
+[0:23:07]  And this is correct.
+[0:23:08]  And this is the norm.
+[0:23:09]  It just looks weird.
+[0:23:11]  But the thing on the left of the equal sign
+[0:23:13]  is the placeholder you're using in the template.
+[0:23:16]  The thing on the right can be any value you want, including a variable.
+[0:23:20]  So even though I'm naming them exactly the same, which looks stupid,
+[0:23:23]  admittedly, like this is what people tend to do, just because it's simpler
+[0:23:28]  than introducing another word like placeholder.
+[0:23:30]  Any questions now on this?
+[0:23:34]  Any questions on these placeholders?
+[0:23:37]  No?
+[0:23:38]  All right.
+[0:23:38]  Let's tighten this up a little bit and see
+[0:23:40]  if we can't get things to be more dynamic still.
+[0:23:43]  Let me propose now that instead of outputting,
+[0:23:47]  instead of using this condition, which made a very simple idea,
+[0:23:51]  like very verbose with four different lines,
+[0:23:53]  it turns out there's an easier way to do this.
+[0:23:55]  You can actually still create a variable called name.
+[0:23:58]  And you can set it equal to request.args.
+[0:24:01]  But instead of just blindly indexing into that dictionary,
+[0:24:05]  it turns out that request.args comes with a function as well called get.
+[0:24:12]  You can pass it an argument that tells you what value you want to get.
+[0:24:16]  And by default, if there is no key called name in that dictionary,
+[0:24:22]  this function will not throw a key error.
+[0:24:24]  It's just going to return none, n-o-n-e, the special value in Python.
+[0:24:28]  So it avoids a bug in your code, but it tightens up four lines into one.
+[0:24:32]  But even nicer, if you read the documentation,
+[0:24:34]  the get function can also take an explicit default value.
+[0:24:38]  So if you don't want none to be on the screen, like hello, comma, blank,
+[0:24:41]  or I mean, that would be weird too.
+[0:24:43]  You can just put in a default value per the documentation
+[0:24:46]  of this function, like world.
+[0:24:48]  So now we've gone from four lines to just one.
+[0:24:51]  So arguably, it's better designed.
+[0:24:52]  And if I go back to the browser now, still with Carter in the URL
+[0:24:55]  and hit reload, same thing happens.
+[0:24:58]  But we'll notice this.
+[0:25:00]  Suppose I get rid of the name parameter altogether and hit Enter.
+[0:25:05]  Now it goes to the default instead, world.
+[0:25:07]  So it's just a little better, a little better designed
+[0:25:10]  than doing it the other way instead.
+[0:25:12]  All right, how about we take things up one more notch?
+[0:25:15]  And how about we introduce multiple routes
+[0:25:18]  and actually introduce perhaps a form to the mix?
+[0:25:21]  Because again, no normal person is going to visit a URL
+[0:25:25]  and add a slash and a question mark in their name.
+[0:25:27]  That's not how browsers work.
+[0:25:29]  Well, that's how browsers work.
+[0:25:30]  That's not how humans interact with browsers.
+[0:25:32]  You and I use a form typically instead.
+[0:25:35]  So now things can get a little more interesting
+[0:25:37]  when making our own web application, because maybe we
+[0:25:40]  could do something like this.
+[0:25:42]  Let me go and zoom out again.
+[0:25:44]  Let me go back to my code here.
+[0:25:46]  And let me move this around and focus now on the index.html file.
+[0:25:51]  Instead of just this placeholder, why don't we go ahead and give ourselves
+[0:25:54]  a form, like we've played with a little bit in the past,
+[0:25:57]  be it for Google or something else.
+[0:25:59]  And let's do this.
+[0:26:01]  Form.
+[0:26:02]  And inside of this form, let's have an input.
+[0:26:05]  And the name of this input will be, quote unquote, name.
+[0:26:08]  So that, too, is confusing.
+[0:26:09]  But inputs have name attributes.
+[0:26:12]  But this is a person's name.
+[0:26:13]  So I'm saying name equals name here.
+[0:26:15]  So just a messy world of semantics.
+[0:26:18]  And let me go ahead and make this a text box by default.
+[0:26:22]  And then let me give myself a button whose default type will be submit.
+[0:26:26]  And the name of this button will be greet, for instance.
+[0:26:29]  So let's see what happens here.
+[0:26:31]  But let me change app.py to just be the original simpler.
+[0:26:33]  I'm not passing in any placeholders now.
+[0:26:35]  And I'm going to even get rid of this.
+[0:26:37]  I'm just going to rewind to the first version of this for simplicity.
+[0:26:40]  Let's now change the URL to get rid of Carter and myself.
+[0:26:43]  So we just go to slash and hit Enter.
+[0:26:46]  And now we have a super simple form again.
+[0:26:49]  All right, this is not super user friendly.
+[0:26:50]  But there's some nice enhancements we can make, for instance.
+[0:26:53]  We can, for instance, turn off autocomplete,
+[0:26:56]  especially if I want to type David and Carter manually
+[0:26:58]  and I don't want it finishing my thought during class.
+[0:27:01]  We can do autofocus, which puts the cursor there
+[0:27:03]  blinking by default, which is nice because then the human
+[0:27:06]  doesn't have to deal with that.
+[0:27:07]  And then we can even have a placeholder attribute.
+[0:27:10]  Placeholder equals name so that it's built in instructions for this thing.
+[0:27:14]  And so now if I go back to the other tab, nothing's changed yet
+[0:27:17]  because I have to download the HTML again, reload.
+[0:27:20]  OK, now it's a little more user friendly.
+[0:27:21]  It says name in light gray.
+[0:27:23]  The cursor is blinking.
+[0:27:24]  And I'm sort of ready to go.
+[0:27:26]  But this form hasn't been wired up to go anywhere yet.
+[0:27:29]  And so let's do this.
+[0:27:31]  Let's, for instance, say that the action of this form
+[0:27:34]  is not going to be something like google.com, which
+[0:27:36]  we did last time with for cats.
+[0:27:38]  I am now going to be both the front end and the back end of this website.
+[0:27:43]  The front end is what the human sees, the web page, the graphics, the forms.
+[0:27:46]  The back end is the stuff the human typically
+[0:27:48]  doesn't see, the Python code, the SQL code, the server itself.
+[0:27:52]  But now I'm in control of both sides of the experience, the HTML and also
+[0:27:57]  the routes.
+[0:27:58]  So let's just propose that we invent our own route.
+[0:28:01]  And instead of calling it slash search like Google does, let's call it slash
+[0:28:05]  greet.
+[0:28:06]  And let me specify that the method this form will use, which is technically
+[0:28:09]  the default, will be get.
+[0:28:11]  And confusingly, it is lowercase get, even though in the envelope
+[0:28:14]  we keep talking about virtually, it's actually capitals.
+[0:28:17]  Again, left hand wasn't talking to right hand when these things were decided.
+[0:28:21]  All right, so all I've done is create a web form that's
+[0:28:24]  going to submit whatever the text box value is to a route called slash greet.
+[0:28:29]  By default, because there's no HTTP or HTTPS or no domain name,
+[0:28:34]  slash greet is going to be assumed to be not at google.com,
+[0:28:37]  but whatever my own server's URL is.
+[0:28:40]  So whatever my code space's URL is, that's
+[0:28:42]  going to be the implicit prefix.
+[0:28:44]  This slash greet is just the route.
+[0:28:46]  So now let's go back to VS Code's app.py file.
+[0:28:51]  How do I now stitch this together?
+[0:28:54]  Well, I think we're good to go with index.html.
+[0:28:56]  If index.html's purpose in life is just to spit out this form,
+[0:29:00]  we're done with one of my routes.
+[0:29:02]  But if I want to have a second route, greet, that actually spits out
+[0:29:07]  some greeting to the user, well, let's prepare that template too.
+[0:29:11]  Let me go ahead and highlight all of this HTML.
+[0:29:14]  Let me go back into my terminal window.
+[0:29:16]  And into my hello directory.
+[0:29:19]  And then into my templates directory.
+[0:29:21]  And let me create another template called greet.html,
+[0:29:25]  whose purpose in life will not be to show a form,
+[0:29:28]  but to greet the user with hello so-and-so.
+[0:29:30]  So in this file, I'm going to paste all that same HTML,
+[0:29:34]  but I'm going to get rid of the form and essentially revert
+[0:29:36]  to our previous version, hello, comma, and then using the ginger syntax name.
+[0:29:41]  So one template, index.html, is for the form.
+[0:29:45]  The second template now is for the greeting of hello, comma, so-and-so.
+[0:29:49]  But otherwise, these files, notice, are almost the same,
+[0:29:52]  except one has the form, one has just the hello.
+[0:29:56]  So now let's finish this up in app.py.
+[0:29:58]  Let me go down here after a couple of blank lines stylistically.
+[0:30:01]  Let me do app.route, quote unquote, slash greet.
+[0:30:05]  But I could call this route anything I want.
+[0:30:07]  I'm just using a reasonable verb.
+[0:30:09]  Then let's define another function.
+[0:30:11]  I could call the function anything I want, x, y, or z.
+[0:30:13]  I'm going to call it more reasonably greet, no arguments.
+[0:30:17]  And then now is the code where I want to render the template.
+[0:30:19]  So I do return render template greet.html.
+[0:30:25]  But I need to do one more thing.
+[0:30:28]  What else do I want to do if I want greet.html
+[0:30:31]  to have access to the human's name?
+[0:30:33]  Just to recap, I think we solved this already, but I deleted it.
+[0:30:38]  But what do I have to add back?
+[0:30:41]  Yeah.
+[0:30:43]  Yeah, so I got to pass in the placeholder somehow.
+[0:30:46]  So I can do this a couple of different ways.
+[0:30:48]  I'm going to keep it a little more elegant this time.
+[0:30:50]  I'm just going to put my name argument there.
+[0:30:54]  And I'm going to set it equal to request.args.get, quote unquote,
+[0:30:58]  name, comma, world.
+[0:31:00]  Before, I used a separate variable, but I only used it in one place.
+[0:31:03]  So that's not strictly necessary.
+[0:31:05]  So this is fine, too.
+[0:31:06]  But if this gets a little overwhelming, notice
+[0:31:08]  that I can alternatively do this.
+[0:31:10]  I can create an actual variable called name.
+[0:31:13]  And then I can pass in an argument called name
+[0:31:17]  with a value that is that variable.
+[0:31:19]  But again, what's really the point here?
+[0:31:21]  It was kind of prettier all on one line.
+[0:31:23]  So these are the exact same things.
+[0:31:24]  I'm just trying to tighten things up further here.
+[0:31:27]  All right, so what just happened?
+[0:31:29]  If I go back to my form, this is still index.html.
+[0:31:32]  If I reload it, nothing has changed.
+[0:31:34]  If I type in my name to this form, notice again,
+[0:31:37]  the URL I'm currently at, this is Chrome hiding things.
+[0:31:40]  It's technically slash by default, even though many browsers are just
+[0:31:43]  hiding unnecessary characters these days.
+[0:31:46]  But watch what happens now if I scroll over here
+[0:31:50]  and I click greet on this new form.
+[0:31:53]  Notice my URL, my route change to slash greet, question mark,
+[0:31:59]  name equals David.
+[0:32:00]  And the body of the page at top left says, hello, comma, David.
+[0:32:04]  So this is exactly how google.com works.
+[0:32:05]  And it's how we implemented search.html last time.
+[0:32:08]  But instead of submitting the form to Google via the form,
+[0:32:13]  I'm submitting it to myself, my very own route.
+[0:32:15]  So I'm implementing my own back end for this same front end.
+[0:32:20]  All right, any questions just yet?
+[0:32:23]  Much less interesting than Google, certainly.
+[0:32:24]  But we kind of have all of the wiring now.
+[0:32:30]  Any questions?
+[0:32:32]  No?
+[0:32:34]  All right, so what can we do to further tighten this up
+[0:32:39]  and adhere to some conventions?
+[0:32:40]  Well, let me propose that in this version, we solve one problem.
+[0:32:45]  And even if you've never done this sort of thing before,
+[0:32:47]  I dare say we have enough weeks of CS50 where if I show you index.html again
+[0:32:52]  and greet.html again, odds are to someone's mind,
+[0:32:57]  there's a opportunity for improvement.
+[0:33:01]  Why is this web app super simple though it is, arguably poorly
+[0:33:05]  designed at the moment?
+[0:33:09]  And the answer lies somewhere in these two templates,
+[0:33:12]  index.html and greet.html.
+[0:33:16]  Yeah, they're almost the exact same except for the contents of the body.
+[0:33:20]  And you know, it wasn't a big deal.
+[0:33:21]  There's only two pages.
+[0:33:22]  So what, I copy pasted this once.
+[0:33:24]  But imagine now a normal website or even your home pages,
+[0:33:27]  which had three, four, or more pages.
+[0:33:29]  I mean, at this point, you're just copying and pasting everything,
+[0:33:32]  honestly, as you probably did necessarily for your home page.
+[0:33:36]  Why?
+[0:33:36]  Because when you have HTML only, maybe CSS and even JavaScript,
+[0:33:40]  that's all you can do is copy, paste, copy, paste,
+[0:33:42]  and just make sure that you have the same structure.
+[0:33:45]  Maybe you have the same CSS file, the same JavaScript file,
+[0:33:47]  the same third party libraries.
+[0:33:49]  But it makes it very, very annoying, as you might have realized already,
+[0:33:52]  to just make a change that affects everything.
+[0:33:55]  So wouldn't it be nice to factor out all of this and all of this
+[0:33:59]  and just let the body change?
+[0:34:01]  So here too is something that Flask and really other equivalent frameworks
+[0:34:05]  let us do.
+[0:34:06]  It allows us to create what we're going to call conventionally a layout.
+[0:34:10]  Instead, so I'm going to go ahead and do this.
+[0:34:11]  I'm going to copy one last time all of the same HTML.
+[0:34:15]  I'm going to go into my terminal window.
+[0:34:18]  And I'm going to create by convention a file called layout.html.
+[0:34:22]  This is truly going to be a blueprint of sorts.
+[0:34:25]  And in layout.html, I'm going to paste all of that same code.
+[0:34:29]  But I'm going to use now some ginger syntax
+[0:34:32]  to indicate that I don't want to plug in just a variable like name here.
+[0:34:37]  I want to actually plug the contents of a whole other file.
+[0:34:41]  So instead of just using curly braces, two of them left and right,
+[0:34:44]  I have to use slightly different syntax to say,
+[0:34:46]  I want a whole block of HTML here from some other file.
+[0:34:50]  And the way to do this, even though the syntax is a little not obvious,
+[0:34:54]  is you use open curly brace, percent sign, block.
+[0:34:58]  Then you can call the next word anything you want.
+[0:35:01]  It just has to be a special type of placeholder for an actual file,
+[0:35:04]  not for just a variable.
+[0:35:06]  I'm going to call it body, only because I'm in the body.
+[0:35:08]  So I want a placeholder to be the entire body.
+[0:35:11]  And then outside of this, you then say, in one word, no space, end block.
+[0:35:16]  So it looks kind of stupid, honestly.
+[0:35:18]  And why do we have yet more ugly syntax?
+[0:35:20]  Again, just different software developers in the world
+[0:35:22]  are all choosing their own syntax for their own libraries.
+[0:35:25]  So they all kind of look different, but are all kind of similar in spirit.
+[0:35:28]  And you just get used to seeing the different syntax.
+[0:35:30]  This now is not nearly as pretty as the pair of curly braces for variables.
+[0:35:35]  But this is how I can say, plug the contents of an entire file here.
+[0:35:40]  And now, what does this let me do?
+[0:35:42]  I can now go back into my index.html file, which at the moment
+[0:35:48]  still looks like this, but almost all of this is copy paste.
+[0:35:51]  The only lines that are interesting and different
+[0:35:54]  are these four lines here in the body.
+[0:35:57]  So what I can actually do now is I'm going to highlight that and cut it.
+[0:36:01]  And then I'm going to highlight everything else
+[0:36:02]  and just delete the entire file.
+[0:36:04]  And I'm going to use some of that same syntax and say,
+[0:36:07]  curly brace percent sign extends, quote unquote, layout.html.
+[0:36:14]  And then I close my thought with a percent sign and close curly brace.
+[0:36:18]  So this syntax, as you might just be inferring,
+[0:36:20]  is now saying, please extend whatever layout.html looks like.
+[0:36:25]  That's the original blueprint, the mold out
+[0:36:28]  of which I want to make this web page.
+[0:36:30]  And now here, the syntax is a little weird, too,
+[0:36:32]  but similar, at least from before.
+[0:36:34]  I can now say the body block that I want you to plug into that layout
+[0:36:40]  is going to be everything between these two tags, which we already saw earlier.
+[0:36:46]  But in layout.html, they're sort of giving a placeholder.
+[0:36:50]  In index.html, this is what I'm going to plug
+[0:36:53]  into those other placeholders as well.
+[0:36:55]  So I'm just going to give myself some extra white space.
+[0:36:57]  I'm going to paste the HTML that was there.
+[0:36:59]  If I want to make clear what's going on,
+[0:37:01]  I can indent it, although this has no functional impact.
+[0:37:04]  But it just makes clear that, just like in HTML,
+[0:37:06]  you can open a ginger tag and close it.
+[0:37:09]  But in ginger here, we have this, hey, Python,
+[0:37:13]  here comes the body of this page.
+[0:37:15]  Hey, Python, that's it for the body of this page.
+[0:37:18]  And all of this stuff should be plugged into this main parent layout,
+[0:37:23]  if you will.
+[0:37:24]  So super ugly, admittedly.
+[0:37:26]  But now, at least, things get way less redundant,
+[0:37:28]  because I'm going to do the exact same thing over here.
+[0:37:31]  In greet.html, it looks like this.
+[0:37:33]  But now, I'm going to do this, extends layout.html also.
+[0:37:39]  Just as before, the body that I want to plug in
+[0:37:43]  is going to be everything inside of these tags here.
+[0:37:47]  And this body is just going to be hello, comma,
+[0:37:49]  name in curly braces, like that.
+[0:37:53]  So again, ugly syntax got really ugly fast.
+[0:37:55]  But it's really just following these patterns now.
+[0:37:58]  And we have two types of placeholders, two curly braces
+[0:38:00]  for variables.
+[0:38:02]  And now, this kind of syntax with the percent signs
+[0:38:05]  and the single curly braces for contents of actual files.
+[0:38:09]  And so now, in this world or in the world of a home page,
+[0:38:13]  if you were using Flask and Python to make your personal home page
+[0:38:16]  with all of those various pages, you would probably
+[0:38:19]  design one main layout with all of your pretty logos and colors
+[0:38:22]  and fonts and what you want the site to look like.
+[0:38:25]  And then each of your smaller pages would now
+[0:38:27]  be distilled into just these smaller fragments.
+[0:38:30]  And whether you're using Python or Java or JavaScript or other languages,
+[0:38:34]  too, all different programming languages have popular frameworks
+[0:38:37]  that do things like this.
+[0:38:38]  The idea is the same across all of them.
+[0:38:41]  All right, let's see if it works.
+[0:38:43]  Let's go back into the browser.
+[0:38:44]  Let me go back to my slash route.
+[0:38:47]  There's that same form.
+[0:38:49]  Let me type in David and click greet.
+[0:38:52]  And indeed, I see hello, comma, David.
+[0:38:54]  I see that greet was automatically added to the URL
+[0:38:57]  by the browser when I submitted the form, followed by the key value pairs.
+[0:39:01]  And if I view the page source as I did earlier,
+[0:39:03]  you'll see that you have the entirety of that layout with hello, David
+[0:39:08]  plugged in.
+[0:39:08]  Meanwhile, if I go back to the form and view this page source,
+[0:39:13]  you'll see the exact same layout but with the form tag plugged in.
+[0:39:17]  And here's where you can be a little less nitpicky with styling.
+[0:39:21]  OK, yes, this isn't technically indented inside of the body,
+[0:39:24]  but it was relative to the original file.
+[0:39:26]  So at this point in the game, you don't need
+[0:39:28]  to worry about your outputted HTML looking super pretty.
+[0:39:31]  You want your source code that the humans see to be pretty, not the browser.
+[0:39:35]  This is not a stylistic concern.
+[0:39:38]  OK, questions on these capabilities then of Flask or problems
+[0:39:44]  that we've just solved and why?
+[0:39:46]  Yeah.
+[0:39:52]  OK, so if the files in question are in different folders, for instance,
+[0:39:57]  if I go back into my index page, which has the form,
+[0:40:03]  the routes here are entirely dependent on what is an app.py.
+[0:40:08]  There's no notion of a folder when it comes to implementing a web
+[0:40:12]  application anymore.
+[0:40:13]  They are more generically routes.
+[0:40:15]  However, and we've not done this yet, you can put your static content,
+[0:40:19]  your images, your video files, your CSS files in a folder called static.
+[0:40:22]  And there can be subfolders therein.
+[0:40:24]  And that would affect what you use as your source attributes for images
+[0:40:29]  or your source tags for video or any of those kinds of assets.
+[0:40:34]  And we'll see that eventually in the problem set next.
+[0:40:37]  Other questions on what we've just done here?
+[0:40:39]  Yeah.
+[0:40:42]  Good question.
+[0:40:43]  How did I ensure that the web app starts on the form
+[0:40:46]  and then goes to the hello page?
+[0:40:49]  So whatever you decide your default index route is, like the implicit slash,
+[0:40:55]  that is what is going to be pulled up when a user visits the domain name
+[0:40:59]  where your website is hosted.
+[0:41:00]  So if I go back over here to app.py, because my slash route
+[0:41:05]  is designed to return index.html, that's exactly why that response came back.
+[0:41:11]  Good question.
+[0:41:12]  All right, so beyond this, let's consider now issues of privacy.
+[0:41:16]  And we'll touch on this too as we get to issues like shopping carts and cookies.
+[0:41:19]  If I zoom in on the URL here, even though the URL itself
+[0:41:22]  is a little long and ugly and cryptic.
+[0:41:24]  But when I type in my name and hit greet, of course,
+[0:41:29]  we keep seeing name equals David in the URL.
+[0:41:33]  In what sense might this be bad design?
+[0:41:37]  Or in what kinds of web apps might you not want the name
+[0:41:41]  to show up in the URL like that?
+[0:41:42]  Because this is what Google does, and this is what my app does.
+[0:41:47]  Yeah.
+[0:41:48]  Yeah, so if I'm logging in with a username and password,
+[0:41:51]  I could imagine that they show up in the URL
+[0:41:54]  after the question mark, where username equals
+[0:41:56]  Malin and password equals 12345.
+[0:41:59]  But then all my nosy siblings need to do is go through my browser history
+[0:42:03]  and boom, it's right there for them to copy paste.
+[0:42:06]  So that doesn't seem particularly secure.
+[0:42:08]  Or if someone's walking past you in a cafe,
+[0:42:11]  they can just look at your URL if it's revealed by the browser,
+[0:42:14]  and they see it too.
+[0:42:15]  So get is not necessarily the best verb to use,
+[0:42:18]  even though it's the default when submitting forms.
+[0:42:20]  Typically, when you've got anything remotely sensitive or anything large,
+[0:42:24]  so be it a password or credit card number or an image or a video
+[0:42:28]  that you're uploading to Instagram or to YouTube or any such site like that,
+[0:42:34]  you don't want the data going into the URL.
+[0:42:36]  And thankfully, there's actually an easy way to fix this.
+[0:42:40]  I can go into my form, which is currently in index.html,
+[0:42:44]  and I can just change the method from get to post.
+[0:42:47]  In lowercase here, but the verb in the virtual envelope
+[0:42:51]  we discussed last week would itself be capital P-O-S-T.
+[0:42:54]  Now, unfortunately, watch what happens here.
+[0:42:58]  Let me go over to my original form by going back to the slash route,
+[0:43:03]  and I'm reloading the page to make sure I get the latest, freshest HTML.
+[0:43:06]  And just to confirm here, yep, if I view source, method is now post.
+[0:43:13]  So let me go ahead and type in David now and click read.
+[0:43:16]  And before, we saw hello, David.
+[0:43:18]  But now I get method not allowed.
+[0:43:20]  And this is somewhat subtle, but in the title of the tab,
+[0:43:24]  notice that it's a 405 error, which is not familiar probably.
+[0:43:27]  Almost all of us have seen 404, file not found.
+[0:43:30]  Turns out 405, a little more arcane, is the method.
+[0:43:34]  The HTTP verb is not allowed.
+[0:43:36]  Why?
+[0:43:37]  Because by default, my app.py only currently supports get by default.
+[0:43:42]  How do I support post?
+[0:43:43]  Well, I just need a little bit more syntax.
+[0:43:45]  So let me go back into VS Code here.
+[0:43:48]  Let me go into app.py now.
+[0:43:50]  And after changing the form, I just need to inform Flask that, you know what?
+[0:43:54]  The method I want this great route to use should not be the default, which
+[0:43:58]  is only get.
+[0:44:00]  I want it to use these methods.
+[0:44:02]  And it takes a second argument called methods, the value of which is a list,
+[0:44:07]  the default of which is quote unquote get.
+[0:44:09]  So that's the default. This has not made any changes.
+[0:44:12]  But if I want to support post instead, I can explicitly
+[0:44:15]  pass a list with one string in it, post instead.
+[0:44:20]  And now, what does this mean?
+[0:44:21]  We didn't talk about this in any detail last week.
+[0:44:23]  But inside of this virtual envelope, typically,
+[0:44:26]  is that line like get slash search q equals cat after the question mark.
+[0:44:32]  If you want to hide that kind of information for privacy
+[0:44:35]  sake or because you want to upload an image, which just doesn't make sense
+[0:44:38]  to put in the URL, essentially, the part of the story
+[0:44:41]  would be, well, the computer looks deeper inside of that virtual envelope.
+[0:44:44]  And anything submitted via post goes below the HTTP headers,
+[0:44:49]  like deeper in that envelope.
+[0:44:50]  So they're still there.
+[0:44:51]  They're just not obviously visible for prying eyes in the user's own browser.
+[0:44:56]  So just by making that change in the HTML,
+[0:44:59]  telling the browser to submit the data via post,
+[0:45:02]  and changing app.py to tell the route to expect the data via post,
+[0:45:07]  I can now go back to my other tab.
+[0:45:09]  Let me go back to the original page.
+[0:45:11]  Let me reload, just so I've got the latest HTML.
+[0:45:14]  And indeed, view page source, it's still, yep, it's still post.
+[0:45:18]  But now when I type in d-a-v-i-d and click greet, now it works.
+[0:45:23]  But, but, but, notice the privacy implication.
+[0:45:27]  I'm at the slash greet route, but where's my name?
+[0:45:30]  It's not actually there.
+[0:45:32]  It still went to the server, but it's not in your autocomplete
+[0:45:34]  or your history now for privacy sake.
+[0:45:37]  Questions now on post.
+[0:45:41]  Yeah, oh, no, just scratching.
+[0:45:43]  All right.
+[0:45:44]  Can you, the programmer, see this?
+[0:45:46]  Well, let me show you a couple of other features of Chrome and Safari
+[0:45:51]  and other browsers as well.
+[0:45:52]  I keep going to view page source, which just shows you
+[0:45:55]  like a read-only version of your HTML.
+[0:45:57]  But recall that last time I actually right clicked
+[0:45:59]  and went to inspect or viewed developer tools.
+[0:46:02]  And this brings up a much fancier version of the developer tools.
+[0:46:06]  And under elements here, you see everything.
+[0:46:08]  And it's nice and pretty printed.
+[0:46:09]  It's hierarchical.
+[0:46:10]  It collapses things into these clickable triangles.
+[0:46:12]  But it's the exact same thing.
+[0:46:13]  It's just more interactive.
+[0:46:15]  But notice what I can do today is this.
+[0:46:17]  If I go to the network tab here, and let me zoom out a little bit,
+[0:46:21]  let me go ahead and reload the form here and type in d-a-v-i-d again
+[0:46:28]  and click greet.
+[0:46:30]  Notice now in the network tab of Chrome's developer tools,
+[0:46:35]  I see a few things as we saw before.
+[0:46:37]  One, I see that the request method is post.
+[0:46:40]  Two, I see that the server automatically,
+[0:46:42]  without me writing any code for this, returns 200 when it's successful.
+[0:46:46]  But I can scroll down, down, down, down, down.
+[0:46:49]  And you'll see that eventually, after all these cookies, more on those later,
+[0:46:54]  if I click on Payload, the second tab next to headers,
+[0:46:57]  you can see as the developer what was actually sent to the server.
+[0:47:01]  So indeed, this is going to be super useful
+[0:47:03]  like when doing problem set 9, maybe your final projects.
+[0:47:06]  If you want to see what's going from browser to server,
+[0:47:08]  you have complete control over all of that information.
+[0:47:12]  Even if you're using HTTPS, because your browser and you, the developer,
+[0:47:15]  can certainly see all of this.
+[0:47:17]  So again, these developer tools, even though there's
+[0:47:19]  a lot of tabs and buttons you probably won't need any time soon,
+[0:47:22]  some of them, like elements and network and with JavaScript console,
+[0:47:26]  are going to be super useful to start to get familiar with.
+[0:47:31]  All right, any questions now on this implication of post?
+[0:47:40]  Anything at all?
+[0:47:43]  No?
+[0:47:43]  OK, how about one final hello example that
+[0:47:46]  ties a few of these things together?
+[0:47:48]  How about now we try to tighten things up further only
+[0:47:52]  in anticipation of something like problem set 9 or really more
+[0:47:55]  complicated web apps where you might have not two but 20 or maybe
+[0:48:00]  even more different routes.
+[0:48:01]  It might be ideal to just minimize how many total routes we have so we
+[0:48:06]  don't get a little too overwhelmed.
+[0:48:07]  And I dare say that these two routes are so short,
+[0:48:11]  maybe I can combine them into one.
+[0:48:13]  And maybe I can keep the user at what seems to be the same URL
+[0:48:16]  but just to kind of tidy things up.
+[0:48:18]  So let me propose that we do this instead.
+[0:48:21]  Let me get rid of my greet route.
+[0:48:24]  And let me go into my form in index.html.
+[0:48:28]  And let me go ahead and just have the action of this form still be slash.
+[0:48:33]  So I want the form to be visible at slash, the index of the site.
+[0:48:37]  But I also want the form to submit to itself,
+[0:48:40]  if only because I don't want to introduce another route like slash
+[0:48:43]  which eventually, indeed, will be compelling.
+[0:48:45]  So you don't have one route for everything you want your website to do.
+[0:48:49]  So technically, this is the default, too.
+[0:48:51]  And if I omit action, the exact same thing would happen as well.
+[0:48:53]  But let me rewind.
+[0:48:55]  And let me now go into app.py to see how we can make this happen.
+[0:48:58]  Well, if I want my one and now only route to support both methods,
+[0:49:02]  I can say methods equals and then a list with both get and post in any order.
+[0:49:07]  But I'll keep them alphabetical like this.
+[0:49:09]  This now tells Python, hey, this route should handle both get and post
+[0:49:15]  requests at the same place.
+[0:49:17]  Let's now go into this function.
+[0:49:19]  I kind of want to say the equivalent of this.
+[0:49:22]  If get, then I want to return the form.
+[0:49:26]  Else if post, I want to then return render template of greet.html
+[0:49:32]  with the user's name.
+[0:49:33]  But this is not yet complete code.
+[0:49:35]  But I think I can do this.
+[0:49:37]  I'm going to go ahead and say the following.
+[0:49:39]  I'm going to go ahead and say if request.method equals equals get,
+[0:49:45]  then indeed, return index.html.
+[0:49:48]  Else if request.method equals equals post, then go ahead and return greet.html.
+[0:49:55]  This isn't quite enough, though, because I still
+[0:49:57]  want to pass in that placeholder.
+[0:49:59]  So let me again add back name equals request.args.get, quote unquote name,
+[0:50:05]  and then a default value of world.
+[0:50:08]  What does this now do for me?
+[0:50:10]  Well, let me go back to my other tab here.
+[0:50:13]  Let me close the developer tools.
+[0:50:15]  Let me go back to the form here.
+[0:50:16]  Let me reload to make sure I have the latest.
+[0:50:18]  Let me view page source just to make sure I have the latest.
+[0:50:20]  And yep, I have the latest, because it still says post, but it now says slash.
+[0:50:24]  And let's see what happens now.
+[0:50:26]  If I type in my name David, previously this submitted via post,
+[0:50:29]  so I didn't see any name or value thereof in the URL.
+[0:50:32]  But I did end up at slash greet.
+[0:50:34]  But if the action is now slash and I click greet,
+[0:50:37]  notice that it still kind of works.
+[0:50:40]  I see hello, comma, world, although that didn't quite work.
+[0:50:42]  So we'll come back to that issue in a moment.
+[0:50:44]  But notice the URL ends in just slash.
+[0:50:47]  And again, Chrome is hiding the slash, because that's all that's there.
+[0:50:49]  But it does not end in name equals David in this case, or name equals world.
+[0:50:56]  Now notice this, too.
+[0:50:57]  If I reload, I'm going to get this warning.
+[0:51:00]  Do you want to confirm form resubmission?
+[0:51:02]  The page you're looking for used information
+[0:51:04]  that you entered, returning to that page might
+[0:51:05]  cause any action you took to be repeated.
+[0:51:07]  Do you want to continue?
+[0:51:08]  You might have seen this on websites you've actually visited,
+[0:51:10]  where you hit reload and you're prompted, wait a minute,
+[0:51:13]  do you want to do that?
+[0:51:14]  Odds are you've been prompted to reload explicitly, because why?
+[0:51:17]  Whatever you just did was post instead of get.
+[0:51:21]  And by convention, besides post being used for privacy,
+[0:51:24]  to hide your username, your password, your credit card number, or the like,
+[0:51:27]  besides being used to upload bigger files like images or videos,
+[0:51:31]  post is also used by convention to make changes to the server,
+[0:51:35]  to add something to your shopping cart, to add something to the database.
+[0:51:39]  Whereas get, as the name suggests, is all about getting information,
+[0:51:42]  not posting or sending information instead.
+[0:51:45]  So this is Chrome being a little careful,
+[0:51:47]  because if you just checked out on Amazon and then you hit reload,
+[0:51:51]  you don't want to accidentally buy the same book again, so to speak,
+[0:51:54]  even though Amazon and fancy websites have other defenses for this,
+[0:51:57]  too, to avoid this issue.
+[0:51:59]  Now, there is a bug, though, here.
+[0:52:02]  It says hello comma world instead of hello comma David.
+[0:52:05]  And it actually would have said the same a moment ago,
+[0:52:07]  and I just didn't retest the code and reveal as much to you.
+[0:52:10]  Or if I did, I didn't even notice it said hello world instead of hello David.
+[0:52:14]  It turns out that request.args is only used for get.
+[0:52:20]  When using get, request.args is a dictionary
+[0:52:23]  that contains all of your key value pairs.
+[0:52:25]  But somewhat confusingly, when using post with Flask,
+[0:52:28]  you have to go into request.form.
+[0:52:30]  I have no idea why these are not sort of more obvious opposites,
+[0:52:34]  like request.get or request.form.
+[0:52:37]  Sorry, request.get and request.post would be sort of sensible names.
+[0:52:41]  In this case, though, we have request.args for get and request.form for post.
+[0:52:46]  All right.
+[0:52:47]  That's an easy fix, though.
+[0:52:48]  If I go back to VS Code here, let's change request.args to request.form.
+[0:52:53]  Let's go back to my other tab.
+[0:52:55]  Let me just reload.
+[0:52:56]  And you know what?
+[0:52:57]  I'm going to say OK, continue to resubmit the same form,
+[0:53:00]  because the form was OK.
+[0:53:01]  It was my Python code that was buggy.
+[0:53:03]  Hitting Enter, now it's accessing David OK.
+[0:53:06]  But watch this again.
+[0:53:07]  If I hit reload, Command-R or Control-R, I get the same warning.
+[0:53:11]  Are you sure you want to submit the form?
+[0:53:13]  Yes.
+[0:53:13]  If I do it manually with the reload icon, I get the same warning as before.
+[0:53:17]  But if I want to manually induce a get request, well, that's fine.
+[0:53:21]  Don't hit reload and send the same request.
+[0:53:23]  Instead, go up to your URL and just put the cursor up there and hit Enter.
+[0:53:28]  And now notice, same URL is a get by default.
+[0:53:32]  So anytime you and I have typed URLs into browsers, get is always the default.
+[0:53:36]  Only when you click on a button, typically,
+[0:53:39]  that the programmer has configured to use post,
+[0:53:42]  are you actually adding things to your shopping cart or the like.
+[0:53:45]  All right.
+[0:53:46]  So we are back.
+[0:53:48]  And if I go way back in time myself, like this is actually
+[0:53:53]  the first web application I made back in 1997, I believe.
+[0:53:59]  So at the time, this would have been, what, my sophomore or so year.
+[0:54:03]  I had taken CS50.
+[0:54:04]  I took a follow-on class called CS51, which
+[0:54:07]  is a different type of programming.
+[0:54:08]  And then I pretty much taught myself a language called Perl, which
+[0:54:11]  is somewhat less popular nowadays.
+[0:54:13]  But it's another language like Python, like Java, like JavaScript,
+[0:54:16]  like others that can be used to make web-based applications.
+[0:54:19]  And the web was very young at the time.
+[0:54:21]  And the process via which students, my classmates,
+[0:54:24]  could register for the first year intramural sports program,
+[0:54:27]  a.k.a.
+[0:54:28]  froshims, was to grab a piece of paper and write your name and email address
+[0:54:32]  on it and walk it across the yard to Wigglesworth,
+[0:54:35]  I believe, where the proctor lived.
+[0:54:36]  And you'd slide the piece of paper under the door.
+[0:54:39]  And that was how we submitted forms in my day.
+[0:54:41]  So this was an opportunity, even back in 1997,
+[0:54:44]  is to move things online.
+[0:54:46]  And the website went on to live on until, I think, like 2007.
+[0:54:49]  I found this online.
+[0:54:50]  And then it's become something else since.
+[0:54:53]  But this was a website via which people could register for sports.
+[0:54:56]  And people could log in the scores for various games and whatnot.
+[0:54:59]  And so underneath the hood, I didn't even
+[0:55:01]  know anything about databases at the time.
+[0:55:03]  It was just like CSV files that I was storing the data in.
+[0:55:06]  But there were HTML forms.
+[0:55:08]  And there was, with Perl, the language at the time,
+[0:55:11]  the way to do the exact kind of stuff that we've just
+[0:55:13]  been doing already with Flask.
+[0:55:15]  And so what I thought we'd do is implement
+[0:55:17]  a slightly less ugly version of this.
+[0:55:21]  Repeating graphical backgrounds were in vogue in 1997, as you can see here.
+[0:55:26]  But these were the aesthetics of the day, including the so-called blink tag.
+[0:55:30]  So let's at least focus on the functionality of this website
+[0:55:33]  and not so much the aesthetics and see if we
+[0:55:35]  can't implement some of the plumbing for actually solving
+[0:55:38]  a real-world representative problem, be it for freshman intramural sports
+[0:55:41]  or something else like it, where you're getting data from users
+[0:55:44]  and processing it somehow.
+[0:55:45]  So let me go over here to VS Code.
+[0:55:47]  Let me create a new directory called froshims,
+[0:55:50]  just so we can keep all of this code in its own directory.
+[0:55:53]  Let me cd into froshims.
+[0:55:55]  Let me proactively make another directory called templates,
+[0:55:58]  in which our templates, our .html files, do need to live.
+[0:56:02]  And eventually, I'm going to go ahead and create two files, minimally,
+[0:56:07]  app.py and index.html.
+[0:56:09]  So let's do the first of those.
+[0:56:11]  App.py will live in my froshims directory.
+[0:56:14]  And I'm just going to recreate something very simple
+[0:56:16]  like we have previously.
+[0:56:17]  So from flask, in lowercase, import flask, capitalized, render template,
+[0:56:23]  and also request.
+[0:56:24]  So same first line as before.
+[0:56:26]  Let me then give myself a variable called app,
+[0:56:28]  set it equal to calling the flask function, capital F,
+[0:56:32]  with underscore, underscore name, underscore, underscore.
+[0:56:34]  And then let me give myself a route for slash,
+[0:56:39]  as before, with an index function.
+[0:56:42]  Though again, I could call that anything I want.
+[0:56:44]  And just for now, let's return render template of quote, unquote,
+[0:56:47]  index.html as though that exists.
+[0:56:49]  So this is not really a web application as much as it is at the moment,
+[0:56:52]  just a recreation of HTTP server for one file.
+[0:56:56]  Let's now, in another tab, create a templates file called index.html.
+[0:57:03]  And I'm going to save myself a few keystrokes.
+[0:57:05]  Let me copy paste from earlier almost all of the layout from before.
+[0:57:09]  I've changed the title in advance to froshims instead of hello.
+[0:57:13]  This is essentially the same template.
+[0:57:15]  And for now, though, because I'm in index.html,
+[0:57:17]  I'm not going to use extends or any of that fancy block stuff yet.
+[0:57:21]  I'm just going to go ahead and create a relatively simple form via which,
+[0:57:24]  back in the day, my classmates could have registered for intramural sports.
+[0:57:28]  So let's go ahead here.
+[0:57:31]  And I'll propose that we do this.
+[0:57:34]  In this page, we'll have a form, the action of which
+[0:57:38]  will be a route called slash register, though I
+[0:57:41]  could call that anything I want.
+[0:57:42]  It'll be somewhat private, so I'm going to use post instead of get,
+[0:57:45]  just so that people don't accidentally maybe register twice
+[0:57:49]  by hitting reload without warning.
+[0:57:51]  Inside of this form, let's go ahead and give them an input,
+[0:57:56]  where autocomplete will be off, as always, for demonstration's sake.
+[0:57:59]  Autofocus, so the cursor goes there initially.
+[0:58:03]  The name of this field will be literally named,
+[0:58:05]  because I want my classmates name if they want to register for some sport.
+[0:58:08]  The placeholder will, again, be quote unquote named,
+[0:58:10]  just so they see some gray instructions.
+[0:58:13]  And the type of this field will indeed be text as before.
+[0:58:17]  And then I need to give them the ability to register for a few sports.
+[0:58:20]  Why don't we keep it simple?
+[0:58:22]  Back in the day, basketball, soccer, and ultimate frisbee
+[0:58:25]  were three of the sports that we supported.
+[0:58:26]  And so let me do this.
+[0:58:27]  And you might not have seen this before, unless you dabbled further
+[0:58:31]  with forms on your own.
+[0:58:32]  But I can create a select menu, otherwise known as a dropdown menu,
+[0:58:36]  in HTML, inside of which are a whole bunch of options.
+[0:58:40]  And each option typically follows this paradigm, the value of the option,
+[0:58:44]  and then the actual text that the human sees.
+[0:58:46]  So the value of these options will be, how about we do basketball as one?
+[0:58:52]  And I want the human to see literally the same thing.
+[0:58:55]  So just like with a link in HTML, they could be different.
+[0:58:57]  But I'm going to keep them the same.
+[0:58:59]  Another option will be, let's say, soccer.
+[0:59:04]  And whoops, let me fix my quotes.
+[0:59:06]  And the human will see the exact same thing,
+[0:59:08]  though it could say something else.
+[0:59:10]  And then lastly, the value will be quote, unquote, ultimate frisbee.
+[0:59:14]  And the humans will see the same thing there, ultimate frisbee.
+[0:59:19]  All right, so this is going to create, as we'll soon see, just a dropdown menu
+[0:59:22]  with three separate options.
+[0:59:23]  If I want the students to be able to submit this now,
+[0:59:25]  let me give them a button, the type of which is Submit.
+[0:59:28]  And this button will be like the word Register on it.
+[0:59:32]  So I think we're pretty much good to go.
+[0:59:34]  This is all just HTML, no Python, no Flask per se,
+[0:59:37]  except for the rendering of this same template.
+[0:59:39]  So let me go into my terminal window.
+[0:59:41]  Let me do Flask run inside of this directory,
+[0:59:44]  because I need to serve this app instead.
+[0:59:46]  I'm going to see some ugly output, including my own URL.
+[0:59:49]  And if I hover over that and then open that URL,
+[0:59:51]  I should now see a more interesting form.
+[0:59:54]  It's got not only a field for their name, but also this dropdown menu
+[0:59:57]  with all three sports.
+[0:59:58]  Now, this isn't maybe the best way to do it.
+[1:00:00]  But I'm going to go ahead and do it.
+[1:00:01]  I'm going to go ahead and do it.
+[1:00:02]  I'm going to go ahead and do it.
+[1:00:03]  I'm going to go ahead and do it.
+[1:00:04]  I'm going to go ahead and do it.
+[1:00:06]  I'm going to go ahead and do it.
+[1:00:07]  I'm going to go ahead and do it.

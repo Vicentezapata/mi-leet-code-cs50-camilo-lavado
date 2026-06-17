@@ -1,0 +1,1315 @@
+# Transcripción: chunk_008.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  We sort numbers like these here.
+[0:00:02]  And in fact, just to complement our search example earlier,
+[0:00:06]  could we perhaps quickly get some eight volunteers to come up
+[0:00:09]  if you're comfortable appearing on the internet?
+[0:00:11]  If you want to do one, OK, two, three, four, five, six, seven, eight.
+[0:00:17]  How about?
+[0:00:18]  All right, come on down.
+[0:00:19]  All right.
+[0:00:26]  Come on over here, and I'll give you each a number.
+[0:00:29]  And if you want to start to organize yourselves in the same order
+[0:00:33]  you see the numbers on the board, OK?
+[0:00:37]  So look up on the overhead and organize yourselves from left
+[0:00:40]  to right in that same order.
+[0:00:43]  And let's have the first of you perfect.
+[0:00:45]  If you want to come right over here, how about right in line with this?
+[0:00:49]  All right, and a few more numbers.
+[0:00:52]  All right.
+[0:00:53]  Number two, six, and perfect.
+[0:00:58]  Just the right number.
+[0:00:59]  All right, no, uh-oh.
+[0:01:01]  All right, there we go, number three.
+[0:01:03]  All right, so let's just do a quick check.
+[0:01:05]  We have seven, two, five, four, one, six, zero, three.
+[0:01:09]  Very good so far.
+[0:01:10]  Do you want to just scooch a little this way just to make a little more room?
+[0:01:13]  All right, and let's consider now who we have here on stage.
+[0:01:16]  Do you want to each say a quick hello to the audience?
+[0:01:19]  Hi, my name is Ryan.
+[0:01:21]  I'm a first year from Pennybacker.
+[0:01:24]  Hi, my name's Itzel.
+[0:01:25]  I'm a first year at Strauss.
+[0:01:28]  Hi, my name is Lucy.
+[0:01:29]  I'm a first year from Reno.
+[0:01:31]  Hi, my name is Shiloh.
+[0:01:32]  I'm a first year in Wigglesworth.
+[0:01:35]  Hi, my name's Jack.
+[0:01:35]  And I'm a first year in Strauss.
+[0:01:39]  Hi, my name's Catherine.
+[0:01:40]  I'm a first year at Strauss.
+[0:01:42]  Hi, my name is Michael.
+[0:01:43]  I'm a first year at Pennybacker.
+[0:01:45]  Hi, my name is Muhammad.
+[0:01:46]  I'm a first year in Matthews.
+[0:01:48]  Nice, welcome aboard.
+[0:01:49]  All right, so let's consider now how we might go about sorting our kind
+[0:01:54]  volunteers here, the goal being to get them into order from smallest
+[0:01:58]  to largest so that presumably then we can use something smarter than just
+[0:02:02]  linear search.
+[0:02:03]  We could actually use binary search assuming
+[0:02:05]  that they are already then sorted.
+[0:02:06]  So let me propose that we first consider an algorithm that actually
+[0:02:09]  has a name called selection sort.
+[0:02:11]  And selection sort is going to be one that literally has me,
+[0:02:15]  or really you as the programmer, selecting the smallest element again
+[0:02:18]  and again, and then putting them into the appropriate place.
+[0:02:22]  So let me go ahead and start this here, starting with the number 7.
+[0:02:26]  At the moment, 7 is the smallest number I found,
+[0:02:28]  so I'm going to make mental note of that with a mental variable, if you will.
+[0:02:31]  I'm going to move on now.
+[0:02:32]  Number 2 is obviously smaller, so I'm just
+[0:02:34]  going to update my mental reminder that 2 is now the smallest,
+[0:02:37]  effectively forgetting for now, number 7.
+[0:02:40]  5, not smaller, 4, not smaller, 1, smaller,
+[0:02:43]  and I'm going to make mental note of that.
+[0:02:45]  6, not smaller, 0, even smaller, I'll make mental note of that,
+[0:02:48]  having forgotten now everything else.
+[0:02:50]  And now number 3 is not smaller.
+[0:02:52]  So what's your name again?
+[0:02:53]  So Michael is number 0.
+[0:02:55]  He belongs, of course, way down there, but unfortunately you are?
+[0:02:59]  Ryan?
+[0:03:00]  Ryan is in the way, so what should we do?
+[0:03:03]  How should we start to sort this list?
+[0:03:06]  Where should number 0 go?
+[0:03:09]  Yeah, do you want to say the latter?
+[0:03:14]  Yeah, so let's just go ahead and swap.
+[0:03:15]  So if you want to go ahead and 0, go on where 7 is.
+[0:03:18]  We need to make room for number 7.
+[0:03:20]  It would kind of be cheating if maybe everyone kind of politely
+[0:03:23]  stepped over to the side.
+[0:03:24]  Why?
+[0:03:24]  Because if we imagine all of our volunteers here to be an array,
+[0:03:27]  that's a crazy amount of work to have every element in the array
+[0:03:31]  shift to the left just to make room.
+[0:03:33]  So we're going to keep it simple and just evict whoever's there.
+[0:03:36]  Now, maybe we get lucky and number 7 is actually closer to its destination.
+[0:03:39]  Maybe we get unlucky and it goes farther away,
+[0:03:42]  but we've at least solved one problem.
+[0:03:44]  If we had n problems at first, now we have n minus 1
+[0:03:47]  because number 0 is indeed in the right place.
+[0:03:49]  So if I continue to act this out, let me go ahead and say 2, currently
+[0:03:53]  the smallest, 5, no, 4, no, 1, currently the smallest.
+[0:03:56]  I'll make mental note, 6, 7, 3.
+[0:04:00]  And now let me pause.
+[0:04:01]  1 is obviously the now smallest element.
+[0:04:05]  So did I need to keep going?
+[0:04:06]  Well, it turns out, at least as I've defined selection sort,
+[0:04:09]  I do need to keep going because I only claim
+[0:04:12]  that I'm using one variable in my mind to remember the then smallest element.
+[0:04:15]  I'm not smart enough, like us humans, to remember, oh, wait a minute,
+[0:04:18]  1 is definitely the smallest now.
+[0:04:20]  I don't have that whole recollection.
+[0:04:22]  So I just am keeping track of the now smallest.
+[0:04:24]  So number 1, what your name was?
+[0:04:25]  AUDIENCE MEMBER 2, AUDIENCE MEMBER 1,
+[0:04:26]  Jack, where should Jack go?
+[0:04:28]  Probably there, and what's your name?
+[0:04:29]  Itsel.
+[0:04:30]  Itsel?
+[0:04:30]  OK, so Jack and Itsel, if you want to swap places,
+[0:04:33]  we've now solved two of the end total problems.
+[0:04:36]  And now we'll do it a little faster if each of you
+[0:04:38]  want to sort of start to swap as I find the right person.
+[0:04:41]  So 5, smallest, 4 is smaller, 2 is smaller.
+[0:04:45]  Got to keep checking.
+[0:04:46]  OK, 2 is smaller.
+[0:04:48]  All right, now I'm going to go back to the beginning.
+[0:04:50]  All right, 4 is small, 5 is not, 6 is not, 7 is not, oh, 3 is small.
+[0:04:55]  Where do you want to go?
+[0:04:56]  OK, good.
+[0:04:57]  I'm going to go back here.
+[0:04:58]  And I can be a little smart.
+[0:05:00]  I don't have to go all the way to the end
+[0:05:01]  because I know these folks are already sorted.
+[0:05:03]  So I can at least optimize slightly.
+[0:05:05]  So now 5 is small, 6 is small, 7 is small, 4 is smaller
+[0:05:09]  if you want to go in place there.
+[0:05:12]  And now here things get interesting.
+[0:05:13]  I can optimize by not looking at these folks
+[0:05:16]  anymore because they're obviously problem solved.
+[0:05:18]  But now 5 is small, 6 is not, 7 is not.
+[0:05:21]  OK, 5, you can stay where you are.
+[0:05:24]  Now a human in the room is obviously going
+[0:05:25]  to question why I'm wasting any more time.
+[0:05:28]  But with selection sort, as I've defined it thus far,
+[0:05:31]  I still have to now check 6 is smallest, not 7.
+[0:05:34]  And now my final step, OK, they're all in place.
+[0:05:37]  So here, too, is this dichotomy between what we all have
+[0:05:39]  is this bird's eye view of the whole problem where it's obvious where
+[0:05:42]  everyone needs to go.
+[0:05:44]  But a computer implementing this with an array
+[0:05:46]  really has to be more methodical.
+[0:05:48]  And we're actually saving a step here.
+[0:05:49]  If we were really doing this, none of these numbers would be visible.
+[0:05:52]  All eight of our volunteers would be inside of a locked door.
+[0:05:55]  And only then could we see them one at a time.
+[0:05:58]  But we're focusing now just on the sorting aspect.
+[0:06:00]  So let me just, before we do one other demonstration here,
+[0:06:03]  propose that what I really just did here in pseudocode
+[0:06:06]  was something like this.
+[0:06:08]  For i from 0 to n minus 1, keeping in mind
+[0:06:12]  that 0 is always the left of the array, n minus 1
+[0:06:15]  is always the right end of the array, for i from 0 to n minus 1,
+[0:06:18]  I found the smallest number between numbers bracket i and numbers
+[0:06:23]  bracket n minus 1.
+[0:06:24]  And that's the very geeky way of expressing this optimization.
+[0:06:27]  I'm always starting from numbers bracket i, wherever I am,
+[0:06:30]  and then everything else to the right.
+[0:06:32]  And that's what was allowing me to ignore the already sorted volunteers.
+[0:06:36]  If, though, my last line says swap smallest number with numbers i,
+[0:06:40]  I think that implements what our humans were doing by physically
+[0:06:42]  walking to another spot.
+[0:06:44]  All right, so that then would be what we'll call selection sort.
+[0:06:48]  Let's go ahead and take a second approach here using an algorithm
+[0:06:51]  that I'm going to call bubble sort.
+[0:06:52]  But to do this, we need you all to reset to your original locations.
+[0:06:55]  We have a little cheat sheet on the board
+[0:06:56]  if you'd like to go back to this position here.
+[0:06:58]  And let me take a fundamentally different approach
+[0:07:01]  because I'm not really liking selection sort as is because it's
+[0:07:03]  kind of a lot of walking back and forth.
+[0:07:05]  And a lot of walking suggests a lot of steps again and again.
+[0:07:09]  So what might I do instead?
+[0:07:10]  Well, bubble sort is going to have me focus a little more intuitively
+[0:07:14]  on just smaller problems.
+[0:07:15]  And let's see if this gets me somewhere else.
+[0:07:17]  So if I just look at this list without looking at everyone else, 7 and 2.
+[0:07:21]  This is obviously a problem.
+[0:07:22]  Why?
+[0:07:23]  Because you're out of order.
+[0:07:24]  So let's just solve one tiny problem first.
+[0:07:26]  So 7 and 2, why don't you swap?
+[0:07:28]  I know 2 is in a better place now because she's definitely less than 7.
+[0:07:33]  So I think I can now move on.
+[0:07:34]  7 and 5, problem.
+[0:07:36]  So let's solve that.
+[0:07:37]  7 and 4, problem.
+[0:07:38]  Let's solve that.
+[0:07:39]  7 and 1, let's solve that.
+[0:07:41]  7 and 6, let's solve that.
+[0:07:42]  7 and 0, solve that.
+[0:07:44]  7 and 3, solve that.
+[0:07:45]  OK, done.
+[0:07:46]  Sorted, right?
+[0:07:48]  Obviously not if you just glance at these numbers here.
+[0:07:50]  But we have fundamentally taken a bite out of the problem.
+[0:07:53]  7 is indeed in the right place.
+[0:07:55]  So we maximally have n minus 1 other problems to solve.
+[0:08:00]  So how do I do this?
+[0:08:02]  I think I can just repeat the same logic.
+[0:08:04]  Let me go over here.
+[0:08:05]  2 and 5, good.
+[0:08:07]  5 and 4, no.
+[0:08:08]  5 and 1, no.
+[0:08:10]  5 and 6, yes.
+[0:08:11]  6 and 0, no.
+[0:08:13]  6 and 3, no.
+[0:08:15]  So now we've solved two of the problems.
+[0:08:18]  And what's nice about bubble sort, at least as a glance,
+[0:08:20]  it's nice and simple, it's nice and local,
+[0:08:22]  and you just keep incrementally solving more and more problems.
+[0:08:25]  So let's go ahead and do this again, and we can do it faster.
+[0:08:29]  2 and 4, we know are good.
+[0:08:30]  4 and 1, 4 and 5, 5 and 0, 5 and 3, 5 and 6, 6 and 7, good.
+[0:08:38]  So we go back.
+[0:08:39]  2 and 1, ah, now another problem solved.
+[0:08:42]  2 and 4, 4 and 0, 4 and 3, 4 and 5, 5 and 6, 6 and 7.
+[0:08:48]  And so notice too, as per its name, the largest elements
+[0:08:52]  have bubbled their way up to the top.
+[0:08:53]  And that's what seems to be happening just
+[0:08:55]  as we're fixing some remaining problems.
+[0:08:57]  Almost done.
+[0:08:58]  1 and 2, 2 and 0, 2 and 3, 3 and 4, 4 and 5, 5 and 6, 6 and 7.
+[0:09:05]  Almost done.
+[0:09:06]  Obviously to us humans, it looks done.
+[0:09:08]  How do I know as the computer for sure?
+[0:09:11]  What would be the most surefire way for me to now, oh, it's not done.
+[0:09:14]  Sorry, that's a bug.
+[0:09:16]  OK, 1 and 0, OK, 1 and 2, 2 and 3, 3 and 4, 3 and 4, 4 and 5, 5 and 6,
+[0:09:21]  6 and 7.
+[0:09:22]  So now it's obviously sorted to the rest of us on stage.
+[0:09:26]  How could I confirm as much as code?
+[0:09:29]  You're doing it with your mind just glancing at this.
+[0:09:31]  How would the computer, the code, know for sure that this list is now sorted?
+[0:09:35]  Yeah.
+[0:09:37]  Let's do it one more time and draw what conclusion?
+[0:09:44]  Yeah, let's do it one more time, even though it's a little wasteful.
+[0:09:47]  But logically, if I go through the whole list comparing pairs again,
+[0:09:51]  again, and again, and I don't do any work that time,
+[0:09:54]  now it's obviously logically safe to just stop because otherwise I'm
+[0:09:58]  wasting my time doing the same thing again and again
+[0:10:00]  if no one's actually moving.
+[0:10:02]  So I'm afraid we don't have Monopoly games for all of you,
+[0:10:04]  but we do have eight stress balls.
+[0:10:05]  And a round of applause if we could for our volunteers.
+[0:10:07]  If you want to put your numbers on the shelf there.
+[0:10:12]  So if we consider for a moment, thank you.
+[0:10:15]  Thank you so much.
+[0:10:18]  Sure.
+[0:10:21]  Thank you.
+[0:10:22]  Thanks.
+[0:10:23]  Sure, so if we consider now these two algorithms, which one is better?
+[0:10:27]  Any intuition for whether selection sort the first is better or worse
+[0:10:32]  than bubble sort the second?
+[0:10:34]  Any thoughts?
+[0:10:36]  Yeah?
+[0:10:41]  OK.
+[0:10:42]  So bubble sort seems like less work, especially
+[0:10:45]  since I was focusing on those localized problems.
+[0:10:47]  Other intuition?
+[0:10:50]  Selection sort versus bubble sort?
+[0:10:53]  Well, let me propose that we try to quantize this so we can actually
+[0:10:56]  analyze it in some way.
+[0:10:58]  And this is not an exercise we'll do constantly for lots of algorithms,
+[0:11:01]  but these are pretty representative of algorithms.
+[0:11:03]  So we can wrap our minds around, indeed, the performance
+[0:11:06]  or the design of these things.
+[0:11:07]  So here is my pseudocode for selection sort, whereby, as per its name,
+[0:11:13]  I just iteratively select the next smallest element again and again.
+[0:11:17]  So how can we go about analyzing something like this?
+[0:11:20]  Well, we could just do it on paper pencil
+[0:11:22]  and count up the number of steps that seem to be implied logically by the code.
+[0:11:27]  We could literally count the number of steps
+[0:11:29]  I was taking again and again, left to right.
+[0:11:31]  We could also just count the number of comparisons
+[0:11:34]  I was making with each of the persons involved.
+[0:11:37]  And I was doing it kind of quickly in selection sort,
+[0:11:39]  but every time I was looking at a person trying to decide,
+[0:11:42]  do I want to remember that number as smallest, that number,
+[0:11:44]  I was comparing two values with an equals equals or less than or greater
+[0:11:48]  than sign, at least if we had done this in code.
+[0:11:50]  So that tends to be the norm when analyzing algorithms like these,
+[0:11:54]  counting the number of comparisons, because it's kind of a global unit
+[0:11:59]  of measure we can use to compare different algorithms entirely.
+[0:12:02]  So think, too, that in the general case, when
+[0:12:06]  we have more than eight volunteers, more than seven doors,
+[0:12:09]  we can generalize our array in general as this is the first element at bracket
+[0:12:13]  0, and the end of it is always n minus 1.
+[0:12:16]  So arrays, or doors in this case, or volunteers,
+[0:12:20]  are always numerically indexed from 0 on up to n minus 1,
+[0:12:24]  if there's n of them in total.
+[0:12:26]  So how do we analyze the code of selection sort?
+[0:12:30]  Well, how many steps did it take me to find the first smallest element?
+[0:12:35]  Or more precisely, how many comparisons did I
+[0:12:37]  need to make when I walked left to right to find our first smallest
+[0:12:41]  person, which ended up being 0?
+[0:12:45]  How many comparisons did I do when walking left to right?
+[0:12:48]  If there were eight people on stage, how many total comparisons did I do?
+[0:12:54]  If there's eight people, I compared these folks, then this person,
+[0:12:59]  this person, yeah.
+[0:13:01]  Yeah, so seven total, right?
+[0:13:02]  Because if there's eight people on stage,
+[0:13:04]  you can only do seven comparisons total, because otherwise you'd
+[0:13:07]  be comparing one number to itself.
+[0:13:08]  So it seems like in the general case, if you've got n numbers that you're
+[0:13:12]  trying to sort, finding the smallest element first
+[0:13:15]  takes n minus 1 comparisons.
+[0:13:17]  Maybe n total steps left to right, but the number of comparisons,
+[0:13:21]  which I claim is just a useful unit of measure, is n minus 1.
+[0:13:25]  How about finding the next smallest person?
+[0:13:27]  How many steps did it take me to find the next smallest number, which
+[0:13:30]  ended up being the number 1?
+[0:13:34]  Yeah, yeah, so just n minus 2.
+[0:13:38]  Why?
+[0:13:38]  Because I'd already solved one problem.
+[0:13:40]  Someone was already in the right position.
+[0:13:41]  It would be silly to keep counting them again and again,
+[0:13:44]  so I can whittle down my number of comparisons for the next pass to n
+[0:13:47]  minus 2.
+[0:13:48]  The third pass to find the third smallest number would be n minus 3.
+[0:13:51]  And then dot, dot, dot, presumably this story, this formula,
+[0:13:54]  ends when you have just one final pair, the people at the end to compare.
+[0:13:58]  So if this is looking a little reminiscent of some kind of recurrence
+[0:14:01]  from high school or high school math or physics or the like,
+[0:14:04]  let me just stipulate that if you actually do out this math and generalize
+[0:14:07]  it, that is the same thing as n times n minus 1 divided by 2.
+[0:14:12]  And if you're rusty on that, no big deal.
+[0:14:13]  Just kind of commit to memory that any time you add up this kind of series,
+[0:14:17]  something plus something slightly smaller plus something slightly smaller,
+[0:14:20]  each of which differs by 1, you're going to get this formula, n times n
+[0:14:24]  minus 1 over 2.
+[0:14:25]  If we, of course, multiply that out, that's really
+[0:14:28]  n squared minus n all divided by 2.
+[0:14:30]  If we keep multiplying it out, that's n squared divided by 2 minus n over 2.
+[0:14:35]  And now we have kind of a vocabulary with which
+[0:14:38]  we can talk about the efficiency, the design of this algorithm.
+[0:14:42]  But honestly, I don't really care about this level of precision,
+[0:14:45]  like n squared divided by 2 minus n divided by 2,
+[0:14:48]  as n gets really large, which of these symbols, which of these terms
+[0:14:53]  is really going to dominate, become the biggest
+[0:14:55]  influencer on the total value of steps?
+[0:14:59]  It's the square, right?
+[0:15:00]  It's definitely not n divided by 2.
+[0:15:02]  That's shaving some time off.
+[0:15:03]  But n squared, as n gets big, is going to get really big.
+[0:15:06]  If n is 100, then n squared is bigger.
+[0:15:08]  If n is a million, n squared is really bigger.
+[0:15:11]  And so at the end of the day, when we're really just talking
+[0:15:14]  about sort of a wave of the hand analysis and upper bound, if you will,
+[0:15:18]  let's just say that selection sort, as analyzed here,
+[0:15:22]  it's on the order of n squared steps.
+[0:15:24]  It's not precisely n squared steps.
+[0:15:26]  But you know what?
+[0:15:27]  n squared divided by 2, the intuition here
+[0:15:30]  might be that, well, it's half of that.
+[0:15:34]  n squared is what really matters as n gets really, really large.
+[0:15:37]  And that's when you start thinking about and trying
+[0:15:39]  to solve the Google problems of the world, when n gets large,
+[0:15:42]  that's when you have to be smarter than just sort of naive implementations
+[0:15:45]  of any algorithm.
+[0:15:46]  So where, then, does this algorithm fall into this categorization here?
+[0:15:51]  Well, n squared, it turns out, is on the order of n squared steps,
+[0:15:55]  in the worst case, whether it's sorted or not.
+[0:15:58]  It turns out, though, lower bound, if we consider this same code,
+[0:16:03]  suppose the best case scenario, like our eight volunteers came up on stage
+[0:16:07]  and just because they already sorted themselves, 0 through 7.
+[0:16:11]  Suppose they just happen to be in that state.
+[0:16:13]  How many steps would selection store take to sort an already
+[0:16:18]  sorted list of volunteers?
+[0:16:21]  Any intuition?
+[0:16:22]  Yeah.
+[0:16:26]  It would still be n.
+[0:16:30]  So for the first pass, it would still be 7 for the first pass
+[0:16:33]  across the humans, because even though, yeah, I'm claiming 0 is here,
+[0:16:37]  I don't know that 0 is the smallest until I make my way all the way
+[0:16:40]  over there, doing all seven comparisons.
+[0:16:42]  OK, fine.
+[0:16:43]  First pass took 7, or more generally, n minus 1 steps.
+[0:16:47]  What if I look for the next smallest element,
+[0:16:49]  and the humans in this story are already sorted 0 through 7?
+[0:16:53]  Well, yes, the number 1's here, and I see them first.
+[0:16:56]  But I don't know they're the smallest until I compare against everyone else,
+[0:17:00]  get to the end of the list, and realize, oh, well, that was stupid.
+[0:17:02]  I already had the smallest person in hand then.
+[0:17:05]  And so this pseudocode, this implementation of selection sort,
+[0:17:09]  is sort of fixed like this.
+[0:17:10]  There's no special case that says, if already sorted, quit early.
+[0:17:14]  It's always going to take n squared steps.
+[0:17:16]  So in this case, if we borrow our jargon from earlier using omega notation,
+[0:17:22]  just to be clear, selection sort is also going
+[0:17:25]  to be in this incarnation in omega of n squared.
+[0:17:29]  Because even in the best case where the list is already sorted,
+[0:17:32]  you're going to waste a huge amount of time essentially
+[0:17:35]  verifying as much, or discovering as much,
+[0:17:37]  even though we humans, of course, could see it right away.
+[0:17:40]  So selection sort would seem to take both n squared steps in the worst case,
+[0:17:45]  n squared steps in the best case.
+[0:17:47]  And so you know what?
+[0:17:48]  We can use our theta terminology for that.
+[0:17:50]  Here would be an algorithm, just like counting earlier,
+[0:17:52]  that always takes n squared steps, no matter whether the array is
+[0:17:56]  sorted or not from the get go.
+[0:17:58]  All right, so hopefully we can do better.
+[0:18:00]  And someone proposed earlier that bubble sort
+[0:18:02]  felt like it was using fewer steps.
+[0:18:04]  Well, let's consider that next.
+[0:18:05]  With bubble sort, we had this pseudocode, I claim,
+[0:18:09]  whereby let's focus on the inside of the code first.
+[0:18:12]  Down here, what was I doing?
+[0:18:15]  4i from 0 to n minus 2.
+[0:18:19]  That's curious.
+[0:18:19]  We've never seen n minus 2 before.
+[0:18:21]  But I ask this question.
+[0:18:22]  If numbers bracket i and numbers bracket i plus 1 are out of order, swap them.
+[0:18:29]  So that was when I was pointing at our first two volunteers here.
+[0:18:32]  I saw that they were out of order, so I swapped them.
+[0:18:36]  How come I'm doing that again and again up to n minus 2,
+[0:18:40]  though, instead of n minus 1, which we've always used up until now
+[0:18:45]  as our rightmost boundary?
+[0:18:48]  Any intuition for why I'm doing this from 0 to n minus 2?
+[0:18:53]  Yeah.
+[0:19:00]  Exactly, because I'm looking at the i-th person per this pseudocode here
+[0:19:05]  and the i-th plus 1 person, I better make sure I don't
+[0:19:08]  step beyond the boundaries of my array.
+[0:19:10]  So if you think of my left hand when my back was to here pointing
+[0:19:13]  at the current person at the first position,
+[0:19:16]  my right hand for this if conditioner is essentially
+[0:19:18]  pointing at the person next to them.
+[0:19:20]  And you want to iterate with your left hand all through these people.
+[0:19:23]  But you don't want your left hand to point at the last person.
+[0:19:26]  You want it to point at the second to last person.
+[0:19:28]  But we know that the last person is always at n minus 1.
+[0:19:33]  So the second to last person just mathematically is at n minus 2.
+[0:19:36]  So it's a subtlety, but this is like a segfault waiting to happen.
+[0:19:39]  If you implemented bubble sort using n minus 1,
+[0:19:42]  you will, my right hand would go beyond the boundaries of the array.
+[0:19:46]  So just bad.
+[0:19:47]  All right, so why am I saying this n times?
+[0:19:49]  Well, we did it very organically with humans.
+[0:19:51]  But each time someone, each pass I did through the array,
+[0:19:56]  someone bubbled their way up to the end.
+[0:19:58]  Number 7, then number 6, then number 5.
+[0:20:01]  So if on each pass through the array of volunteers,
+[0:20:05]  I was solving at least one problem, it seems
+[0:20:09]  like bubble sort can just run n times total to solve all n problems.
+[0:20:13]  Because the first pass will get at least one number into place.
+[0:20:15]  Second pass, second number into place.
+[0:20:17]  You might get lucky, and it would do more.
+[0:20:19]  But worst case, this feels like enough.
+[0:20:20]  Just do this blindly n times, and they'll all line up together.
+[0:20:25]  Well, technically, all right, now we're getting into the weeds.
+[0:20:28]  Technically, you can just repeat it n minus 1 times.
+[0:20:31]  Because if you solve all n minus 1 other problems and you're left with 1,
+[0:20:34]  literally that person's where they need to be, just logically.
+[0:20:37]  If you've already sorted everything else and you've got just the one left,
+[0:20:40]  it's already bubbled up.
+[0:20:41]  So how do we analyze this?
+[0:20:42]  Well, in bubble sort, we might do something like this.
+[0:20:45]  I'm essentially doing n minus 1 things n minus 1 times.
+[0:20:50]  Now let me back up to the pseudocode, because this one's a little less obvious.
+[0:20:54]  This is where you can actually mathematically infer from your loop
+[0:20:58]  how many steps you're taking.
+[0:20:59]  So this first line literally says repeat the following n minus 1 times.
+[0:21:03]  So that's going to translate very straightforwardly
+[0:21:05]  to our mathematical formula.
+[0:21:07]  Do something n minus 1 times.
+[0:21:09]  This loop, just because I'm using for loop terminology,
+[0:21:12]  it's framed a little differently.
+[0:21:14]  So if you're iterating from 0 to n minus 2,
+[0:21:19]  you're iterating a total of n minus 1 times.
+[0:21:22]  And again, the arithmetic is getting a little annoying,
+[0:21:24]  but this just means do the following n minus 1 times.
+[0:21:27]  So do n minus 1 things n minus 1 times.
+[0:21:30]  We can now run out the math as follows.
+[0:21:33]  We have the formula n minus 1 times n minus 1.
+[0:21:36]  We do our little FOIL method here, n squared minus 1 times n minus 1 times
+[0:21:40]  n plus 1.
+[0:21:42]  We can combine like terms n squared minus 2n plus 1.
+[0:21:45]  But at this point, when n gets really large,
+[0:21:47]  which term are we really going to care about?
+[0:21:49]  This is on the order of?
+[0:21:52]  Yeah, n squared.
+[0:21:53]  So at least asymptotically, asymptotically
+[0:21:56]  means as n approaches infinity, gets really large,
+[0:21:59]  turns out that the upper bounds on selection sort and bubble sort
+[0:22:03]  are essentially the same.
+[0:22:04]  Now, if we really nitpicked and compared the total number of comparisons,
+[0:22:07]  they might differ slightly.
+[0:22:08]  But as n gets large, honestly, you're barely
+[0:22:10]  going to notice the difference, it would seem, between these two algorithms.
+[0:22:15]  But what about the lower bound?
+[0:22:18]  If the upper bound on bubble sort is also big O of n,
+[0:22:22]  what about the lower bound here?
+[0:22:24]  Well, with this pseudocode, what would the lower bound be on bubble sort,
+[0:22:29]  even in the best case when all of the volunteers are sorted?
+[0:22:32]  Any intuition in this pseudocode?
+[0:22:36]  Yeah, in the middle?
+[0:22:45]  Good question.
+[0:22:45]  Isn't bubble sorts designed such that you
+[0:22:47]  wouldn't need to compare numbers that have already bubbled up?
+[0:22:51]  That's what's happening here in the middle implicitly.
+[0:22:55]  I'm always going from left to right.
+[0:22:58]  But remember that even when I screwed up at the end
+[0:23:00]  and the last two people were out of order,
+[0:23:02]  I do always need to restart at the beginning.
+[0:23:04]  Because the big numbers are going that way,
+[0:23:06]  and the small numbers are coming this way.
+[0:23:12]  So that is true.
+[0:23:13]  There are some slight optimizations that I'm kind of glossing over here.
+[0:23:16]  Let me stipulate that it would still end up
+[0:23:18]  being on the order of n squared.
+[0:23:19]  But that would definitely shave off some actual running time here.
+[0:23:22]  But what if the list is already sorted?
+[0:23:25]  Our pseudocode at the moment has no allowance for,
+[0:23:27]  if list is already sorted, quit early.
+[0:23:30]  So we're going to blindly do n minus 1 things n minus 1 times,
+[0:23:33]  unless we modify our pseudocode.
+[0:23:36]  As I did verbally earlier, I propose this.
+[0:23:39]  Inside of that outer loop, if you make a pass across all of the volunteers
+[0:23:43]  and your mental counter has made no swaps,
+[0:23:46]  you have to keep track with some kind of variable,
+[0:23:47]  well, then you might as well stop.
+[0:23:49]  Because if you do a whole pass and make no swaps, why would you waste time
+[0:23:52]  doing it again, expecting different behavior?
+[0:23:56]  So to help visualize these, whereby now bubble sort can be advantageous
+[0:24:02]  if the data is already sorted or mostly sorted.
+[0:24:05]  Why?
+[0:24:06]  Because it does have this short circuit detail.
+[0:24:08]  At least if we implement it like that, how can we
+[0:24:11]  go about visualizing these things a little more clearly?
+[0:24:15]  Well, let me go ahead and do this.
+[0:24:16]  Let me pull up here a visualization of exactly these algorithms,
+[0:24:20]  thanks to a third party tool here, that's
+[0:24:23]  going to help us visualize these sorting algorithms as follows.
+[0:24:25]  Small bars represent small numbers.
+[0:24:27]  Big bars represent big numbers.
+[0:24:29]  And so the idea now is when I hit a button here
+[0:24:32]  to get all of the small bars this way, all of the big bars this way.
+[0:24:35]  So just like our volunteers, but instead of holding lighted numbers,
+[0:24:38]  it's bars representing their magnitude.
+[0:24:41]  So let's go ahead and start with, for instance, selection sort.
+[0:24:46]  And you'll see in pink is being highlighted the current number that
+[0:24:50]  is being selected and then pulled all the way to the left.
+[0:24:53]  So this is selection sort.
+[0:24:55]  And again, it's selecting the next smallest element.
+[0:24:59]  But you can see here all the more visibly that just like my human feet
+[0:25:04]  were taking a lot of steps, so is this algorithm touching these elements
+[0:25:09]  again and again and again.
+[0:25:11]  And this is why the n squared is really a thing.
+[0:25:14]  There's got to be some inherent redundancy here.
+[0:25:16]  Like, why do we keep looking at the same darn elements again and again?
+[0:25:19]  We do, in terms of our pseudocode, need to do so.
+[0:25:22]  But it's this redundant comparisons that kind of explains why n squared is
+[0:25:27]  indeed the case.
+[0:25:27]  So now it's done.
+[0:25:28]  Small bars here, big bars there.
+[0:25:29]  And I had to just keep talking there to kill time
+[0:25:31]  because it's relatively slow.
+[0:25:33]  Well, let me re-randomize the array just so we start with a different order.
+[0:25:37]  And now let me click on bubble sort.
+[0:25:39]  And you'll see similar idea, but different algorithm.
+[0:25:42]  So now the two bars in pink are the two that
+[0:25:45]  are being compared and fixed, potentially, if they're out of order.
+[0:25:48]  And you can see already that the biggest bars are bubbling their way up
+[0:25:52]  to the top.
+[0:25:53]  But now you can also see this redundancy.
+[0:25:56]  We keep swooping through the list again and again,
+[0:25:59]  just like I kept walking back and forth.
+[0:26:01]  And this is n squared.
+[0:26:02]  This is not that many bars.
+[0:26:03]  What, 10, 20?
+[0:26:04]  This is like 40 or something bars, I'm guessing.
+[0:26:06]  That's pretty slow already, just to sort 40 numbers.
+[0:26:10]  And I think it's going to get tedious if I keep talking over this.
+[0:26:13]  So let's just assume that this, too, is relatively slow.
+[0:26:16]  Had I gotten lucky and the list were almost sorted already,
+[0:26:20]  bubble sort would have been pretty fast.
+[0:26:22]  But this was a truly random array, so we did not get lucky.
+[0:26:25]  So indeed, the worst case might be what's kicking in here.
+[0:26:28]  So I feel like it'll be anticlimactic, like holding in a sneeze
+[0:26:33]  if I don't let you see the end of this.
+[0:26:34]  So here we go.
+[0:26:37]  Nothing interesting is about to happen.
+[0:26:39]  Almost done.
+[0:26:41]  OK, done.
+[0:26:42]  All right, so thank you.
+[0:26:45]  Thank you.
+[0:26:48]  So still somewhat slow, though.
+[0:26:51]  How, though, can we perhaps do a little better fundamentally?
+[0:26:54]  So we can do so if we introduce yet another technique.
+[0:26:57]  And this one isn't so much a function of code as it is concept.
+[0:27:01]  And it's something that you might have seen in the real world,
+[0:27:04]  but perhaps not so obviously so.
+[0:27:06]  So it turns out in programming, recursion
+[0:27:10]  refers to the ability of a function to call itself.
+[0:27:13]  In the world of mathematics, if you have a function f,
+[0:27:16]  if f appears on both the left side and the right side of a formula,
+[0:27:20]  that would be a recursive function in the math world, too.
+[0:27:22]  Whenever f is defined in terms of itself, or in our case, in programming,
+[0:27:27]  any time a function calls itself, that function is said to be recursive.
+[0:27:32]  And this is actually something we've seen already in class,
+[0:27:34]  even though we didn't call it as much.
+[0:27:36]  For instance, consider this pseudocode from earlier,
+[0:27:40]  whereby this was the pseudocode for searching via binary search.
+[0:27:45]  A whole bunch of doors.
+[0:27:46]  If no doors are left, return false.
+[0:27:48]  That was the additional conditional we added.
+[0:27:51]  But then if number behind middle door, return true.
+[0:27:53]  And here's the interesting part.
+[0:27:55]  If number is less than middle door, search the left half.
+[0:28:00]  If number is greater than middle door, search the right half.
+[0:28:03]  This pseudocode earlier was itself recursive.
+[0:28:06]  Why?
+[0:28:07]  Because here is an algorithm for searching.
+[0:28:09]  But what's the algorithm telling us?
+[0:28:11]  Well, on this line and this line, it's telling us to search something else.
+[0:28:16]  So even though it's not explicitly defined in code as having a name,
+[0:28:19]  if this is a search algorithm, and yet the search algorithm
+[0:28:22]  is using a search algorithm, this pseudocode is recursive.
+[0:28:26]  Now, that could quickly get you into trouble if a function just calls itself
+[0:28:30]  again and again and again.
+[0:28:32]  But why intuitively is it not problematic that this code,
+[0:28:37]  this pseudocode calls itself?
+[0:28:40]  Why will the algorithm still stop?
+[0:28:42]  Yeah, exactly.
+[0:28:47]  It has some exit condition, like if no door is less.
+[0:28:49]  And more importantly, any time you search the left half,
+[0:28:53]  you're searching a smaller version of the problem.
+[0:28:56]  Any time you search the right half, you're
+[0:28:58]  searching a smaller version of the problem, literally half the size.
+[0:29:01]  So this is why in the phone book, obviously I
+[0:29:03]  couldn't tear the phone book in half infinitely many times,
+[0:29:06]  because it was literally getting smaller each time.
+[0:29:08]  So recursion is this ability to call yourself, if you will.
+[0:29:12]  But what's important is that you do it on a smaller, smaller problem,
+[0:29:15]  so that eventually you have no more problems to solve,
+[0:29:18]  or no more data, no more doors at all.
+[0:29:21]  So these two lines here would be the recursive elements here.
+[0:29:25]  But if we go back to week 0, we could have used recursion in some other way.
+[0:29:28]  So this was our pseudocode for the phone book back in week 0.
+[0:29:32]  And recall that we described these yellow lines as really representing
+[0:29:35]  a loop, some kind of cycle again and again.
+[0:29:38]  But there was a missed opportunity here.
+[0:29:39]  What if I had re-implemented this code to do this instead?
+[0:29:44]  Instead of saying open to middle of left half a book
+[0:29:48]  and then go back to line 3, like literally inducing a loop,
+[0:29:51]  or open to middle of right half a book and go back to line 3,
+[0:29:54]  inducing another loop, why don't I just recognize
+[0:29:57]  that what I'm staring at now is a algorithm
+[0:29:59]  for searching a phone book.
+[0:30:02]  And if you want to search a smaller phone book, like A through M or N
+[0:30:06]  through Z, we'll just use this same algorithm.
+[0:30:09]  So I can replace these yellow lines with just this, casually speaking.
+[0:30:13]  Search left half a book.
+[0:30:15]  Search right half a book.
+[0:30:16]  This would be implicitly, and now I can shorten the whole thing,
+[0:30:19]  a recursive implementation of the phone book pseudocode from week 0.
+[0:30:22]  And it's recursive because if this is a search algorithm
+[0:30:24]  and you're saying go search something else, that's fine.
+[0:30:27]  That's recursive.
+[0:30:28]  But because you're searching half of the phone book,
+[0:30:31]  it's indeed going to get smaller and smaller.
+[0:30:34]  Even in the real world, or the real virtual world,
+[0:30:38]  you can see recursive data structures in the wild,
+[0:30:40]  or at least in Super Mario Brothers like this.
+[0:30:42]  Let me get rid of all the distractions here
+[0:30:44]  and focus on this pyramid where you have one block, then two, then three,
+[0:30:48]  then four.
+[0:30:49]  Well, this itself is technically recursively defined in the sense that,
+[0:30:53]  well, what is a pyramid of height 4?
+[0:30:55]  Well, it's really what?
+[0:30:58]  How would you describe?
+[0:30:59]  A pyramid of height 4 is actually the same thing
+[0:31:01]  as a pyramid of height 3 plus one additional layer.
+[0:31:09]  Well, what's a pyramid of height 3?
+[0:31:11]  Well, it's technically a pyramid of height 2 plus one additional layer.
+[0:31:15]  And so even physical structures can be recursive
+[0:31:17]  if you can define them in terms of itself.
+[0:31:19]  Now, at some point, you have to say that if the pyramid is of height 1,
+[0:31:23]  there's just one block.
+[0:31:24]  You can't forever say it's defined in terms of a height negative 1.
+[0:31:28]  Negative 2, you would never stop.
+[0:31:29]  So you have to kind of have a special case there.
+[0:31:31]  But let's go ahead and translate something like this, in fact, to code.
+[0:31:34]  Let me go back to VS Code here.
+[0:31:36]  And let me implement a program called iteration
+[0:31:39]  that refers to a loop iterating.
+[0:31:42]  And let me implement a very simple pyramid like that.
+[0:31:44]  So let me go ahead and include the CS50 library.
+[0:31:47]  I'll include our standard io.h int main void.
+[0:31:52]  No command line arguments today.
+[0:31:53]  And let's go ahead and do this.
+[0:31:55]  Let's declare a variable called height.
+[0:31:56]  Let's ask the human for the height of this pyramid.
+[0:32:00]  And then let's go ahead and draw a pyramid of that height.
+[0:32:04]  Now, of course, draw does not yet exist.
+[0:32:06]  So I'm going to need to invent the draw function.
+[0:32:09]  Let me go ahead and define a function that doesn't have a return value.
+[0:32:12]  It's just going to have side effects.
+[0:32:13]  It's just going to print bricks on the screen.
+[0:32:15]  Call draw, and it takes in an integer n as its input.
+[0:32:19]  And how am I going to implement this?
+[0:32:20]  Well, again, I want to print one block, then two, then three, then four.
+[0:32:25]  It's pretty straightforward, at least once you're comfortable with loops.
+[0:32:28]  Let me go back to the code here.
+[0:32:30]  Let me go ahead and say for int i gets 0.
+[0:32:34]  i is less than n, i plus plus.
+[0:32:37]  And that's going to iterate essentially row by row.
+[0:32:40]  And on each row, I want to print out 1, then 2, then 3, then 4 bricks.
+[0:32:45]  But I'm iterating from 0 to 1 to 2 to 3, so I think that's OK.
+[0:32:48]  I can just say something like for int j gets 0.
+[0:32:52]  j, let's be clever about this, is less than i, j plus plus.
+[0:32:58]  And now let me go ahead and inside of this loop,
+[0:33:01]  I think I can get away with just printing out a single hash sign.
+[0:33:06]  But then outside of that loop, similar to last week,
+[0:33:09]  I'm going to print my new line separately.
+[0:33:11]  So a little non-obvious at first, but this outer loop
+[0:33:14]  iterates row by row, line by line, if you will.
+[0:33:17]  And then the inner loop just makes sure that when i equals 0, let's see.
+[0:33:26]  Nope, there's a bug.
+[0:33:28]  I need to make sure that it's j is less than i plus 1.
+[0:33:31]  So when i is 0 on my first line of output, I'm going to print out 1 brick.
+[0:33:36]  When i is 1, I'm going to print out 2 bricks and so forth.
+[0:33:41]  So let me go ahead and run make iteration.
+[0:33:45]  And now seems to compile.
+[0:33:47]  Uh-oh.
+[0:33:49]  Huh, implicit declaration of function draw.
+[0:33:51]  So I'm making week one mistakes again.
+[0:33:55]  Say again?
+[0:33:57]  Yeah, the prototype is missing.
+[0:33:58]  I didn't declare it at the top.
+[0:34:00]  That's an easy fix.
+[0:34:01]  And the only time, really, it's OK and necessary to copy paste.
+[0:34:04]  Let me copy the function's declaration there,
+[0:34:06]  end it with a semicolon so that Clang now knows that draw will exist.
+[0:34:11]  Make iteration, now it works.
+[0:34:12]  Thank you.
+[0:34:13]  Dot slash iteration.
+[0:34:15]  We'll type in something like 4.
+[0:34:16]  And there we have it, our pyramid of height 1, 2, 3, 4
+[0:34:19]  that looks pretty similar to this, albeit using hashes.
+[0:34:22]  So that's how we would have implemented this like two weeks ago in week one,
+[0:34:25]  maybe last week, but just using arrays.
+[0:34:28]  But let me propose that we could do something recursively instead.
+[0:34:32]  Let me close this version of the code.
+[0:34:34]  And let me go back to VS Code and open up recursion.c just
+[0:34:39]  to demonstrate something recursively.
+[0:34:40]  And I'll do it incorrectly deliberately the first time.
+[0:34:43]  So let me include cs50.h.
+[0:34:45]  Let me include standard io.h.
+[0:34:47]  Let me do int main void.
+[0:34:51]  And let me just blindly draw a pyramid initially of height 1.
+[0:34:56]  But now in my draw function, let me re-implement it a little differently.
+[0:35:01]  So my draw function this time is still going to take a number n.
+[0:35:03]  But that's how many hashes it's going to print.
+[0:35:05]  So let's do 4.
+[0:35:07]  Int i gets 0.
+[0:35:08]  i is less than n.
+[0:35:11]  i plus plus.
+[0:35:13]  Then let's go ahead and print out a single hash mark here.
+[0:35:17]  And then after that, let's print out the end of the line just as before.
+[0:35:23]  But now this, of course, is only going to draw a single row.
+[0:35:28]  It's going to print out one hash or two hashes or three hashes,
+[0:35:32]  but only on one line.
+[0:35:33]  Let me now incorrectly but just kind of curiously say, all right,
+[0:35:37]  well, if this draws a pyramid of height 1,
+[0:35:40]  let's just use ourself to draw a pyramid of height n plus 1.
+[0:35:43]  So the first time I call draw, it will print out one hash.
+[0:35:47]  Then the second time I call draw, it will print out two hashes, then three,
+[0:35:51]  then four.
+[0:35:52]  So we're kind of laying these bricks down from top to bottom.
+[0:35:57]  Make recursion.
+[0:35:59]  Whoops, I screwed up again.
+[0:36:01]  So let's copy the prototype here.
+[0:36:03]  Let's put this down over here, semicolon.
+[0:36:06]  Let's do this again.
+[0:36:07]  Make recursion.
+[0:36:09]  All right, all good.
+[0:36:10]  Dot slash recursion.
+[0:36:11]  And now let me increase the size of my terminal window
+[0:36:13]  just so you can see more of the output.
+[0:36:16]  And here we have.
+[0:36:18]  OK, bad, but thank you.
+[0:36:20]  So we have an infinitely tall pyramid.
+[0:36:22]  And it's just flying across the screen, which
+[0:36:24]  is why it looks kind of like a mess.
+[0:36:26]  But I printed out a pyramid of height 1 and then 2 and then 3 and then 4.
+[0:36:30]  And unfortunately, what am I lacking?
+[0:36:32]  Any sort of quick condition, any kind of condition that says,
+[0:36:35]  wait a minute, when it's too tall, stop altogether.
+[0:36:38]  So this is an infinite loop.
+[0:36:39]  But it's not a loop.
+[0:36:40]  It's a recursive call.
+[0:36:42]  And actually, doing this in general is very bad.
+[0:36:44]  We'll see next week that if you call a function too many times,
+[0:36:47]  you can actually trigger yet another of those segmentation faults,
+[0:36:51]  because you're using too much memory, essentially.
+[0:36:53]  But for now, I haven't triggered that yet.
+[0:36:55]  Control C is your friend to cancel.
+[0:36:57]  And as an aside, if you're playing along at home
+[0:36:59]  or play with this code later, I actually cheated here.
+[0:37:01]  We have a special clang configuration feature
+[0:37:04]  that prevents you from calling a function like that and creating a problem.
+[0:37:08]  I overrode it just for demonstration's sake.
+[0:37:10]  But odds are, at home, you wouldn't be able to compile this code yourself.
+[0:37:13]  But let me do a proper version recursively of this code as follows.
+[0:37:18]  Let me go back into the code here.
+[0:37:20]  Let me go ahead and not just blindly start drawing 1, then 2,
+[0:37:24]  then 3 layers of bricks.
+[0:37:25]  Let me prompt the human as before for the height of the pyramid they want
+[0:37:30]  using our getInt function.
+[0:37:32]  And now let me call draw of height again.
+[0:37:34]  So now I'm going back to the loop-like version.
+[0:37:37]  But instead of using a loop now, this is where recursion
+[0:37:40]  gets rather elegant, if you will.
+[0:37:43]  Let me go ahead and execute code the draw function as follows.
+[0:37:49]  Per your definition, if a pyramid of height 4
+[0:37:52]  is really just a pyramid of height 3 plus another row,
+[0:37:56]  well, let's take that literally.
+[0:37:57]  Let me go back to my code.
+[0:37:59]  And if you want to draw a pyramid of height 4,
+[0:38:02]  well, go right ahead and draw a pyramid of height 3 first,
+[0:38:06]  or more generally, n minus 1.
+[0:38:08]  But what's the second step?
+[0:38:09]  Well, once you've drawn a pyramid of height 3, draw an extra row.
+[0:38:13]  So I at least have to bite off that part of the problem myself.
+[0:38:16]  So let me just do for int i gets 0, i is less than n, i plus plus.
+[0:38:20]  And let me, the programmer of this function, print out my hashes.
+[0:38:24]  And then at the very bottom, print out a new line
+[0:38:27]  so the cursor moves to the next line.
+[0:38:29]  But this is kind of elegant now, I dare say,
+[0:38:32]  in that draw is recursive because I'm literally translating
+[0:38:36]  from English to C code this idea that a pyramid of height 4
+[0:38:39]  is really just a pyramid of height 3.
+[0:38:41]  So I do that first.
+[0:38:42]  And I'm sort of trusting that this will work.
+[0:38:45]  Then I just have to lay one more layer of bricks, four of them.
+[0:38:48]  So if n is 4, this is just a simple for loop a la week 1
+[0:38:52]  that will print out an additional layer.
+[0:38:54]  But this, of course, is going to be problematic eventually.
+[0:38:57]  Why?
+[0:38:59]  It's not done yet, this program.
+[0:39:01]  How many times will draw call itself in this model?
+[0:39:07]  Infinitely many times.
+[0:39:08]  Why?
+[0:39:13]  Yeah, there's no equivalent of quit.
+[0:39:15]  Like, if you've printed enough already, then quit.
+[0:39:18]  Well, how do we capture that?
+[0:39:19]  Well, I don't think we want this to go negative, right?
+[0:39:22]  It would make no sense to draw a negative height pyramid.
+[0:39:25]  So I think we can just pluck off, as the programmer,
+[0:39:29]  an easy case, an easy answer, a so-called base case.
+[0:39:32]  And I'm just going to do this.
+[0:39:34]  At the top of my draw function, let me just say if n is less than,
+[0:39:38]  or heck, less than or equal to 0.
+[0:39:40]  That's it.
+[0:39:41]  Go ahead and just return.
+[0:39:43]  There's nothing more to do.
+[0:39:45]  And that simple condition, technically known as a base case,
+[0:39:49]  will ensure that the code doesn't run forever.
+[0:39:52]  Why?
+[0:39:52]  Well, suppose that draw is called with an argument of 4.
+[0:39:56]  4 is, of course, not less than 0.
+[0:39:58]  So we don't return.
+[0:39:59]  But we do draw a pyramid of height 3.
+[0:40:01]  And here's where things get a little mentally tricky.
+[0:40:03]  You don't move on to line 20 until draw has been called.
+[0:40:07]  So when draw is called with an argument of 3,
+[0:40:10]  it's as though you're executing from the top of this function again.
+[0:40:13]  3 is not less than 0.
+[0:40:14]  So what do you do?
+[0:40:15]  You draw 2.
+[0:40:17]  OK, how do you draw 2?
+[0:40:18]  Well, 2 is not less than 0.
+[0:40:20]  So you don't return.
+[0:40:20]  So you draw 1.
+[0:40:22]  Got to be careful here.
+[0:40:23]  Draw 1.
+[0:40:24]  And now we go ahead back to the beginning.
+[0:40:26]  How do you draw 1?
+[0:40:27]  Well, 1 is not less than 0.
+[0:40:28]  So you don't return.
+[0:40:29]  You draw height 0.
+[0:40:32]  How do you draw height 0?
+[0:40:33]  Wait a minute.
+[0:40:34]  0 is less than or equal to 0.
+[0:40:36]  And you return.
+[0:40:38]  And so it's kind of like this mental stack, this to-do list.
+[0:40:41]  You keep postponing, executing these lower lines of code,
+[0:40:44]  because you keep restarting, restarting, restarting the draw function
+[0:40:47]  until finally one of those function calls says there's nothing to do.
+[0:40:51]  Return.
+[0:40:52]  And now the whole thing starts to unravel, if you will.
+[0:40:55]  And you pick back up where you left off.
+[0:40:57]  And this is perhaps the best scenario.
+[0:40:59]  We won't do it in class.
+[0:41:00]  But if you'd like to wrestle through this on your own,
+[0:41:02]  using debug 50 to keep stepping into, step into, step into each of those lines,
+[0:41:07]  logically, you'll see exactly what's actually happening.
+[0:41:10]  So let me go to my terminal and do make recursion, which is now
+[0:41:13]  this correct version of the code.
+[0:41:15]  Dot slash recursion.
+[0:41:16]  Let's type in a height of 4.
+[0:41:18]  And voila, now we have that same pyramid not using iteration, per se,
+[0:41:23]  though admittedly we're using iteration to print the additional layer.
+[0:41:26]  We're now using draw recursively to print all of the smaller pyramids
+[0:41:32]  that need come before it.
+[0:41:37]  No, question is, can you only use recursion with a void function?
+[0:41:40]  No, not at all.
+[0:41:40]  In fact, it's very common to have a return value,
+[0:41:43]  like an integer or something else, so that you can actually
+[0:41:46]  do something constructively with that actual value.
+[0:41:50]  Other questions on this?
+[0:41:54]  Say a little later.
+[0:41:57]  When is line 21 getting executed?
+[0:41:59]  So if you continue to unwrap, let me scroll down a bit more
+[0:42:04]  so you can see the top of the code.
+[0:42:05]  So line 21 will be executed once line 19 is done executing itself.
+[0:42:14]  Now, in the story I told, we kept calling draw again, again, again.
+[0:42:19]  But as soon as one of those function calls, where n equals 0,
+[0:42:23]  returns immediately, then we don't keep drawing again and again.
+[0:42:27]  So now if you kind of think of the process as reversing,
+[0:42:30]  then you continue to line 21.
+[0:42:32]  Then line 21 again.
+[0:42:34]  Then line 21 again, and as the sort of logic unravels.
+[0:42:38]  And next week, we'll actually paint a picture
+[0:42:40]  of what's actually happening in the computer's memory.
+[0:42:42]  But for now, it's very similar to the pseudocode for the phone book.
+[0:42:46]  You're just searching again and again.
+[0:42:48]  But you're waiting until the very end to get back the final result.
+[0:42:53]  Google now, who I might keep mentioning by coincidence
+[0:42:55]  today is full of programmers, of course.
+[0:42:57]  Here's a fun exercise.
+[0:42:59]  Let me go back to a browser.
+[0:43:02]  I'm going to go ahead and search for recursion,
+[0:43:04]  because I want to learn a little something about recursion.
+[0:43:07]  Here is kind of an internet meme or joke.
+[0:43:09]  If I zoom in here, the engineers at Google are kind of funny.
+[0:43:14]  See why?
+[0:43:18]  Ah, there we go.
+[0:43:19]  Yes?
+[0:43:20]  Yes, this is recursion.
+[0:43:22]  And there's going to be so many memes you'll come across now where recursion,
+[0:43:24]  like if you've ever pointed a camera at the TV that's showing the camera
+[0:43:28]  and you sort of see yourself or the image again and again, that's really recursion.
+[0:43:31]  And in that case, it only stops once you hit the base case of a single pixel.
+[0:43:35]  But this is a very funny joke in some circles
+[0:43:38]  when it comes to recursion and Google.
+[0:43:40]  So how can we actually use Google, or rather,
+[0:43:43]  how can we actually use recursion constructively?
+[0:43:47]  Well, let me propose that we actually introduce a third and final algorithm
+[0:43:51]  for sorting that hopefully does better than the two sorts thus far.
+[0:43:55]  We've done selection sort and bubble sort.
+[0:43:58]  Bubble sort we liked a little better, at least
+[0:44:00]  in so far as in the best case where the list is already sorted.
+[0:44:03]  Bubble sort's at least smarter, and it will actually terminate early,
+[0:44:06]  giving us a better lower bound in terms of our omega notation.
+[0:44:09]  But it turns out that recursion, and this is not necessarily
+[0:44:13]  a feature of recursion, but something we can now leverage,
+[0:44:15]  it turns out using recursion, we can take a fundamentally different approach
+[0:44:18]  to sorting a whole bunch of numbers in such a way
+[0:44:21]  that we can do far fewer comparisons and ideally speed up our final results.
+[0:44:28]  So here is the pseudocode for what we're about to see for something
+[0:44:31]  called merge sort, and it really is this terse.
+[0:44:35]  Sort the left half of numbers.
+[0:44:37]  Sort the right half of numbers.
+[0:44:39]  Merge the sorted halves.
+[0:44:41]  This is almost sort of nonsensical, because if you're
+[0:44:45]  asked for an algorithm to sort and you respond with, well,
+[0:44:47]  sort the left half, sort the right half, that's
+[0:44:50]  being sort of difficult because, well, I'm asking for a sorting algorithm.
+[0:44:53]  You're just telling me to sort the left half and the right half.
+[0:44:55]  But implicit in that last line, merging is a pretty powerful feature
+[0:45:00]  of this sort.
+[0:45:00]  Now, we do need another base case at the top, so let me add this.
+[0:45:03]  If we find ourselves with a list, an array of size one,
+[0:45:06]  well, that array is obviously sorted.
+[0:45:08]  If there's only one element in it, there's no work to be done.
+[0:45:11]  So that's going to be our base case, but allowing us now
+[0:45:13]  in just these, what, four, six lines of pseudocode
+[0:45:17]  to actually sort some elements.
+[0:45:19]  But let's focus first on just a subset of this.
+[0:45:22]  Let's consider for a moment what it means to merge sorted halves.
+[0:45:25]  So Carter has wonderfully come up to volunteer here
+[0:45:27]  just to help us reset these numbers.
+[0:45:29]  Suppose that in the middle of the story we're about to tell,
+[0:45:33]  we have two sorted halves.
+[0:45:35]  I've already sorted the left half of these numbers.
+[0:45:37]  And indeed, 2, 4, 5, 7 is sorted from smallest to largest.
+[0:45:40]  And the right half appears to be already sorted, 0, 1, 3, 6, already sorted.
+[0:45:45]  So in my pseudocode, we're already done sorting the left half
+[0:45:48]  and the right half somehow.
+[0:45:49]  But we'll see how in a moment.
+[0:45:51]  Well, how do I go about merging these two halves?
+[0:45:53]  Well, because they're sorted already and you want to merge them in order,
+[0:45:57]  I think we can flip down.
+[0:45:59]  We can hide all but the first numbers in each of these sublists.
+[0:46:04]  So here we have a half that starts with 2.
+[0:46:07]  And I don't really care what the other numbers are,
+[0:46:09]  because they're clearly larger than 2.
+[0:46:10]  I can focus only on 2.
+[0:46:12]  And 0, 2.
+[0:46:13]  0 also.
+[0:46:14]  We know that 0 is the smallest there.
+[0:46:15]  So let's just ignore the numbers that Carter kindly flipped down.
+[0:46:18]  So how do I merge these two lists into a new sorted larger list?
+[0:46:23]  Well, I compare the 2 on my left with the 0 on my right.
+[0:46:27]  Obviously, which comes first?
+[0:46:28]  The 0.
+[0:46:29]  So let me put this down here.
+[0:46:31]  And Carter, if you want to give us the next element.
+[0:46:33]  Now I have two sorted halves.
+[0:46:34]  But I've already plucked one off.
+[0:46:36]  So now I compare the 2 against the 1.
+[0:46:39]  1 obviously comes next.
+[0:46:40]  So I'm going to take out the 1 and put it in place here.
+[0:46:43]  Now I'm going to compare the two halves again.
+[0:46:45]  2 and 3, which do I merge first?
+[0:46:47]  Obviously, the 2 comes next.
+[0:46:49]  And now notice each time I do this, my hands
+[0:46:52]  are theoretically making forward progress.
+[0:46:54]  I'm not doubling back like I kept doing with selection
+[0:46:56]  or bubble sort, back and forth, back and forth.
+[0:46:59]  My fingers are constantly advancing forward.
+[0:47:01]  And that's going to be a key detail.
+[0:47:03]  So I compare 4 and 3.
+[0:47:04]  3 obviously.
+[0:47:06]  I compare 4 and 6.
+[0:47:09]  4 obviously.
+[0:47:11]  I compare 5 and 6.
+[0:47:13]  5 obviously.
+[0:47:15]  And then I compare 7 and 6.
+[0:47:18]  6, of course.
+[0:47:19]  And then lastly, we have just one element left.
+[0:47:21]  And even though I'm kind of moving awkwardly as a human, my hands,
+[0:47:25]  technically, we're only moving to the right.
+[0:47:27]  I was never looping back, doing something again and again.
+[0:47:30]  And that's perhaps the intuition and just enough room for the 7.
+[0:47:33]  So that then is how you would merge two sorted halves.
+[0:47:37]  We started with left half sorted, right half sorted.
+[0:47:39]  And merging is just like what you would do as a human.
+[0:47:41]  And Carter just flipped the numbers down.
+[0:47:43]  So our focus was only on the smallest elements in each.
+[0:47:47]  Any questions before we forge ahead with what it means then
+[0:47:52]  to be merged in this way?
+[0:47:56]  So now, here is an original list.
+[0:47:57]  We deliberately put it at the top, because there's
+[0:47:59]  one detail of merge sort that's key.
+[0:48:01]  Merge sort is technically going to use a little more space.
+[0:48:04]  And so whereas previously, we just kept moving our humans around
+[0:48:07]  and swapping people and making sure they stayed ultimately
+[0:48:09]  in their original positions, with merge sort,
+[0:48:12]  pretends that here's our original array of memory.
+[0:48:15]  I'm going to need at least one other array of memory.
+[0:48:17]  And I'm going to cheat.
+[0:48:18]  And I'm going to use even more memory.
+[0:48:20]  But technically, I could actually go back and forth
+[0:48:22]  between one array and a secondary array.
+[0:48:24]  But it is going to take me more space.
+[0:48:27]  So how do I go about implementing merge sort on this code?
+[0:48:32]  Well, let's consider this.
+[0:48:33]  Here is an array of size 8.
+[0:48:36]  If only one number quit, obviously not applicable.
+[0:48:38]  So let's focus on the juicy part there.
+[0:48:40]  Sort the left half of the numbers.
+[0:48:41]  All right, how do I sort the left half of the numbers?
+[0:48:44]  I'm going to just nudge them over just to be clear which is the left half.
+[0:48:48]  Here is now a sub list of size 4.
+[0:48:50]  How do I sort the left half?
+[0:48:53]  Well, do I have an algorithm for sorting?
+[0:48:56]  Yeah, what do I do?
+[0:48:57]  Here's a list of size 4.
+[0:48:58]  How do I sort it?
+[0:48:59]  What's step one?
+[0:49:01]  Sort the left half.
+[0:49:02]  So I now sort of conceptually, in my mind, take this sub list of size 4,
+[0:49:07]  and I sort it by first sorting the left half, focusing now on the 7 and 2.
+[0:49:11]  All right, here's a list of size 2.
+[0:49:13]  How do I sort a list of size 2?
+[0:49:17]  Sorry?
+[0:49:19]  I think we just keep following our instructions.
+[0:49:21]  Sort the left half.
+[0:49:22]  All right, here is a list of size 1.
+[0:49:24]  How do I sort a list of size 1?
+[0:49:29]  I'm done.
+[0:49:29]  Like, it's done.
+[0:49:30]  So I leave this alone.
+[0:49:32]  What was the next step in the story?
+[0:49:33]  I've just sorted the left half of the left half of the left half.
+[0:49:37]  What comes next?
+[0:49:38]  I sort the right half of the left half of the left half.
+[0:49:42]  And I'm done, because it's just a list of size 1.
+[0:49:45]  What comes after this?
+[0:49:48]  Merge.
+[0:49:49]  So this is where it gets a little trippy,
+[0:49:50]  because you have to remember where we're pausing the story to do things
+[0:49:53]  progressively again and again.
+[0:49:55]  But if I've just sorted the left half and I've just sorted the right half,
+[0:49:58]  now I merge them together.
+[0:50:00]  This is a super short list, so we don't need Carter's help here as before.
+[0:50:04]  But I think the first number I take here is the 2.
+[0:50:06]  And then the second number I take, because it's the only option, is the 7.
+[0:50:10]  But what's nice now is that, notice, the left half of the left half
+[0:50:14]  is indeed sorted, because I trivially sorted the left half of it
+[0:50:18]  and the right half of it.
+[0:50:19]  But then merging is really where the magic happens.
+[0:50:21]  Again, if you rewind now in your mind, if I've just
+[0:50:25]  sorted the left half of the left half, what happens next?
+[0:50:30]  Sort the right half of the left half.
+[0:50:33]  So again, you kind of rewind in time.
+[0:50:35]  So how do I do this?
+[0:50:37]  I've got a list of size 2.
+[0:50:38]  I sort the left half, just the 5, done.
+[0:50:40]  Sort the right half, 4, done.
+[0:50:43]  Now the interesting part.
+[0:50:44]  I merge the left half and the right half of the right half of the left half.
+[0:50:50]  So what do I do?
+[0:50:51]  4 comes down here, 5 comes down here.
+[0:50:55]  And now, notice what I have.
+[0:50:58]  Left half is sorted, right half is sorted.
+[0:51:02]  If you rewind in time, where is my next step, 3?
+[0:51:05]  Merge the two halves.
+[0:51:06]  And so this is what Carter helped me do before.
+[0:51:08]  Let's focus only on the smallest elements just so there's less distraction.
+[0:51:11]  I compare the 2 and the 4.
+[0:51:13]  2 comes first, so let's obviously put that here.
+[0:51:15]  Now I compare the new beginning of this list
+[0:51:18]  and the old beginning of this list.
+[0:51:20]  The 4 obviously comes next.
+[0:51:22]  And now I compare the 7 against the 5.
+[0:51:24]  5 obviously comes next.
+[0:51:26]  And now, lastly, I'm left with one number.
+[0:51:28]  So now I'm down to the 7.
+[0:51:30]  So even if you've kind of lost track of some of the nuances here,
+[0:51:32]  if you just kind of take a step back, we have the original right half here,
+[0:51:36]  still untouched.
+[0:51:37]  But the left half of the original input is now, indeed, sorted.
+[0:51:42]  All by way of doing sorting left half, right half, left half, right half,
+[0:51:46]  but with those merges in between.
+[0:51:48]  So if we've just sorted the left half, we rewind all the way to the beginning.
+[0:51:52]  What do I now do?
+[0:51:54]  So sort the right half.
+[0:51:56]  So sort the right half.
+[0:51:57]  How do I sort a list of size 4?
+[0:51:59]  Well, I first sort the left half, the 1 and the 6.
+[0:52:01]  How do I sort a list of size 2?
+[0:52:03]  You sort the left half.
+[0:52:04]  Just the number 1, obviously there's no work to be done.
+[0:52:07]  Done sorting the left half.
+[0:52:09]  6, done sorting the right half.
+[0:52:12]  Now what do I do?
+[0:52:13]  I merge the left half here with the right half here.
+[0:52:19]  And that one's pretty straightforward.
+[0:52:21]  Now what do I do?
+[0:52:21]  I've just merged.
+[0:52:22]  So now I've just sorted the left half of the right half.
+[0:52:26]  So now I sort the right half of the right half.
+[0:52:28]  So I consider the 0, done.
+[0:52:30]  I consider the 3, done.
+[0:52:32]  I now merge these two together.
+[0:52:34]  0, of course, comes first.
+[0:52:35]  Then comes the 3.
+[0:52:37]  And now I'm at the point of the story where
+[0:52:39]  I've sorted the left half of the right half
+[0:52:42]  and the right half of the right half.
+[0:52:43]  So step 3 is merge.
+[0:52:46]  And I'll do it again like we did with Carter.
+[0:52:48]  All right, 1 and 0, obviously the 0 comes first.
+[0:52:51]  Now compare the 1 and the 3, obviously the 1 comes first.
+[0:52:55]  Compare the 6 and the 3, obviously the 3.
+[0:52:57]  And then lastly, the 6.
+[0:52:59]  So now where are we?
+[0:53:00]  We've taken the left half of the whole thing and sorted it.
+[0:53:05]  We then took the right half of the whole thing and sorted it.
+[0:53:09]  So now we're at, lastly, step 3 for the last time.
+[0:53:12]  What do we do?
+[0:53:14]  Merge.
+[0:53:14]  And so just to be consistent, let me push these down.
+[0:53:18]  And let's compare left hand to right hand,
+[0:53:20]  noticing that they only make forward progress.
+[0:53:22]  None of this back and forth comparisons.
+[0:53:24]  2 and 0, of course, the 0.
+[0:53:26]  So we'll put that in place.
+[0:53:27]  2 and 1, of course, the 1.
+[0:53:30]  So we put that in place.
+[0:53:31]  2 and 3, we merge in, of course, the 2 in this case.
+[0:53:36]  4 and 3.
+[0:53:37]  We now merge in the 3 in this case.
+[0:53:39]  4 and 6.
+[0:53:41]  We now merge, of course, the 4 in place.
+[0:53:44]  And now we compare 5 and 6.
+[0:53:46]  We keep the 5.
+[0:53:51]  Bug.
+[0:53:54]  OK, well, pretend that the 5 is on.
+[0:53:58]  Oh, this is why.
+[0:54:00]  All right, so now we compare the 7 and the 6.
+[0:54:03]  6 is gone.
+[0:54:05]  And lastly, 7 is the last one in place.
+[0:54:08]  And even though I grant that of all the algorithms,
+[0:54:10]  this is probably the hardest one to stay on top of,
+[0:54:13]  especially when I'm doing it as a voiceover,
+[0:54:15]  realize that what we've just done is only those three steps recursively.
+[0:54:19]  We started with a list of size 8.
+[0:54:21]  We sorted the left half.
+[0:54:22]  We sorted the right half.
+[0:54:23]  And then we merged the two together.
+[0:54:25]  But if you go down each of those rabbit holes, so to speak,
+[0:54:27]  sorting the left half involves sorting the left half of the left half
+[0:54:31]  and the right half of the left half, and so forth.
+[0:54:33]  But this germ of an idea of really dividing and conquering the problem,
+[0:54:38]  not such that you're having the problem and only dealing
+[0:54:40]  with one half.
+[0:54:41]  Clearly, we're sorting one half and the other half
+[0:54:44]  and merging them together.
+[0:54:45]  Ultimately, it does still lead us to the same solution.
+[0:54:49]  And if we visualize the remnants of this now,
+[0:54:52]  if I depict this as follows, where on the screen here,
+[0:54:55]  you see where the numbers originally started in the top row from left
+[0:54:58]  to right, essentially, even though this is in a different order,
+[0:55:02]  I divided that list of size 8 ultimately into eight lists of size 1.
+[0:55:07]  And that's where the base case kicked in and just said, OK,
+[0:55:10]  we're done sorting that.
+[0:55:11]  And after that, logically, I then merged two lists of size 1
+[0:55:16]  into many lists of size 2.
+[0:55:18]  And those lists of size 2 into the lists of size 4.
+[0:55:20]  And then finally, the lists of size 4 into one big list sorted of size 8.
+[0:55:26]  And so I put forth this picture with the little line indicators here
+[0:55:29]  because how many times did I divide, divide, divide in half?
+[0:55:34]  Or really double, double, double?
+[0:55:36]  So exponent is the opposite.
+[0:55:38]  Spoiler.
+[0:55:39]  How many times did I divide?
+[0:55:41]  So three concretely.
+[0:55:43]  But if there's eight elements total and there's n more generally,
+[0:55:47]  it really is a matter of dividing and conquering log n times.
+[0:55:51]  You start this, and you can divide one, two, three times, log n times.
+[0:55:54]  Or conversely, you can start here and exponentially double, double, double,
+[0:55:58]  three times, which is log n.
+[0:56:00]  But on every row, every shelf, literally, I
+[0:56:03]  made a fuss about pointing my hands only from the left to the right,
+[0:56:07]  constantly advancing them such that every time I did those merges,
+[0:56:10]  I touched every element once and only once.
+[0:56:13]  There was none of this back and forth, back and forth on stage.
+[0:56:16]  So if I'm doing something log n times, or if I'm doing rather n things,
+[0:56:23]  log n times, what would be our big O formula perhaps?
+[0:56:28]  n things log n times?
+[0:56:31]  Yeah, so n log n.
+[0:56:32]  The order of n log n is indeed how we would describe
+[0:56:35]  the running time of merge sort.
+[0:56:37]  And so of all of the sorts thus far, we've
+[0:56:40]  seen that merge sort here actually is n log n, which is strictly
+[0:56:44]  better than n squared, which is where both selection sort and bubble sort
+[0:56:49]  landed.
+[0:56:49]  But it's also slower than linear search, for instance.
+[0:56:52]  But you would rather expect that.
+[0:56:54]  If you have to do a lot of work up front sorting some elements
+[0:56:57]  versus just searching them, you're going to have to put in more effort.
+[0:57:00]  And so the question of whether or not you should just search something blindly
+[0:57:03]  with linear search and not bother sorting it really
+[0:57:06]  boils down to, can you afford to spend this amount of time?
+[0:57:09]  And if you're the Googles of the world, odds
+[0:57:11]  are you don't want to be searching their database linearly every time.
+[0:57:14]  Why?
+[0:57:14]  Because you can sort it once and then benefit millions, billions of people
+[0:57:19]  subsequently using something like binary search or, frankly,
+[0:57:22]  in practice, something even fancier and faster than binary search.
+[0:57:25]  But there's always going to be this trade-off.
+[0:57:27]  You can achieve binary search only if the elements are sorted.
+[0:57:31]  How much does it cost you to sort them?
+[0:57:32]  Well, maybe n squared if you use some of the earlier algorithms.
+[0:57:36]  But it turns out n log n is pretty fast as well.
+[0:57:39]  So at the end of the day, these running times involve trade-offs.
+[0:57:45]  And indeed, in merge sort 2, I should note
+[0:57:47]  that the lower bound on merge sort is also going to be omega of n log n.
+[0:57:51]  As such, we can describe it in terms of our theta notation,
+[0:57:53]  saying that merge sort is indeed in theta of n log n.
+[0:57:56]  So generally speaking, probably better to use something like merge sort
+[0:58:00]  or some other algorithm that's in n log n.
+[0:58:02]  In practice, most programmers are not implementing these sorting algorithms
+[0:58:06]  themselves.
+[0:58:07]  Odds are they're using a library off the shelf
+[0:58:09]  that themselves have made the decision as to which of these algorithms to do.
+[0:58:13]  But generally speaking, and we're seeing now this for the first time,
+[0:58:16]  if you want to improve time, like use less time, write faster code,
+[0:58:20]  you've got to pay a price.
+[0:58:21]  And that might be your human time.
+[0:58:23]  Just takes you more time to code up something more sophisticated,
+[0:58:26]  more difficult to implement.
+[0:58:28]  Or you need to spend something like space.
+[0:58:30]  And as these shelves suggest, that too is one of the key details of merge sort.
+[0:58:34]  You can't just have the elements swapping in place.
+[0:58:37]  You need at least an auxiliary array so that when you do the merging,
+[0:58:41]  you have a place to put them.
+[0:58:43]  And this is excessive, this amount of memory.
+[0:58:45]  I could have just gone back and forth between top shelf and bottom shelf,
+[0:58:48]  but it's a little more interesting to go top down.
+[0:58:50]  But you do need more space.
+[0:58:51]  Back in the day, decades ago, space was really expensive.
+[0:58:54]  And so you know what?
+[0:58:55]  It might have been better to not use merge sort,
+[0:58:57]  use bubble sort or selection sort even, or some other algorithm altogether.
+[0:59:02]  Nowadays, space is relatively cheap.
+[0:59:04]  And so these are more acceptable trade-offs.
+[0:59:06]  But it totally depends on the application.
+[0:59:08]  The very last thing we thought we'd do is show you an actual comparison
+[0:59:12]  of some of these sorting algorithms.
+[0:59:13]  It's about 60 seconds long.
+[0:59:14]  And it will compare for you selection sort, bubble sort, and merge sort
+[0:59:19]  in parallel, simultaneously with some fun sorting music,
+[0:59:23]  showing you ultimately what it really means
+[0:59:25]  to be an O of n squared, or better yet, big O of n log n.
+[0:59:31]  Selection on the top, bubble on the bottom, merge in the middle.

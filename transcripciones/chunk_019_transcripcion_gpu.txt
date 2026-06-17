@@ -1,0 +1,1236 @@
+# Transcripción: chunk_019.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  The exact same response here, this first tells me
+[0:00:04]  when I visit HTTP, harvard.edu with no www,
+[0:00:08]  Harvard minimally wants me to be using a secure connection.
+[0:00:11]  If I then, OK, fine, cooperate, let me go ahead and clear my screen.
+[0:00:16]  Let me add the s, but not the www.
+[0:00:18]  You can see here that it again responded with a 301 up here.
+[0:00:23]  And the location now adds the www.
+[0:00:26]  So it's just a way of bouncing users from one place to another.
+[0:00:29]  And this is all thanks to HTTP boiling down
+[0:00:32]  to relatively simple messages inside of the envelope that
+[0:00:37]  tell the computer, the browser in this case, how to respond.
+[0:00:41]  Now, odds are you've seen others besides 301,
+[0:00:44]  even though you've probably never seen that actual number,
+[0:00:47]  unless you've done this kind of thing before.
+[0:00:49]  But there probably is a number that everyone in this room has seen,
+[0:00:52]  even if you've never really wondered why is it that number.
+[0:00:55]  I think you're smiling.
+[0:00:56]  What number are you thinking of?
+[0:00:58]  Yeah, so 404.
+[0:00:59]  Why is 404?
+[0:01:00]  Well, 404 indicates, by convention, not found.
+[0:01:04]  And now, why the world decided years ago to show us normal humans
+[0:01:08]  on the internet, 404 is anything significant, is unclear.
+[0:01:12]  That's sort of like bad design.
+[0:01:13]  Like, what do I care if the status code is 404?
+[0:01:16]  But it's common enough on the internet that probably all of us
+[0:01:19]  have seen it.
+[0:01:19]  But that just means that some server, when you visit a URL that's incorrect,
+[0:01:24]  maybe it's outdated, the URL has been changed, if you see a 404,
+[0:01:29]  it just means that the virtual envelope that
+[0:01:30]  came from the server back to your Mac or PC or phone contains not 200 OK,
+[0:01:35]  not 301 moved permanently, but 404 not found instead.
+[0:01:39]  And it's usually accompanied by a technical message,
+[0:01:42]  maybe a cute picture of a cat sort of hiding
+[0:01:44]  because it means not found, or something like that.
+[0:01:46]  The aesthetics are entirely up to the server,
+[0:01:48]  but that's what the 404 means.
+[0:01:50]  And there's other codes, too, a few of which
+[0:01:52]  you'll use in the coming weeks as we transition from command line
+[0:01:55]  programs in C and Python to web-based ones.
+[0:01:58]  We've seen a few of these already, and several of them
+[0:02:01]  are kind of variants of the same thing, like these 300 ones here.
+[0:02:05]  But we'll see others, like 403 forbidden means,
+[0:02:08]  like, you probably forgot to log in, or you need to log in,
+[0:02:11]  or something like that.
+[0:02:13]  Internal server error, right now, no, in the coming weeks,
+[0:02:16]  you will absolutely encounter 500 errors, and they're always your fault.
+[0:02:20]  It's going to be the equivalent of, like, a segmentation fault in C.
+[0:02:24]  A 500 error means, like, you or I screwed up
+[0:02:26]  when writing some code, so we're going to see that.
+[0:02:28]  But it's just going to be an opportunity for us to fix it.
+[0:02:31]  If a server's overloaded, you often see 503,
+[0:02:34]  like something's unavailable because something's too popular,
+[0:02:37]  or it's maybe worse getting attacked.
+[0:02:39]  This is an old April Fool's joke.
+[0:02:42]  418 is not actually used in practice, but someone took the time
+[0:02:45]  to write up an entire formal technical proposal
+[0:02:48]  so that servers can respond saying, I am a teapot.
+[0:02:50]  So it's kind of part of internet lore, and there's other ones of these status
+[0:02:54]  codes, as well.
+[0:02:55]  But this is useful because, eventually, we'll see in code,
+[0:02:58]  you can use this understanding, high level as it might be, of HTTP
+[0:03:03]  to do some interesting and powerful things.
+[0:03:05]  So for instance, we can even send fancier URLs to servers.
+[0:03:10]  It turns out, as we'll soon see, if you send a message like this,
+[0:03:14]  get slash search question mark q equals cat, and then HTTP 1.1
+[0:03:20]  or whatever version, and you send that message to Google server,
+[0:03:24]  www.google.com, this is how you can specify not just the path of a web
+[0:03:29]  page that you want, slash search in this case, the question mark,
+[0:03:33]  it turns out, is going to be a convention in the internet,
+[0:03:36]  in the web specifically, for passing user input to the server, as well.
+[0:03:42]  In fact, you've probably never paid close attention to URLs,
+[0:03:45]  but they very often have question marks.
+[0:03:47]  They very often have equal signs.
+[0:03:49]  And indeed, even google.com supports a certain key, q in this case,
+[0:03:53]  for query, and you can put anything you want after that in order
+[0:03:57]  to search for actual cats.
+[0:03:59]  So if I actually go back to Chrome itself here for a moment,
+[0:04:03]  let me pull back open my Chrome browser here.
+[0:04:07]  Previously, I was using incognito mode for harvard.edu.
+[0:04:11]  I've gone ahead and closed that window and opened a new one
+[0:04:13]  so we can start fresh by visiting Google.
+[0:04:15]  Normally, you and I are in the habit of going to google.com
+[0:04:18]  and searching via the form.
+[0:04:19]  Or nowadays, you just type your search query in the browser itself,
+[0:04:22]  and it brings you automatically to Google, or Bing, or something else.
+[0:04:26]  But I can really be panantic here.
+[0:04:28]  Let me go ahead and zoom in.
+[0:04:29]  And I'll manually go to https://www.google.com slash search question mark q
+[0:04:36]  equals maybe cats.
+[0:04:38]  Now, this would not be a very user-friendly experience
+[0:04:40]  if all of us had to manually type out something crazy like that.
+[0:04:43]  But that's what the form is redirecting you
+[0:04:46]  to when you type in more user-friendly cats into a text box.
+[0:04:50]  If I hit Enter here, we'll get back, indeed, a whole bunch
+[0:04:54]  of search results about cats.
+[0:04:56]  If I zoom back in and maybe I change it from cats to dogs,
+[0:04:59]  that too is going to change.
+[0:05:01]  And notice it's pre-populating the text box
+[0:05:03]  because Google has written its code in order to do so as well.
+[0:05:07]  Now, apropos of the video with which we began today from yesteryear, one
+[0:05:13]  of the better Yale pranks over the years,
+[0:05:16]  has anyone actually ever been to safetyschool.org?
+[0:05:22]  And to our friends at Yale watching live, hi, safetyschool.org.
+[0:05:26]  So it's kind of fun if you actually visit it, depending on who you are.
+[0:05:31]  So if I open up a new window here and I go to http://safetyschool.org,
+[0:05:38]  zooming in, Enter, my oh my.
+[0:05:43]  Look at where it goes.
+[0:05:44]  Now, how does that?
+[0:05:46]  OK.
+[0:05:51]  This is not a CS50 thing.
+[0:05:52]  Someone out there who I don't know who they are for like 20 years
+[0:05:56]  has been paying annually for that domain, safetyschool.org, for just this joke.
+[0:06:01]  But if I now go back into VS code here in my terminal window
+[0:06:05]  and a little more sophisticatedly, let me do curl-i, http://safetyschool.org.
+[0:06:13]  The browser, of course, immediately redirected me to the website.
+[0:06:16]  But what's going on underneath the hood?
+[0:06:17]  Well, 20-some years ago, someone bought the domain,
+[0:06:20]  configured the server, quite simply, to spit this out.
+[0:06:23]  Safetyschool.org, for years, has moved permanently to www.yale.edu.
+[0:06:30]  So just a little demonstration of what you can do with just a little bit
+[0:06:33]  of understanding of HTTP.
+[0:06:35]  That's been a lot already.
+[0:06:36]  We've laid the foundation for understanding how the internet works.
+[0:06:39]  Now we're going to use it with a language called HTML, Hypertext Markup
+[0:06:42]  Language, CSS, Cascading Style Sheets, and JavaScript,
+[0:06:45]  a proper programming language.
+[0:06:47]  But first, it feels opportune to take a 10-minute break.
+[0:06:49]  We have some wonderful Halloween candy and the transept,
+[0:06:52]  and we'll be back in 10 with those languages.
+[0:06:56]  We're headed up to Boston, checking out the stadium for the prank.
+[0:07:04]  A few years ago, I was at a math conference.
+[0:07:06]  And I was sitting around at the table at dinner
+[0:07:09]  with a few other mathematicians.
+[0:07:11]  And one of them went to Harvard and started
+[0:07:15]  telling the story of this amazing prank that was against Harvard.
+[0:07:20]  And at that point, I felt I had to interrupt and said, well, actually,
+[0:07:24]  I can tell you a lot more about that.
+[0:07:27]  OK.
+[0:07:28]  The idea was perfected in a dorm room.
+[0:07:30]  Came up with the idea, actually, to prank them
+[0:07:32]  with signs at the football game.
+[0:07:34]  We threw some ideas out there as far as what the signs would say.
+[0:07:38]  We eventually settled on, we suck.
+[0:07:40]  And my immediate reaction was, no, this will never work.
+[0:07:43]  However, the problem solver in me started thinking, well,
+[0:07:47]  maybe we can make this work.
+[0:07:50]  The problem?
+[0:07:51]  They had to infiltrate Harvard Stadium without getting caught,
+[0:07:55]  sneak in 1,800 placards, distribute them to unsuspecting Harvard fans,
+[0:07:59]  and then convince those fans to prank themselves.
+[0:08:04]  We thought about basically every possible thing that could go wrong
+[0:08:09]  and tried to come up with a solution for it.
+[0:08:11]  And then you put two reds on top of it.
+[0:08:13]  They made fake Harvard IDs and fake backstories, fake placard designs,
+[0:08:19]  and a 28-member fake pep squad.
+[0:08:23]  On November 20, 2004, a fake Harvard student
+[0:08:27]  smuggled the placards into the game.
+[0:08:42]  But then, trouble.
+[0:08:45]  What house is this?
+[0:08:46]  We're in.
+[0:08:47]  How many extra?
+[0:08:57]  I just showed him the front of this ID, and all of a sudden, he just ran away.
+[0:09:00]  And he felt so embarrassed.
+[0:09:03]  Having escaped one confrontation, they couldn't risk another.
+[0:09:07]  It was time.
+[0:09:09]  This just looks like a total mess.
+[0:09:11]  We have absolutely no idea if this is going to work.
+[0:09:14]  Look at that.
+[0:09:15]  They have to go for a round.
+[0:09:16]  It's going to hurt me.
+[0:09:17]  It's actually going to hurt me.
+[0:09:19]  I can't believe this.
+[0:09:21]  What was once a prank became a legend.
+[0:09:27]  Immediately, we started hearing chants from the other side.
+[0:09:35]  You suck.
+[0:09:36]  You suck.
+[0:09:37]  You suck.
+[0:09:38]  You suck.
+[0:09:39]  And I think it was at that point in time that we knew we had pulled it off.
+[0:09:43]  I think it didn't matter that Harvard won because of the prank for a lot of Yale
+[0:09:57]  students and alumni.
+[0:09:59]  We definitely won that year.
+[0:10:23]  Thank you all.
+[0:10:24]  Thank you.
+[0:10:25]  Oh, here.
+[0:10:27]  Oh, all right.
+[0:10:28]  A little Halloween candy.
+[0:10:29]  All right.
+[0:10:30]  Thank you all.
+[0:10:31]  So glad I wore the same thing today.
+[0:10:34]  So in just a moment.
+[0:10:40]  Thank you.
+[0:10:41]  OK, so in just a moment, we'll transition
+[0:10:45]  to understanding all the more now what we can
+[0:10:47]  do with this underlying infrastructure.
+[0:10:49]  So again, HTTP and below it, TCP, IP is all about just getting the data from
+[0:10:53]  point A to point B in some standardized way.
+[0:10:56]  But now let's talk about HTML.
+[0:10:57]  This is the language in which web pages themselves are written,
+[0:11:01]  hypertext markup language.
+[0:11:02]  Now, some of you might have used this before to make personal homepages.
+[0:11:06]  Some of you might have dabbled, even if using some website
+[0:11:08]  to create your own home page.
+[0:11:09]  But understanding this language is useful,
+[0:11:12]  certainly for creating the aesthetics of a web page,
+[0:11:15]  conveying data that's of interest.
+[0:11:17]  But at the end of the day, it and the language we'll look at next, CSS,
+[0:11:22]  are not programming languages.
+[0:11:24]  There's going to be no functions, no loops, no programming logic.
+[0:11:28]  But we will end today with a teaser of a proper programming
+[0:11:30]  language called JavaScript via which you can manipulate all
+[0:11:33]  of these various other languages as well.
+[0:11:37]  So ultimately, HTML has like two features.
+[0:11:39]  And this is a language that we spend very brief amount of time
+[0:11:42]  on because it really boils down to just a couple of basic ideas
+[0:11:45]  and then vocabulary that you'll build out over time just by googling,
+[0:11:49]  looking up references, looking at other pages source code.
+[0:11:51]  But tags and attributes are what characterize HTML.
+[0:11:54]  Now, what do I mean by that?
+[0:11:56]  Here, for instance, is the HTML code via which
+[0:11:59]  you can make probably the simplest of all web pages, one that quite simply
+[0:12:02]  says in the browser window, hello title and hello body, for instance.
+[0:12:08]  Now, what does this actually mean?
+[0:12:09]  If you imagine opening up this code in a browser,
+[0:12:13]  be it on a Mac or PC or phone, you'll see typically
+[0:12:16]  like some kind of rectangular window.
+[0:12:17]  And there's usually a tab that has the title of that page.
+[0:12:20]  And then most of the rectangular region is the web page itself.
+[0:12:23]  What you're looking at then is the code that's
+[0:12:25]  going to put hello title in the title bar and the tab at the very top.
+[0:12:29]  And down at the bottom, hello body is going
+[0:12:31]  to be all that's in the big black and white box that
+[0:12:34]  composes the rest of the browser window itself.
+[0:12:36]  Now, what are the salient characteristics here
+[0:12:38]  that we'll now start to take for granted?
+[0:12:40]  Well, first, let's go ahead and give me just a moment here
+[0:12:47]  and actually do something with this code.
+[0:12:49]  So I'm going to go ahead and do this.
+[0:12:51]  Back in VS Code here, I'm going to first create a file called, say, hello.html.
+[0:12:56]  And in this tab, I'm going to go ahead and really repeat exactly that same code.
+[0:13:01]  Now, I had this line first, doctype HTML.
+[0:13:03]  Then I had this line, HTML lang equals quote unquote EN, close quote.
+[0:13:08]  Then I had inside of that head.
+[0:13:10]  Then I had inside of that title.
+[0:13:12]  Then inside of that, I had hello title.
+[0:13:13]  And I'm doing this quickly because we'll tease apart in a moment
+[0:13:16]  what it actually all means.
+[0:13:17]  And then down here, below that so-called head,
+[0:13:21]  I had just the text hello body.
+[0:13:23]  So at the moment, that I claim is the entirety of a web page.
+[0:13:27]  But it currently lives in my code space, so to speak,
+[0:13:30]  in a file called hello.html.
+[0:13:32]  That's fine if I want to create it.
+[0:13:34]  But how do I, how do you, how does anyone on the internet actually view it?
+[0:13:38]  Well, to serve a web page, you indeed need a web server.
+[0:13:42]  And it turns out that Codespaces comes with one of these pre-installed
+[0:13:45]  because we CS50 staff did so for you.
+[0:13:48]  And what you can do in a terminal window, once you have an HTML file ready
+[0:13:52]  to go that you want the world to see, you can literally
+[0:13:55]  run in your terminal window HTTP-server.
+[0:13:59]  Single command.
+[0:14:00]  And what that's going to do for you is start a web server.
+[0:14:03]  That is to say, a program whose purpose in life is just to serve web pages.
+[0:14:07]  And even though probably up until now for years,
+[0:14:10]  you probably, if you're like me, equate server,
+[0:14:12]  quote unquote, with a physical device.
+[0:14:15]  Server is really a piece of software.
+[0:14:16]  It just tends to run on big fancy devices.
+[0:14:19]  So when we say server, we often all think of, in our mind's eye,
+[0:14:22]  big expensive devices perhaps.
+[0:14:24]  But a server is just a program whose purpose in life
+[0:14:27]  is to respond to requests with responses.
+[0:14:30]  And that's the vernacular there.
+[0:14:32]  Now, once you run HTTP-server, and I'm going to do a bit of magic
+[0:14:35]  because I set this up before class just to make sure it goes smoothly,
+[0:14:38]  you'll see some output like this, whereby your server is now
+[0:14:42]  available on a very long URL.
+[0:14:45]  Mine here is a very long URL that will be different from yours.
+[0:14:49]  But what this is is a unique identifier that your Codespace has temporarily
+[0:14:54]  so that you can now access, and ideally only you can access,
+[0:14:57]  that file using your browser.
+[0:15:00]  Now, if I flip the URL or you flip the URL to public
+[0:15:02]  by right-clicking or control-clicking the right features of VS Code,
+[0:15:06]  you can enable anyone in the world to visit it.
+[0:15:08]  But we're not going to ultimately host our websites in your Codespace,
+[0:15:11]  because as soon as you log off for the night and the thing shuts down,
+[0:15:14]  the website will go down.
+[0:15:15]  But at the end of the semester, particularly for final projects,
+[0:15:18]  we'll show you ways that you can put your own website, your own code,
+[0:15:21]  on the actual internet 24-7-365, even with your own domain name,
+[0:15:26]  if you want to get one, so that it lives independent of your own sleep schedule
+[0:15:31]  and use its schedule of VS Code here.
+[0:15:33]  So I'm going to go ahead now and visit this URL in another tab of my browser.
+[0:15:39]  And what I'll see here is this.
+[0:15:41]  This is the output of that program called HTTP server.
+[0:15:44]  And essentially, what it is doing is it's using TCP and IP in conjunction
+[0:15:49]  with HTTP to just run your very own web server on GitHub's own servers as well.
+[0:15:55]  And that's because of different ports.
+[0:15:57]  Again, we won't go too much into the weeds of the TCP, the IP,
+[0:16:00]  and all of that stuff.
+[0:16:01]  But recall that different port numbers can allow you
+[0:16:04]  to distinguish one service from another.
+[0:16:06]  Now, one of the services is, of course, your Codespace, VS Code in the cloud
+[0:16:10]  that we've been using for weeks.
+[0:16:11]  But if you want to use the same physical server that GitHub controls,
+[0:16:15]  but actually visit your own web server that I just
+[0:16:18]  ran in my terminal window in another tab, that's fine.
+[0:16:21]  They're just going to be using different TCP ports.
+[0:16:23]  And you and I don't have to care what they are,
+[0:16:25]  but just that this is a feature that TCP supports.
+[0:16:28]  So what you see here is somewhat arcane.
+[0:16:29]  This is not like a thing that most people on the internet should ever see.
+[0:16:33]  I'm just doing this for development purposes.
+[0:16:35]  But this is the index.
+[0:16:36]  That is, the directory, the folder contents of my Codespace.
+[0:16:40]  And because I deleted everything from prior weeks already,
+[0:16:43]  all we see right now is hello.html, which I just created.
+[0:16:47]  So if I click on hello.html within this folder listing,
+[0:16:51]  you'll be a little underwhelmed.
+[0:16:53]  And I'll zoom in just so there's something more interesting there.
+[0:16:56]  But now you see hello, body.
+[0:16:59]  But what's interesting, perhaps, is that after this long, very
+[0:17:02]  cryptic and uninteresting URL, notice at the very end of it,
+[0:17:06]  and I'll zoom in in a moment, what do you see?
+[0:17:08]  Slash hello.html, which follows the convention I claimed before break,
+[0:17:13]  is how a browser would allow you to access a specific file on a server
+[0:17:19]  by doing slash and then the name of the file name.
+[0:17:21]  Everything before it is very cryptic.
+[0:17:23]  It would be better if I buy a domain name that's
+[0:17:26]  a little more easy to remember and set that up some other time.
+[0:17:29]  But for now, let's just focus on only the file names
+[0:17:31]  that I'm actually creating.
+[0:17:33]  All right.
+[0:17:34]  So the code is up and running, underwhelming though it might be,
+[0:17:38]  with the body in the middle of the page.
+[0:17:40]  And let me zoom in up here, too.
+[0:17:42]  Hello, comma, title is indeed in the tab, just as promised.
+[0:17:45]  So what's actually going on with code like this that we just created?
+[0:17:49]  Well, let's go back to the slide version of the same.
+[0:17:51]  And let me just highlight a few of these lines.
+[0:17:53]  The very first line is what's called your document type declaration.
+[0:17:57]  It doesn't really matter to remember that by phrasing.
+[0:17:59]  And this is just something you copy, paste, or do from memory
+[0:18:02]  at the top of any .html file that you create when making your own web page.
+[0:18:06]  It's a implicit indicator to the browser
+[0:18:09]  that you're using the very latest version of HTML, which is version 5.
+[0:18:13]  You don't mention the number 5.
+[0:18:14]  Just browsers nowadays are programmed to look for this
+[0:18:17]  to know that you're using the very latest version of the language.
+[0:18:20]  Languages, just like human languages, evolve over time.
+[0:18:23]  We're up to version 5 of HTML.
+[0:18:25]  But new features get added every few years.
+[0:18:27]  So indeed, this lecture, this class, has been evolving over time, too.
+[0:18:30]  So let's now focus on the next line, as well as the bottom line.
+[0:18:34]  And you'll notice some deliberate symmetry here.
+[0:18:37]  This here is what we're going to call a tag.
+[0:18:39]  And it's technically different from this.
+[0:18:41]  This is a document type declaration.
+[0:18:42]  It's got the weird exclamation point.
+[0:18:43]  That's the only anomaly.
+[0:18:44]  Everything else follows a pattern.
+[0:18:46]  This is a tag in HTML.
+[0:18:49]  And it's the HTML tag.
+[0:18:50]  And a tag generally both starts and stops, or opens and closes at some point.
+[0:18:57]  So this is the so-called start tag, or open tag.
+[0:18:59]  And this just means essentially to the browser,
+[0:19:01]  hey, browser, here comes some HTML, the language
+[0:19:04]  in which web pages are written.
+[0:19:06]  This here with the forward slash after the angled bracket means, hey, browser,
+[0:19:11]  that's it for the HTML of this page.
+[0:19:13]  So that's what I mean by symmetry.
+[0:19:14]  I started a thought here, finished it down here.
+[0:19:16]  What's in between those two thoughts?
+[0:19:18]  Well, here, browser, or rather, let me clarify one thing.
+[0:19:22]  This thing here is that other keyword, an attribute.
+[0:19:26]  An attribute is something that modifies the behavior of a tag.
+[0:19:29]  So it's similar to an argument in C or in Python,
+[0:19:32]  like a parameter to a function.
+[0:19:34]  These aren't functions, but it's the same idea.
+[0:19:36]  It just modifies the default behavior of something instead.
+[0:19:39]  Lang equals en, you can probably guess.
+[0:19:41]  Just means that, hey, browser, assume that everything hereafter is in English.
+[0:19:45]  And that might be useful with Google Translate or just
+[0:19:48]  search engine optimization so that just the server, the browser,
+[0:19:51]  know what human language you have actual content in, like hello, title, hello,
+[0:19:55]  body, even though a good computer can probably infer from context often.
+[0:19:59]  All right, so that's an attribute.
+[0:20:01]  That's a tag.
+[0:20:02]  And the whole thing here, everything in between the start tag and end tag,
+[0:20:07]  we would also call an HTML element.
+[0:20:09]  That just means everything related to that open and close tag.
+[0:20:13]  All right, now notice, indented inside of, so to speak,
+[0:20:16]  the HTML open and close tag are another pair of tags, the head tag and the body
+[0:20:22]  tag, or the head element collectively and the body element collectively.
+[0:20:26]  And same idea, hey, browser, here comes the head of my page.
+[0:20:28]  Hey, browser, that's it for the head.
+[0:20:30]  Hey, browser, here comes the body of my page.
+[0:20:32]  Hey, browser, that's it for the body.
+[0:20:34]  The head is essentially the tiny little strip at the very top,
+[0:20:37]  including the tab itself.
+[0:20:39]  The body is like 95% of everything else, the big rectangular region.
+[0:20:43]  What's inside of your title, of your head, of the web page at the moment?
+[0:20:48]  Just the title.
+[0:20:49]  So this indicates, hey, browser, here comes my title.
+[0:20:51]  Hey, browser, that's it for the title.
+[0:20:53]  The title, of course, is literally quote unquote, hello, comma, title.
+[0:20:57]  Meanwhile, if we bounce back out, here is the second element
+[0:21:02]  inside of the HTML tag.
+[0:21:04]  This says, hey, browser, here comes the body.
+[0:21:05]  Hey, browser, that's it for the body.
+[0:21:07]  And hey, browser, this is the contents.
+[0:21:09]  These are the contents of the body itself.
+[0:21:11]  Now, the indentation is a stylistic thing.
+[0:21:13]  I did it just to be sort of neat and tidy,
+[0:21:16]  because it suggests what is inside of what.
+[0:21:19]  But it also suggests a sort of hierarchy.
+[0:21:21]  And in fact, we'll use terminology from the world of family trees.
+[0:21:25]  If this is like a parent, so to speak, head and body
+[0:21:29]  would be the child elements of the HTML tag.
+[0:21:33]  Meanwhile, title is a child of the head tag.
+[0:21:36]  Or equivalently, title is a grandchild of HTML.
+[0:21:39]  So you can use the same sort of vernacular as in the human world
+[0:21:42]  when it comes to familial relationships, too.
+[0:21:45]  And that just hints at, again, the same hierarchy.
+[0:21:48]  So we have tags.
+[0:21:49]  And they include HTML, head, title, body.
+[0:21:52]  And that's it for now.
+[0:21:54]  We have attributes.
+[0:21:55]  We've seen one example of them, Lang.
+[0:21:57]  But we'll see many other examples of the same idea.
+[0:21:59]  But these building blocks are exactly the same.
+[0:22:02]  Generally, you start a thought, you finish a thought,
+[0:22:04]  and you might do something in between.
+[0:22:06]  Questions on this basic structure of any web page?
+[0:22:11]  Any questions at all?
+[0:22:13]  No?
+[0:22:14]  All right, so let's now allow things to ramp up a little more interestingly
+[0:22:18]  and do something with these building blocks.
+[0:22:20]  But so that you have a mental model for everything
+[0:22:23]  that's going on here on after, think of this same HTML
+[0:22:26]  being related in spirit to Week 5 when we talked all about data structures.
+[0:22:31]  If I really wanted to, I could take to heart this idea of children,
+[0:22:34]  and parents, and grandparents, and really depict this thing graphically.
+[0:22:38]  And in fact, this tree here, if you will, and it's not a binary tree,
+[0:22:42]  it's not a binary search tree, it's just a tree, using Week 5's terminology.
+[0:22:46]  If this special node here represents the whole document,
+[0:22:50]  well, the root element, as I called it, is HTML.
+[0:22:52]  HTML has two children, head and body.
+[0:22:55]  The head tag has in turn a title child, and in turn has some text,
+[0:23:00]  just as the body has some text.
+[0:23:02]  And so this is what your browser is doing.
+[0:23:04]  You and I, the programmers, write this stuff.
+[0:23:07]  The browser reads this code, top to bottom, left to right,
+[0:23:09]  whenever you visit a website.
+[0:23:11]  And inside of the computer's memory, Chrome, Edge, Firefox, Safari, whatnot,
+[0:23:15]  they build this data structure in the computer's memory
+[0:23:19]  so as to know what it is you have told them to do.
+[0:23:22]  And we'll see over time, at the end of today,
+[0:23:24]  you can write code in an actual programming language, JavaScript,
+[0:23:27]  to maybe dynamically add or remove things from this tree.
+[0:23:31]  And this is how things like Gmail work.
+[0:23:32]  When you open up your Gmail inbox, if you're a Gmail user,
+[0:23:35]  if you just stay there long enough, you'll probably get more and more mail.
+[0:23:39]  And what happens?
+[0:23:39]  You don't have to reload the page or rebuild the tree, per se.
+[0:23:43]  It just all of a sudden appears at the top, at the top, at the top.
+[0:23:47]  What's happening there is that Google wrote
+[0:23:49]  some code that just keeps adding more nodes to this tree
+[0:23:52]  every time they realize you've got a new message again and again.
+[0:23:55]  So that's the relationship now, even with this world of HTML,
+[0:24:00]  with all of the programmatic ideas we looked at in the past.
+[0:24:04]  All right, so let's go ahead and do something
+[0:24:06]  that's a little more interesting than just hello itself.
+[0:24:09]  I'm going to go ahead and hide my terminal window because the server is
+[0:24:12]  now running.
+[0:24:12]  And all I want to do now is experiment with hello and other examples
+[0:24:16]  as well.
+[0:24:17]  Let me go ahead and, actually, before I do that,
+[0:24:20]  let me go ahead and run a code of paragraphs.html,
+[0:24:25]  just so I can keep my code separate.
+[0:24:26]  And now I'll hide the terminal window again.
+[0:24:29]  Paragraphs.html, I'm going to do almost exactly the same.
+[0:24:32]  Let me go ahead and start with something familiar.
+[0:24:36]  And eventually, I'll start copying and pasting just to save time.
+[0:24:39]  So doc type HTML is always there.
+[0:24:42]  Open the HTML tag.
+[0:24:43]  And now notice, I didn't type the rest of that.
+[0:24:45]  Just like with C, just like with Python, we
+[0:24:47]  try to save you some keystrokes by closing parentheses, adding quotes.
+[0:24:52]  The HTML support in VS Code is pretty good, too.
+[0:24:54]  And it tries to finish your thought when it comes to tags as well.
+[0:24:57]  It can screw things up if it does something you don't want it to do.
+[0:25:01]  So sometimes you have to delete.
+[0:25:02]  But it's just autocomplete, as we've seen before.
+[0:25:05]  Let's go ahead and let me add lang equals en,
+[0:25:07]  as all of my examples today will be.
+[0:25:10]  Let's add the head tag.
+[0:25:11]  Let's go and proactively add the body tag.
+[0:25:14]  And now let's go ahead and give this a title tag, which has a,
+[0:25:19]  I'll just call this paragraphs, just so I remember which example is what.
+[0:25:22]  Now notice, all of this whitespace and all of this neat and tidy indentation,
+[0:25:26]  the browser ultimately is not going to care about.
+[0:25:28]  This is just for us humans to kind of keep ourselves saying,
+[0:25:31]  when we look at the code, it's just easier to read.
+[0:25:33]  But strictly speaking, I could minimally delete all of this whitespace.
+[0:25:38]  And I could just move all of this tag up to the same line.
+[0:25:41]  Both, I think, are fine.
+[0:25:43]  I'm just going to follow a certain convention.
+[0:25:45]  But this, too, would have the exact same meaning.
+[0:25:47]  But we'll see where that detail about whitespace
+[0:25:49]  could potentially get us into trouble later.
+[0:25:52]  In my paragraphs tag, let's do this.
+[0:25:54]  In advance, I've written up some Latin-like text,
+[0:25:57]  a really long paragraph of Latin-like text like this.
+[0:25:59]  It's actually random nonsense.
+[0:26:01]  It's not real Latin, even though a couple of the words might look familiar.
+[0:26:04]  And so here we have three paragraphs of text.
+[0:26:07]  And I've deliberately hit Enter in between them,
+[0:26:09]  so that just like an essay in Google Docs or Microsoft Word,
+[0:26:12]  hopefully I'll see three separate paragraphs.
+[0:26:14]  Let me now change tabs.
+[0:26:16]  And I'll close hello.html from before.
+[0:26:18]  I'm going to go back to my other tab here.
+[0:26:21]  I'm going to click Back to go back to that index of all of my files,
+[0:26:25]  which I started at earlier.
+[0:26:27]  And you'll see now that I have two files,
+[0:26:29]  because I obviously just created a second file called paragraphs.html.
+[0:26:32]  So let's click on this to see our three paragraphs of Latin-like text.
+[0:26:36]  And voila, I'll zoom out.
+[0:26:39]  All right, first bug, if you will.
+[0:26:41]  This just looks like one massive blob of text, not three blobs of text.
+[0:26:47]  And why might that be, borrowing the hint I offered a moment ago?
+[0:26:53]  Why are we not seeing break?
+[0:26:55]  Yeah, so we need some kind of line breaks here,
+[0:26:57]  because the browser turns out is only going to take us literally.
+[0:27:00]  And if you just give it text, text, text, it's just going to show you text.
+[0:27:03]  And any time there's more than a single white space,
+[0:27:05]  whether it's 2 or 20 or 200, it's going to just assume
+[0:27:09]  that you did that just to be neat and tidy.
+[0:27:11]  And it's going to collapse them into just one space visually, like this.
+[0:27:15]  So there are, in fact, a couple of solutions.
+[0:27:17]  One is this here.
+[0:27:19]  I could add some explicit line breaks.
+[0:27:20]  And it turns out that there's a br tag like this.
+[0:27:24]  And just for visibility's sake, let me do two of them.
+[0:27:26]  So like hitting Enter, Enter on my keyboard.
+[0:27:29]  I'll do it here too, br for break, break.
+[0:27:32]  And now let me go back to my other tab.
+[0:27:34]  Nothing's changed yet, but that's because I have to reload.
+[0:27:37]  I've changed it on the server, but now I need
+[0:27:39]  to change it in the browser by reloading.
+[0:27:41]  And now it looks a little better, albeit nonsensical.
+[0:27:44]  But you'll notice a curiosity.
+[0:27:46]  Per this br tag, this is kind of poorly designed.
+[0:27:49]  It's a little hackish to just say Enter, Enter,
+[0:27:51]  and make the browser do this.
+[0:27:53]  Breaks, line breaks, don't actually require close tags or end tags.
+[0:27:58]  So not all tags need to be closed, at least those that it just
+[0:28:01]  makes no semantic sense to close them, right?
+[0:28:03]  Like the break is there or it's not.
+[0:28:05]  You can't imagine starting to move to the next line
+[0:28:08]  and then eventually getting around to finishing.
+[0:28:10]  It's either there or it's not.
+[0:28:12]  So some tags do not have close tags as necessary.
+[0:28:15]  But there's a more elegant way here, I dare say,
+[0:28:18]  not just sort of hackishly putting in these line breaks.
+[0:28:21]  Let me do this instead.
+[0:28:22]  I'll delete those.
+[0:28:23]  And let me go ahead and, as the name of this file suggests,
+[0:28:26]  let me add a paragraph tag.
+[0:28:29]  Now here I need to fight with VS Code's autocomplete
+[0:28:31]  because I don't want to finish the thought there.
+[0:28:34]  Let me go ahead and open the paragraph tag and close a paragraph tag.
+[0:28:37]  And just to keep things tidy, I'll go ahead and indent to,
+[0:28:40]  even though the indentation itself doesn't matter,
+[0:28:43]  let me go ahead and create another tag for opening this paragraph.
+[0:28:47]  And I'll close this one here.
+[0:28:49]  And now let me see, sometimes it's fighting with my autocomplete.
+[0:28:52]  But that's fine because I did this sort of the wrong way at first.
+[0:28:55]  And now let me go ahead and finish this thought
+[0:28:58]  by closing this paragraph tag here.
+[0:29:01]  And I've manually fixed all of my indentations.
+[0:29:04]  So now on line 10, I have the equivalent of, hey, browser,
+[0:29:07]  start a paragraph.
+[0:29:08]  And then it does the Latin-like text.
+[0:29:10]  Then on line 12, hey, browser, that's it for this paragraph.
+[0:29:13]  And repeat, repeat.
+[0:29:15]  If I now go back to my other tab and reload again,
+[0:29:20]  shouldn't be all that different.
+[0:29:21]  But semantically, it's a little bit better.
+[0:29:24]  Why?
+[0:29:24]  Because just saying break, break doesn't really mean anything.
+[0:29:27]  But by saying paragraph, paragraph, paragraph,
+[0:29:30]  now there's some more semantic information there.
+[0:29:32]  Now if Google is analyzing your page or if the program is
+[0:29:36]  trying to understand what it is you did in the past when writing this code,
+[0:29:39]  you just know semantically, oh, this is a paragraph, this is a paragraph,
+[0:29:42]  this is a paragraph, just like in a book or an essay.
+[0:29:45]  So it's a little more clear, focusing more on what it is,
+[0:29:48]  not how you want to display it.
+[0:29:50]  Any questions then on these paragraphs?
+[0:29:55]  Now all right, so a few more tags.
+[0:29:57]  And indeed, these first few examples will really just be sort of bang,
+[0:30:00]  bang, bang, just a bunch of different vocabulary words
+[0:30:02]  in the form of these new tags.
+[0:30:04]  But we won't go through the entire laundry list of tags.
+[0:30:06]  This is indeed the thing for which web references in books and the like
+[0:30:09]  are ultimately helpful, just like a dictionary in the real world.
+[0:30:12]  So I'm going to go ahead and do this.
+[0:30:13]  Let me go ahead and copy this.
+[0:30:15]  Let me create a new file called headings.html,
+[0:30:18]  just so we have a new file for this.
+[0:30:20]  To save time, I'm just going to paste that exact same code just
+[0:30:22]  to get me started.
+[0:30:23]  I'm going to change the title of it for clarity for the code online
+[0:30:26]  to headings.
+[0:30:27]  And now just like a book or an essay or a thesis,
+[0:30:30]  let me actually put some actual headings here.
+[0:30:33]  Now if my first heading, like chapter 1, I
+[0:30:36]  could do something like this up here.
+[0:30:37]  I could have a paragraph, like I just learned.
+[0:30:40]  And I could say something like chapter 1 here.
+[0:30:43]  But that's not really a paragraph.
+[0:30:44]  And so it's sort of better designed to tell the browser
+[0:30:47]  and really tell the world what it is.
+[0:30:49]  So it turns out there's another tag I can use, like h1, for heading
+[0:30:53]  and most important heading.
+[0:30:54]  And in here, I'm just going to keep it simple.
+[0:30:56]  And I'm going to say something like 1.
+[0:30:58]  And in fact, this is so short.
+[0:30:59]  Here's a good candidate for just keeping this all on the same line.
+[0:31:02]  But this has no functional difference.
+[0:31:04]  But it'll just make it a little more terse on the screen.
+[0:31:07]  Now let me go ahead down here.
+[0:31:09]  And I could have multiple headings, so h1, 2.
+[0:31:12]  And down here, I could have another one, h1, 3.
+[0:31:16]  And if I go back to my other tab, I reload it.
+[0:31:19]  Now we should see just like a book or an essay, now we have some proper.
+[0:31:24]  Now we have some, oops, I have to go to the right file, sorry.
+[0:31:27]  If I go back to the index, now we see the new third file called headings.html.
+[0:31:32]  And now we indeed see some fairly pretty, if simple, headings as well.
+[0:31:36]  Now if these aren't three chapters, 1, 2, 3,
+[0:31:38]  but maybe it's a chapter, then a section, then a subsection,
+[0:31:41]  such that just visually you want things to get smaller and smaller,
+[0:31:44]  well, those exist too.
+[0:31:45]  And in fact, you can do h1 through h6.
+[0:31:48]  h1, a little paradoxically, is the biggest and boldest.
+[0:31:51]  h6 is the smallest, but still bold.
+[0:31:53]  So it might make sense to make this h2 both open and close,
+[0:31:57]  and maybe this h3 open and close if, again, this
+[0:32:01]  is a section or a subsection inside of that chapter.
+[0:32:04]  If I reload now, notice it just gets a little smaller.
+[0:32:07]  So it's more similar to what you'd see on the printed page.
+[0:32:10]  But this now is just another three tags that I might use in my own code.
+[0:32:15]  All right, well, how about lists of things?
+[0:32:17]  I have three paragraphs here, but let's do this.
+[0:32:19]  Let me go back to VS Code.
+[0:32:21]  I'm going to copy this code so I have a starting point.
+[0:32:23]  I'm going to create a new file called, say, list.html.
+[0:32:28]  Here I'm going to copy paste.
+[0:32:29]  I'm going to change my title to be list, just for clarity.
+[0:32:32]  And in here, I'm going to go ahead and get rid of this whole body,
+[0:32:35]  because let's move away from these massive paragraphs
+[0:32:37]  and keep it simpler for now.
+[0:32:39]  If I want to have a list of things, for instance,
+[0:32:42]  if you haven't seen these already, a computer scientist
+[0:32:44]  when they're fishing for just some arbitrary, meaningless words,
+[0:32:47]  they often use foo, bar, and baz, just as their go to,
+[0:32:50]  just like a mathematician might use x, y, z for variables.
+[0:32:53]  So foo, bar, and baz are on three separate lines.
+[0:32:56]  And maybe this is like my to-do list or my shopping list.
+[0:32:58]  But you can probably imagine, if I go back to my other tab,
+[0:33:02]  go back to the index, I now see my new file, list.html.
+[0:33:06]  But it's probably going to look wrong.
+[0:33:09]  I think I'm just going to say, yeah, foo, bar, baz, all in one breath,
+[0:33:12]  if you will, not on new lines.
+[0:33:14]  And you can try to fight this.
+[0:33:16]  You can be like, I really want to put some line breaks there,
+[0:33:19]  go back and reload.
+[0:33:21]  It's still not going to make any change.
+[0:33:22]  How do I want to fix this?
+[0:33:24]  Well, I can do this in a few ways.
+[0:33:25]  I could make them paragraphs, but they're not really paragraphs.
+[0:33:28]  They're a list.
+[0:33:29]  So I'm going to use a different tag instead.
+[0:33:31]  I'm going to create, for instance, an unordered list using the ul tag,
+[0:33:36]  open and close.
+[0:33:37]  Inside of that, I'm going to use the list item tag, li.
+[0:33:40]  And I'm going to say foo.
+[0:33:42]  Inside of another tag, I'm going to say bar.
+[0:33:44]  Inside of a third tag, open and close, I'm going to say baz.
+[0:33:47]  So it's getting a little verbose, but it's still relatively succinct.
+[0:33:51]  li is all you need type for list item.
+[0:33:53]  ul is all you need type for unordered list.
+[0:33:56]  So there's some shorthand syntax here that's adopted.
+[0:33:59]  If I now reload, you're going to see a so-called unordered list,
+[0:34:03]  like not sorted, which means by convention to show it as bullets,
+[0:34:06]  though it could be displayed in different ways visually as well.
+[0:34:09]  If you actually change your mind and you realize,
+[0:34:11]  oh, I'd really like to number this, well,
+[0:34:13]  you could obviously just add one and two and three.
+[0:34:17]  But that's going to get annoying, especially if the list grows.
+[0:34:19]  You want to change something, insert something in the middle,
+[0:34:22]  then you have to reorder it.
+[0:34:23]  I mean, we are using computers here.
+[0:34:25]  They can do this for us.
+[0:34:26]  So we can change the ul to, any guesses?
+[0:34:30]  ol, maybe, for ordered list, which is sort of the opposite here.
+[0:34:34]  So let's try changing that to ol.
+[0:34:36]  Let me go back to my browser.
+[0:34:38]  And I'm just hitting Command R or Control R to reload the page instead
+[0:34:42]  of clicking the button every time.
+[0:34:43]  Now I automatically get one, two, and three.
+[0:34:46]  And you can even override the aesthetics using different numerables
+[0:34:49]  or symbology instead.
+[0:34:51]  But that would be perhaps the most common there as well.
+[0:34:55]  All right, it's a lot of tags quickly, but any questions on lists, paragraphs,
+[0:34:59]  headings, or the like?
+[0:35:02]  No?
+[0:35:02]  All right, so let me go ahead and propose this here.
+[0:35:05]  Let's go ahead and create what we'll call a table.
+[0:35:09]  So let me copy and paste this into a new file, code of table.html.
+[0:35:14]  And in table.html, let me again rename the title to table.
+[0:35:18]  Let me get rid of that ordered list from before.
+[0:35:20]  And let me now use a table tag, open and close.
+[0:35:24]  This one's a little weird, but inside of a table,
+[0:35:26]  you typically have a head of the table.
+[0:35:29]  So I'll say, well, let's say the first row.
+[0:35:32]  We'll keep this one simple.
+[0:35:34]  A table row, or tr.
+[0:35:36]  Inside of a table row, you would ideally have columns,
+[0:35:39]  but that's not the nomenclature.
+[0:35:40]  Instead, you have data, so td for table data.
+[0:35:43]  And let me go ahead and just have the first datum be 1.
+[0:35:46]  I'm just going to arbitrarily do 1, 2, 3, just
+[0:35:48]  so we have something to play with.
+[0:35:50]  And you know what, just for demonstration's sake,
+[0:35:52]  I am going to deliberately copy paste this twice.
+[0:35:55]  And I'm just going to manually change the numbers,
+[0:35:57]  just so we can see what I'm creating.
+[0:36:00]  7, 8, 9.
+[0:36:01]  And then maybe just for good measure, if you're seeing where this is going,
+[0:36:05]  let me copy this one more time and give myself
+[0:36:08]  a final row with an asterisk, a 0, and a pound sign,
+[0:36:12]  maybe you see where this is going.
+[0:36:13]  Let me go back to my other tab.
+[0:36:15]  Let me go back to the index.
+[0:36:17]  There's my new file, table.html.
+[0:36:20]  I'll click that.
+[0:36:21]  And while it's not very pretty, I'll zoom in.
+[0:36:24]  It's indeed a table of data.
+[0:36:26]  I happen to mimic a telephone keypad, but you
+[0:36:29]  could imagine this being much juicier, much more interesting scientific
+[0:36:32]  or financial data, or the like, laid out into these rows, trs,
+[0:36:35]  and these columns, aka table data as well.
+[0:36:39]  So we have that ability as well for structured data.
+[0:36:42]  Now, of course, the internet has lots of images on it.
+[0:36:45]  And in fact, this is all just text.
+[0:36:47]  How can we introduce images?
+[0:36:49]  Well, let me go ahead and do this.
+[0:36:51]  Let me first semi-secretly copy an image file that I brought from earlier,
+[0:36:58]  just so we have something to play with.
+[0:37:00]  And I have in my account here now an image called harvard.jpg.
+[0:37:04]  And I uploaded this semi-secretly a second ago into my account
+[0:37:07]  so that I can reference a second file.
+[0:37:10]  Let me go ahead and copy this HTML just to save myself some keystrokes.
+[0:37:14]  Let me go ahead and do code of image.html.
+[0:37:18]  And let me paste that code and hide my terminal window.
+[0:37:21]  I'm going to get rid of all of this table as just uninteresting now.
+[0:37:25]  We're going to make this even simpler by changing my title to image
+[0:37:29]  to keep all these demonstrations separate.
+[0:37:32]  And now, if I want to make a web page that when visited
+[0:37:35]  shows us a picture of Harvard, well, there's an image tag, abbreviated IMG,
+[0:37:40]  for short.
+[0:37:41]  I can specify what the source of that image is.
+[0:37:43]  And if my file, a JPEG in this case, is literally in the same folder,
+[0:37:48]  I can just say quote unquote harvard.jpg.
+[0:37:51]  If it's in a folder, I should mention the folder name and a slash
+[0:37:54]  or something like that.
+[0:37:55]  If the image is on the internet somewhere with a URL,
+[0:37:58]  I could also have a whole URL, HTTPS colon slash slash
+[0:38:02]  and then the URL of the image.
+[0:38:03]  But I upload it in advance.
+[0:38:05]  Now, this is just going to visually display on the screen.
+[0:38:07]  But not everyone, of course, can see images.
+[0:38:09]  Screen readers might need a bit of assistance.
+[0:38:12]  And even search engines might want to analyze the page
+[0:38:14]  and know what this is an image of.
+[0:38:16]  Now, machine learning and artificial intelligence
+[0:38:19]  are maybe getting better, to be fair, at figuring out,
+[0:38:21]  just by analyzing images what they are.
+[0:38:23]  But they're certainly imperfect.
+[0:38:25]  I'm a human.
+[0:38:25]  I know pretty well what I took a photo of, for instance.
+[0:38:28]  So maybe what I should do proactively, which
+[0:38:30]  would be good for accessibility, is have this alt tag for alternative text
+[0:38:34]  and then literally say, like, Harvard University,
+[0:38:37]  so that someone who can't see or so that a server can actually
+[0:38:40]  know with higher probability what it is they're looking at.
+[0:38:43]  And I could be even more detailed than just a phrase.
+[0:38:46]  I could describe the image as well.
+[0:38:48]  All right, let me go back to my index in the second tab.
+[0:38:52]  Let me go back and zoom back out.
+[0:38:55]  There's my new file.
+[0:38:56]  And there's my new JPEG that I quickly uploaded before.
+[0:39:00]  I can click now on image.html.
+[0:39:02]  And albeit a little overwhelming, that is a really big image of Harvard.
+[0:39:07]  Now, apparently, it's too big to fit on the screen.
+[0:39:09]  So this isn't the best user experience to have to scroll up.
+[0:39:13]  OK, so there's the image.
+[0:39:14]  Horrible, horrible design, if you will, at least in terms of my code.
+[0:39:18]  But there's going to be ways where I can sort of reign
+[0:39:20]  that in and affect the height or the width as well.
+[0:39:23]  But for now, it's just deliberately a little overwhelming instead.
+[0:39:27]  Now, we can do something a little more fun and topical today, which
+[0:39:31]  might be to use a video instead.
+[0:39:34]  So let me go ahead here and very quickly grab another file today,
+[0:39:38]  which is I brought in advance.
+[0:39:40]  And then you might have seen briefly earlier,
+[0:39:43]  which is an MP4, an actual video file.
+[0:39:45]  And what I'm going to do here by revealing VS Code again
+[0:39:49]  is I'm going to code a file called video.html.
+[0:39:51]  Yet another demonstration here.
+[0:39:53]  I'm going to change my title to video just to keep these things straight.
+[0:39:57]  And instead of the image tag, you might imagine using now, indeed, a video tag.
+[0:40:02]  And this is a relatively newer tag that has increasing support among browsers.
+[0:40:06]  So it's good now to use.
+[0:40:07]  And inside of this, the syntax is a little different.
+[0:40:10]  You specify, and this is weirdly, annoyingly inconsistent, not src for source.
+[0:40:16]  You literally say source.
+[0:40:18]  And then in source, you use a source attribute.
+[0:40:21]  Horrible design, semantically.
+[0:40:23]  But this is what we're stuck with.
+[0:40:24]  Halloween.mp4 is the name of the video we
+[0:40:27]  uploaded in advance made by some of Harvard's digital artists.
+[0:40:31]  And the type of this video, so that the browser knows for sure,
+[0:40:34]  is video slash mp4.
+[0:40:36]  That's the so-called content type that you just know
+[0:40:38]  or you look up to figure it out.
+[0:40:40]  And just so that this is as animated as possible,
+[0:40:43]  I'm going to tell the video tag with a few attributes to autoplay.
+[0:40:48]  And it turns out that attributes often have key value pairs, whereby
+[0:40:52]  it's the key, the attribute name, equals quote unquote some value,
+[0:40:56]  just like lang equals quote unquote en for English.
+[0:40:59]  But not all attributes need values.
+[0:41:01]  In fact, if you read the documentation for HTML's video tag,
+[0:41:04]  there's an autoplay attribute where you can literally just say the key,
+[0:41:07]  and it needs no value.
+[0:41:08]  It's just going to mean autoplay.
+[0:41:10]  And if you don't want autoplay, you just omit it altogether.
+[0:41:13]  So you don't necessarily need a value on or off.
+[0:41:16]  I want the thing to loop just so it keeps going.
+[0:41:18]  I want it to be muted so that we don't hear any sound.
+[0:41:21]  In fact, there is no sound.
+[0:41:22]  But browsers nowadays for anti-spam and advertising reasons
+[0:41:26]  often will not play a video if it has sound because it's just
+[0:41:30]  kind of obnoxious if you visit a page and all of a sudden
+[0:41:32]  your speakers start blaring.
+[0:41:33]  So I know this from having read up on this
+[0:41:35]  that I should mute it so if I want it to actually autoplay for real.
+[0:41:38]  And then I'll set the width manually for now
+[0:41:41]  to be like 128 pixels across just from some trial and error earlier.
+[0:41:45]  And that width attribute does have a value.
+[0:41:49]  Now I'm being a little uptight here by alphabetizing all of my attributes.
+[0:41:54]  Not at all necessary.
+[0:41:55]  I do it just so I can skim things faster and know if something is there or not.
+[0:41:58]  So for me, it's just a matter of style.
+[0:42:01]  Let me go back to my other tab.
+[0:42:03]  Go back to my index.
+[0:42:04]  And you'll see two new files again, the mp4 file and video.html.
+[0:42:10]  I'll click on the ladder.
+[0:42:11]  And if I did this well, here we have, thanks to our friends in Harvard,
+[0:42:17]  artistic friends at Harvard, like an ooh would help with the drama here.
+[0:42:21]  But OK, but we have a very dramatic, nice Halloween type view here as well.
+[0:42:25]  So we have videos embedded as well.
+[0:42:27]  And suffice it to say, there's ways to embed YouTube videos or Vimeo
+[0:42:30]  or other services as well using yet more tags too.
+[0:42:34]  But the web is, of course, all about hyperlink, hypertext markup language
+[0:42:38]  where you click on something and you end up somewhere else.
+[0:42:41]  And this is how the web is so powerfully interconnected.
+[0:42:44]  So how do we start creating links from one website or web page to another,
+[0:42:48]  either that I made or someone else?
+[0:42:50]  Well, let me go ahead and open back up my terminal window.
+[0:42:54]  And let's create a file called link.html just to demonstrate
+[0:42:57]  what you and I know as a link.
+[0:42:59]  I'll hide my terminal window now.
+[0:43:00]  Let me copy paste just to save myself some keystrokes.
+[0:43:03]  And let me get rid of the video tag so we can focus now on links.
+[0:43:07]  Suppose that I want you to visit Harvard virtually.
+[0:43:10]  Well, I could say something like, visit Harvard period.
+[0:43:15]  This is uninteresting because it's just going to be text.
+[0:43:17]  I probably want you to actually visit harvard.edu instead more specifically.
+[0:43:22]  And I'll lowercase it just to be consistent with what browsers do
+[0:43:24]  in the address bar.
+[0:43:26]  All right, let me go now to the video, back to this video tab
+[0:43:29]  and go back where we now see my index.
+[0:43:32]  I'll zoom back in and there's link.html.
+[0:43:34]  Unfortunately, when I click this and I'll zoom in,
+[0:43:37]  you literally just see the text that I wrote.
+[0:43:39]  And yet on every social media platform nowadays, except like Instagram,
+[0:43:42]  when you type a URL or what looks like a URL,
+[0:43:45]  even if you didn't bother with the HTTP or HTTPS,
+[0:43:48]  it usually automatically links it for you on Facebook, on Twitter,
+[0:43:52]  and other sites as well.
+[0:43:53]  That's just a convenience.
+[0:43:55]  Discord and Slack do that too.
+[0:43:57]  But they're just doing it to make things more user friendly.
+[0:44:00]  But they have to generate HTML with the proper tags and attributes.
+[0:44:06]  So to get this to actually work, it's not even
+[0:44:08]  good enough to say HTTPS colon slash slash www.harvard.edu.
+[0:44:12]  Because if I go back now and reload now, you'll literally
+[0:44:15]  just see all of that as text.
+[0:44:17]  If you want the browser to treat this as a link, you need to use the anchor tag.
+[0:44:22]  It'd be great if it were called the link tag, but it's not.
+[0:44:24]  It's called the anchor tag, or A for short.
+[0:44:27]  And the way you reference the URL to which you want to leave the user
+[0:44:31]  is via href for hyper reference.
+[0:44:34]  This is one of the earliest tags, perhaps among the most arcane now.
+[0:44:37]  But if I then put that whole URL in quotes and close my tag,
+[0:44:42]  I now have an opportunity to finish my thought in between the start tag
+[0:44:46]  and the end tag for this anchor.
+[0:44:48]  And what I put in between the start and end tag
+[0:44:51]  is whatever the human's going to see.
+[0:44:53]  So here I can say Harvard.
+[0:44:55]  I can go back to my other tab.
+[0:44:57]  I can reload the page.
+[0:44:59]  And now you see the familiar blue underline.
+[0:45:02]  This now is an actual link.
+[0:45:04]  And if I click it, I'll be whisked away to the actual Harvard website.
+[0:45:08]  But there's a risk here.
+[0:45:11]  Can anyone imagine, pretty simply, after, like, what, 60 seconds
+[0:45:15]  of the anchor tag, how could someone, an adversary, misuse this tag alone?
+[0:45:21]  How could a website run by an adversary?
+[0:45:24]  How could a spammer misuse this tag, do you think?
+[0:45:27]  Yeah.
+[0:45:31]  Yeah, absolutely.
+[0:45:33]  You could have it say one thing, but lead elsewhere.
+[0:45:36]  So I could say, Yale in here.
+[0:45:38]  Nothing's stopping me as the developer.
+[0:45:40]  Go back to the page, reload.
+[0:45:41]  Now it says, visit Yale.
+[0:45:43]  You click on Yale, and voila, you end up applying to the wrong place instead.
+[0:45:46]  Now there's some hints of this.
+[0:45:48]  I could hover over this, and super small.
+[0:45:51]  This isn't very good for your anti-hacking techniques.
+[0:45:54]  But way down here, you can actually see the URL that it's going to go to.
+[0:45:58]  And most browsers indeed do this, at least on desktops and laptops.
+[0:46:01]  So it's a little bit of a hint.
+[0:46:03]  But what you're seeing here, even though this is kind of a silly, playful
+[0:46:07]  example, this is exactly how phishing attacks work, P-H-I-S-H-I-N-G work,
+[0:46:13]  whereby an adversary tells you to log into your PayPal account,
+[0:46:16]  but it doesn't go to PayPal.com.
+[0:46:18]  It goes to some other random website that they bought and built that then
+[0:46:22]  tries to collect your username and password and store it in their database,
+[0:46:25]  so now they can log into your PayPal account as you.
+[0:46:28]  And it boils down to that simple primitive.
+[0:46:31]  And you can be even more manipulative to.
+[0:46:34]  You can even say the whole URL for Yale, like Yale.edu, or worse,
+[0:46:39]  HTTPS colon slash slash www.yale.edu.
+[0:46:42]  Reload that.
+[0:46:43]  And now, I mean, who among you and people in your lives
+[0:46:46]  are necessarily going to be so paranoid as to not just blindly click
+[0:46:50]  on that URL?
+[0:46:51]  This is why just being a defensive, real world person nowadays digitally
+[0:46:55]  is just ever more so important.
+[0:46:57]  So these same things that can be used for good or benign use cases
+[0:47:00]  can also be used for ill purposes, too.
+[0:47:03]  And it is literally that simple.
+[0:47:06]  Questions now on any of these tags thus far?
+[0:47:10]  Just a few more to offer up.
+[0:47:13]  Any questions on this here?
+[0:47:16]  No?
+[0:47:17]  Well, let me open up a couple that I brought in advance,
+[0:47:20]  just so we don't have to type all of them here.
+[0:47:23]  If you, for instance, have a web page that's got quite a bit of code,
+[0:47:26]  let me go ahead and grab from the website a couple of examples real fast
+[0:47:31]  here, namely one that we'll call how about meta.html.
+[0:47:38]  And in this example here, give me just a moment to full screen it,
+[0:47:42]  we're going to have a file.
+[0:47:45]  So code meta.html.
+[0:47:48]  I'll open this up next.
+[0:47:49]  No relationship to what we now know as meta the company.
+[0:47:52]  But rather, this is going to be a page that I copied and pasted
+[0:47:55]  the same chunk of Latin-like text from earlier.
+[0:47:57]  So it's going to be a really big paragraph of text.
+[0:48:00]  And this is an example where if you were to open this web page not
+[0:48:02]  on my own Mac or your PC, but on your phone,
+[0:48:04]  the font might actually be really annoying and difficult to read.
+[0:48:08]  Why?
+[0:48:08]  Because your phone's going to try to squeeze all of the content
+[0:48:10]  onto the tiny viewport, the rectangular region of your phone instead.
+[0:48:14]  So it turns out there are pretty easy ways
+[0:48:17]  to make your website mobile friendly as well,
+[0:48:20]  otherwise known technically as responsive.
+[0:48:22]  And the easiest way to do this is to include this tag here, a meta tag.
+[0:48:28]  Again, no relationship to Facebook.
+[0:48:30]  This has been here much longer.
+[0:48:31]  And this case here, this meta tag on line 5
+[0:48:35]  has its own sort of approach to key value pairs.
+[0:48:37]  This is a good example of where it'd be nice if it
+[0:48:39]  looked just like everything else.
+[0:48:41]  But this is what we have historically.
+[0:48:43]  You can have a meta tag with an attribute called
+[0:48:45]  name that refers to the name of some feature of the browser.
+[0:48:49]  In this case, viewport is the technical term
+[0:48:51]  for the big rectangular region to which I keep referring, the body, really,
+[0:48:55]  of your page.
+[0:48:56]  The content for the viewport, you can say some esoteric details like this.
+[0:49:00]  The initial scale should be 1.
+[0:49:02]  That is, no matter who visits your site, it shouldn't start zoomed in.
+[0:49:05]  It shouldn't start zoomed out.
+[0:49:07]  It should start at just the default sizing.
+[0:49:09]  And then this here, width equals device width,
+[0:49:11]  is a very arcane way of saying, if the user has a small screen,
+[0:49:15]  show the text proportional to that size.
+[0:49:18]  Don't just try to cram it all into a tiny little window.
+[0:49:21]  So it's super simple.
+[0:49:22]  But if, for the next problem set or future projects as well,
+[0:49:26]  you find that just things look really bad on mobile,
+[0:49:28]  like this kind of tag is the place to start meta.
+[0:49:32]  There aren't terribly many of these that you'll use,
+[0:49:34]  but they're useful for other mechanisms as well.
+[0:49:37]  In fact, let me go ahead and semi-secretly pull up one other example
+[0:49:40]  as well, whereby I'm going to grab another example that
+[0:49:45]  uses more of these tags.
+[0:49:47]  And in just a moment, I'll reveal it here.
+[0:49:50]  Give me just one second here.
+[0:49:53]  I'll propose that in this example of meta,
+[0:49:59]  we now add these properties instead.
+[0:50:03]  So I copy pasted this from an existing file
+[0:50:05]  just so as to not waste time typing all of these out.
+[0:50:08]  If you've ever shared a URL on Facebook or Twitter or Slack
+[0:50:12]  or Discord or any number of websites nowadays
+[0:50:14]  that automatically show a nice preview where you suddenly
+[0:50:17]  see the default image of the page, maybe a few sentences or words
+[0:50:20]  of text or something like that, sometimes those applications,
+[0:50:24]  those websites, will just choose the first image it finds on the website
+[0:50:28]  or the first sentence it sees and show that.
+[0:50:30]  But that might not be very user friendly or search engine friendly.
+[0:50:34]  And so a developer might want to control what
+[0:50:37]  it is that Slack, Discord, Facebook, Twitter, and other such sites
+[0:50:40]  show by default. For that, you can use nowadays
+[0:50:43]  what are called open graph tags, which is to say there's
+[0:50:47]  other uses of the meta tag, and you just look these things up.
+[0:50:50]  Even I had to look this up to remember what the key value pairs are.
+[0:50:52]  The meta tag can also have a property attribute
+[0:50:55]  that can be these very specific strings, OG title, OG description,
+[0:50:59]  OG image, which denotes open graph, which, again,
+[0:51:02]  is this standard that's evolved in recent years.
+[0:51:05]  And what you can do here is tell browsers and, in turn, servers
+[0:51:09]  what you want them to show as the default title of the page,
+[0:51:12]  the description of the page, and even the default image,
+[0:51:15]  just so you can exercise more control when sharing things socially nowadays
+[0:51:19]  as well.
+[0:51:20]  Again, it just boils down to these key value pairs.
+[0:51:22]  This is absolutely the kind of thing you look up as needed to cross check.
+[0:51:25]  But those capabilities are there.
+[0:51:27]  And so literally, the next time you paste a link into Slack or Discord
+[0:51:30]  or any online site that then displays it in embedded fashion,
+[0:51:34]  just know that all this time, a little bit of textual code like this in HTML
+[0:51:38]  has been there by whoever authored the site.
+[0:51:43]  All right, let's do one final example in HTML
+[0:51:46]  alone before we transition to just cleaning up the aesthetics
+[0:51:49]  and improving the visuals of everything we've been creating.
+[0:51:52]  Let me go ahead here and close meta.html.
+[0:51:55]  Let me code up a new file called how about search.html
+[0:51:59]  and see if we can't draw some inspiration from our cursory understanding
+[0:52:03]  earlier of how URLs work to see if we can't reinvent google.com itself.
+[0:52:08]  So recall that a canonical URL might look like this here.
+[0:52:12]  And in particular, if you want to pass in user input to that URL,
+[0:52:16]  again, you can potentially have a question mark
+[0:52:19]  and then a key equals value pair.
+[0:52:21]  Or for that matter, you can even have multiple key value pairs
+[0:52:23]  that by convention are separated by ampersands.
+[0:52:26]  These things are everywhere.
+[0:52:27]  Like later today, when you pull up almost any website in your browser,
+[0:52:30]  look at the URL and you'll just see a lot of this, a lot of noise too
+[0:52:34]  and distractions.
+[0:52:35]  But there's going to be some equal signs most likely and or some ampersands
+[0:52:38]  as well.
+[0:52:39]  And those are just separating key value pairs.
+[0:52:41]  Now, what can I do here?
+[0:52:43]  Well, if you think back to how we manually searched for cats earlier,
+[0:52:47]  let me quickly do this.
+[0:52:48]  I'll do this one manually.
+[0:52:50]  Doc type HTML as my very first line.
+[0:52:53]  HTML tag with how about my lang attribute for English up here.
+[0:52:58]  And then inside of this, I'll have a head tag.
+[0:53:00]  Inside of this, I'll have a title.
+[0:53:02]  I'll call this example search.
+[0:53:05]  And then down here, I'll have my beginning of body tag.
+[0:53:07]  And now let me introduce you to really a final tag for now,
+[0:53:11]  a form tag, which will create a web form, the thing with text boxes and buttons
+[0:53:15]  that you and I use every day on any number of websites.
+[0:53:18]  Inside of this form, I'm going to have an input,
+[0:53:21]  like a text box whose name is going to be Q for query,
+[0:53:25]  because I'm trying to re-implement Google here.
+[0:53:27]  The type of that, I want to be a text box.
+[0:53:32]  Or if I know I'm using this for search, I can actually
+[0:53:34]  change this to a search box.
+[0:53:36]  And it's going to generally put a little x there so you can clear it quickly.
+[0:53:40]  That's a nice little enhancement as well.
+[0:53:42]  And then I'm going to give myself a submit button by doing input.
+[0:53:46]  Whoops.
+[0:53:46]  I'm going to give myself a submit button by doing input type equals submit.
+[0:53:51]  And then I'll leave that as such here.
+[0:53:54]  All right, now I need to do a little bit more, but let's see how this looks.
+[0:53:58]  Let me go over to my other tab.
+[0:53:59]  Let me go back to my index.
+[0:54:01]  And if I zoom out, there is search.html.
+[0:54:06]  I'll click it, and there's not much going on here, even if I zoom in.
+[0:54:09]  But I do indeed have a really big text box and a submit button.
+[0:54:13]  But I haven't in my HTML told anyone anywhere
+[0:54:16]  that I want this input, whether I type cat or dog, to go to google.com.
+[0:54:20]  So for that, I need a couple of more attributes.
+[0:54:22]  And I know this from having done this before,
+[0:54:24]  and any online reference will say the same.
+[0:54:26]  You can add an action attribute, like what
+[0:54:28]  you want the action of this form to be.
+[0:54:30]  And you can put the URL to which you want this form to be submitted.
+[0:54:34]  And I know from tinkering that it should be
+[0:54:36]  https://www.google.com slash search.
+[0:54:40]  I don't need to put any question marks here myself,
+[0:54:43]  but I do want the browser to do that for me.
+[0:54:47]  So let me go back to my other tab.
+[0:54:49]  Let me reload, and nothing visually has happened.
+[0:54:52]  But watch this.
+[0:54:53]  When I now type in cats, but before I hit Enter,
+[0:54:57]  notice that I'm currently at some long, crazy URL slash search.html
+[0:55:02]  as expected.
+[0:55:03]  If I now go down to the Submit button and click Submit,
+[0:55:06]  watch what happens to the URL and the page itself.
+[0:55:09]  I'm whisked away to the actual google.com.
+[0:55:12]  And indeed, there are those same cats.
+[0:55:13]  And if I zoom in here, you'll see that my URL
+[0:55:16]  has changed to be indeed slash search question mark q equals cats.
+[0:55:20]  So this is just how web forms work.
+[0:55:21]  When you submit any form on the web in this way,
+[0:55:24]  the browser automatically goes to that action URL,
+[0:55:27]  adds a question mark, puts any key value pairs
+[0:55:30]  that you manually typed into the text boxes,
+[0:55:32]  and lets the server do its thing.
+[0:55:34]  Now here's where Chrome is starting to simplify things.
+[0:55:36]  Safari does this too.
+[0:55:37]  If you double click on your URL, now you see the full URL.
+[0:55:41]  But if any parts are missing, that's just a UI thing
+[0:55:43]  to eliminate visual distractions nowadays.
+[0:55:46]  Meanwhile, if I go back to my own form, if I search this time for dogs
+[0:55:51]  and hit Enter, now again the URL changes to be q equals dogs.
+[0:55:56]  And it all reduces to this basic building block of using a form tag.
+[0:56:01]  Now I can be more explicit.
+[0:56:02]  If I know I want to use get, which is actually the default,
+[0:56:05]  I can literally say quote unquote get in all lowercase,
+[0:56:08]  even though the verb earlier was by design in uppercase.
+[0:56:11]  But here now, I'm just being ever more explicit.
+[0:56:13]  If I don't want the label of this button to be very generically submit,
+[0:56:18]  maybe I want it to be Google search, quote unquote.
+[0:56:21]  Well, if you read the documentation for forms,
+[0:56:23]  you can actually change the value of the button
+[0:56:25]  to be quote unquote Google search.
+[0:56:28]  And if I now go back here and reload, I get a fresh form.
+[0:56:32]  And now I get a button that literally says Google search.
+[0:56:35]  And if I tinker with this further, because this isn't very user friendly,
+[0:56:38]  there's even more attributes I can do.
+[0:56:40]  I can add on my search input a autocomplete equals off.
+[0:56:47]  If I don't want to see my own history for whatever reason,
+[0:56:50]  I don't want people knowing I'm searching for cats and dogs on this page,
+[0:56:53]  I can auto focus on the text box so that it shows the cursor blinking
+[0:56:57]  in that box by default.
+[0:56:59]  And I can even do something like this.
+[0:57:01]  I can have a placeholder attribute that says something
+[0:57:03]  like query or some other documentation for the user.
+[0:57:07]  And if I now go back and reload, you'll see notice it says query,
+[0:57:11]  and it's subtle, but my cursor is already positioned there.
+[0:57:14]  It gave it focus.
+[0:57:16]  And I can type cats now without having to click
+[0:57:18]  in the box manually, which is just marginally better
+[0:57:20]  for the user's experience.
+[0:57:23]  Any questions now on all of this here?
+[0:57:28]  Any questions?
+[0:57:30]  All right, that too was a lot.
+[0:57:31]  Why don't we take a casual five minute break, and when we resume,
+[0:57:34]  we'll take a look at CSS, add in some JavaScript, and then wrap up.
+[0:57:37]  So five minutes only for now.
+[0:57:39]  All right, we are back.
+[0:57:41]  So that's technically it for HTML.
+[0:57:44]  Like here on out, it'll be up to like online resources and references
+[0:57:47]  we point you to, just to fill in your vocabulary for more tags
+[0:57:50]  and attributes, but like conceptually, that's it.
+[0:57:52]  There's attributes, there are tags, and there are attributes,
+[0:57:56]  and the rest of it really is just kind of a laundry
+[0:57:58]  list of possible features.
+[0:58:01]  But it turns out, too, you'll see over time
+[0:58:03]  that you can even see the HTML for websites.
+[0:58:05]  So for instance, if I go over to harvard.edu in my browser,
+[0:58:10]  which I'll go ahead in just a moment here and do here,
+[0:58:12]  and do https colon slash slash www.harvard.edu slash enter,
+[0:58:18]  it again will pull up today's version of Harvard's website.
+[0:58:21]  And if I right click or Control click on it again and go to Inspect,
+[0:58:25]  you'll see those so-called Developer Tools.
+[0:58:27]  And earlier, we focused on the Network tab,
+[0:58:30]  just so we could see the HTTP stuff going on.
+[0:58:33]  But what I glossed over earlier was the so-called Elements tab,
+[0:58:37]  which actually shows you the HTML underlying
+[0:58:40]  any web page on the internet.
+[0:58:42]  And so for instance, here is the underlying HTML for Harvard's home
+[0:58:46]  page as of right now.
+[0:58:47]  And aesthetically, some of it's been collapsed.
+[0:58:49]  So if I click on these various triangles,
+[0:58:51]  I'll see what's actually inside of, that is the children of some
+[0:58:54]  of these HTML tags.
+[0:58:55]  But here on out, if you're ever curious as to how a web page made
+[0:58:59]  some feature visually, you can just literally
+[0:59:02]  use these Developer Tools built into your own browser
+[0:59:04]  just to see what the web developer actually did.
+[0:59:08]  And you can do things, too, like this.
+[0:59:10]  Like if you really like maybe, let's see,
+[0:59:14]  if you really like this menu in the top right-hand corner of Harvard's
+[0:59:17]  website, you can even right click that or Control
+[0:59:20]  click that specifically, choose Inspect.
+[0:59:24]  And what browsers will do is jump to the HTML corresponding
+[0:59:28]  to that visual element on the page.
+[0:59:30]  And here you can see that we've not talked about this tag before.
+[0:59:33]  There's a button tag.
+[0:59:34]  There's an ID attribute.
+[0:59:36]  And there's some other attributes as well that define that button.
+[0:59:40]  You can do other things, too, in the web page.
+[0:59:43]  Let me scroll down, for instance, here.
+[0:59:45]  And actually, let's go to another one, like Yale.edu here in today's theme.
+[0:59:50]  And suppose we want to do something like change
+[0:59:55]  the aesthetics of this website.
+[0:59:57]  Well, let's do, how about this over here, Life at Yale.

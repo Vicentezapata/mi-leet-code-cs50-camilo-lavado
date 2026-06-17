@@ -1,0 +1,1117 @@
+# Transcripción: chunk_023.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  is because we're checking only the list in my session.
+[0:00:03]  And Flasks makes sure, again, that my session is different from your session,
+[0:00:07]  is different from Carter's session as well.
+[0:00:09]  But you write the code once, and it works for thousands, millions
+[0:00:13]  of people in parallel.
+[0:00:16]  Any questions on this?
+[0:00:21]  Yes, in the back.
+[0:00:23]  Sorry, say a little louder?
+[0:00:29]  So to recap, so users will never have the same session values.
+[0:00:34]  Theoretically, the cookie that gets planted
+[0:00:36]  does not look like a smiley face for everyone.
+[0:00:38]  Each of us gets a big random number that's assigned to us.
+[0:00:41]  So it would be like each of us gets a completely unique hand
+[0:00:44]  stamp that no one else can see.
+[0:00:45]  The reason no one else can see it is because if the website's using HTTPS,
+[0:00:49]  every time this hand stamp is shown, every time this cookie is sent back
+[0:00:52]  and forth, it's all encrypted as well.
+[0:00:55]  So each of us can, even if we have the same contents by coincidence,
+[0:00:59]  because we like the same books, they will be separate cookies,
+[0:01:01]  separate memory, separate sessions.
+[0:01:04]  Behind you, yeah.
+[0:01:09]  Really good question.
+[0:01:10]  When does the session end?
+[0:01:11]  Totally configurable.
+[0:01:12]  Typically, it ends when you close the tab or when you quit the browser.
+[0:01:16]  Or you can also configure cookies to themselves
+[0:01:18]  be persistent for a day, for a week, for longer.
+[0:01:21]  So for instance, when you log into, say, Gmail,
+[0:01:26]  they plant a cookie on your computer probably
+[0:01:28]  for a week, a month, a year, something like that,
+[0:01:31]  because it would be annoying and probably drive you to Outlook
+[0:01:33]  or something else if you kept having to log into your account,
+[0:01:36]  whereas your bank account might actually wait for you to just close the tab.
+[0:01:40]  And then for your own financial safety, they just automatically
+[0:01:43]  delete the session far sooner.
+[0:01:44]  But totally configurable.
+[0:01:45]  By default, as I'm using it, it will typically
+[0:01:47]  be thrown away when the browser itself quits.
+[0:01:50]  And here, too, is another reason to develop websites using incognito mode,
+[0:01:54]  because if you want to just throw away all of your cookies,
+[0:01:57]  you close the incognito window mode, open a new one,
+[0:01:59]  and now you're starting from scratch.
+[0:02:01]  You don't have to manually delete all your cookies,
+[0:02:03]  which could log you out of websites you actually care about.
+[0:02:07]  Yeah, good question.
+[0:02:12]  When using sessions, if someone maliciously
+[0:02:14]  changes the value of subforms, could it affect other people?
+[0:02:16]  Theoretically, no, because the worst you can do
+[0:02:19]  is add books to your own shopping cart that you don't want there.
+[0:02:23]  So at that point, even though it's on the server,
+[0:02:25]  it doesn't affect you or Carter or anyone else,
+[0:02:27]  unless there is something more globally happening,
+[0:02:32]  like registering or deregistering for a sport
+[0:02:35]  or removing books from the Amazon database.
+[0:02:37]  That would be problematic.
+[0:02:38]  But in this case, we're removing things only from my own session
+[0:02:42]  that the website is giving me.
+[0:02:44]  All right, the last topic for today is this thing here,
+[0:02:48]  which is sort of everywhere nowadays, these things called APIs,
+[0:02:51]  or Application Programming Interfaces.
+[0:02:53]  And this is a very generic term, in fact,
+[0:02:55]  because any function you've used in C, in Scratch, in Python, in SQL,
+[0:03:00]  are all APIs.
+[0:03:02]  There is a standard way of interfacing with those functions.
+[0:03:06]  They all have names.
+[0:03:07]  They sometimes have return values.
+[0:03:09]  They sometimes have arguments.
+[0:03:10]  And an API is just how you use a function.
+[0:03:14]  Or more generally, an API just specifies how you interact with some service.
+[0:03:18]  And so nowadays, there's a lot of web-based services
+[0:03:21]  that you can use to get back data, like the weather or the current time
+[0:03:26]  or the database of Amazon books, for instance.
+[0:03:28]  All might have APIs, often web-based, that
+[0:03:31]  allow you, using URLs or some other technology,
+[0:03:34]  to just get data from someone else.
+[0:03:36]  As though it's a function, you're calling remotely.
+[0:03:38]  But HTTP is very often the mechanism that's
+[0:03:41]  used to actually get data from servers.
+[0:03:44]  And the way the data can come back can be as follows.
+[0:03:47]  Let me end with one final example using some of our familiar shows
+[0:03:51]  from weeks past.
+[0:03:53]  Let me go ahead and close the old Flask version, go back into source 9,
+[0:03:57]  and go into how about an example called shows.
+[0:04:02]  And the first version of this zero, I'm just
+[0:04:04]  going to go ahead and run with Flask run.
+[0:04:07]  I'll hover over my URL and open it here.
+[0:04:09]  And you'll see now that I have a very simple form, as we keep doing today.
+[0:04:13]  I'm going to type in like O-F-F-I-C-E office into this search box
+[0:04:18]  and click Search.
+[0:04:19]  And you'll see now that I ended up at a URL ending in slash search,
+[0:04:24]  question mark Q equals office.
+[0:04:26]  So this is like my own baby version of google.com,
+[0:04:29]  but I implemented it myself.
+[0:04:30]  And for any title of a TV show from a couple of weeks
+[0:04:34]  past that matches O-F-F-I-C-E, I spit it out into an unordered list.
+[0:04:40]  How is this working?
+[0:04:41]  You can maybe imagine, even if you might not
+[0:04:43]  be able to program this off the top of your head certainly so soon,
+[0:04:46]  let me go into source 9.
+[0:04:48]  Let me go into show 0.
+[0:04:51]  Let me open up app.py.
+[0:04:53]  And in this file, you'll see that I'm grabbing a file called shows.db,
+[0:04:58]  which is like a simpler version of the one from a couple of weeks past.
+[0:05:02]  Here is why I see the web form.
+[0:05:03]  My first route, my index is super simple.
+[0:05:06]  It just spits out that form.
+[0:05:07]  And my search route, like you can think of this as google.com,
+[0:05:11]  there's only like four lines of code.
+[0:05:13]  So if the user sends data to slash search, this function called search
+[0:05:17]  is called.
+[0:05:18]  I declare a variable called shows.
+[0:05:20]  I execute a SQL command that is select star from shows
+[0:05:24]  where title like question mark.
+[0:05:26]  And the syntax here is a little crazy, but I
+[0:05:29]  want to prefix to the user's input percent sign
+[0:05:32]  and suffix it with a percent sign as well,
+[0:05:35]  putting in between those two values the actual input y in SQL.
+[0:05:40]  What does it mean if you have a percent sign to the left and to the right?
+[0:05:44]  Nothing to do with Jinja today.
+[0:05:46]  Yeah, it's a wild card.
+[0:05:47]  So it means match zero or more characters on the left
+[0:05:51]  or match zero or more characters on the right.
+[0:05:53]  You have to do the concatenation as the second argument to this function.
+[0:05:57]  You can't do something clever like put it here around the question mark.
+[0:06:01]  The question mark is the placeholder that you plug these values into.
+[0:06:04]  But this just means, hey, SQL, show me all of the titles that
+[0:06:07]  have o-f-f-i-c-e somewhere in them.
+[0:06:10]  That gives me back a list of dictionaries.
+[0:06:12]  I pass that in as a placeholder for a variable called shows.
+[0:06:17]  And if we look at search.html, let's look at that.
+[0:06:19]  In my templates directory, there's something called search.html.
+[0:06:22]  Super simple.
+[0:06:23]  I mean, this is like the essence of google.com search results.
+[0:06:27]  I'm using an unordered list to keep things simple,
+[0:06:30]  but I iterate over every show in the show's list that came back,
+[0:06:33]  and I output an l-i with each of those show's titles.
+[0:06:36]  And that's it.
+[0:06:36]  Now, Google has blue links and little previews and other text,
+[0:06:39]  the first sentence or so, from each page.
+[0:06:41]  But that's the idea.
+[0:06:43]  This is really similar in spirit to what google.com slash search does for you.
+[0:06:48]  Now, how is this working?
+[0:06:50]  There's no API involved here yet.
+[0:06:52]  This is just very basic HTTP.
+[0:06:54]  I submit the form, I go to another route, and I get back the results.
+[0:06:57]  But check out this version.
+[0:06:59]  Let me close these tabs here and open my first terminal window.
+[0:07:03]  Let me go into shows 1 from today's source 9 directory
+[0:07:07]  and do Flask run this time.
+[0:07:09]  Let me go ahead and hover over that URL and open it here.
+[0:07:12]  And gone now is the submit button.
+[0:07:14]  Now I'm going to make a user interface that uses a technique called AJAX,
+[0:07:18]  for asynchronous JavaScript and XML, which is somewhat of a dated term,
+[0:07:23]  because we're not using something called XML anymore.
+[0:07:26]  But AJAX is a technique whereby you don't have to submit forms anymore
+[0:07:30]  to get more data from the server.
+[0:07:32]  You can use JavaScript per last week, listen for an event
+[0:07:36]  like the key press coming down or up.
+[0:07:39]  And as soon as you hear such an event, you can secretly, in JavaScript code,
+[0:07:43]  send a request to the server to get back more data
+[0:07:46]  and then plug it into the DOM, the tree in the computer's memory.
+[0:07:50]  And this just makes for more seamless experiences
+[0:07:52]  like autocomplete on any website.
+[0:07:54]  So now let me try typing O. OK, we got autocomplete super fast, F-I-C-E.
+[0:08:02]  And you'll see every time I add more keys to my input,
+[0:08:06]  I'm doing another search, another search, another search,
+[0:08:08]  and the data is changing.
+[0:08:10]  Now how is this working?
+[0:08:11]  Well, let me go back to VS Code here.
+[0:08:13]  And in my other terminal window, let me open up app.py.
+[0:08:17]  And in app.py, you'll see that there's still a search route down below that
+[0:08:24]  returns a search template.
+[0:08:26]  But watch this.
+[0:08:27]  Let me go into templates slash search.html.
+[0:08:32]  And notice here that we're indeed getting back an unordered list of shows
+[0:08:39]  again and again and again.
+[0:08:41]  And this HTML that's coming back, let me go here.
+[0:08:47]  Let me open my terminal.
+[0:08:49]  Sorry, this is the wrong version.
+[0:08:51]  Sorry, I was in the wrong folder.
+[0:08:52]  Let's fix this.
+[0:08:54]  In shows1, code of app.py, it's almost the same thing.
+[0:08:57]  In search here, OK, well, I changed this slightly.
+[0:09:02]  Let me show you this version of search.
+[0:09:03]  If I open up app.py, here's my search route.
+[0:09:07]  I'm getting a variable called q, giving it
+[0:09:09]  the value of whatever request.args has from the user, like q equals office.
+[0:09:14]  And then I'm checking.
+[0:09:15]  If the user actually typed something in, execute this SQL query.
+[0:09:18]  Select star from shows where title is like that, using the same.
+[0:09:21]  And this time, just to keep things efficient,
+[0:09:23]  I limited the total results to 50 instead of an infinite number.
+[0:09:27]  Otherwise, if the user typed nothing, just to be super safe here,
+[0:09:31]  I'm setting shows equal to an empty list.
+[0:09:33]  So if you don't type anything, there's nothing to show.
+[0:09:35]  And no matter what, I render this template called search.html.
+[0:09:39]  Well, let's look at that.
+[0:09:40]  If I open up templates slash search.html, this time there's no layout.
+[0:09:45]  There's no inheritance of that layout.html.
+[0:09:48]  I am literally generating just a whole bunch of li fragments.
+[0:09:53]  Why?
+[0:09:53]  Well, let's see what's happening in the browser.
+[0:09:55]  And this is the beginning of an API.
+[0:09:57]  If I wanted to make this API available, this application programming
+[0:10:01]  interface, I could tell the world that if you
+[0:10:03]  want to search for TV shows in my database,
+[0:10:06]  go to URL that something something slash search question mark q
+[0:10:12]  equals office or cat or dog or anything else.
+[0:10:16]  And what I will return to you is this.
+[0:10:18]  Enter.
+[0:10:19]  I will just give you a whole bunch of li tags, which almost looks the same.
+[0:10:23]  But let me view the page source.
+[0:10:25]  Only am I going to hand you back a fragment of HTML.
+[0:10:28]  I'm not giving you an HTML tag, a body tag, a title tag, a head tag.
+[0:10:31]  I'm not giving you a web page.
+[0:10:33]  I'm giving you a fragment of HTML that you can now do whatever you want,
+[0:10:37]  including insert this into your own unordered list.
+[0:10:41]  So notice what happens in this actual app.
+[0:10:44]  If I go back to VS Code here, let me open up my index template here.
+[0:10:50]  And you'll see some JavaScript magic.
+[0:10:52]  So in JavaScript here, in my form that only had the text box and no button,
+[0:10:58]  what am I doing?
+[0:10:59]  In a script tag here, I am creating a variable called input.
+[0:11:03]  And I'm using this function called querySelector
+[0:11:06]  that just gets me a reference to the input text box on the form.
+[0:11:11]  So I can see what the human typed.
+[0:11:13]  This is a little different today, but I'm
+[0:11:15]  using input.atEventListener, which is a way in JavaScript
+[0:11:19]  to tell it, just like in Scratch, listen for something
+[0:11:22]  to happen, like the green flag being clicked.
+[0:11:24]  But in this case, listen for an event that involves input.
+[0:11:28]  That is like typing on the keyboard, whether it's
+[0:11:30]  by a copy paste, manual input, or anything else.
+[0:11:34]  Then whenever that happens, call this function.
+[0:11:37]  And async stands for asynchronous.
+[0:11:39]  This is a term of art, which means that this function might
+[0:11:42]  take like a split second, maybe even a second or two to execute.
+[0:11:45]  So it's going to do it behind the scenes, like in the background, so to speak.
+[0:11:49]  And what is it going to do?
+[0:11:51]  Well, it's going to call a JavaScript function
+[0:11:53]  that all browsers now support called fetch,
+[0:11:56]  which is a function that uses HTTP to go fetch more data from the server.
+[0:12:01]  It's going to fetch data from a route called
+[0:12:02]  slash search, question mark, q equals, and whatever the value is
+[0:12:07]  that the user typed in.
+[0:12:08]  So I'm just sort of manually creating my own mini URL
+[0:12:11]  and telling JavaScript, go fetch me that HTML.
+[0:12:14]  When it comes back via this line of text here called response.text,
+[0:12:19]  and let me wave my hand at await, await just means
+[0:12:21]  this might not come back immediately.
+[0:12:22]  Let's await the response.
+[0:12:23]  And when it does come in, then let's execute this code.
+[0:12:26]  I'm going to do this.
+[0:12:27]  I'm going to search the document, the whole web page,
+[0:12:30]  for this ul tag, which is somewhere in this page that we'll see in a moment,
+[0:12:35]  change its inner HTML to be that fragment of li li li
+[0:12:39]  of all of those matching shows.
+[0:12:41]  And where does this all go?
+[0:12:43]  Well, if we scroll up here, you'll notice that there's
+[0:12:45]  my usual HTML up at the top, head tag, body tag, and all of that.
+[0:12:50]  There's the text box that we've talked about already.
+[0:12:53]  There's no button for submitting because it all happens automatically.
+[0:12:56]  But there is, by default, this empty ul that has nothing by default
+[0:13:00]  until we start using that API.
+[0:13:03]  And the final flourish here is this.
+[0:13:06]  This is kind of an ugly, sloppy way to get data from a server,
+[0:13:11]  to just get back a fragment of HTML.
+[0:13:14]  What if I'm not using HTML?
+[0:13:15]  I want to store these TV shows in a PDF or in some other wet tag,
+[0:13:19]  in a table, or something like that.
+[0:13:21]  It doesn't really make sense for the server
+[0:13:23]  to be presuming that I want li tags surrounding each of my data.
+[0:13:27]  Better would be to get a more generic format back.
+[0:13:30]  And that format is almost always nowadays called this, our final acronym,
+[0:13:35]  JSON, JavaScript Object Notation.
+[0:13:38]  And let me do this.
+[0:13:39]  Let me close these two tabs here and open my terminal window
+[0:13:43]  and cancel the previous version of Flask that was running.
+[0:13:48]  Let me close this version and look at our final version called shows2
+[0:13:52]  and do Flask run.
+[0:13:54]  I'm going to hover over that URL and open it in a browser.
+[0:13:57]  And I'm going to manually visit, after zooming in,
+[0:14:01]  let's do, again, slash, search, question mark, q equals office, enter.
+[0:14:08]  And this is what JSON looks like.
+[0:14:10]  Now, at a glance, this does not seem like an improvement.
+[0:14:12]  This looks crazy that it's just this big blob of text.
+[0:14:15]  But it's just enough text for the computer
+[0:14:17]  to be able to process it reliably.
+[0:14:20]  Notice that there's a square bracket here.
+[0:14:22]  And if I actually scroll to the bottom, there
+[0:14:24]  would be a closed square bracket way down there.
+[0:14:27]  Inside of that square bracket is a curly brace.
+[0:14:30]  Then ID, colon, and then a number.
+[0:14:33]  Then a title, quote unquote, colon, and then the title,
+[0:14:36]  and then the closed curly brace.
+[0:14:38]  So what you're seeing in JavaScript object notation
+[0:14:40]  is a very standard, super popular format that's just text that still uses
+[0:14:45]  square brackets for lists, AKA arrays, that still uses curly braces
+[0:14:49]  for dictionaries, key value pairs.
+[0:14:51]  So what you see here is a massive list, up to 50,
+[0:14:54]  I think, shows that came back from this API, each of which
+[0:14:58]  has a dictionary, if you will, an object of key value pairs.
+[0:15:02]  What keys and values?
+[0:15:04]  An ID key and a title key, each of which has a value, respectively.
+[0:15:08]  And this is the same data from IMDB, some of which
+[0:15:11]  you might be recalling visually.
+[0:15:13]  This is just a very raw, computer-friendly way
+[0:15:16]  of returning a whole bunch of data that we humans don't need to see.
+[0:15:18]  But I can use this data by going back into VS code.
+[0:15:23]  Let me open another terminal window and go into source9 slash shows
+[0:15:29]  And in here, let me go ahead and open up how about templates index.html,
+[0:15:36]  which previously just used that inner HTML trick.
+[0:15:40]  And you're not going to be pleased with this syntax.
+[0:15:44]  But let me just at least explain what we're doing.
+[0:15:47]  It turns out that JSON is just the better way in general, the more generic,
+[0:15:51]  multi-purpose, user-agnostic, language-agnostic way of returning data
+[0:15:55]  from a server, because it's just text.
+[0:15:57]  So it doesn't matter if you're using Python or C or C++ or JavaScript
+[0:16:00]  or Ruby or PHP or something else.
+[0:16:02]  All of those languages can process JSON information.
+[0:16:06]  And indeed, here is some JavaScript that does just that.
+[0:16:09]  Same code as before initially.
+[0:16:11]  I declare a variable called input that gives me access to the user's text box.
+[0:16:15]  I listen for input, like keystrokes going up and down.
+[0:16:19]  And when they happen, I call this anonymous function.
+[0:16:22]  I fetch data from the server using the exact same code as before,
+[0:16:26]  search, question mark, q equals office or anything else.
+[0:16:30]  And then this is just now new code that I
+[0:16:33]  use to convert that JSON data into my own HTML format,
+[0:16:38]  be it an unordered list, an ordered list, a table, or anything else.
+[0:16:42]  What am I doing?
+[0:16:43]  I've got a variable called HTML initialized to nothing.
+[0:16:46]  So I've got no HTML initially.
+[0:16:48]  I then iterate over every ID in those shows.
+[0:16:52]  So every one of IMDB's unique identifier,
+[0:16:54]  I iterate over them one at a time.
+[0:16:56]  And then I go into the show, add its ID location, and I grab its title.
+[0:17:02]  And this is, forget this for just a moment,
+[0:17:07]  I then take this HTML variable, concatenate or join onto it
+[0:17:12]  my own li tag plus the title plus the close li tag.
+[0:17:18]  And I skipped this because it got scary pretty fast.
+[0:17:20]  But it turns out that if some TV shows have actually angled brackets in them,
+[0:17:24]  that could break my HTML entirely.
+[0:17:27]  So it turns out, you might recall super briefly last week,
+[0:17:30]  we had the copyright symbol using an HTML entity using the ampersand
+[0:17:34]  and the hash symbol and 169 semicolon.
+[0:17:37]  It turns out there are other such cryptic sequences of characters
+[0:17:41]  that represent otherwise dangerous or untypable characters like this, which
+[0:17:45]  could confuse the computer into thinking it's at the beginning of a tag
+[0:17:48]  and an ampersand, which could similarly trick the computer into thinking
+[0:17:51]  that it's a entity, which it isn't.
+[0:17:54]  But long story short, there are libraries, thankfully,
+[0:17:57]  that handle much of this for you.
+[0:17:58]  For our purposes, the takeaway is that now that you understand a bit of HTTP,
+[0:18:03]  now that you understand a bit of HTML, CSS, and JavaScript,
+[0:18:06]  all of which have their roles, you can use them ultimately
+[0:18:09]  to start assembling your own web applications,
+[0:18:11]  as you will for problem set nine, stitching together all of those languages
+[0:18:15]  and building full-fledged web applications, mobile applications,
+[0:18:19]  or anything more.
+[0:18:20]  And for that, I think we are all set.
+[0:18:23]  And the first one up here can have these cookies as well.
+[0:18:26]  We'll see you next time for our very last CS50 lecture.
+[0:20:26]  Good afternoon.
+[0:20:27]  My name is Sarah.
+[0:20:29]  And my name is Grant.
+[0:20:30]  And we are the Harvard Crocodillos and the Radcliffe Pitches.
+[0:20:34]  Now, Sarah and I understand that today is the final lecture of CS50.
+[0:20:37]  It's been a tough semester.
+[0:20:38]  We've made it through p-sets four, five, and even finance.
+[0:20:42]  Now, I know this is an unpopular opinion,
+[0:20:44]  but I particularly enjoyed finance.
+[0:20:45]  I spent a lot of time with my flask.
+[0:20:48]  The p-set?
+[0:20:50]  There was a p-set?
+[0:20:53]  At least things are looking up.
+[0:20:55]  Today is our last lecture.
+[0:20:57]  And look how far we've come.
+[0:20:59]  If I were an emoji right now, I'd be the face with tears of joy.
+[0:21:03]  Sorry about that.
+[0:21:04]  We're just trying to work some CS50 references into the intro.
+[0:21:07]  I mean, boy, I sure hope this Tied Man doesn't run off my Mario filter.
+[0:21:14]  You could say that.
+[0:21:16]  For loop x equals open bracket one comma two closed bracket.
+[0:21:22]  Boy, I sure wish we had check 50 to see if these jokes were
+[0:21:24]  funny when we wrote them.
+[0:21:27]  Anywho, we hope that you'll enjoy this brief serenade.
+[0:21:33]  Do-do-do-ba-do-do-do-do-do-do-do-do-do-do-do-do-do.
+[0:21:35]  Well, you lace up your boots and you walk on down to a knock down shack
+[0:21:38]  on the edge of town.
+[0:21:39]  There's a Latin beam combo there that just won't quit.
+[0:21:42]  People walk up to you and sing a blue light and they fall in pair.
+[0:21:45]  You may take them sights and at the house,
+[0:21:47]  there's the house of blue lights.
+[0:21:49]  Well, there's spryers.
+[0:21:50]  Spoilers.
+[0:21:51]  Handy choice.
+[0:21:52]  Barbecue ribs.
+[0:21:53]  But the trick of the trade is you'll get serving up those fine A Bs.
+[0:21:58]  You're going to spend the rest of your rights down at the house,
+[0:22:01]  the house, the house of blue lights.
+[0:22:03]  Do-be-dun, do-be-do-be-do-be-boy.
+[0:22:06]  Do-be-dun, do-be-do-be-do-be-high, high, high.
+[0:22:09]  Boy, boy, boy, boy, boy, boy, boy.
+[0:22:11]  Boy, boy, boy, boy, boy, boy, boy.
+[0:22:13]  Boy, boy, boy, boy, boy, boy.
+[0:22:15]  Down at the house, the house of blue lights.
+[0:22:18]  Well, you lace up your boots and you walk on down to a knock down shack
+[0:22:21]  on the edge of town.
+[0:22:22]  There's a Latin green cobble there that just won't quit.
+[0:22:25]  Keep on walking till you see a blue light lit ball in there.
+[0:22:29]  And you dig that aside, you stand at the house, the house of blue lights.
+[0:22:32]  Do-be-dun, do-be-do-be-do-be-boy.
+[0:22:35]  Do-be-dun, do-be-do-be-do-be-high, high, high.
+[0:22:38]  Boy, boy, boy, boy, boy, boy, boy.
+[0:22:40]  Boy, boy, boy, boy, boy, boy, boy.
+[0:22:42]  Boy, boy, boy, boy, boy, boy.
+[0:22:45]  Do-be-dun, do-be-do-be-do-be-boy.
+[0:22:48]  Lace up your boots and you walk on down to a knock down shack on the edge of town.
+[0:22:56]  There's a Latin green cobble there that just won't quit.
+[0:22:58]  Keep on walking till you see a blue light lit ball in there.
+[0:23:02]  And you dig that aside, you stand at the house, the house of blue lights.
+[0:23:10]  Do-be-dun, do-be-do-be-do-be-boy.
+[0:23:12]  Be sure to spend your brights down at the house of blue lights.
+[0:23:33]  Good afternoon, everyone.
+[0:23:34]  We are the Harvard Crocodilos, and it is such an honor to be here
+[0:23:38]  with the Radcliffe Pitches performing for CS50's final lecture.
+[0:23:41]  Congratulations to everyone, and we hope you'll enjoy this, our tribute to CS50.
+[0:24:05]  C is for the language I once knew.
+[0:24:10]  O is for all notation I must do.
+[0:24:15]  D is for dynamic, flask one and finance it.
+[0:24:20]  E is even more than David Maylin can adore.
+[0:24:24]  So code is all that I can give to you.
+[0:24:30]  Code, debugging it since P set two.
+[0:24:34]  Soon deadlines I'll make it, hit compile and please don't break it.
+[0:24:40]  Code was made by me for you.
+[0:24:44]  C is for the language I once knew.
+[0:24:49]  O is for notation I must do.
+[0:24:54]  D is for dynamic, flask one and finance it.
+[0:24:59]  E is even more than David Maylin can adore.
+[0:25:03]  So code is all that I can give to you.
+[0:25:08]  Code, debugging it since P set two.
+[0:25:13]  Soon deadlines I'll make it, hit compile and please don't break it.
+[0:25:18]  Code was made.
+[0:25:23]  C is for the language O is for all notation.
+[0:25:32]  D is for dynamic, flask one and finance it.
+[0:25:36]  E is even more than David Maylin can adore.
+[0:25:41]  So code is all that I can give to you.
+[0:25:46]  Code, debugging it since P set two.
+[0:25:50]  Soon deadlines I'll make it, hit compile and please don't break it.
+[0:25:55]  Code was made by me for you.
+[0:26:26]  All right, this is CS50.
+[0:26:29]  And CS50, this was the Harvard Crocodilos and the Radcliffe Pitches.
+[0:26:33]  If one more time, we can thank them for joining us today.
+[0:26:41]  So this is already week 10, our last.
+[0:26:45]  And indeed, among the goals for today are
+[0:26:46]  to hopefully give you all the more of appreciation of truly just
+[0:26:49]  how far you've come.
+[0:26:51]  Recall that in week 0, we began with this visual here,
+[0:26:54]  whereby it was described this class as a bit of a fire hose,
+[0:26:58]  whereby drinking from that fire hose, or really a fire hose from a water
+[0:27:02]  fountain, is not unlike getting an education down the road, too.
+[0:27:06]  And so this is to say that if you're feeling
+[0:27:07]  like you didn't quite get it all down, that's actually OK.
+[0:27:11]  And that's to be expected.
+[0:27:12]  And even if you felt that with each passing week 0, 1, 2, all the way up
+[0:27:15]  now till 10, it never really ever got easier, perhaps,
+[0:27:19]  just consider that what was once hard, like Mario and getting Hello World
+[0:27:24]  to compile, is indeed the right measure of the delta
+[0:27:27]  between week 0 and now in week 10.
+[0:27:29]  In fact, you might recall that again in week 0, 2 thirds of your classmates
+[0:27:33]  had never taken a CS course before.
+[0:27:35]  Now, of course, you all have.
+[0:27:37]  And indeed, if you think back, too, to this final sentiment from week 0,
+[0:27:40]  that indeed, what ultimately matters in this course
+[0:27:42]  is not where you end up relative to your classmates,
+[0:27:44]  but where you end up relative to where you yourself began.
+[0:27:48]  So I would take some pride, take some satisfaction, take some relief,
+[0:27:51]  even though a little bit more work does remain at really just how far you've
+[0:27:55]  come since that week 0.
+[0:27:56]  And recall that in week 0, we literally started with just 0s and 1s.
+[0:27:59]  And by now, many of you might have gleaned
+[0:28:01]  that these 64 0s and 1s have been spelling something week by week.
+[0:28:06]  In fact, today is our very last message here in binary encoded on stage.
+[0:28:11]  But then quickly, we introduced Scratch, and we
+[0:28:13]  started to assemble some building blocks of programming, loops, conditions,
+[0:28:17]  functions, and the like.
+[0:28:19]  But without all the distractions of semicolons and curly braces
+[0:28:21]  and all of that, which admittedly we introduced the next week when
+[0:28:24]  we introduced you to C, but even now that we've transitioned to Python,
+[0:28:28]  hopefully even those kinds of curiosities or confusions
+[0:28:30]  are hopefully starting to just get more familiar.
+[0:28:32]  And so you finally start to see the missing semicolon as opposed
+[0:28:35]  to spending time on that kind of struggle.
+[0:28:37]  Recall, too, that in week 2, we started talking already about memory
+[0:28:41]  and how you can manage things in arrays that later became, of course,
+[0:28:44]  in Python lists.
+[0:28:45]  The week after, we talked not only about debugging bugs in code,
+[0:28:49]  but how to debug those same programs.
+[0:28:51]  Thereafter, we started talking about algorithms.
+[0:28:53]  And we took a step back from code and looked at the bubble sorts
+[0:28:57]  and the selection sorts and the merge sorts and all of the searches
+[0:29:00]  as well that go hand in hand with that.
+[0:29:01]  And indeed, this ultimately is what a lot of problem solving moving forward
+[0:29:04]  is going to be about, just solving problems with some form of algorithm.
+[0:29:07]  And you have so many different languages in your toolkit
+[0:29:10]  now with which to approach problems like those.
+[0:29:13]  We talked thereafter about pointers, which
+[0:29:15]  are not likely to come back in any modern languages that you now use.
+[0:29:18]  But hopefully, you have an all the better of a sense
+[0:29:20]  underneath the hood of what's going on inside of the computer so that when
+[0:29:23]  you're designing something, you're using something, something crashes,
+[0:29:26]  you at least have a mental model for what's going on.
+[0:29:28]  And it's no longer that week 0 black box as it once was.
+[0:29:32]  I mean, you built things like this.
+[0:29:34]  Think back to week 5 when you built your own hash table.
+[0:29:37]  And those things are everywhere.
+[0:29:38]  Key value pairs, whether it's in Python or in C
+[0:29:41]  or if it's now in CSS and JavaScript and even HTML,
+[0:29:45]  like that principle of key value pairs is really everywhere.
+[0:29:48]  And so of course, now code doesn't necessarily have to look like this.
+[0:29:51]  It now wonderfully looks a little something more like this.
+[0:29:54]  But eventually, you're probably not.
+[0:29:55]  I'm not going to use Python anymore.
+[0:29:57]  Something new and better is going to come along.
+[0:29:59]  But odds are, like a lot of the building blocks from these past 11 weeks
+[0:30:03]  are still going to be useful for wrapping your mind around those new worlds.
+[0:30:06]  And indeed, SQL, we introduced you a little bit too.
+[0:30:09]  And even if you don't feel yourself yet an expert,
+[0:30:11]  hopefully you have a sense of what you can do with it
+[0:30:13]  and what problems you can solve.
+[0:30:15]  It's, of course, a better alternative to something simple like a spreadsheet.
+[0:30:18]  And now, of course, web stuff is everywhere,
+[0:30:21]  whether it's on your laptop or desktop or even a lot of the mobile apps
+[0:30:24]  that you use on your phone, even though they're native applications,
+[0:30:27]  like you install them from Google Play or the Apple App Store,
+[0:30:30]  they're implemented increasingly with HTML, CSS, and JavaScript.
+[0:30:34]  But they're put in a little rectangular window
+[0:30:36]  so you don't even notice that that's actually really just an embedded browser.
+[0:30:40]  And then, of course, you can build things as you might for your final project
+[0:30:43]  that too might very well be web-based if you go that route.
+[0:30:46]  I mean, I'm still clinging to the very first web app I ever made years ago.
+[0:30:50]  But honestly, I do that in part because I was just so darn proud that I taught
+[0:30:55]  myself how to do something and it actually
+[0:30:56]  worked and was used by other people.
+[0:30:58]  So whether it's just used by you or your classmates or your roommates
+[0:31:02]  or your family or your company down the line,
+[0:31:04]  there's a great sense of satisfaction that comes despite all of the pain that
+[0:31:07]  might be along the way when you just can't see or fix that bug.
+[0:31:11]  Now, of course, we'll transition, as you'll see in the coming days,
+[0:31:15]  to empowering you to code client-side as well.
+[0:31:18]  Up until now, you've been using our own VS Code installation
+[0:31:21]  in the cloud, which is nice because you got up and running super fast in week
+[0:31:24]  one, focusing only on code challenges, not on technical difficulties.
+[0:31:28]  But among the goals now, if you so choose and want
+[0:31:31]  to program after this class, even if you never take another CS course before,
+[0:31:34]  you can use these same real world de facto standard tools on your own Mac
+[0:31:39]  or PC.
+[0:31:39]  And so pictured here is a screenshot of VS Code on the Mac.
+[0:31:42]  And even though, yes, you're going to have to jump through a couple of more
+[0:31:45]  hoops to just get Python or some other language working on your own Mac or PC,
+[0:31:49]  that's what programming is ultimately going to be about.
+[0:31:51]  And we deliberately transition you to this at term's end
+[0:31:54]  so that now you have 11 weeks of more comfort
+[0:31:56]  under your belt with which to solve sort of silly technical support
+[0:32:00]  headaches that might have been deal breakers so many weeks ago.
+[0:32:03]  So there's still more to be done in the coming weeks.
+[0:32:06]  And indeed, a support structure, therefore, the CS50 Hackathon,
+[0:32:09]  of course, will be this 7 PM till 7 AM opportunity
+[0:32:13]  to dive into your final project, well, really continue
+[0:32:16]  diving into your final project, ideally at that point, alongside classmates,
+[0:32:20]  perhaps your project partners if you're working collaboratively.
+[0:32:23]  And awaiting you will be such memories and excitement,
+[0:32:26]  hopefully, as these, even as you then turn your attention back
+[0:32:28]  to your final project.
+[0:32:30]  There, of course, will be several meals during the day culminating with 5 AM
+[0:32:33]  shuttles to IHOP, the local pancake place, if you are so awake at that point.
+[0:32:38]  Or even if you get there, this is not an uncommon sight,
+[0:32:42]  as you might recall from week 0.
+[0:32:43]  And then lastly is the CS50 Fair, which is finally
+[0:32:46]  back after a couple of years now of it not being on campus.
+[0:32:48]  And this will be an opportunity for everyone
+[0:32:50]  to present their final projects to passersby, classmates, faculty,
+[0:32:54]  and staff in really just a light in what it is you created on your Mac,
+[0:32:57]  your PC, your phone, in the cloud, or anywhere else.
+[0:33:00]  And indeed, it's just going to be an opportunity to bring your laptop
+[0:33:03]  to a shared space or your phone and introduce your project to passersby,
+[0:33:07]  such as might appear, and ultimately celebrate what you all accomplished.
+[0:33:11]  And indeed, will you be handed at the CS50 Fair your very own I took CS50
+[0:33:15]  t-shirt, which I dare say I'm still wearing all of these years later.
+[0:33:20]  And so you too will have that ahead of you as well.
+[0:33:26]  So for what's on the agenda today, we thought we would not only look back
+[0:33:30]  but look forward.
+[0:33:31]  But first, we wanted to thank so many of the team members
+[0:33:33]  that have been helping both on stage and off who've made this course
+[0:33:37]  and these sections and so much more about CS50 possible.
+[0:33:40]  Of course, the building that we are now in,
+[0:33:42]  there's a whole team downstairs in Memorial Hall
+[0:33:44]  who helps us get set up and organized each day, our thanks to them.
+[0:33:48]  There's the education support services team
+[0:33:50]  who makes everything look and sound so well down here,
+[0:33:52]  especially when we have all of the more microphones as well.
+[0:33:55]  Our friends, the Harvard Crocodilos and the Radcliffe Pitches most recently.
+[0:33:59]  And then, of course, CS50's own team, CS50's own favorite restaurant,
+[0:34:05]  Chang Shou down the road.
+[0:34:06]  Indeed, if you find yourself in Cambridge for the next one, two, three,
+[0:34:09]  four years or visiting it from out of town,
+[0:34:11]  do pay a visit to our friends just down the road.
+[0:34:13]  And in fact, we'll have our very last CS50 lunch this Friday
+[0:34:16]  if you're able locally to partake.
+[0:34:18]  And then there's CS50's own team, both on stage and off.
+[0:34:22]  And my thanks truly, because not only do they make everything run so smoothly,
+[0:34:26]  they capture it for students here who might not be physically present here,
+[0:34:29]  for our friends down in New Haven at Yale,
+[0:34:31]  and certainly for anyone online who might be tuning in as well.
+[0:34:34]  And then lastly, wanted to thank, of course,
+[0:34:37]  the huge team of your classmates, your peers
+[0:34:40]  that make CS50 possible in sections and office hours, tutorials, and more.
+[0:34:44]  Allow me to share with you the outtakes so
+[0:34:48]  that even we, the teaching staff, sometimes struggle with computer science.
+[0:34:52]  Here are some of the clips that we captured
+[0:34:54]  when just passing packets via TCPIP a while back.
+[0:34:57]  You saw, finally, the nicely polished version.
+[0:35:00]  But here are, if I may, if we could dim the lights, are some of the outtakes.
+[0:35:06]  Up we go.
+[0:35:08]  Muffering.
+[0:35:08]  OK.
+[0:35:09]  Then, oh!
+[0:35:19]  Metamoni again.
+[0:35:20]  No, oh, wait.
+[0:35:27]  That was amazing, Josh.
+[0:35:33]  Sophie.
+[0:35:41]  I think that was perfect.
+[0:35:49]  I think I, over to you all.
+[0:35:59]  That was amazing.
+[0:36:00]  Thank you all.
+[0:36:01]  That was so good.
+[0:36:04]  Indeed.
+[0:36:05]  And at moment, if we could, just one round of applause for everyone
+[0:36:08]  who's helped out this semester.
+[0:36:13]  So back in week zero, we introduced you, of course,
+[0:36:18]  to this idea of computational thinking, which
+[0:36:21]  is to think a little more methodically, a little more algorithmically.
+[0:36:24]  And by way of these various languages, hopefully that
+[0:36:26]  is something you notice, maybe not in the moment,
+[0:36:28]  but in the months and the years to come, that you
+[0:36:30]  do find that your thoughts are indeed a little more cleaned up.
+[0:36:33]  And you're just able to express yourself a little more precisely and even spot
+[0:36:36]  illogic in someone else's document or statements as well.
+[0:36:39]  But at the end of the day, really, a course like this
+[0:36:41]  is also about critical thinking.
+[0:36:43]  And indeed, rewind again to week zero when
+[0:36:45]  we framed the entirety of computer science as really just this,
+[0:36:48]  like problem solving.
+[0:36:49]  And any problem in the world, be it CS or otherwise, has some input.
+[0:36:52]  And we decided how to represent those inputs.
+[0:36:54]  It needs some output, the solution there too.
+[0:36:57]  And then all of what you focused on doing and learning
+[0:36:59]  and applying these past several weeks is in that proverbial black box, which
+[0:37:03]  hopefully is not such an abstraction anymore,
+[0:37:05]  but is indeed something that you know how to harness
+[0:37:08]  and know what could be going on underneath the hood,
+[0:37:10]  even if it's in some technology or some language
+[0:37:13]  that maybe we ourselves didn't cover because a lot of those first principles
+[0:37:16]  remain the same.
+[0:37:17]  Now along the way, we talked about the quality of solutions to those problems.
+[0:37:21]  We happened to focus on correctness, just does it work,
+[0:37:23]  design, which is a bit more qualitative and subjective,
+[0:37:26]  and then style, the aesthetics of it all.
+[0:37:28]  And these two are characteristic, maybe not with these same words,
+[0:37:31]  of just how you might write or evaluate other creations in life,
+[0:37:35]  be it physical or written or the like.
+[0:37:37]  So think about, too, as you solve problems,
+[0:37:39]  just how you can sort of frame for yourself like am I doing a good job
+[0:37:42]  or not by quantizing it along these or perhaps other axes as well.
+[0:37:47]  And we thought we'd highlight just two topics from that week
+[0:37:49]  zero that have really been manifest for the past several weeks,
+[0:37:52]  namely abstraction, like taking complicated things and ideas
+[0:37:55]  and trying to simplify them so that we can sort of operate at this level
+[0:37:58]  and solve problems we care about without getting
+[0:38:00]  into the weeds of implementation detail, so to speak.
+[0:38:04]  But there's this tension because you know now
+[0:38:06]  from all of these different languages that code is fairly unforgiving.
+[0:38:10]  I mean, even omitting a stupid semicolon sometimes breaks everything.
+[0:38:13]  And so precision is sort of at odds sometimes
+[0:38:15]  with this idea of leveraging abstraction.
+[0:38:18]  And so we thought we would try to tease this apart,
+[0:38:21]  especially all these weeks later here, but with a bit of a live demonstration.
+[0:38:26]  So on the way in, you probably all received a sheet of paper.
+[0:38:29]  If not, but someone near you did, just tear theirs in half
+[0:38:32]  and borrow half a sheet if you can.
+[0:38:33]  Or any piece of loose-leaf paper or the like
+[0:38:36]  will suffice, so long as you have a pen or a pencil.
+[0:38:39]  And for this, allow me to propose that we invite up maybe two final CS50
+[0:38:44]  volunteers this semester.
+[0:38:47]  And like a lot of hands are going up in this.
+[0:38:49]  OK, a lot of hands.
+[0:38:50]  How about I saw the first hand there.
+[0:38:52]  Yes, yes, who's pointing at herself now?
+[0:38:55]  Come on down.
+[0:38:57]  We just need the one hand for now.
+[0:38:59]  Oh, wait, you'll be our number two.
+[0:39:01]  OK, we have way too many volunteers now.
+[0:39:03]  No, no, please, please, come down.
+[0:39:05]  Yes, in the black shirt.
+[0:39:06]  And if you guys, we will do pair programming in just a bit.
+[0:39:11]  If you want to hang out in the wings here,
+[0:39:13]  we'll have our second demonstration as well.
+[0:39:15]  So OK, now maybe a round of applause for our three volunteers.
+[0:39:22]  Oh, come on up first.
+[0:39:24]  Second and third.
+[0:39:25]  OK, you come first.
+[0:39:26]  We'll do it.
+[0:39:28]  This is a cue.
+[0:39:28]  OK, cue.
+[0:39:30]  What's your name?
+[0:39:31]  Danny, OK, take this mic.
+[0:39:32]  OK, so we will dequeue you momentarily.
+[0:39:35]  All right, so Danny, come on over to the middle here.
+[0:39:37]  And in a moment, I'm going to hand to Danny a sheet of paper
+[0:39:41]  that has a picture on it.
+[0:39:42]  And this picture is going to be something
+[0:39:43]  that I'd like you to verbally program the audience to draw.
+[0:39:47]  You can use any words, any abstractions, any level of precision that you want,
+[0:39:52]  but you just can't make hand gestures or sort of show them what to draw.
+[0:39:55]  But first, do you want to tell us a little something about yourself,
+[0:39:58]  including everyone here?
+[0:39:59]  I'm Danny, and I took CS50.
+[0:40:02]  OK, wonderful, wonderful.
+[0:40:04]  So I'm going to reveal the picture only to Danny.
+[0:40:07]  And if each of you would like to take out that sheet of paper
+[0:40:09]  and just make sure that no one else can see this,
+[0:40:12]  if you want to hold it up this way, everyone here
+[0:40:14]  is now holding their pen or pencil.
+[0:40:16]  And in some number of steps, give them a verbal algorithm
+[0:40:19]  for drawing what you see.
+[0:40:20]  And you can say anything you want, but no hand gestures.
+[0:40:22]  OK, so you're going to want to draw a square in the center of the paper
+[0:40:30]  with the diagonal pointing to the center of the edge.
+[0:40:40]  Wait, no, actually, I scratched that.
+[0:40:43]  Draw a rhombus in the center of your paper.
+[0:40:49]  And for those who forget what a rhombus is?
+[0:40:51]  A diamond, a square that's on its side.
+[0:40:58]  And then from the bottom vertex, draw a straight line down,
+[0:41:04]  but not all the way to the edge of the paper.
+[0:41:09]  OK, and then keep your pencil or pen at that point.
+[0:41:14]  And you're going to want to draw a line that's
+[0:41:17]  parallel to the line of the original rhombus to the right.
+[0:41:25]  And then keep your pencil or pen at that point
+[0:41:29]  and draw a line straight up, connecting to the side vertex.
+[0:41:37]  And then go back to the line that you
+[0:41:40]  drew from the bottom vertex to the bottom of the paper.
+[0:41:43]  And then draw a line parallel to the left edge of the rhombus.
+[0:41:51]  And then keep your pencil at that point
+[0:41:55]  and draw a line up to the vertex of the rhombus again.
+[0:42:04]  The end?
+[0:42:04]  The end.
+[0:42:05]  All right, well, thank you to Danny.
+[0:42:06]  Hang on to your paper.
+[0:42:07]  Thank you so much.
+[0:42:09]  And if you want to step off to the stage there, we will reveal.
+[0:42:11]  Thank you.
+[0:42:12]  A round of applause if we could for Danny.
+[0:42:14]  That is not an easy task, I'm sure.
+[0:42:18]  And if Carter wouldn't mind just grabbing a few samples here,
+[0:42:21]  let's actually take a look on the overhead if we could.
+[0:42:23]  I'm going to pop down over here real fast.
+[0:42:25]  We don't need to collect them all.
+[0:42:26]  If you're feeling either good or bad with what you drew,
+[0:42:29]  happy to collect a few of them.
+[0:42:31]  OK, thank you.
+[0:42:35]  Thank you.
+[0:42:36]  OK, hope you won't mind if I can't reach everyone.
+[0:42:39]  Just a couple more.
+[0:42:40]  OK, over here.
+[0:42:42]  OK, all right, that's plenty.
+[0:42:44]  OK, this one's really funny.
+[0:42:47]  OK, I'm going to go with this one, if I may, and Carter has some too.
+[0:42:54]  OK, thank you so much.
+[0:42:57]  OK, so just a random assortment here.
+[0:43:00]  Let me turn on a camera so I can show you what I see.
+[0:43:03]  Here, for instance, is one classmate's drawing,
+[0:43:08]  which might resemble perhaps what you drew here.
+[0:43:11]  Here is the beginnings of a house, it seems.
+[0:43:17]  Nice.
+[0:43:18]  This one, OK, this one is larger.
+[0:43:23]  And how about a couple of others that were getting closer, I think.
+[0:43:27]  OK, so more edges and vertices there.
+[0:43:30]  This one seems a little similar in spirit, if not proportional.
+[0:43:37]  This is Zach's, the best one.
+[0:43:42]  But it turns out, if I may, Zach, you're not all that far off.
+[0:43:45]  Here, Danny, is what you were reciting to everyone algorithmically.
+[0:43:49]  Indeed, it was this here cube.
+[0:43:51]  And so Danny, can you come on back up for a moment?
+[0:43:54]  So if you'd like to share for just a moment,
+[0:43:57]  what were some of the thoughts going through your head
+[0:43:59]  and why did you choose the words that you did?
+[0:44:01]  OK, so what was going through my head when I saw the cube?
+[0:44:06]  I didn't know if I could say, draw a cube.
+[0:44:09]  So I decided to start with the top.
+[0:44:11]  And so draw a rhombus in the center of your paper.
+[0:44:14]  And then draw a line down.
+[0:44:16]  And just do the first part, then the second part, then the third part.
+[0:44:22]  And then you would get a cube, like Zach.
+[0:44:24]  Yeah, and so had you said, and you could have said,
+[0:44:26]  draw a cube, which would be more of an abstraction,
+[0:44:29]  even that's not necessarily sufficiently precise, right?
+[0:44:31]  Because you don't necessarily know what the orientation of that cube
+[0:44:34]  is, the size of it, the positioning on the paper.
+[0:44:36]  So you instead took a lower level approach, which is not unlike Scratch.
+[0:44:39]  If you think about Scratch being able to move up, down, left, right,
+[0:44:41]  turn 90 degrees, turn 15 degrees, and the like,
+[0:44:44]  I mean, that is ultimately how a lot of graphical programs and games
+[0:44:47]  even might be implemented, by really focusing at the level you do.
+[0:44:50]  But of course, there's this tension with us humans,
+[0:44:52]  whereby we prefer often to think at this level.
+[0:44:54]  But even that might not be sufficient, which is to say, here in week 10,
+[0:44:57]  these are still going to be in our hard problems.
+[0:45:00]  But a hand, if we could, one more time for Danny
+[0:45:02]  for getting us that far along.
+[0:45:04]  Thank you so much.
+[0:45:05]  Let me give you a stretch ball here.
+[0:45:07]  All right, and if we could have both of our volunteers come up here,
+[0:45:12]  we're going to have, yes, come on up.
+[0:45:15]  Come on up, and let me have you guys introduce yourselves in the middle here.
+[0:45:20]  Hi, I'm Evan.
+[0:45:23]  Hey there, I'm Cedik from Turkey.
+[0:45:24]  Nice to meet you all.
+[0:45:25]  Wonderful, welcome.
+[0:45:26]  And this time we're going to flip it around.
+[0:45:29]  So as to have the audience do what Danny just did for us,
+[0:45:33]  the only catch here is that the only means
+[0:45:35]  we have for showing the audience what they need to tell you to draw
+[0:45:38]  is literally right above the chalkboard.
+[0:45:40]  So honor system here, that your eyes must stay on the chalkboard
+[0:45:43]  and not look up.
+[0:45:44]  And in just a moment, if you guys want to both stand in front of the chalkboard
+[0:45:48]  back to the audience, and as you're talking with each other,
+[0:45:52]  verbalize it through the microphone if you will,
+[0:45:54]  I'm going to show everyone else in the room a second and final drawing.
+[0:45:57]  And we'll just go rapid fire around the room,
+[0:45:59]  give us one step at a time collectively, and we'll
+[0:46:01]  see if these guys can't draw exactly that same outcome.
+[0:46:05]  So what's that?
+[0:46:08]  Just the one.
+[0:46:09]  So you'll have to collaborate, and let's give you a clean slate here,
+[0:46:13]  literally.
+[0:46:16]  All right, so no looking up.
+[0:46:18]  That's the only rule for you guys.
+[0:46:20]  Here we go.
+[0:46:21]  For the audience, here is what we'd like them, ironically, to draw.
+[0:46:27]  Step one, from anyone in the audience.
+[0:46:31]  Yes.
+[0:46:33]  Draw a circle.
+[0:46:34]  Anywhere.
+[0:46:36]  Not anywhere.
+[0:46:42]  OK, that's step one.
+[0:46:43]  Step two, someone else.
+[0:46:45]  Yeah, in the middle.
+[0:46:52]  Draw a line down from the bottom of the circle about halfway down.
+[0:46:56]  I think there was a hand in front of you too, number three?
+[0:47:08]  OK.
+[0:47:14]  The overarching goal here for those unable to hear is to draw a person.
+[0:47:18]  OK, it may be a six figure.
+[0:47:21]  Draw the left leg of the person, of this person.
+[0:47:25]  OK, good job.
+[0:47:27]  All right, next, step four.
+[0:47:29]  Yeah.
+[0:47:35]  OK.
+[0:47:40]  OK, to the right of the vertex at the bottom of the circle, draw a V.
+[0:47:44]  A V.
+[0:47:46]  Like what V?
+[0:47:47]  Nope, not interactive.
+[0:47:48]  Draw a V.
+[0:47:51]  Well, he would.
+[0:47:53]  I'm just writing about it.
+[0:47:55]  Yeah, it seems really weird.
+[0:47:57]  Draw a V.
+[0:47:59]  Get ready for step five.
+[0:48:03]  OK, we'll go with that.
+[0:48:04]  Step five, someone else.
+[0:48:06]  Step five, someone else.
+[0:48:08]  Someone else, yeah.
+[0:48:10]  Draw the right side of the leg.
+[0:48:13]  Nice.
+[0:48:14]  Step six.
+[0:48:15]  Step six.
+[0:48:16]  Happy face.
+[0:48:17]  Six.
+[0:48:19]  Six, yes.
+[0:48:24]  Erase the line that you have on the left.
+[0:48:30]  OK, step seven.
+[0:48:31]  Yes?
+[0:48:36]  Instead of that line before going up, make it go down.
+[0:48:40]  Step eight.
+[0:48:41]  Step eight.
+[0:48:43]  Step eight.
+[0:48:44]  Yes.
+[0:48:47]  Connect that line to the hip.
+[0:48:50]  Not touching.
+[0:48:54]  OK, compromise.
+[0:48:56]  OK.
+[0:48:58]  All right.
+[0:48:59]  Step nine, almost there, I think.
+[0:49:01]  Step nine.
+[0:49:05]  Step nine, step nine.
+[0:49:06]  Yes, and back.
+[0:49:15]  Write the word high on the top left of the circle.
+[0:49:20]  OK.
+[0:49:21]  And step 10, almost there.
+[0:49:25]  Draw a line pointing to high.
+[0:49:31]  OK, and step 10, 11.
+[0:49:35]  Yeah?
+[0:49:38]  Erase the exclamation point.
+[0:49:39]  Nice.
+[0:49:40]  12.
+[0:49:42]  Do we want to give them one more?
+[0:49:45]  12, or are we good?
+[0:49:47]  Yeah, last one.
+[0:49:50]  Erase the right arm.
+[0:49:52]  OK, I think we're going to need a 13 then.
+[0:49:56]  And then?
+[0:49:59]  Yeah.
+[0:50:02]  Repeat the left arm, but rotate it by 90 degrees.
+[0:50:08]  That feels wrong.
+[0:50:12]  How would you, as an organic human being,
+[0:50:14]  how would you put your arms?
+[0:50:17]  That would not be a stick figure.
+[0:50:24]  Would you do this, or would you do that?
+[0:50:26]  All right, a little hint maybe.
+[0:50:29]  Give me a step 14.
+[0:50:31]  Step 14 in final.
+[0:50:32]  Step 14?
+[0:50:33]  I think we just got to tell them what to do.
+[0:50:36]  Step 14.
+[0:50:38]  Yes.
+[0:50:49]  Think of a walking man and have the right hand walking to your right.
+[0:50:57]  All right, so like, hmm.
+[0:50:59]  Where could the hand go?
+[0:51:02]  Where should the hand go on that arm?
+[0:51:05]  But, yeah.
+[0:51:07]  Yeah, OK, yes.
+[0:51:08]  No.
+[0:51:11]  I mean, look right here.
+[0:51:12]  Look right here.
+[0:51:13]  Look right here.
+[0:51:14]  Yes, sorry, thank you.
+[0:51:16]  14 steps.
+[0:51:20]  That's pretty close.
+[0:51:21]  So congratulations to you guys, and thank you as well.
+[0:51:24]  All right.
+[0:51:25]  So I mean, these things too are not, yes, a round of applause then, sure.
+[0:51:33]  So this is to say that these ideas of abstraction and precision
+[0:51:38]  and really every other term of art that we explored this term
+[0:51:40]  are sort of omnipresent and can be easier or harder
+[0:51:43]  to implement depending on exactly what the problem is.
+[0:51:46]  But what we thought we'd do now in our final day
+[0:51:49]  is try to now similarly prepare you for life after CS50.
+[0:51:53]  And this is really going to be a list of really potential to do
+[0:51:57]  so that you can stand on your own after the class,
+[0:52:00]  after the class's infrastructure, write actual code.
+[0:52:02]  And then we'll come full circle one final time with our friend Jennifer
+[0:52:06]  8 Lee to look at the world of emojis and how
+[0:52:08]  they relate to all forms of representation
+[0:52:10]  that we've talked about up until now.
+[0:52:13]  So one, how can you go about programming after CS50?
+[0:52:16]  So one, you can actually install command line tools on your own Mac or PC.
+[0:52:21]  Perhaps unbeknownst to you, Windows has what's generally called a command
+[0:52:24]  prompt.
+[0:52:24]  Mac OS literally comes with a terminal program in your applications utilities
+[0:52:29]  folder.
+[0:52:29]  And so even if you never run those programs,
+[0:52:31]  you actually had a sort of blinking cursor,
+[0:52:33]  black and white prompt available to you.
+[0:52:35]  Might not have all of the same software installed as your code space
+[0:52:38]  in the cloud, but you have that command line interface even
+[0:52:41]  within today's graphical tools.
+[0:52:43]  And among the tools you can install within that command line interface
+[0:52:46]  would be something called Xcode on the Mac, which comes not only with a GUI,
+[0:52:50]  IDE, integrated development environment, but also those command line tools.
+[0:52:53]  And Microsoft for Windows has something similar as well.
+[0:52:57]  Learning Git.
+[0:52:58]  So we've used Git only unbeknownst to you underneath the hood
+[0:53:01]  for the most part, but Git is a very, very popular tool
+[0:53:05]  if challenging to pick up for the first time that
+[0:53:07]  makes it easy to push code to a website called GitHub or any equivalent
+[0:53:11]  and then collaborate more effectively with classmates.
+[0:53:13]  There's definitely a bit of a learning curve,
+[0:53:15]  but thanks to CS50's own Brian Yu, you can start, for instance,
+[0:53:17]  with a video like this.
+[0:53:19]  And this indeed is going to be one of these de facto standards in the real
+[0:53:21]  world, at least for the next several years, that you'll probably encounter
+[0:53:25]  if you work in tech or really any company where you're doing
+[0:53:27]  some programming.
+[0:53:29]  VS Code itself will walk you through this process in the coming days,
+[0:53:31]  but you can indeed install it on your own Mac or PC.
+[0:53:34]  And what can you do when you write code?
+[0:53:36]  Well, you can certainly write software for your Mac, for your PC,
+[0:53:39]  for your phone, or of course, per week 10, week 9,
+[0:53:42]  you can host your own website, be it static, as in week 8,
+[0:53:48]  hosting it at websites like these, which generally have free or student
+[0:53:52]  friendly accounts via which you can put something statically
+[0:53:55]  on the web at a real domain name that you might choose
+[0:53:57]  or you can host a full fledged web app.
+[0:53:59]  And using student tiers on Amazon and Microsoft and Google's cloud services
+[0:54:05]  or others, you can sign up for, being a student certainly,
+[0:54:08]  a whole lot of free software, free hosting, so as to, if nothing else,
+[0:54:12]  experiment and perhaps maximally get your own app or website up and running.
+[0:54:17]  So know that those are resources available to you.
+[0:54:19]  And this is by certainly a non-exhaustive list.
+[0:54:22]  If you'd like to geek out in the coming months, in the coming years,
+[0:54:26]  these are just some of the places that people who take computer science
+[0:54:29]  classes, who write code, might tend to hang out and ask and answer
+[0:54:33]  questions of each other.
+[0:54:34]  So keep an eye, for instance, on these here.
+[0:54:36]  And then CS50 has its own communities.
+[0:54:38]  As you'll see, if you go to this URL here via the OpenCourseWare version
+[0:54:42]  of CS50, which is open to the world, is there a vibrant community, thanks
+[0:54:46]  to time zones, that's pretty much active 24, 7, 365,
+[0:54:49]  talking about not only CS50 goings on in problem sets and projects,
+[0:54:53]  but really technology more generally as well.
+[0:54:55]  So certainly feel welcome to partake either asking or answering questions.
+[0:54:59]  Now, speaking of asking and answering questions, a couple of weeks ago,
+[0:55:03]  you kindly gave us a whole bunch of review questions, which we called
+[0:55:07]  through and picked out our favorite 20 of them.
+[0:55:10]  These, of course, were multiple choice questions.
+[0:55:12]  And in preparation for this week, in preparation for life ahead,
+[0:55:16]  we thought we would choreograph a bit of a quiz show here.
+[0:55:20]  And indeed, as you came in at the start of class,
+[0:55:23]  you might recall being invited to go to this URL here, CS50.ly,
+[0:55:27]  either here in person or if you're watching live from home, at this URL
+[0:55:31]  here, you can use a phone or a laptop.
+[0:55:35]  And if it's easier on a phone, you can point your camera at this 2D barcode
+[0:55:40]  here.
+[0:55:41]  We'll give folks a moment to pull that up.
+[0:55:44]  And again, that URL was CS50.ly slash pull.
+[0:55:51]  And once it looks like most folks have it up and running,
+[0:55:56]  our friend Carter here will help us dive into this review session,
+[0:56:02]  if you will, with a bit of fun along the way.
+[0:56:04]  All right, Carter, if you'd like to take it away,
+[0:56:07]  what do we have as our first question?
+[0:56:09]  You should see on your phone or laptop this same question being asked.
+[0:56:12]  The first question is, how do you print, quote unquote, hello world in Python?
+[0:56:17]  So among the possible answers are these here.
+[0:56:22]  Buzz in on your phone or your laptop.
+[0:56:27]  You've got a few hundred responses already.
+[0:56:30]  Seven seconds to make your decision.
+[0:56:35]  This is question one of 20.
+[0:56:36]  Go into it with some confidence.
+[0:56:38]  I think we're down to zero on the clock.
+[0:56:40]  And Carter, it looks like 98% of you indeed said hello world.
+[0:56:45]  And Carter, per the check mark, that's indeed the correct answer here.
+[0:56:49]  Now to make things interesting, know that you'll
+[0:56:52]  see some number of points.
+[0:56:53]  And we've deliberately anonymized it, so only you know what number you are.
+[0:56:56]  So a whole lot of guests have a perfect score of 1,000 at the moment.
+[0:57:01]  Hopefully we'll see over the next several questions,
+[0:57:03]  things start to bridge out.
+[0:57:05]  But know that the speed with which you buzz in
+[0:57:08]  will also factor into how many points you now get.
+[0:57:10]  So the faster you move, the more points you get.
+[0:57:13]  Question two, if we could.
+[0:57:15]  What does DNS stand for?
+[0:57:17]  From just a couple of weeks back, domain number system,
+[0:57:20]  domain name system, data numbering structure,
+[0:57:23]  there's no such thing as DNS.
+[0:57:27]  A few hundred responses are in.
+[0:57:30]  Eight seconds remain.
+[0:57:34]  Fewer points now, but still a chance to buzz in.
+[0:57:37]  And now, as we hit zero, the responses are these.
+[0:57:40]  Domain name system, which is indeed correct.
+[0:57:43]  And 84% of you got that one correctly.
+[0:57:46]  And indeed exists.
+[0:57:47]  We talked about it a couple of weeks ago.
+[0:57:49]  So we're still seeing a whole lot of ties.
+[0:57:51]  By 2000, we'll see if someone starts to pull away before long.
+[0:57:54]  Question three, what is the upper bound of merge sorts run time?
+[0:57:58]  So that escalated quickly.
+[0:58:01]  Big O of n log n, big O of log n, omega of log n, or big O of 1.
+[0:58:10]  What is the upper bound of merge sorts run time?
+[0:58:15]  That was the last of the algorithms we saw for sorting.
+[0:58:17]  And in one second, we'll see that the correct answer is just edging out
+[0:58:21]  everyone else.
+[0:58:22]  Indeed, 46% it is n.
+[0:58:25]  I know, it's n log n.
+[0:58:28]  Now, if I may, as the teacher, it can't be log n,
+[0:58:31]  because log n is strictly less than n.
+[0:58:33]  And you can't possibly sort n elements unless you minimally
+[0:58:36]  look at or touch each of them.
+[0:58:38]  So it's got to be at least greater than n intuitively.
+[0:58:41]  We still have a whole bunch of ties.
+[0:58:42]  Let's move on to number four.
+[0:58:45]  What is stored in argc?
+[0:58:48]  Back to the language c, is it an array of arguments,
+[0:58:50]  the maximum size of an array, the count of arguments
+[0:58:53]  given to a program when first run, or how much memory
+[0:58:56]  is allocated to a function?
+[0:58:59]  Again, you wrote all of these questions.
+[0:59:02]  And we have five seconds for the reveal.
+[0:59:06]  argc is indeed the count of arguments given to a program when first run.
+[0:59:13]  Think back to c.
+[0:59:13]  When we did command line arguments, there was argc in argv.
+[0:59:17]  argv was the array, but argc was indeed the count, the c in argc.
+[0:59:22]  We still have a whole bunch of ties at the top here.
+[0:59:26]  But let's move on then to number five.
+[0:59:29]  What is the duck debugger's favorite hobby?
+[0:59:32]  According to one of your classmates, dressing up like Dracula,
+[0:59:35]  swimming across the stage, filling up the entire bathroom of a guy's house,
+[0:59:39]  and sitting quietly on stage.
+[0:59:44]  The third, of course, is a reference to a YouTube video
+[0:59:46]  that was on the course's website that week.
+[0:59:48]  But according to your classmates, number two, seconds remaining,
+[0:59:54]  sitting quietly on stage, is its favorite pastime.
+[0:59:58]  So a little harder, perhaps.

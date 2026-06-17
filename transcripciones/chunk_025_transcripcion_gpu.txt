@@ -1,0 +1,587 @@
+# Transcripción: chunk_025.mp3
+# Modelo: medium | Duración audio: 0:51:22
+
+[0:00:00]  Getting an emoji accepted is to try to demonstrate demand and how do we demonstrate demand? And I would say in a it's in a pretty
+[0:00:07]  Clumsy way actually at this point
+[0:00:09]  So the main thing that you have in our in our current proposal
+[0:00:13]  Process is we have a median emoji, which is elephant
+[0:00:17]  So elephant is like if you stack ranked all the emoji for popularity elephant is like right there in the middle
+[0:00:22]  And it's also a concept. That's like universally understood across all languages
+[0:00:26]  so
+[0:00:28]  Elephant shows up somewhere between five hundred million and seven hundred million in Google search results
+[0:00:33]  Like if you type it into a laptop, you'll see you know elephant five hundred thousand five hundred million search results
+[0:00:39]  And generally you're you're trying to when you're comparing your
+[0:00:43]  Term to elephant you want to see very roughly how many Google search results being search results sometimes Instagram
+[0:00:50]  So actually with him something that was really surprising to me was someone proposed hummingbird
+[0:00:54]  I think hummingbird is a good proposal and
+[0:01:00]  But if you look at hummingbird, it's only like 21 million in terms of the staff
+[0:01:05]  So which I thought was like very surprisingly low
+[0:01:07]  So that's one of the main ways that we kind of we kind of see like is it also visually used and all of that
+[0:01:15]  Yeah, any other questions?
+[0:01:18]  Are we good? I didn't even need my water or anything. Oh, can I take and I'm gonna take a picture
+[0:01:22]  I'm gonna take a picture for a because now you guys are actually human and not muppets
+[0:01:26]  So I'm very very excited about this
+[0:01:28]  So I will send this to like my block mates and be like I just lecture it at CS
+[0:01:33]  Sanders theater
+[0:01:43]  So if up until now though would be appropriate to toss this up on the board if up until now
+[0:01:53]  You've not yet gotten a CS50 stress ball on the way out. Please do grab on
+[0:01:56]  We got some extras as well off to the side
+[0:01:58]  But I would also keep in mind back in week zero where again we began
+[0:02:03]  We asked you to categorize yourselves is to whether you are among those less comfortable those more comfortable or those somewhere in between
+[0:02:10]  Please know now that you are officially all some
+[0:02:14]  Please know now that you are all officially among those more comfortable and indeed even though a couple of more milestones away
+[0:02:20]  We cannot wait to see what you accomplish with your final projects in the meantime as always
+[0:02:26]  This is and now this was CS50
+[0:03:33]  Oh
+[0:03:38]  Mr. Sandman, I was on the bell brides trying so hard to not fall behind
+[0:03:46]  Attending section and wanting a tutor stuck in the it's been void of my computer
+[0:03:53]  Finally getting ahead
+[0:03:55]  Then may when switches to pipe on instead why we spend five weeks on see
+[0:04:01]  Because this is CS50
+[0:04:11]  Mr. Sandman, we completed each job a script sequel CSS and flasks
+[0:04:17]  With every language our minds had to reset
+[0:04:21]  Don't get us started on the finance piece
+[0:04:23]  Sandman, now on week ten
+[0:04:27]  My friends asked if I would do it again
+[0:04:30]  I replied obviously
+[0:04:43]  All right, so this is CS50
+[0:06:43]  My name is David Malan and this is Harvard University's introduction to the intellectual enterprises of computer science and the art of programming
+[0:06:50]  And this of course is our special family weekend
+[0:06:53]  We're in not only our safety zone students here in the audience
+[0:06:55]  But also some family members as well now you're showing up in the semester a little bit late
+[0:07:00]  We've just tackled week eight, which is really our ninth week since computer scientists start counting from zero
+[0:07:05]  So we've done a whole lot of work over the past few weeks as you might have heard via emails or text messages home
+[0:07:11]  Including a language known here as binary
+[0:07:13]  So on the screen here, of course is a lot of zeros and ones and suffice it to say let me sum up the past
+[0:07:18]  Nine weeks with this is what's going on underneath the hood
+[0:07:22]  But of course today we thought we'd make things a little more accessible a little more broadly applicable and indeed our focus today
+[0:07:28]  Will not be on what these patterns of zeros and ones represent which in astute
+[0:07:32]  I might notice are replicated visually with these light bulbs being in a pattern on and off and as your child might have hinted
+[0:07:40]  Before class or perhaps now this might very well spell a word up to eight characters long because you can encode even in the real world
+[0:07:47]  Things digital too, but today we'll focus on things much more high-level this notion of cybersecurity
+[0:07:52]  like our the security of our data our
+[0:07:55]  Privacy of our systems particularly on the internet nowadays because presumably all of us are carrying technologies around in our pocket using laptops
+[0:08:03]  And desktops every day and so the goal today is to
+[0:08:07]  Stipulate that this is what's going on underneath the hood
+[0:08:10]  But let's solve some problems at a higher level so that your homework when you go back to wherever you're visiting from
+[0:08:15]  Can actually be to apply some of today's lessons learned
+[0:08:18]  So with that said perhaps the most common familiar defense of one's systems and data phone and laptops and desktops would just be these simple passwords
+[0:08:28]  Unfortunately, you and I are frankly as humans not all that good at choosing passwords
+[0:08:32]  And this is in itself a relatively weak form of defense even though each of us has dozens
+[0:08:38]  hundreds of passwords nowadays or at least dozens or hundreds of accounts maybe
+[0:08:44]  Fives or tens of dozens of passwords indeed if you're in the habit of reusing passwords, we'll see today
+[0:08:50]  Probably among our first lessons learned so if for instance if we look back at the past year
+[0:08:56]  2021 thanks to security researchers who take a look at data that has been hacked or leaked online by way of public databases
+[0:09:03]  we have a sense as computer scientists of what the most popular or
+[0:09:08]  Equivalently what some of the worst passwords are that you and I are choosing for our system so as of this past year
+[0:09:13]  According to one measure the most commonly used password in systems everywhere was 1 2 3 4 5 6
+[0:09:21]  All right, so number 2 password in our top 10 here list was only slightly longer 1 2 3 4 5 6 7 8 9
+[0:09:28]  After that we took a turn in the other direction 1 2 3 4 5 alone
+[0:09:33]  After that got a little more interesting QWERTY which might sound pretty cryptic
+[0:09:38]  But not if you look down at your US keyboard, and it's the top left-hand row of the keys on an American keyboard
+[0:09:43]  So also not all that hard perhaps not surprisingly a little disconcertingly number 5 was password
+[0:09:53]  Meanwhile number 6 returns us to digits 1 2 3 4 5 6 7 8 after that really less effort 1 1 1 1 1 1
+[0:10:01]  After that a little more variation, but not all that much 1 2 3 1 2 3 after that
+[0:10:06]  It's getting even less interesting 1 2 3 4 5 6 7 8 9 0 and then lastly topping the list is just 1 2 3 4 5 6 7
+[0:10:13]  So this is not a good top 10 list to be on so among today's first takeaways is if you see your password on this
+[0:10:19]  Screen like you didn't make the list in a good way
+[0:10:22]  This means hundreds thousands millions of other people probably have that password of yours now in and of itself
+[0:10:28]  That's not necessarily worrisome because I don't know who has these passwords in a room as large as this
+[0:10:33]  But just intuitively why is this a bad thing?
+[0:10:36]  either parent or child
+[0:10:40]  Welcome to raise a hand here. Why might this be?
+[0:10:44]  intuitively, yeah
+[0:10:46]  So access to it like I mean we literally as computer scientists now have a database of really common passwords and your thoughts
+[0:10:53]  Yeah, you can just find it out quickly
+[0:10:58]  I mean you could imagine trying to guess someone's password by just typing in random letters random numbers random words
+[0:11:04]  But not if you have a top 10 list like the the adversaries in the world might as well just start with this list now
+[0:11:10]  You'll notice that even absent from this are slight variants like some of you might be thinking
+[0:11:14]  I'm not on the list because I do something clever like I use an exclamation point for the number one or a
+[0:11:19]  Three for an E or a five for an S and based on the smiles in the room right now
+[0:11:24]  You're not all that clever it turns out because other people are smiling too
+[0:11:28]  Which is to say that an adversary can take those same heuristics that you might think are making things more secure by just tweaking
+[0:11:35]  Some letters to numbers or vice versa, but if you're doing it and other people are doing it the bad guys
+[0:11:39]  So to speak are going to be doing it as well so unfortunately when it comes to passwords
+[0:11:44]  Better is longer and random and really unguessable, but that's not what most of us have in fact case in point on our phones
+[0:11:51]  Whether you have an Android device or an iPhone nowadays
+[0:11:53]  You know odds are you have something relatively simplistic protecting it if you have anything at all
+[0:11:57]  But at least Apple and Google are pretty good at least nudging us to choose these kinds of pass codes now and a four-digit
+[0:12:03]  Passcode is quite common nowadays
+[0:12:05]  And so here's where we have an opportunity thanks to the URL that you saw on the screen earlier to conjecture as a group
+[0:12:13]  Just how long might it take an adversary someone out there who's out to get us or get one of us?
+[0:12:19]  How long might it take an adversary to figure out your phones for digit passcode?
+[0:12:25]  This is our CS50 zone Carter Carter if we could switch over and pull the audience here if you take out your phone or laptop
+[0:12:30]  Whatever device you might have used a few minutes ago to scan that QR code or to visit that same URL
+[0:12:38]  You can see these questions on your browser, and if you can't that's fine
+[0:12:43]  We'll share some aggregate data nonetheless, but you should have an opportunity to tap one of your answers
+[0:12:48]  and we'll give folks a few more seconds if you'd like to play along at home and
+[0:12:55]  Here in just a moment
+[0:12:58]  Probably have many people reporting, but why don't we go ahead and take a look at some percentages it looks like
+[0:13:04]  Most of you sixty-five percent are proposing just a few seconds
+[0:13:07]  So that's not all that good news if it's a four-digit passcode some of you are hoping it's a few minutes
+[0:13:12]  Eight percent are hoping a few hours for more than four percent of you are really hoping perhaps. It's a few days
+[0:13:18]  Well, let's actually consider how we can answer this question and make today not just conceptual
+[0:13:22]  But a little quantitative too and see if we can't slap some numbers on questions like these
+[0:13:26]  So ultimately you can make more informed decisions with your system security
+[0:13:29]  So for instance when it comes to four-digit passcodes rather than just consider how secure it is
+[0:13:36]  Well, let's make it a more precise question. Like what are the forms of attack?
+[0:13:39]  Well, the simplest attack might be just someone grabbing your phone be it in your family or maybe at Starbucks or the airport or the
+[0:13:45]  Like and just starting all possible combinations
+[0:13:48]  Maybe zero zero zero zero then zero zero zero one and zero zero zero two we could maybe automate this a little bit
+[0:13:54]  so for instance, I might potentially be able to do something like
+[0:13:59]  Roboticize this here. Let me go ahead and full screen a quick video here
+[0:14:02]  That's just gonna paint a picture in just a moment on the screen of how if we're a really clever adversary
+[0:14:08]  You know how to build things. Well, at least maybe we could automate some of that process
+[0:14:12]  So here's an Android phone sitting on a counter
+[0:14:14]  Here's a very simple tripod and a little touch device robotically doing all of that hacking for you starting at zero zero zero zero
+[0:14:21]  Probably all the way up to nine nine nine nine now that too wasn't necessarily all of that all that fast
+[0:14:26]  But at least you the adversary can step away and doesn't actually have to be bothered with the time involved the cost involved and actually
+[0:14:34]  Hacking that particular device. Well, let's go one level deeper a little more interestingly and consider here
+[0:14:41]  That how much time really this so-called brute force attack would take and that's actually a term of art much like in yesteryear
+[0:14:48]  when maybe there was a battering ram trying to brute force their way into a
+[0:14:52]  Castle or something like that a brute force attack digitally is just someone trying
+[0:14:56]  Manually all possible codes or maybe robotically trying all possible codes
+[0:15:00]  But generally automating the process in some way to go through all possibilities. Well, if you've got for instance
+[0:15:07]  a four digit pass code
+[0:15:10]  Let's ask maybe a follow-up question here not how long it will take but how many
+[0:15:16]  possible four digit pass codes are there because then maybe we can do some quick math and if every
+[0:15:22]  Pass code takes me a second or a few milliseconds or the like then I think we can try to extrapolate from that whether the first
+[0:15:27]  Answer was seconds or minutes or days or hours or something else
+[0:15:31]  So how many four digit pass codes are possible if you take out your same device?
+[0:15:36]  It should have just changed automatically if it doesn't seem to have maybe reload your browser with some menu option and
+[0:15:41]  Then tap in here. How many four digit pass codes are possible for total 49,999 10,000 or unsure is
+[0:15:50]  Okay, too
+[0:15:52]  So, let's see. We'll give you a few more moments
+[0:15:55]  How many four digit pass codes are possible and shall we reveal the results?
+[0:16:00]  So now it looks like a
+[0:16:03]  few of you
+[0:16:05]  2% of you are saying just four pass codes 40
+[0:16:09]  9999 there's definitely some contention here and 6% are unsure. Well, how do we wrap our minds around this?
+[0:16:16]  Well, let's just kind of do this real simply here
+[0:16:18]  Let me switch back over to doing a bit of math and if we have here
+[0:16:23]  Ten possibilities for each digit if there's four digits each digit can be 0 1 2 3 4 5 6 7 8 9
+[0:16:28]  So that's 10 possibilities. So if you think about the number of
+[0:16:32]  permutations that's 10 possibilities for the first digit times 10 for the next times 10 to the for the next times 10 for the next
+[0:16:39]  And so if we do that out 10 times 10 times 10 times 10 or 10 to the 4th
+[0:16:42]  There are indeed a 66% of you found
+[0:16:46]  10,000 possibilities and so now we can kind of work backwards and decide how long is it gonna take for an adversary to hack into this
+[0:16:53]  Phone because if it's one attack one guess per second
+[0:16:56]  Well, that's gonna map out to 10,000 seconds, but maybe not if the adversary isn't a roboticist or a human
+[0:17:02]  What if they're like at a software programmer someone who's taken even a class introductory like CS50 and learned a little bit of programming
+[0:17:09]  Well a little bit frighteningly
+[0:17:11]  It's not all that hard to hack into systems if you just know how to code to and really have the computer do your work
+[0:17:17]  For you. So in fact, let me go ahead and change over to another screen on my computer here
+[0:17:21]  This is different for students in the group from VS code
+[0:17:24]  This is just a black and white version of it that we've used briefly in the past and I'm just gonna go ahead and create
+[0:17:29]  a program called crack dot PI to crack something just technically means to figure out what it is figure out a password in this case and
+[0:17:36]  Dot PI means I'm gonna use a programming language that we here in CS50 have been dabbling in the past couple of weeks with more
+[0:17:42]  To come next week as well
+[0:17:43]  So it turns out and you need not understand each of these lines of code if I want to try
+[0:17:49]  Maybe generating all 10,000 possible codes. I'm not gonna bother with a robot
+[0:17:55]  I've got all these cables coming out of my computer and odds are one of them is a USB cable or a lightning cable
+[0:18:00]  Surely we could figure out how to connect like laptop or desktop to phone and just like automate the process nowadays by just sending all
+[0:18:07]  Of the numbers into the phone until one unlocks the trick just like in the movies or TV
+[0:18:12]  Well in Python I could write a program that does this as follows
+[0:18:15]  I can import so to speak all of the decimal digits zero through nine and this for students in the room is just a
+[0:18:21]  Slightly better version of typing out ten different numbers manually
+[0:18:25]  I can also import from a library so to speak called iter tools for iteration tools
+[0:18:30]  Which means to do something again and again. I can import a function
+[0:18:34]  Called product which means the cross product like combine this with this some number of times and then it's just two more lines of code
+[0:18:41]  I can use what's called a loop in programming
+[0:18:43]  So for every passcode in the cross product of all ten of those digits repeated a total of
+[0:18:50]  Four times let me go ahead and rather than bother connecting my phone and hacking my own phone
+[0:18:56]  Let me just print out every one of those 10,000 codes on the screen and we'll see how fast the hacker could do this
+[0:19:01]  Let me go ahead and print and with an asterisk, which is a little trick to format it nicely
+[0:19:05]  I'm gonna print out each of those passcodes and that's it four lines of code
+[0:19:09]  Maybe 40 seconds of talking but maybe really four seconds of coding if I actually did this without the audience and now let me go
+[0:19:16]  Ahead and save the file and I'm gonna run as we do every day in class of late
+[0:19:20]  Python of crack pi and when I hit enter I should see on the screen all 10,000 possibilities from zero zero zero zero
+[0:19:26]  To nine nine nine nine. So let's see. Is it a few seconds minutes hours or days?
+[0:19:32]  done
+[0:19:33]  So barely even seconds plural if that so that should be a little disconcerting because all that after sorry needs to do
+[0:19:39]  Is grab your phone off the counter plug in a cable and boom, they're done
+[0:19:42]  Like there's no ticking clock or worries as in the movies or TV that maybe you're gonna come into the room
+[0:19:48]  You don't need that much of a window of time. So what would be better than this?
+[0:19:52]  Well, let's consider what our options might be if we don't want to just use four digit passcode
+[0:19:58]  Some of you indeed might have better passcodes than that and maybe you use four letter passcodes instead
+[0:20:03]  So a through Z maybe uppercase and lowercase that starts to make things a little more interesting
+[0:20:08]  So should we pull this question to if we upgrade from four digits to just four letters English letters a through Z
+[0:20:15]  Uppercase and lowercase. Why don't we go ahead and pull the grip here and ask how many four letter passcodes are there
+[0:20:23]  instead
+[0:20:24]  So this time the range starts at four still not the right answer though this time
+[0:20:30]  How many four letter passcodes are possible?
+[0:20:38]  Take a couple more seconds. All right
+[0:20:46]  Almost a couple hundred responses in already few more seconds and
+[0:20:54]  Why don't we go ahead and reveal now the answers which are okay, so we've solved a couple problems at least so we well
+[0:21:03]  Okay, someone's just messing with us now. Alright, so it looks like most of you 76% of you have claimed
+[0:21:08]  It's 7 million plus possibilities. So that's encouraging because that's a whole order of magnitude more than before
+[0:21:14]  Well, let's figure out how we might do this mathematically
+[0:21:17]  So we've got 26 lowercase 26 uppercase that's 52 possibilities now for each of those four digits
+[0:21:22]  So that's 52 times itself four times which indeed either off the top of your head a good guess a calculator on the same device
+[0:21:29]  You're using right now indeed gives us 7 million instead
+[0:21:33]  Well, what might be slightly better than that?
+[0:21:35]  Well, maybe four characters and this indeed is what your Mac's PCs and phones are urging us to do nowadays
+[0:21:41]  Not just numbers not just letters, but like really annoying punctuation
+[0:21:45]  So it really looks cryptic not just to the adversary but also to you and me unfortunately, and that's the downside
+[0:21:50]  but here now we have a mental model and really a
+[0:21:54]  Computational framework via which we can evaluate the security of these and I'll go ahead and spoil some of the math here if we've got
+[0:22:01]  52 letters of the alphabet uppercase and lowercase 10 digits
+[0:22:04]  And if I count them out on my keyboard about 32 punctuation symbols and typical English grammar that actually gives us
+[0:22:11]  94 possibilities now which is up from 52 which is up from 10
+[0:22:16]  So now we're really moving and now that would give us 78 million possibility. So another order of magnitude now
+[0:22:23]  It's still going to be relatively fast because you know what I can actually do this. Let me go back into my code here
+[0:22:28]  Let me reopen the same program and I can point out just how easy it is to make these changes
+[0:22:34]  Instead of importing digits as before I can import as your child might know ASCII letters
+[0:22:40]  Which are a through Z uppercase lowercase and I can just change this here
+[0:22:44]  ASCII letters and so this was that first version where we just changed to letters
+[0:22:49]  Let me now rerun the code and instead of seeing numbers
+[0:22:51]  We'll see letters flying across the screen and if I walk over here to the screen
+[0:22:55]  We'll see that by the time I get here. We're halfway through the entire alphabet lowercase. If I now start walking away
+[0:23:02]  I think yep. We're already done now with uppercase as well. If I upgrade this slightly further
+[0:23:07]  Let's go ahead and take it one more level and perhaps do let's say ASCII letters and digits and
+[0:23:15]  Punctuation and this would be the
+[0:23:16]  Pythonic way to say that and I'm gonna add to those letters those same digits those same punctuation symbols
+[0:23:23]  Let me shrink my font just so the code still fits on the screen
+[0:23:26]  And what we now have is with two seconds of changes a program that if I run this version whoops
+[0:23:34]  Without the typographical error, this is what we call in CS50 a bug
+[0:23:38]  So now we run the same. This is what we call in CS50 a second bug
+[0:23:45]  punctuation
+[0:23:47]  Okay, this is where I cross my fingers. Okay, so now it's gonna be a little hard to see as it flies across the screen
+[0:23:53]  But you probably are seeing glimpses of some weird punctuation characters as well
+[0:23:56]  And I won't waste our time trying to talk through this because this is gonna take longer. We're still in the lowercase
+[0:24:02]  I'm still over here already. We've not even gotten to end now. Oh then P
+[0:24:07]  So this is gonna run longer, but let's end with one final question on the security of all these systems
+[0:24:12]  I'm gonna cancel that by hitting ctrl C on my keyboard and let's ask the question instead if we use eight character passwords
+[0:24:19]  So twice as many characters, but even that is not terribly long, right?
+[0:24:23]  This is eight characters alone on the stage eight characters using letters numbers in punctuation might be better
+[0:24:28]  Let's do one final vote here if we could on your same device. How many eight character?
+[0:24:35]  Possibilities are there now
+[0:24:37]  for
+[0:24:38]  These pass codes and now forward and even make the list this time
+[0:24:43]  All right a few more seconds about a hundred responses so far
+[0:24:48]  How about we go ahead and Carter if you want mine?
+[0:24:51]  Let's reveal the results based on the vote a pretty decent spread here
+[0:24:56]  Although the quadrillions are quickly buzzing in and they're contending with the others here
+[0:25:00]  Looks like 44% of you said quintillion 34% said quadrillion and this time for the first time
+[0:25:06]  You overbid so indeed if we go back to the math here at least the majority overbid if we have eight character pass codes
+[0:25:13]  That gives us 94 times itself eight times or 94 to the eighth power
+[0:25:18]  And in fact that gives us roughly six quadrillion ninety five trillion six hundred eighty nine billion three hundred eighty five million four hundred ten thousand
+[0:25:28]  816 possible pass codes now. What does that mean?
+[0:25:31]  Well the adversaries algorithm the step-by-step
+[0:25:35]  Code that they write to try to hack into your phone is no different and honestly if your passcode is eight characters long
+[0:25:41]  But they're zero zero zero zero zero zero zero zero you're no more secure fundamentally
+[0:25:46]  You really want to be somewhere in the sweet spot of that massive range of values
+[0:25:50]  So that if the adversary tries this brute-force attack just running through all possibilities
+[0:25:54]  They will eventually reach your passcode just mathematically it will be there
+[0:26:00]  Hopefully though well
+[0:26:01]  Maybe not hopefully you and I and they will be gone from this world because that much time will have passed and if we've acted we
+[0:26:08]  Do out the math here this number of seconds for instance is long past when we will no longer be here
+[0:26:16]  So that's the sort of measure is we don't sort of fundamentally change the equation for the adversary. It's still the same risk
+[0:26:22]  It's still the same attack
+[0:26:23]  but you significantly drive down the probability of success on their part or
+[0:26:27]  Conceptually you drive up the cost to the adversary and indeed even in the physical world
+[0:26:32]  This is true
+[0:26:33]  You just want your passcode in the digital world really to be better than someone else's because you want someone else's passcode to be
+[0:26:40]  The one that the adversary does something with just like in the physical world even though it's a bit
+[0:26:45]  Uncomfortable to consider your house doesn't need to be hundred percent secure and indeed. It's difficult to make it such
+[0:26:52]  There's always going to be a point of weakness
+[0:26:53]  Maybe it's that window the door or something like that
+[0:26:56]  But if your home is more secure than the next door home just probabilistically you are more secure
+[0:27:02]  You're not secure and indeed any website you see down the road that says we are secure because we do X Y or Z like that's
+[0:27:08]  Nonsense security is really about
+[0:27:11]  Comparisons and evaluating things if quantitatively relative to some other system relative to some other code
+[0:27:17]  So what's the takeaway here? Well, hopefully a non-trivial number of you
+[0:27:21]  We'll go home this weekend on Monday and change at least one passcode
+[0:27:25]  But there's gonna be a trade-off here
+[0:27:27]  We talk about this all the time in CS50 anytime we improve something we pay some price in time and performance and cost somewhere else
+[0:27:35]  So what's the downside then of this advice that you should use?
+[0:27:38]  minimally eight character passcodes
+[0:27:41]  Why might you want to say nay and not do this?
+[0:27:45]  Let's say again
+[0:27:46]  You have to remember it right and so here there is sort of some sociology
+[0:27:50]  There's some human behavior
+[0:27:52]  you know some of you might have colleagues if you're working in the real world at least back in healthier times when you had
+[0:27:56]  Colleagues with desks and cubicles and there's probably one person in the office with like a post-it note on their monitor with their passcode
+[0:28:02]  you know, it's a bit of a
+[0:28:04]  cyber security offense
+[0:28:06]  But it's also a sort of real-world side effect
+[0:28:09]  Maybe of corporate policies that aren't really calibrated for human behavior
+[0:28:13]  So we'll see if there's some other defenses and indeed let me propose that we talk briefly about one that actually tends to kick in
+[0:28:19]  Automatically, even if your passcode is not as strong as we've just seen one of these six quadrillion possibilities
+[0:28:25]  Well, what could we do instead? Well as anyone and I'll zoom in on this here
+[0:28:29]  Accidentally locked themselves out of their own phone before like when does that happen?
+[0:28:35]  Yeah, when you try the password
+[0:28:37]  Yeah, so too many times. Maybe your fingers slightly off
+[0:28:40]  Maybe you're slightly off and you just don't input the same passcode correctly after like five times ten times
+[0:28:46]  There's some reasonable threshold and why does that happen?
+[0:28:49]  Well Apple and Google equivalently figure just probabilistically if after ten guesses you still haven't typed in the right passcode
+[0:28:56]  Probably you're not you you're someone else who's picked up your phone
+[0:28:59]  So we're just gonna go ahead and lock you out now. What's the effect of this?
+[0:29:02]  Well, this means now that each of those possible passcodes no longer takes roughly one second now
+[0:29:08]  It takes roughly one minute. So the attack is still the same
+[0:29:11]  But if it's now one passcode or ten guesses per minute
+[0:29:14]  We have significantly by a factor of 60 in this story slowed things down and unfortunately does anyone know what happens if you screw up again?
+[0:29:21]  after a minute
+[0:29:24]  Yeah, it goes longer. It's like five minutes and then ten minutes and Google is kind of obnoxious about it
+[0:29:29]  They don't even give you a time frame. They just say try again later
+[0:29:32]  And so that keeps not only the adversary out but also potentially you so therein lies that trade-off if you've forgotten your code if
+[0:29:40]  Nowadays your finger is slightly wet
+[0:29:42]  So the screen isn't responding correctly. These could be usability downsides, too
+[0:29:46]  So security is really just about finding the sweet spot among these various trade-offs here
+[0:29:52]  But there's other mechanisms too and some of you might recognize this screen from Gmail via which of course you log in
+[0:29:58]  But after you log into Gmail or similar websites or apps or systems at work nowadays, especially you might be presented with
+[0:30:07]  What's called two-factor?
+[0:30:09]  Authentication and what is this in a nutshell in layperson's terms?
+[0:30:13]  Most many of you if you do anything digitally at work might have to do this now. Yeah
+[0:30:20]  Exactly, you get texted at your phone in additional code. That's not your same password
+[0:30:25]  It's typically a numeric code. Maybe six digits long it expires after a minute or ten minutes
+[0:30:29]  But why is this a good thing?
+[0:30:30]  Well one it's no longer just a piece of information that you know or that you might have written down
+[0:30:36]  It's information that changes every time you try to log in but more importantly, it's a fundamentally second factor
+[0:30:42]  Which means it's not just something you know now
+[0:30:44]  It's something you have so you for instance are the only one theoretically that should be receiving that code
+[0:30:50]  and so now the adversary if they want to get into your account not only have to guess or
+[0:30:54]  Brute force or maybe read off of a post-it note your password. They also have to physically have access now to that phone
+[0:31:00]  So there's still a threat absolutely
+[0:31:02]  But it's not everyone on the internet with an internet connection now, it's only the people in Starbucks now
+[0:31:08]  It's only the people at work now
+[0:31:09]  It's only the people in your home who might have access to that second factor
+[0:31:13]  So there too it just raises the bar to the adversary making it harder more time-consuming more geographically impossible for them to attack you
+[0:31:20]  But what's the downside of two-factor authentication whether it's a device or even nowadays it's in software
+[0:31:26]  Whether it's on your keychain or on your phone where you're prompted for this code
+[0:31:29]  What's a downside as some of us have probably experienced too
+[0:31:33]  You forget your cell phone. Absolutely, right?
+[0:31:37]  That's a factor that you have you don't have with you or maybe you're in a basement somewhere don't have reception
+[0:31:42]  You're on a plane
+[0:31:42]  You can't get the code and so there too are these trade-offs and even IT departments need to keep that in mind because what does that mean?
+[0:31:48]  For them. Well, if you don't have your phone with you and you are in the habit of calling IT to help you fix this now
+[0:31:54]  There's a cost a human cost maybe an event of financial cost
+[0:31:57]  And so IT policy nowadays is really just about finding the right balance and where we want to spend our resources
+[0:32:03]  But at least raise the bar to the adversary
+[0:32:06]  But of course, there's other ways to and this is going to be one of our homework assignments if you will after today
+[0:32:12]  There's this software called password managers and no need to buzz in on your phone
+[0:32:16]  But maybe with a physical hand how many folks here use a password
+[0:32:21]  Manager, okay. Let me ballpark this at 10 20 percent perhaps
+[0:32:25]  Okay, so we've got 80% upside here and a lesson learned potentially
+[0:32:28]  So a password manager is just a piece of software on your Mac your PC or your phone nowadays that manages your passwords
+[0:32:35]  Well, what does that mean when you go to a website for the first time or you download an app for the first time?
+[0:32:40]  And you have to create an account
+[0:32:41]  You can still use your email address or David as your username or whatever your name might be
+[0:32:46]  So you don't have to change that methodology
+[0:32:48]  But instead of typing in 1 2 3 4 5 6 as your same password for that website or app as well as for every other
+[0:32:55]  Now you use the password manager software to generate something difficult to guess for you
+[0:33:01]  That is you tell the password manager. Give me an 8 character random passcode
+[0:33:05]  Not 0 0 0 0 but something with punctuation with numbers with letters and better yet the password manager as the name suggests
+[0:33:13]  Remembers that password for you and the next time you go to another website you do it again with a completely different password
+[0:33:18]  Maybe same username maybe two-factor authentication, but different password different password different password and it doesn't have to be eight
+[0:33:25]  I mean, I'm in the habit of using a dozen two dozen characters in total and at that point
+[0:33:29]  I can't even pronounce the number of possibilities because it goes well beyond the quadrillion
+[0:33:35]  So the probability that someone's getting get into one of those accounts for me now is very very very low and they're gonna take
+[0:33:41]  Less interest in me and maybe more interest in someone else that's not using as good of a password now
+[0:33:46]  What does this mean in real terms?
+[0:33:48]  Well, when you go to lock into that managed site, you don't manually type your password anymore
+[0:33:54]  In fact, you don't generally even need to know it nowadays
+[0:33:56]  I probably don't know 90 plus 99 percent of my passwords
+[0:34:00]  I entrust them to this password manager now, of course, you'd like to think that the password manager itself is secure
+[0:34:08]  So what might that mean? Well, those of you who do use a password manager, how do you access that software itself?
+[0:34:14]  What's protecting your data and your understanding?
+[0:34:18]  So maybe biometrics like your your face ID or maybe your fingerprint or maybe more simply what else?
+[0:34:24]  Maybe just a password and hopefully that password that primary password that gatekeeper is not itself
+[0:34:31]  One two, three, four, five six. Otherwise, it doesn't matter how secure all of the others are
+[0:34:36]  But if you're willing to put in the effort and pick one pretty long
+[0:34:40]  Somewhat random very unguessable password that you just promise to commit to memory and maybe for backup
+[0:34:46]  You literally print it out and put it in a safe deposit box or a safe or just kind of hide it somewhere physically that there's
+[0:34:51]  Very low probability someone's gonna find the backup copy that might be alone
+[0:34:55]  But of course the flip side is now if you forget that mat that primary password
+[0:34:59]  You've now lost all of the eggs in the basket if someone gets that primary password now
+[0:35:04]  They have access to everything so that's rather the trade-off
+[0:35:08]  But I dare say you're probably less threatened depending on your family
+[0:35:12]  By the people immediately around you than the billions of other people on the internet that have access potentially to those same systems
+[0:35:20]  So there too
+[0:35:21]  It's a trade-off and it's up to you to decide whether or not to manage your passwords in this way
+[0:35:25]  But if you were on that top 10 list or even if you're not
+[0:35:28]  But you can think of several accounts that all have the same password
+[0:35:31]  You're probably going to benefit from something like this and why is it bad to be clear to use the same
+[0:35:37]  Password on multiple sites in case that's never sort of dawned in
+[0:35:42]  Thoughts why is that a bad thing to reuse a password on different websites different apps any intuition? Yeah and back
+[0:35:53]  Exactly once it's attacked you can print the adversary presumably by transitivity can see oh well if this user's
+[0:35:59]  Username is mailin at harvard.edu on this website and their password is foolishly one two three four five six or even something way more
+[0:36:06]  Complicated they can probably just assume with high probability that if I'm being a little reckless
+[0:36:10]  Let's try accessing mailin at harvard.edu's other accounts other apps using that exact same password and so by transitivity essentially you're putting your other
+[0:36:19]  Accounts at risk so what's maybe a takeaway minimally here? I would start to reconsider your pass codes on your most important data
+[0:36:25]  Maybe it's medical maybe it's financial maybe it's email anything remotely personal that you really wouldn't want to have access
+[0:36:31]  Do you necessarily need the same for level of security on?
+[0:36:35]  E-commerce sites or sites that you don't really care about or that you signed up for once and after that and that's it
+[0:36:41]  Probably not so you can decide for yourself
+[0:36:43]  But again software like a password manager, and these are just some of the possibilities out there
+[0:36:47]  Are probably to be your friend a couple of these are free they come with Windows or Mac OS a couple of commercial
+[0:36:53]  Harvard has a site license for students for one of these as well, so there are options out there
+[0:36:58]  But what else do people use what else can people use to keep their system secure so most of us nowadays have probably heard of?
+[0:37:05]  Encryption this technique for just kind of scrambling information so when you want to send a message an email or upload a
+[0:37:12]  photograph or use your credit card
+[0:37:14]  Hopefully it's not just being sent out for all to see but there's some kind of scrambling going on and some fancy mathematics ensure that encryption
+[0:37:21]  Ensures that only you the sender and someone else the receiver can
+[0:37:25]  Theoretically see what that credit card number is what that message is what that photograph is instead so encryption is sort of commonplace
+[0:37:33]  Nowadays both in websites and apps and ATMs and other such devices, but how does it work well back in week 2 of CS50?
+[0:37:40]  Your child learned a little something about encryption otherwise known as cryptography and one of the algorithms
+[0:37:45]  We talked about was quite simply something like this
+[0:37:48]  This is what we might call not only CS50 but plain text so very plain text that in this case is English and obviously
+[0:37:56]  Everyone in the room can read it
+[0:37:57]  But what if I wanted to send this message out to someone in this room or out on the internet or maybe equivalently back in
+[0:38:03]  The day maybe write a message down on a scrap of paper in grade school and pass a secret note a secret love note
+[0:38:08]  To someone in class with hopes that the teacher or any other students in the class can't intercept it and read it
+[0:38:14]  Well, you probably don't want to say this is CS50 or I love you or anything remotely sensitive
+[0:38:20]  But rather maybe you want to encrypt it and let's change the the T to you
+[0:38:24]  Maybe change the H to an I the I to a J the S to a T the I to a J
+[0:38:29]  The S to a T again the C to a D the S to a T
+[0:38:32]  And we'll just leave the numbers alone even though I worry someone could probably guess what this now does say nonetheless
+[0:38:37]  But what was the algorithm as I rattled those changes off whether student from week two or parents from?
+[0:38:44]  week now
+[0:38:45]  Yeah
+[0:38:47]  Just a one-letter shift and this is more sophisticatedly called a rotational cipher or a Caesar cipher after Caesar back in the day
+[0:38:55]  It's relatively simplistic but back in the day
+[0:38:57]  It's not so simplistic if you're the first person in the world to ever use it or think of it
+[0:39:02]  But nowadays this is not actually what we use but it's similarly mathematical in nature
+[0:39:06]  It's not quite as simple as just adding one or subtracting one to go from now what we'd call cipher text
+[0:39:11]  It's a plain test but it's similarly math that's involved and let me just stipulate that the way the math works is that
+[0:39:17]  The sender and the receiver just have to have in mind some kind of secret and the secret in this case would very trivially
+[0:39:23]  Be one but it could be a much bigger much more unguessable number or maybe some other secret
+[0:39:28]  We share the presumption being that my classmates my teacher in that grade school classroom
+[0:39:32]  If they don't know what that secret is that number is yeah
+[0:39:35]  They could try to brute force it and try all possible mathematics plus one plus two plus three
+[0:39:40]  But that's going to take them some time and they probably don't care enough
+[0:39:43]  And so my data might be and therefore relatively secure
+[0:39:46]  But we use encryption all the time nowadays
+[0:39:48]  And so for instance this is at the start of most URLs nowadays
+[0:39:52]  Even if you don't type it yourself with that said Safari and even Chrome now are kind of simplifying if not dumbing down
+[0:39:59]  User interfaces to just hide details that you and I as sort of normal users don't need to see
+[0:40:04]  24-7 but it is there and if in fact on your phone or laptop you click on the URL
+[0:40:09]  Even if it's super short initially you'll probably see the whole thing starting with this and the S means secure
+[0:40:15]  The S means that encryptions being used, but there's other forms of this not just when you visit websites
+[0:40:20]  There's this end-to-end encryption which is being talked about more nowadays
+[0:40:24]  Especially during kovat times with so many more of us on video and talking about more sensitive things
+[0:40:31]  Telemedicine talking to doctors things that you also wouldn't want to verbally or visually get out into the wild just like text
+[0:40:37]  What's different about end-to-end encryption versus HTTPS and the type of encryption that most of us use every day on websites alone
+[0:40:46]  End-to-end encryption is sort of a better feature that you want to increasingly seek
+[0:40:50]  when using services like zoom or Microsoft teams or
+[0:40:54]  What's app or the like?
+[0:40:57]  Any instincts here?
+[0:40:58]  Yeah over on the right
+[0:41:00]  Good, so the encryption the scrambling of information happens in the source the sender and the destination the receiver without a so called middle
+[0:41:14]  Man in between and this is actually very different from most context nowadays that use just
+[0:41:19]  HTTPS because when you're using HTTPS to buy something on Amazon securely with your credit card
+[0:41:24]  Well, of course Amazon needs to be able to decrypt the message at the end of the day and so that's fine
+[0:41:28]  But even when you're using services like video conferencing or maybe text messaging nowadays
+[0:41:34]  Well, if you're using what's app that's owned by meta and if you're using Instagram, that's owned by meta
+[0:41:39]  There's a lot of middlemen in these apps that we're using and if they were only using encryption period or only using something like
+[0:41:47]  HTTPS yes
+[0:41:48]  You're in your connection from you to whatsapp and in turn to the recipient might very well be secure on each end of that channel
+[0:41:55]  But meta in the between the company and any other company in between could theoretically for better for worse be looking at that data
+[0:42:02]  Whether it's to mine it for advertising purposes
+[0:42:04]  Whether it's to snoop on data that you're sending that is not end-to-end encryption if the middle man a company typically has
+[0:42:11]  Technically access to that data now zoom and Microsoft Teams and whatsapp and iMessage and other services with which you're familiar
+[0:42:18]  Increasingly are offering stronger guarantees of encryption whereby it's indeed between
+[0:42:23]  Parties A and B and not the one in the middle now
+[0:42:26]  There's downsides here and you can actually see this kind of functionality manifest in certain settings for instance besides iMessage
+[0:42:34]  Which just does this for you on iPhones or Macs besides zoom you can actually fine-tune these settings indeed within zoom itself
+[0:42:41]  So here's a screenshot that I took last night of just what the user interface looks like today to create a new zoom
+[0:42:46]  Meeting with the latest version of zoom software and maybe unbeknownst to you
+[0:42:50]  There's a choice of buttons down here and most likely yours is by default on enhanced encryption
+[0:42:56]  Which is brilliant marketing speed because it's just encryption. It's not enhanced
+[0:43:00]  It actually ironically means worse than this
+[0:43:02]  But they want you using it most likely why well it's a little easier to implement
+[0:43:07]  It's a little less expensive for them computationally and to be fair
+[0:43:11]  Enhanced encryption does scramble the data but not in a way that zoom can't see it zoom can indeed see it
+[0:43:17]  But that's actually a plus in some context because if you want to do like cloud recordings
+[0:43:21]  And you want a meeting recorded not on your Mac or PC
+[0:43:24]  But like let zoom deal with that if you want automatic transcription nowadays
+[0:43:28]  So the words to appear whether it's English or something else on the screen
+[0:43:31]  Well, you can't really lock zoom or any other middleman out of that because someone needs to save it to the cloud
+[0:43:36]  Someone needs to translate the voice to those English or some other language words
+[0:43:41]  So enhanced encryption enables those features, but they also allow a bad actor malicious employees
+[0:43:46]  Someone who's just nosy at zoom or the equivalent middleman to just kind of poke around your video conference and hear what you've said
+[0:43:53]  Or see what you've typed as well unless you instead check this box as well
+[0:43:57]  So increasingly look for mentions of end-to-end encryption or give that some thought when you choose a technology via which to
+[0:44:04]  Communicate with someone whether it's within your family or without as well
+[0:44:08]  Now last but not least there's other applications of encryption too and this too might be a lesson learned as well
+[0:44:15]  Full disk encryption so a disk is like where your data is stored in your Mac or PC or even your phone and
+[0:44:21]  Full disk encryption just means ideally that all of your data is encrypted that is somehow scrambled now
+[0:44:27]  Hopefully your password for your computer or phone is good enough that
+[0:44:31]  Even though the device is encrypted with that password at least you'll remember it and your phone or your Mac or PC will automatically
+[0:44:37]  Decrypt it for you
+[0:44:38]  Of course, you can't scramble the information and hide it from ourselves one of us at least for these devices needs to have access
+[0:44:44]  But full disk encryption typically means that at least when you close the laptop lid or power down for the night
+[0:44:49]  That even if someone else steals that device opens the lid unless they don't unless they have your passcode
+[0:44:56]  They can't even plug in fancy cables to the device and just rip the zeros and ones off of the device and see what's actually there
+[0:45:03]  Full disk encryption means they could do that, but they would just see seemingly random zeros and ones now
+[0:45:09]  There's a downside here, too
+[0:45:10]  This might slow things down potentially but it is a feature increasingly that's offered and it's absolutely something you should consider enabling
+[0:45:17]  In general, especially if your laptop or phone travels with you and certainly your phone does or if you plan to donate or sell
+[0:45:24]  Or give away a device
+[0:45:25]  You don't want to leave all of the zeros and ones the remnants of your own sensitive data passed on there
+[0:45:30]  So windows has a feature called bit locker mac os has a feature called file vault
+[0:45:34]  There's commercial options as well
+[0:45:36]  But generally we're at the point now in 2022
+[0:45:38]  We're clicking a button is sufficient to enable these features with that said don't rush into all of these decisions
+[0:45:45]  I would make backups of your data and don't maybe email cs50 if something goes wrong with that process
+[0:45:50]  But I would do your own due diligence
+[0:45:52]  But this too would be a menu of possibilities
+[0:45:55]  And now the bad side the downside of what seems to be great this notion of full disk encryption
+[0:46:02]  Unfortunately, just as we can encrypt our data to protect it from the adversaries
+[0:46:06]  So can the adversaries if they get into our devices
+[0:46:10]  Encrypt our data and do what not tell us that secret key
+[0:46:14]  And so this is generally applied in the context of ransomware
+[0:46:17]  Which tragically you increasingly hear about in hospital systems school systems municipalities where systems are getting attacked
+[0:46:23]  And the data is not just getting stolen because what does the adversary typically need with like local municipal or even hospital data?
+[0:46:29]  The value to the adversary is encrypting all of the hospital all of the municipalities data
+[0:46:35]  Preventing them from accessing it if they have no backups or the like
+[0:46:39]  And so ransomware is literally about trying to convince someone to pay you money or pay you bitcoin or something like that
+[0:46:44]  To give you that secret key and this key in this case is surely more sophisticated than the number one
+[0:46:49]  But it's really the same idea
+[0:46:51]  So here too yet again a trade-off just as we sort of invent something for good
+[0:46:55]  It can also be used for evil in so to speak as well
+[0:46:58]  But it's really the same underlying principles even though we keep seeing it and hearing about it in these different forms
+[0:47:05]  And lastly if only because folks are generally familiar but don't necessarily know what it is that it's doing for them
+[0:47:11]  Browsers nowadays have what's often called incognito mode or private mode
+[0:47:15]  Which has nothing to do with encryption but does have to do with cyber security or really cyber privacy keeping your data from prying eyes
+[0:47:23]  Incognito mode if you open it in chrome for instance looks a little something like this and we use it in cs50 when introducing
+[0:47:28]  Students as we did last week to web programming because it in effect lets you start with a clean slate like a brand new browser
+[0:47:35]  That has never visited any websites before which is good for just diagnosing problems
+[0:47:38]  But it's often commonly used if you want to log into maybe your gmail account on someone else's computer
+[0:47:43]  And you don't want your password being saved or you want to visit some website where you don't want the url or the search terms
+[0:47:48]  Ending up in your autocomplete history. So there's multiple uses for incognito mode, but what does it really do?
+[0:47:54]  Well, it doesn't stop your company
+[0:47:56]  It doesn't stop your university your internet service provider be it comcast verizon or the like
+[0:48:01]  From knowing what websites you go to because ask your students a couple weeks ago. We talked about actually a week ago
+[0:48:07]  We talked about how the internet works and unfortunately every computer has an ip address, which is unique identifier
+[0:48:12]  Which goes out anytime you go anywhere incognito mode or not
+[0:48:16]  So this isn't really covering your tracks outside of your office or outside of your home or outside of your company
+[0:48:22]  But it is at least throwing away local information. And so we'll talk in fact in cs50s week nine this coming monday about
+[0:48:29]  Cookies which you might generally know about and what are called sessions and so long story short
+[0:48:34]  What incognito mode does is it throws away when you close the window any locally stored information
+[0:48:40]  To these things called cookies which are sort of like virtual hand stamps that just remember what you've logged in as or what's in
+[0:48:45]  Your shopping cart or the like but it doesn't hide any information from anyone outside of your own mac or pc
+[0:48:51]  It only prevents those local prying eyes
+[0:48:53]  so there too even though we have tools that many of you are probably in the habit of using or thinking you should use to
+[0:48:59]  Be more private be more secure on the internet
+[0:49:01]  What we do really in cs50 both weeks past and future is talk about how these technologies work
+[0:49:08]  So that ultimately we have all the more of an educated citizenry
+[0:49:11]  Here among undergrads and here as well as online so that you can apply these same lessons learned to problems
+[0:49:17]  You'll encounter in the future. So as promised the homework one should probably use a password manager
+[0:49:23]  It doesn't have to be one of those ones on the list
+[0:49:25]  But at least starting that conversation maybe with someone who does maybe the you know, it's often the you know, the
+[0:49:31]  The students in your family perhaps who can advise you on some of these technologies consider using a password manager too
+[0:49:36]  Using two-factor authentication whether it's your phone or some key fob or the like
+[0:49:40]  But at least seeking out that feature at least for accounts that you really care about your email social media financial medical anything where
+[0:49:47]  You'd be embarrassed at best or really violated at worst if that kind of information got out
+[0:49:52]  And then increasingly using not just encryption which you kind of get automatically for most technologies today
+[0:49:57]  But increasingly choosing technologies that offer stronger guarantees that keep those middlemen those companies out of the way
+[0:50:04]  If only so that you can trust with higher probability that only party b
+[0:50:08]  Knows what party a has said or sent now. This of course was a whirlwind tour
+[0:50:13]  There's so much more that you can do online indeed
+[0:50:16]  This course cs50 can be taken for free online via platforms like edX at edX.org
+[0:50:21]  CS50 I thought it might be appropriate to end on this note
+[0:50:25]  If anyone would like to conjecture before we start playing music and adjourn for lunch
+[0:50:31]  What our final message here is?
+[0:50:35]  If we reverse the plus one and maybe start minus one here
+[0:50:39]  Minus one here and indeed. Thank you so much for coming. This was cs50

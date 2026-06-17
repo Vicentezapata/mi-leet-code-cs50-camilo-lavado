@@ -1,6 +1,6 @@
 """
 =============================================================================
-PRUEBA RÁPIDA — GPU (transcribe solo chunk_007.mp3)
+PRUEBA RÁPIDA — GPU (transcribe solo chunk_025.mp3)
 =============================================================================
 
 Sirve para verificar que CUDA y faster-whisper funcionan correctamente
@@ -13,7 +13,7 @@ CÓMO EJECUTAR:
     python transcribir_uno_gpu.py
 
 RESULTADO:
-    chunk_007_transcripcion_gpu.txt  — con timestamps por segmento
+    chunk_025_transcripcion_gpu.txt  — con timestamps por segmento
 =============================================================================
 """
 
@@ -46,8 +46,8 @@ except ImportError:
     print("       pip install faster-whisper")
     sys.exit(1)
 
-ARCHIVO      = "chunk_007.mp3"
-SALIDA       = "chunk_007_transcripcion_gpu.txt"
+ARCHIVO      = "chunk_025.mp3"
+SALIDA       = "chunk_025_transcripcion_gpu.txt"
 MODEL        = "medium"
 DEVICE       = "cuda"
 COMPUTE_TYPE = "float16"

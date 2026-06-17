@@ -1,0 +1,1224 @@
+# Transcripción: chunk_016.mp3
+# Modelo: medium | Duración audio: 0:59:59
+
+[0:00:00]  Structured query language.
+[0:00:01]  And this is a language that, rest assured, is actually much smaller,
+[0:00:05]  relatively speaking, than C and Python.
+[0:00:07]  It sort of does less, but it does it really well.
+[0:00:10]  And it's a language for querying databases, storing data in it,
+[0:00:13]  updating it, inserting it, deleting it, and so much more.
+[0:00:16]  And it's the kind of technology that's used nowadays in, indeed,
+[0:00:19]  web apps and mobile apps, data science, analytics, and so much more.
+[0:00:23]  It's really good at storing lots and lots of data.
+[0:00:26]  Now, this is yet another language.
+[0:00:27]  And believe it or not, next week, we'll introduce you to three more languages,
+[0:00:32]  HTML and CSS, which are not technically programming languages.
+[0:00:35]  They're all about aesthetics and markup of information,
+[0:00:38]  but also JavaScript, which is, in fact, a programming language.
+[0:00:41]  But the goals here in CS50 really are going
+[0:00:44]  to be to empower you to program more generally.
+[0:00:46]  And indeed, when you're out there in the real world some years from now,
+[0:00:48]  invariably, there's going to be some new other popular language out there.
+[0:00:52]  And hopefully, in this week and next week and beyond, among the goals
+[0:00:56]  is not just to teach you these languages specifically, but again,
+[0:00:59]  how to teach yourself the future languages
+[0:01:01]  that we've not even heard about just yet.
+[0:01:02]  So with that said, let's begin with a survey of sorts.
+[0:01:06]  If you go to this URL on your phone or laptop, cs50.ly slash favorites,
+[0:01:12]  a very simple Google form awaits you that's just going to ask you
+[0:01:16]  a couple of multiple choice questions.
+[0:01:19]  So go to cs50.ly slash favorites.
+[0:01:24]  And that should lead you to a Google form
+[0:01:27]  that looks a little something like this, asking you first,
+[0:01:30]  as of now in week seven, what is your favorite language
+[0:01:33]  among those options here?
+[0:01:34]  And then further down, one more question.
+[0:01:36]  If you think back on problem sets 0 through 6, what was, if any,
+[0:01:41]  your favorite problem set problem, be it in Scratch or C or Python?
+[0:01:47]  So answer those two questions.
+[0:01:51]  And in a moment, I'll flip over to my screen
+[0:01:53]  here, where you'll see, and anyone who's used Google Forms
+[0:01:57]  knows, the spreadsheet that's collecting now this data.
+[0:02:00]  Microsoft Office 365 can do the same if you use one of those forms.
+[0:02:03]  And what you see here now is a spreadsheet in Google Sheets
+[0:02:06]  enumerating all of the audience's questions.
+[0:02:09]  Language is in column B. Problem is in column C.
+[0:02:12]  And each row represents one student who has responded.
+[0:02:15]  A few of you were super eager for class today at 8.33 AM Eastern time, 10.32,
+[0:02:20]  11.10.
+[0:02:21]  OK, so now we're getting into the actual class time here.
+[0:02:24]  And if I scroll down, we'll probably see a few dozen,
+[0:02:27]  couple hundred answers by now.
+[0:02:29]  And yeah, so we're getting a whole lot of answers here.
+[0:02:31]  And I'm seeing some patterns emerge.
+[0:02:33]  But it's not necessarily obvious to dehumanize what those patterns are.
+[0:02:36]  Now, of course, you can use Google Spreadsheets.
+[0:02:38]  You can highlight the data.
+[0:02:40]  And you can create charts magically out of it.
+[0:02:42]  But you can only do what Google lets you do with the data.
+[0:02:45]  And same thing for Microsoft Excel or Apple Numbers.
+[0:02:47]  But wouldn't it be nice to just be able to manipulate
+[0:02:49]  the raw data, relatively simple though it is,
+[0:02:52]  to just answer questions about the data?
+[0:02:54]  Maybe long term create your own charts.
+[0:02:55]  Customize it just the way you want, rather than be holding to software
+[0:02:59]  that's off the shelf like this.
+[0:03:01]  Well, how could we go about doing this?
+[0:03:04]  Well, let me propose that we treat this data set now as what
+[0:03:08]  we're going to call, for now, a flat file database.
+[0:03:11]  We'll see today that there's fancier databases.
+[0:03:13]  But the simplest database in the world is really just like a .csv file.
+[0:03:17]  We saw that a couple of weeks ago in C. We
+[0:03:20]  wrote a bit of C code that used fprintf to write data to a file using
+[0:03:24]  commas as the separator.
+[0:03:26]  We didn't really do much more with CSVs at the time, though,
+[0:03:28]  because it's really annoying, painful, time consuming,
+[0:03:31]  not fun to use C for something like that because of malloc and memory
+[0:03:34]  and all that stuff.
+[0:03:35]  But with Python, it's going to be much easier.
+[0:03:37]  And so any time you have access to some data set
+[0:03:40]  where you can just download it to your own Mac or PC or your cloud
+[0:03:44]  it's sort of a candidate for now writing code to do something with the data.
+[0:03:48]  Maybe analyze it right away.
+[0:03:50]  If it's been human imported manually, maybe you
+[0:03:52]  have to clean it up by doing a lot of find and replace,
+[0:03:55]  but not with your keyboard, but rather with code.
+[0:03:57]  And so let me go ahead and do this.
+[0:03:58]  Let me go back to my Google Sheet here that has all of the data that's
+[0:04:03]  come in now.
+[0:04:04]  And let me go ahead and download this via the File menu here.
+[0:04:10]  And let's see.
+[0:04:12]  Download.
+[0:04:12]  And you can see a whole bunch of options.
+[0:04:14]  If most formats might be familiar, but today we'll
+[0:04:16]  focus just on this one, comma, separated values, or CSV.
+[0:04:19]  That's going to go ahead and download it on my Mac
+[0:04:21]  here into my own downloads folder.
+[0:04:23]  And now I'm going to go ahead and do this.
+[0:04:25]  Let me go ahead and pull up VS code in the cloud here.
+[0:04:27]  And if you've never done this before, there's a couple of ways to do it.
+[0:04:30]  But the simplest way to upload a file to your code space, so to speak,
+[0:04:33]  is just to sort of drag and drop.
+[0:04:35]  That's going to magically upload it to the server there.
+[0:04:38]  And we'll see that, one, it has a very long file name, which I'm actually
+[0:04:42]  going to clean this up because that's going to be very tedious to type in my code.
+[0:04:46]  So I could either right click, of course, up here.
+[0:04:49]  But I'm going to use my Linux command.
+[0:04:50]  So let's move this file called cs50-2022-something-or-other.
+[0:04:54]  And let's just name it more simply favorites.csv.
+[0:04:57]  So all lowercase, no spaces, sort of good basics.
+[0:05:01]  And let me go ahead now and open up this file with code favorites.csv.
+[0:05:05]  I'll close my file explorer.
+[0:05:07]  And we'll see exactly the same data as before, but not quite as pretty
+[0:05:11]  as Google Sheets makes it be.
+[0:05:12]  Rather, we see here that I still have three columns, timestamp, language,
+[0:05:16]  problem, and then all of the values down below,
+[0:05:18]  including the timestamps and the answers therefor.
+[0:05:20]  But it doesn't have proper columns.
+[0:05:22]  It just has commas separating them.
+[0:05:24]  Now, we could very easily write Python code,
+[0:05:27]  just like we wrote C code, to manipulate files like this,
+[0:05:31]  either to write or read.
+[0:05:32]  But instead, let's do something that's a little more pleasant,
+[0:05:35]  which is indeed in the form of Python.
+[0:05:37]  So Python actually comes with native support for CSVs.
+[0:05:40]  It has, indeed, a package called CSV that just lets you read and write
+[0:05:44]  and do a whole bunch of useful stuff when it comes to CSV files.
+[0:05:47]  So let's go ahead and do something with this file.
+[0:05:49]  Let me go back here to VS Code.
+[0:05:51]  I'm going to close favorites.csv for now.
+[0:05:54]  But just remember in your mind that timestamp was the first column,
+[0:05:57]  language was the second column, and problem was the third.
+[0:06:01]  And notice, because we're using commas, they don't, again, line up perfectly.
+[0:06:04]  But that's not a problem.
+[0:06:05]  There are two commas in every line, presumably.
+[0:06:07]  And I'm going to go ahead and now create a file called, how about favorites.py,
+[0:06:12]  so that I can start writing some code to manipulate this data.
+[0:06:14]  And let's do something simple.
+[0:06:16]  Let's just write a simple program in Python that opens this file,
+[0:06:19]  reads it, and prints something out, just as like a safety check
+[0:06:22]  that I know what I'm doing, even though it's not going to be useful.
+[0:06:25]  So in Python, if you want CSV support, you import CSV.
+[0:06:29]  And that gives you access to all the magical capabilities thereof.
+[0:06:32]  Let me now go ahead and use this technique
+[0:06:34]  to open a file in Python, which is similar in C. But with Python,
+[0:06:39]  I'm going to do this.
+[0:06:40]  The keyword with, I'm going to open a file called favorites.csv,
+[0:06:44]  which was the shorter name I gave it.
+[0:06:46]  This is optional, but just for explicitness,
+[0:06:48]  I'm going to open it in read mode explicitly, just like fopen took
+[0:06:52]  a second argument as well.
+[0:06:54]  And I'm going to name this file once opened, quite simply, file,
+[0:06:56]  though I could call it anything I want.
+[0:06:58]  And now it's just an open file.
+[0:07:01]  So far as Python knows at this moment, it's just text.
+[0:07:04]  Or better yet, it's just zeros and ones.
+[0:07:06]  If you want this Python package called CSV to actually do something useful
+[0:07:11]  with it, you have to load this file now into the library.
+[0:07:14]  And the simplest way to do this is to give myself
+[0:07:17]  a variable called reader, because I want to read this file.
+[0:07:19]  Though this, too, I could call anything else.
+[0:07:22]  I'm going to then set that equal to the return value of a function called
+[0:07:25]  csv.reader.
+[0:07:27]  And I pass to that, per the documentation, the open file.
+[0:07:30]  So step one, I open the file.
+[0:07:32]  And this just gives me access to the bytes they're in.
+[0:07:34]  Step two now, with csv.reader, tells the Python package called CSV
+[0:07:39]  to do something useful with it and start analyzing the commas
+[0:07:43]  and allow me to parse it further.
+[0:07:46]  So let's go ahead and do this.
+[0:07:47]  Let me go ahead now.
+[0:07:48]  And within this loop, let's say this.
+[0:07:52]  Sorry, within this open file, let's do this.
+[0:07:54]  For every row, if you will, or line in the file, a.k.a.
+[0:08:00]  reader, let's go ahead and print out just how about row bracket 1.
+[0:08:07]  Now, what's going on here?
+[0:08:08]  Well, it turns out if you read the documentation for the csv.reader
+[0:08:11]  function, what it hands you back is essentially
+[0:08:14]  this special object, so to speak, that allows
+[0:08:17]  you to treat it as though it's just a really big list of lines
+[0:08:21]  from the file, a.k.a.
+[0:08:22]  reader.
+[0:08:23]  So by saying for row in reader, this is a way more succinct way of saying,
+[0:08:28]  give me the first line in the file, plus plus.
+[0:08:31]  Give me the second line in the file, plus plus, and so forth.
+[0:08:33]  That we would have done much more mechanically in C.
+[0:08:36]  This is just much more Pythonic and English friendly, if you will.
+[0:08:39]  So in every iteration of this loop, row is
+[0:08:43]  going to contain all of the data from the current row.
+[0:08:45]  But better yet, what the reader function does for me is it hands me each row,
+[0:08:50]  not just as a big string or stir of text in Python.
+[0:08:54]  It gives me what, apparently, based on the syntax on line 6?
+[0:08:59]  Any instinct?
+[0:08:59]  Yeah.
+[0:09:01]  It's giving me back indeed a list.
+[0:09:02]  And I presume the visual clue for you was the fact
+[0:09:05]  that we're using square brackets here.
+[0:09:06]  And indeed, row bracket 1 is going to be not the first,
+[0:09:10]  but the second element in that list.
+[0:09:12]  And so just take a guess.
+[0:09:13]  When I run this code in a moment, what's going to get printed?
+[0:09:16]  The timestamp, the language, or the problem?
+[0:09:23]  Yeah.
+[0:09:24]  The language.
+[0:09:25]  Because it's the second column that is in the file,
+[0:09:28]  delimited by those commas.
+[0:09:30]  So let me go ahead and do this.
+[0:09:31]  Let me clear my terminal down here.
+[0:09:33]  Let me run Python of favorites.py and enter.
+[0:09:36]  And there's everything.
+[0:09:37]  It was super fast, but there's a really long list here.
+[0:09:39]  And in fact, if I increase the size of my terminal and start scrolling up,
+[0:09:43]  you'll just see all of the raw data.
+[0:09:45]  Now, this isn't that useful yet.
+[0:09:46]  I could have just glanced at the CSV, but clearly now I
+[0:09:49]  have the ability to open the file, parse it, so to speak.
+[0:09:52]  That is, break it up into its constituent parts
+[0:09:55]  and do something with specific parts therein.
+[0:09:59]  All right, so if I want to do this a little more pleasantly,
+[0:10:01]  though, let me at least make this semantically a little cleaner.
+[0:10:04]  And you know what, just for clarity, let me just give myself a variable.
+[0:10:07]  It's not strictly necessary, but I know that this
+[0:10:11]  is the favorite, for instance, language.
+[0:10:15]  So let's just call it favorite, set it equal to row, bracket 1.
+[0:10:18]  And now just to be more explicit in my code,
+[0:10:21]  even though, again, we don't need the variable per se,
+[0:10:23]  this code's, of course, going to do the same thing.
+[0:10:25]  It's just using an additional variable called favorite.
+[0:10:27]  If I go down here, scroll up, run the program again,
+[0:10:30]  I get back the exact same data.
+[0:10:32]  But this is a stepping stone to something that's even more powerful
+[0:10:36]  about Python support for CSV files is that you don't have to just treat
+[0:10:40]  the return value as a list with 0 and 1 and 2.
+[0:10:46]  So just thinking intuitively here, why is this maybe not the best design
+[0:10:50]  to hand you, the programmer, back the data in a list that's numerically
+[0:10:55]  indexed with 0, 1, 2?
+[0:10:58]  It clearly works, but critique this.
+[0:11:02]  What could go wrong?
+[0:11:03]  What's a little poorly designed?
+[0:11:05]  Yeah, yeah, exactly.
+[0:11:14]  So yeah, so it's up to you to repeat.
+[0:11:17]  It's up to you to remember what column the data is actually in.
+[0:11:20]  And God forbid you're collaborating with someone else on the spreadsheet.
+[0:11:24]  If you've used Google Spreadsheets, you can move columns around.
+[0:11:27]  Maybe just because you want to visually reorganize things.
+[0:11:29]  And if you do this, and then someone else downloads that same data,
+[0:11:32]  all of their code is going to break.
+[0:11:34]  So that's just really bad design.
+[0:11:35]  It's fragile, just because you're sort of on the honor system
+[0:11:38]  that one means the data that you want.
+[0:11:40]  So wouldn't it be nice if we could be a little more explicit?
+[0:11:43]  Well, recall that the very first line in this file is actually this.
+[0:11:49]  And I paused the output this time so that we can see more optionally.
+[0:11:53]  I just reran favorites.py, and notice one of these things is not like the other.
+[0:11:57]  Every output was either Scratch or C or Python, except for this first one.
+[0:12:01]  Why am I seeing the word language here?
+[0:12:06]  Where did language come from?
+[0:12:08]  You didn't have the ability to manual input.
+[0:12:10]  No?
+[0:12:12]  Where did it come from?
+[0:12:12]  Yeah.
+[0:12:14]  Yeah, the header, the very first row in the file, which by human convention
+[0:12:17]  generally just defines what the columns represent so that there's
+[0:12:20]  some human useful information there.
+[0:12:22]  Now, that's not really intended to be part of my output at the moment.
+[0:12:26]  So there is a way to skip this.
+[0:12:28]  If you want to skip the first row, you can actually do something like this.
+[0:12:31]  You can say next row.
+[0:12:33]  And that will just ignore that row so that I'm starting really
+[0:12:36]  with every row thereafter.
+[0:12:38]  But there's a better way to handle this than that.
+[0:12:40]  That will get rid of the row in the output.
+[0:12:42]  But let me go ahead and use a different feature of the CSV package
+[0:12:45]  that's just going to make this a little cleaner altogether.
+[0:12:47]  So let me clear my terminal window here.
+[0:12:49]  Let me undo this next thing that I just added.
+[0:12:52]  And instead of using a reader, let me go ahead and use a dictionary reader,
+[0:12:57]  abbreviated dict reader, that's going to now return me
+[0:13:01]  the equivalent of all of the rows, one at a time.
+[0:13:04]  So I can still call it reader, just as before.
+[0:13:07]  But as the name implies, what this reader is going to return
+[0:13:10]  is not a list after list after list, but a dictionary, a dictionary,
+[0:13:15]  a dictionary.
+[0:13:15]  And remember, a dictionary is just a collection of key value pairs.
+[0:13:18]  So what does that mean?
+[0:13:20]  What are the keys?
+[0:13:20]  What are the values?
+[0:13:22]  Well, now that I'm using a dictionary reader, I can actually do this.
+[0:13:25]  Instead of sort of on the honor system remembering that I want column one,
+[0:13:29]  I can treat row now not as a list, but as a dictionary.
+[0:13:33]  And that means I can go in here and say, quote unquote, language.
+[0:13:36]  And we saw that back in week six.
+[0:13:38]  Python allows you to index into dictionaries
+[0:13:41]  using square bracket notation in strings or stirs on the inside,
+[0:13:45]  just like lists allow for numbers.
+[0:13:47]  But this now, I think, is going to be a little more robust.
+[0:13:50]  If I run this again, python of favorites.py, all of that worked out fine.
+[0:13:55]  And let me pause the output, too, by using this program called more.
+[0:13:59]  Now, I don't even see the header.
+[0:14:01]  So now, whoever works it with Python wrote the code for this package
+[0:14:06]  to just analyze that first line of code, use the header,
+[0:14:09]  as you just called it, as the keys.
+[0:14:11]  And then every time you iterate through this loop,
+[0:14:13]  it updates the values, the values, the values, but the keys stay the same.
+[0:14:18]  Any questions, then, on this technique?
+[0:14:22]  If I said to say, this would be painful in C. Yes.
+[0:14:36]  Exactly.
+[0:14:36]  So the keys are always going to be, quote unquote,
+[0:14:38]  timestamp, language, and problem.
+[0:14:42]  But on each iteration of this loop here, the row
+[0:14:45]  is going to contain a different row of values, different row of values,
+[0:14:49]  different row of values.
+[0:14:50]  So you're going to get back one dictionary for every student who
+[0:14:53]  submitted the Google Form, if you will, while iterating through it there.
+[0:14:56]  All right, so once we have this ability here,
+[0:14:59]  why don't we go ahead and transition to, how about not just
+[0:15:04]  using that dictionary reader, which makes the code a little more robust?
+[0:15:08]  Because now, if you move the columns around, no big deal.
+[0:15:10]  It doesn't matter if the numeric indices change.
+[0:15:13]  You can still use those keywords instead.
+[0:15:16]  But let's actually analyze the data now.
+[0:15:17]  I'm just spitting it out, which is not solving any problems for anyone.
+[0:15:21]  So let's go ahead and count the popularity of Scratch, C, and Python,
+[0:15:25]  and see what everyone's been thinking here.
+[0:15:28]  All right, so how might I do this?
+[0:15:30]  Well, let me go ahead and do this up here.
+[0:15:32]  Before I start iterating, let me give myself, let's say, three variables.
+[0:15:36]  And to keep things simple, I'll say one variable called Scratch,
+[0:15:39]  set it equal to 0 for 0 students so far.
+[0:15:42]  C is going to equal 0, and Python is going to equal 0.
+[0:15:46]  There's a slightly prettier way of doing this,
+[0:15:48]  just because this is like three lines of code to do something very simple.
+[0:15:51]  You could alternatively, in Python, but not C,
+[0:15:55]  do Scratch, C, Python equals 0, 0.
+[0:16:01]  So kind of slightly more elegant, just to fit it all onto one line.
+[0:16:04]  But now let's just do something more interesting.
+[0:16:06]  On line seven, I'm still going to figure out
+[0:16:08]  what the current favorite language is.
+[0:16:10]  And now I'm just going to do some conditional checks.
+[0:16:14]  How about if that favorite equals equals, quote unquote, Scratch?
+[0:16:19]  Let's go ahead and increment Scratch by 1.
+[0:16:22]  We can't do plus plus in Python, but we can do plus equals 1.
+[0:16:26]  How about l if favorite equals equals C?
+[0:16:29]  Then let's do C plus equals 1.
+[0:16:33]  We could do else.
+[0:16:34]  This is actually a good design question.
+[0:16:36]  Should I do else?
+[0:16:37]  Should I do l if?
+[0:16:39]  Any instincts here?
+[0:16:41]  Yeah.
+[0:16:49]  Yeah, really good instincts.
+[0:16:50]  Just in case someone goes and adds another language to the form next week,
+[0:16:53]  because we're obviously going to introduce another language today.
+[0:16:55]  You don't want your code to now artificially inflate
+[0:16:58]  the scores for Python just because you're conflating
+[0:17:01]  multiple languages together.
+[0:17:02]  So the more defensive, sort of better way to write this code, I agree,
+[0:17:06]  would be l if favorite equals equals Python.
+[0:17:10]  Then let's go ahead and increment Python plus equals 1.
+[0:17:13]  And if there's a new language next week,
+[0:17:15]  we're obviously going to have to update the code.
+[0:17:16]  But at least we're not miscounting.
+[0:17:18]  We're just missing the new language.
+[0:17:19]  So I think that's slightly more robust.
+[0:17:21]  All right, now at the very bottom of this program and outside of the loop,
+[0:17:24]  when I'm all done counting, let me go ahead and print out using some F
+[0:17:28]  strings how about the total number of people whose favorite is scratch.
+[0:17:34]  So this is just week six F string syntax.
+[0:17:37]  Let me go ahead and print out another F string for C.
+[0:17:40]  And I'm, of course, putting the variables in curly braces, all lowercase,
+[0:17:44]  but the English words I'm doing capitalization for.
+[0:17:47]  Let's do a final one with F, Python, colon, and then in curly braces,
+[0:17:51]  Python, close quote.
+[0:17:53]  And I think I'm done.
+[0:17:54]  So let me just hide my terminal for a second.
+[0:17:56]  Here's the total program, same stuff as before, open favorites.csv,
+[0:18:01]  open it further with the dictionary reader to do that processing for us,
+[0:18:05]  initialize three variables to 0 just so we have something to count with,
+[0:18:08]  and then iterate over the file row by row.
+[0:18:11]  And this is just some sort of week one style conditional logic,
+[0:18:14]  albeit in Python, counting things.
+[0:18:17]  All right, so how can we now execute this?
+[0:18:19]  Let me go back to my terminal, Python of favorites.py.
+[0:18:23]  And here we go.
+[0:18:24]  As of today, everyone who's reporting in live via the Google form,
+[0:18:28]  their favorite languages are interesting.
+[0:18:33]  That's pretty interesting, too, after just one week of Python, no less.
+[0:18:37]  But Scratch is a healthy contender there, a lot of C. So a pretty good mix here.
+[0:18:40]  So is this going to be the best way to write this program long term?
+[0:18:45]  Well, as you noted, if there's a new language next week, this week,
+[0:18:48]  we're going to have to constantly update this.
+[0:18:50]  And here's where you should let your mind wander to the future.
+[0:18:54]  If we have a fourth language, fifth language, sixth, seventh, eighth,
+[0:18:57]  which aspect here might kind of have some code smell to it?
+[0:19:01]  Like, this probably isn't the best design to set us up for the future.
+[0:19:06]  What might be better than this?
+[0:19:09]  Yeah?
+[0:19:12]  Yeah, we have to keep adding a language to line five.
+[0:19:14]  And OK, not a big deal.
+[0:19:15]  We could add like SQL today and maybe JavaScript next week.
+[0:19:19]  But you know, any time a line of code, a line of logic,
+[0:19:21]  it's just going to kind of grow out of control.
+[0:19:23]  And we've had this chat a couple of times with different syntax.
+[0:19:26]  There's probably a better way than that.
+[0:19:28]  So let's do that.
+[0:19:29]  Instead of using these individual variables, we could maybe use a list.
+[0:19:33]  But a list would be a little confusing because like, what does bracket zero
+[0:19:37]  mean, what is bracket one, bracket two?
+[0:19:39]  But a dictionary, recall, is like this Swiss army knife of data structures
+[0:19:43]  whereby you can associate anything with anything else, keys with values.
+[0:19:47]  So I dare say a cleaner way to solve this problem that sets us up
+[0:19:50]  for less work or confusion later would be to create like a new variable called
+[0:19:54]  counts, if that's what we're doing, counting things up,
+[0:19:57]  and just set it equal to an empty dictionary.
+[0:20:00]  And you can literally say dict with the open parentheses,
+[0:20:03]  closed parentheses, and nothing.
+[0:20:04]  Or the more Pythonic, just use open and closed curly braces
+[0:20:08]  with nothing inside.
+[0:20:09]  That gives me an empty dictionary just like square brackets gives me a list.
+[0:20:13]  Now, my logic down here has to change a little bit.
+[0:20:16]  But what's nice is I don't need one conditional for every language.
+[0:20:21]  Because again, if we have a fourth, a fifth, a sixth,
+[0:20:23]  that chunk of code is also going to grow a bit out of control too.
+[0:20:27]  So I can get rid of this here.
+[0:20:29]  And what I think I'm going to do is say this.
+[0:20:31]  Whatever the current favorite is from the current row in the file,
+[0:20:35]  why don't we go into our counts variable at that key.
+[0:20:40]  And again, favorite is a variable.
+[0:20:42]  It's not quote unquote favorite.
+[0:20:44]  It's going to be scratch, or C, or Python.
+[0:20:47]  And then why don't we go ahead and just increment
+[0:20:49]  whatever the value of that count is at that key.
+[0:20:54]  Now, this is technically buggy.
+[0:20:55]  We're really close.
+[0:20:56]  But there is a bug.
+[0:20:59]  Does anyone want to conjecture what the bug is?
+[0:21:02]  Yeah.
+[0:21:10]  A good question that answers my question nonetheless.
+[0:21:14]  So no, like the magic you describe will not happen.
+[0:21:16]  And to repeat the hypothesis, will this automatically
+[0:21:19]  create a key for every language that we try plugging
+[0:21:25]  into those square brackets?
+[0:21:26]  Short answer, no.
+[0:21:27]  Odds are this is going to create a key error, one of those traceback error
+[0:21:31]  messages that you've probably seen by now, either in class or in problem sets,
+[0:21:34]  whereby if scratch hasn't appeared in the dictionary before, or C, or Python,
+[0:21:39]  then the dictionary has no clue what you're talking about.
+[0:21:42]  So I think we actually still need some conditional logic,
+[0:21:45]  but not that's going to grow longer and longer with each language.
+[0:21:48]  What I think we probably want to do is this.
+[0:21:50]  If the current favorite is in the counts dictionary,
+[0:21:55]  and this is the Pythonic way of just saying is this key in this dictionary,
+[0:21:59]  then go ahead and safely do counts favorite plus equals 1.
+[0:22:04]  Else, to your conjecture now, else what I want to do.
+[0:22:07]  Counts favorite equals 1.
+[0:22:12]  So initialize a brand new key to a brand new value of 1,
+[0:22:16]  because I'm obviously just seeing this language.
+[0:22:19]  Otherwise, increment again and again.
+[0:22:21]  And now down here, I just need to tweak my syntax a little bit.
+[0:22:25]  I don't need to print out all of these things one at a time manually.
+[0:22:29]  I can actually get away, I think, with another loop at the very bottom here.
+[0:22:33]  So how about I do this.
+[0:22:34]  For each favorite in those counts, and this is, again, the Pythonic way
+[0:22:38]  to iterate over all of the keys in a dictionary,
+[0:22:42]  go ahead and print out, using an F string, whatever the current favorite is,
+[0:22:47]  Scratch, or C, or Python, and then a colon,
+[0:22:51]  and then figure out what its count is.
+[0:22:54]  And you can do that by going into the counts dictionary,
+[0:22:57]  looking at the favorite key, and get back its value.
+[0:23:01]  So I close my curly braces, I close my quotes.
+[0:23:03]  And even though this looks ugly at the moment,
+[0:23:05]  now this is much more dynamic.
+[0:23:07]  Because if we go and add SQL to the CSV file tomorrow,
+[0:23:10]  or we add JavaScript next week, this will just work.
+[0:23:13]  It will keep working now automatically.
+[0:23:15]  All I change is the Google form, not my actual code.
+[0:23:17]  All right, let's try Python of favorites.py.
+[0:23:20]  Cross my fingers, as always.
+[0:23:21]  And there now is the data as of now.
+[0:23:25]  Questions on this code here?
+[0:23:27]  Yeah?
+[0:23:31]  Really good question.
+[0:23:32]  What if you wanted to print it in a particular order?
+[0:23:35]  Well, I could give you a couple of solutions.
+[0:23:37]  Like if you want to print it out in, it's already
+[0:23:40]  coincidentally in alphabetical order.
+[0:23:43]  So you got that for free, although that's just by chance here.
+[0:23:46]  But there is a way to do this.
+[0:23:47]  And let me propose that we go down here to my loop.
+[0:23:49]  And I explicitly use a function you might not have seen in Python yet,
+[0:23:52]  but it's literally called sorted, which is going to take either a list,
+[0:23:55]  or in this case, a dictionary, and by default, sort it by key alphabetically.
+[0:24:00]  Now, if my intuition is correct, this is not
+[0:24:03]  going to change the output, because it's already alphabetical.
+[0:24:06]  But if you read the documentation for the sorted function,
+[0:24:08]  it takes multiple parameters, potentially, some of which
+[0:24:11]  are named parameters.
+[0:24:12]  And so you can actually do this.
+[0:24:14]  If you want to sort the count, but you want to reverse the order for whatever
+[0:24:17]  reason here so that it's reverse alphabetical order,
+[0:24:20]  now let me go ahead and rerun this.
+[0:24:22]  And I'll keep the previous output on the screen.
+[0:24:24]  Enter.
+[0:24:24]  And now it's backwards alphabetically, if you will.
+[0:24:29]  Other questions on this here?
+[0:24:34]  No?
+[0:24:34]  How about then?
+[0:24:36]  How about then we transition to sorting by value?
+[0:24:42]  And this is going to escalate a little quickly, briefly,
+[0:24:45]  but then we'll tone it down again.
+[0:24:47]  Notice that right now, this is indeed sorting by key.
+[0:24:50]  What if, especially if I have lots of data,
+[0:24:51]  it'd be nice to make a top 10 list, or in this case, a top 3 list,
+[0:24:55]  and actually see in order of the counts, the values,
+[0:24:59]  what these popular ones are.
+[0:25:01]  So it's not C, Python, Scratch.
+[0:25:03]  It should ideally be Python, then C, then Scratch,
+[0:25:06]  because of the values and the magnitude thereof.
+[0:25:09]  So how can I do this?
+[0:25:10]  Well, it turns out there's another key, another parameter
+[0:25:14]  that you can pass to the sorted function that is typically
+[0:25:18]  implemented as a function itself.
+[0:25:20]  And so I'm going to go ahead and do this.
+[0:25:22]  I'm going to temporarily define a function called getValue,
+[0:25:25]  just to make my life easier.
+[0:25:26]  And this getValue function is going to take, I'll say, a language parameter.
+[0:25:32]  And then all I'm going to do is return whatever
+[0:25:35]  the count is of that language.
+[0:25:37]  So out of context, this is just a super simple function
+[0:25:40]  that you hand in a language, like Scratch or C or Python.
+[0:25:43]  It's just going to tell you what the count is thereof
+[0:25:46]  in that dictionary called counts.
+[0:25:49]  But what I can do now down here in my newly introduced call to sorted
+[0:25:53]  is I can tell it what to use as its key.
+[0:25:56]  Instead of using literally the key, Scratch, C, Python,
+[0:26:00]  I can sort of override that behavior and say, you know what?
+[0:26:03]  To figure out what to sort by, go ahead and call this function called
+[0:26:08]  getValue.
+[0:26:10]  Notice that I have not put parentheses after getValue,
+[0:26:13]  because I don't want to call getValue right then and there.
+[0:26:17]  I want to pass the getValue function as itself in argument
+[0:26:22]  to the sorted function so that the sorted function, written years ago
+[0:26:25]  by the people at Python, can call my version of getValue again and again
+[0:26:29]  when they try to sort this actual data.
+[0:26:32]  So now if I add that and I leave reverse equals true, let's see what happens.
+[0:26:38]  Python of favorites.py, Enter.
+[0:26:40]  And now I get my top 10, or in this case, top three list.
+[0:26:44]  And if I had more sophisticated data with more columns altogether
+[0:26:47]  that I actually care about, I could even sort this more powerfully as well.
+[0:26:52]  But let me clean this up a little bit just so you've seen it,
+[0:26:55]  even though we won't use these that often in CS50,
+[0:26:58]  until the end of the class will they come up again.
+[0:27:00]  Technically, this is a little bit, this isn't necessarily
+[0:27:03]  the best design to spend all this time implementing a function
+[0:27:06]  and then only use it in one place.
+[0:27:08]  In general, we've argued that you don't necessarily
+[0:27:11]  need a variable if you're only going to use it in one place.
+[0:27:14]  You don't really need a function if you're only going to use it in one place.
+[0:27:16]  And here, we kind of have a good candidate for that.
+[0:27:19]  And so it turns out in Python, if you don't
+[0:27:21]  want to bother creating a function just to use it once,
+[0:27:25]  you can create what's called an anonymous function,
+[0:27:28]  AKA a lambda function, like the lambda symbol familiar.
+[0:27:32]  And a lambda function, the syntax is a little strange looking,
+[0:27:35]  but you say this.
+[0:27:36]  You literally say lambda.
+[0:27:38]  You literally then say the name of the argument
+[0:27:40]  that you want this anonymous function with no name to take.
+[0:27:44]  Then you have a colon, and then quite simply,
+[0:27:48]  you write what you want the return value of this function to be.
+[0:27:52]  You don't even say return literally.
+[0:27:54]  These lambda functions are meant to be used super tersely
+[0:27:57]  so that you can, in one line, express something like this.
+[0:28:03]  And I admit this looks more cryptic, I think, than the previous version.
+[0:28:06]  But as you get more comfortable with Python or other languages that
+[0:28:08]  support this feature, it allows you to not bother with lines of code like that
+[0:28:12]  and just tighten up your code a little bit.
+[0:28:14]  So this line here, lambda, language, colon counts language,
+[0:28:19]  is the one line version of this.
+[0:28:21]  And you don't even need to bother picking a name for it.
+[0:28:23]  Lambda tells Python, I didn't waste any time
+[0:28:26]  thinking of a name for this function.
+[0:28:28]  So questions then on this technique of using Python to analyze data like this?
+[0:28:37]  Any questions?
+[0:28:40]  We're almost done with Python.
+[0:28:42]  Questions?
+[0:28:44]  No?
+[0:28:45]  OK.
+[0:28:45]  So why don't we make things a little more interesting
+[0:28:48]  because we had a much juicier data set with the problems
+[0:28:51]  that we've assigned over the past several weeks.
+[0:28:53]  Why don't we go ahead and quite simply, I think,
+[0:28:57]  we wrote pretty darn good code here.
+[0:28:59]  So I think we can pretty much just change a bit of it to say,
+[0:29:05]  let's see, if I don't want language, I want problem.
+[0:29:08]  And if I want to sort by not language, but problem, I think that's it.
+[0:29:12]  I think if I didn't overlook something here,
+[0:29:14]  just by changing what column I'm reading the data from,
+[0:29:18]  and then just to be consistent, renaming my variables,
+[0:29:20]  just so I know what I'm looking at, what will this program now
+[0:29:23]  do after those minor changes?
+[0:29:28]  What will I see when I run this?
+[0:29:32]  What would be the first thing I see when I run this?
+[0:29:37]  Tough crowd today.
+[0:29:38]  Yes?
+[0:29:39]  Yeah, the problem, the top problem.
+[0:29:42]  So the most popular problem, which I'm a little worried it might be hello
+[0:29:46]  or just scratch, but let's go ahead and see.
+[0:29:47]  So let me go ahead and open my terminal window.
+[0:29:50]  I'll even maximize my terminal window so we can see a lot.
+[0:29:53]  Let me go ahead and run Python of favorites.py.
+[0:29:56]  I'm going to go ahead now and cross my fingers that I didn't mess up and hit
+[0:29:59]  Enter.
+[0:30:00]  And OK, great.
+[0:30:02]  We peaked early.
+[0:30:03]  So Scratch was the most popular program according to the data.
+[0:30:07]  At the time, I downloaded it.
+[0:30:08]  I'm sure other votes have come in since.
+[0:30:11]  Filter in week four was tied then with Tiedemann as well.
+[0:30:15]  Mario is a close third there, and so forth.
+[0:30:18]  So this is helpful for us on staff.
+[0:30:20]  That's not so much love down here at the bottom of the list.
+[0:30:23]  So it was a bunch of code to write, but now that we've written it
+[0:30:26]  in this very versatile, dynamic way, it's
+[0:30:28]  pretty good for just crunching data and doing some analytics.
+[0:30:31]  But it's still a decent number of lines to have had to write manually.
+[0:30:35]  And this is where sometimes it isn't necessarily the right tool for the job,
+[0:30:41]  but rather a candidate for using some other language altogether,
+[0:30:46]  especially when it's not just a one-time program that you run
+[0:30:50]  and you want to see the answer.
+[0:30:51]  What if you want to take input from the user
+[0:30:53]  and answer questions dynamically, like a mobile app would,
+[0:30:56]  like a website would, like Microsoft Excel or Apple
+[0:30:59]  Numbers or Sheets would for you?
+[0:31:01]  Well, let's make one final change for now to this version of the program
+[0:31:05]  and actually take in some user input.
+[0:31:07]  So besides just loading all of the data into memory,
+[0:31:10]  let's go ahead and, down below here, not just print out the top 10 list,
+[0:31:16]  if you will, but prompt the user for their favorite.
+[0:31:19]  So I'm going to use Python's input function.
+[0:31:21]  And I'm just going to prompt them with favorite, quote unquote.
+[0:31:23]  Like, tell me what your favorite problem, or what problem,
+[0:31:27]  rather, you're interested in.
+[0:31:30]  And now let me go ahead and say, if that favorite is in the counts variable,
+[0:31:36]  so you didn't type in something random that we didn't actually assign
+[0:31:38]  as a problem, then let me go ahead and print with a format string
+[0:31:42]  whatever that favorite is of yours and show you the actual popularity thereof
+[0:31:48]  by indexing into counts using that favorite as the key and printing this.
+[0:31:53]  So now it's a dynamic program.
+[0:31:55]  It doesn't dump all of the data and all of the summations.
+[0:31:57]  Rather, it's going to allow me to see what my choice of favorite is.
+[0:32:01]  And I'm going to go ahead and say, let's see.
+[0:32:04]  I'm a fan of Mario here.
+[0:32:06]  So enter.
+[0:32:07]  And indeed, we see the same value we saw a moment ago, but just for Mario.
+[0:32:11]  But the point now is that, one, all of this is possible.
+[0:32:14]  Two, it's way easier and more pleasant than this would have been in C.
+[0:32:18]  This is still only 15 lines of code.
+[0:32:19]  And in C, again, there's the memory management.
+[0:32:21]  There's the iterating over the strings trying to find the commas.
+[0:32:24]  There's just a lot more work.
+[0:32:25]  But honestly, even when you just want to answer a question like this in Excel,
+[0:32:29]  in Apple numbers, Google Sheets, generally you can just highlight things.
+[0:32:32]  You can click a button and boom, you get your answer for summation or max
+[0:32:36]  or min or any of those sort of basics.
+[0:32:38]  Wouldn't it be nice if we weren't taking a step backwards as programmers
+[0:32:41]  and being sort of more powerful and yet we now have to do more of the work?
+[0:32:45]  So maybe sometimes Python's not, or any language is not,
+[0:32:49]  the best tool for the job.
+[0:32:50]  And that's going to now allow us to introduce more generally something
+[0:32:54]  called a relational database, graduating from mere flat file databases
+[0:32:58]  like text files or binary files in which all of your data
+[0:33:01]  is stored to something more proper.
+[0:33:03]  But first, questions.
+[0:33:16]  Really good question to reiterate.
+[0:33:18]  Is this case sensitive?
+[0:33:20]  So if I were to type in Mario in all lowercase and hit Enter,
+[0:33:24]  I actually get no such response.
+[0:33:25]  Now, that might be acceptable because the problem technically, what,
+[0:33:28]  is a capital M. But that's a little ridiculous
+[0:33:31]  to be that pedantic about the input.
+[0:33:33]  So how could we solve this?
+[0:33:36]  Any tips for how we can make this a little more robust?
+[0:33:39]  Yeah.
+[0:33:48]  OK, yeah.
+[0:33:51]  Yeah.
+[0:33:52]  So we could use a few different functions, one of which
+[0:33:54]  is called title, which will change it to title case where it capitalizes
+[0:33:57]  like in most English sentences, the first letter of that sentence.
+[0:34:01]  We could use capitalize.
+[0:34:02]  We could use upper.
+[0:34:03]  We could use lower.
+[0:34:04]  But indeed, we could just decide how we want
+[0:34:06]  to standardize the capitalization, either uppercase, lowercase,
+[0:34:09]  or some combination thereof, and just make sure
+[0:34:12]  that you change the counts themselves, make sure that you do the same
+[0:34:15]  to favorite, and make sure that maybe you keep a backup of the data
+[0:34:18]  if you want to show the original version that came from the CSV
+[0:34:22]  without presuming to just capitalize everything for the user.
+[0:34:25]  But indeed, that would be the most common scenario.
+[0:34:27]  You just make things case insensitive when doing those matches.
+[0:34:31]  Other questions now on Python before we leave it behind for the coming week?
+[0:34:39]  All right.
+[0:34:39]  Well, then let's introduce these relational databases.
+[0:34:42]  So relational database is a super popular way of storing lots of data.
+[0:34:48]  This is what the Twitters of the world, the Googles of the world,
+[0:34:50]  the Metas of the world use to store some of their data at scale.
+[0:34:54]  There are alternatives to relational databases.
+[0:34:57]  Indeed, today we'll talk about a language called SQL.
+[0:35:00]  There's also a movement, if you will, or an alternative
+[0:35:02]  generally called NoSQL, which is just the opposite.
+[0:35:04]  You don't use SQL.
+[0:35:05]  There are things called object-oriented databases and the like.
+[0:35:08]  But if you've ever heard of MySQL, or PostgreSQL, or Microsoft SQL Server,
+[0:35:14]  or Oracle, or MariaDB, or a bunch of other products, both free and commercial,
+[0:35:19]  this is what they're talking about, databases that
+[0:35:22]  are designed to store lots of data.
+[0:35:23]  And what's nice about relational databases
+[0:35:26]  is that they're really similar to the spreadsheets with which you
+[0:35:28]  were presumably familiar long before today's class.
+[0:35:32]  So a relational database is going to store, as you'll see,
+[0:35:35]  all of the data in rows and columns.
+[0:35:37]  Now, the terminology will thereafter be a little different.
+[0:35:40]  Instead of having sheets, you're going to have tables.
+[0:35:43]  But those tables are still going to have rows and columns.
+[0:35:45]  And you're going to have even more control over the performance of your data
+[0:35:50]  when you start to access it using this Structured Query Language, or SQL.
+[0:35:55]  This is a language you can use for web apps, mobile apps.
+[0:35:58]  A lot of analysts would sit down at their Mac or PC
+[0:36:01]  and actually ask questions of data to get back the answer.
+[0:36:04]  And wonderfully, even though there will be some new syntax today,
+[0:36:07]  SQL really just does four basic things.
+[0:36:10]  CRUD is the sort of crude acronym here.
+[0:36:12]  CRUD is a way of remembering that a relational database supports,
+[0:36:16]  ultimately, creating data, reading data, updating data, and deleting data.
+[0:36:22]  So even if you're feeling like, wow, this is a lot of new syntax, which
+[0:36:25]  it isn't relative to our past languages, the only things you're doing,
+[0:36:29]  really, are creating data, reading data, updating, and deleting the same.
+[0:36:33]  Now, a little confusingly, in SQL, the corresponding functions or commands
+[0:36:39]  that exist that map to CRUD are actually this.
+[0:36:43]  So it's still create, but there's another one called insert.
+[0:36:46]  It's not read, which is more of the computer scientist way of saying it,
+[0:36:50]  but select, which is a little more explicit,
+[0:36:52]  like select data you care about.
+[0:36:54]  Update is still update.
+[0:36:55]  Delete is still delete.
+[0:36:56]  But there's another command called drop, which
+[0:36:58]  lets you drop, that is, delete entire tables as well.
+[0:37:02]  So you can create tables using syntax that's generally
+[0:37:06]  going to look like this.
+[0:37:07]  You'll say create table.
+[0:37:09]  You'll give the name of the table, which you can call most anything you want.
+[0:37:13]  But generally, all lowercase, no spaces is best.
+[0:37:16]  Then in parentheses, you can specify a comma-separated list of the columns
+[0:37:21]  that you might want in this table.
+[0:37:23]  So this is the code equivalent in the SQL language
+[0:37:26]  of manually opening Google Sheets or Excel or Numbers
+[0:37:29]  and clicking in the top left cell and typing timestamp.
+[0:37:32]  And then in the next, typing language.
+[0:37:34]  And then in the third, typing problem.
+[0:37:36]  This is the way to define what your headers are, if you will, in a spreadsheet,
+[0:37:40]  but now it's called a table.
+[0:37:42]  Now, we won't use this command manually first.
+[0:37:44]  Let's do something a little simpler.
+[0:37:46]  We're going to start off by just importing this data ourselves.
+[0:37:50]  And I'm going to go ahead and do this.
+[0:37:51]  Let me go back to VS Code here.
+[0:37:53]  I'm going to leave behind favorites.py for now,
+[0:37:56]  because now we're going to transition to this other language called SQL.
+[0:37:59]  And to do this, I am going to create a new database file.
+[0:38:05]  And I'm going to do so using a command called sqlite3, which is just
+[0:38:09]  the third version thereof.
+[0:38:11]  And I'm going to give the database a name of favorites.db.
+[0:38:14]  There's different conventions, but this is
+[0:38:16]  one of the most common.
+[0:38:17]  When I hit Enter, this is going to create for me a new empty database,
+[0:38:20]  just like opening an untitled spreadsheet in Excel, Google Sheets,
+[0:38:24]  or Apple Numbers.
+[0:38:25]  I'm being prompted.
+[0:38:26]  Do I want to create favorites.db?
+[0:38:28]  I'll hit Y for yes.
+[0:38:29]  OK, we're up and running.
+[0:38:31]  Now, you're going to notice a different prompt.
+[0:38:33]  I'm not in my Linux prompt, per se, which is always the dollar sign.
+[0:38:36]  I'm now inside of the program called sqlite.
+[0:38:39]  And we're going to use sqlite3 as just an interactive way, for now,
+[0:38:43]  of playing with SQL code.
+[0:38:45]  At the end of today, we'll show you how you can use SQL in Python code
+[0:38:50]  so that you still write Python code to do whatever you want,
+[0:38:53]  but you can talk to databases using Python.
+[0:38:55]  And this is exactly how web apps, mobile apps work, for instance, on iOS,
+[0:38:59]  on an iPhone, an iPad, or the like.
+[0:39:01]  If you want to store data, it's very often stored in a SQL database,
+[0:39:05]  as we're about to do.
+[0:39:07]  But you might use a language called Swift or Objective-C.
+[0:39:09]  And the same exists in the world of Android using Java or Kotlin
+[0:39:13]  or something else to query the database.
+[0:39:15]  So we're going to see SQL in isolation for now,
+[0:39:17]  like an analyst might just use it at their Mac or PC.
+[0:39:20]  But we're going to tie it together by day's end.
+[0:39:22]  So at this terminal, sqlite, let me go ahead and execute this command first.
+[0:39:30]  I'm going to first put sqlite into CSV mode,
+[0:39:33]  because I'm going to cut some corners initially.
+[0:39:34]  And I'm just going to automatically import all of the data that
+[0:39:38]  was submitted via that Google Form, which I exported as a CSV
+[0:39:42]  and uploaded to my code space.
+[0:39:44]  And I'm just going to automatically say, turn this CSV file into a SQL
+[0:39:48]  database for me, just so I don't have to figure out
+[0:39:50]  what those create table commands are.
+[0:39:52]  So to do this, I'm going to say, mode CSV,
+[0:39:55]  so that sqlite knows that this is the command,
+[0:39:58]  knows that this is a CSV file.
+[0:40:00]  It's literally dot mode.
+[0:40:01]  So the dot comes before the keyword there.
+[0:40:04]  And now I'm going to say, dot import, and then the name of the file
+[0:40:08]  I want to import, which is favorites.csv.
+[0:40:10]  And now the name of the table that I want to create with that data.
+[0:40:15]  And just for consistency, I'm going to call it favorites.
+[0:40:17]  I could change these things to be anything I want, but I'm going to do that.
+[0:40:21]  And voila, nothing seems to have happened.
+[0:40:23]  But just like in C and in Python and in Linux,
+[0:40:25]  when nothing seems to happen, that's usually a good thing.
+[0:40:28]  It means I didn't mess up.
+[0:40:30]  So if I want to see what just happened, there's this other command.
+[0:40:33]  And these commands that start with dots, these
+[0:40:35]  are sqlite specific, which is indeed a lightweight version of SQL.
+[0:40:40]  They're not SQL per se.
+[0:40:41]  So if you're using Oracle or something else like that,
+[0:40:43]  you're not going to use these exact commands.
+[0:40:45]  You'll see the ones we use in just a moment.
+[0:40:47]  And here's the first.
+[0:40:49]  When I type dot schema, the schema of a database
+[0:40:52]  is the design of the database.
+[0:40:53]  What are the tables?
+[0:40:54]  What are the columns?
+[0:40:55]  And all of that.
+[0:40:56]  So when I type dot schema, this actually, in this case,
+[0:40:59]  shows me the create table command that was automatically
+[0:41:03]  run for me by just doing this import line.
+[0:41:06]  Once I get more comfortable with SQL, I could literally
+[0:41:08]  type this out myself or use some program to generate that as well.
+[0:41:12]  But what it's creating for me is this.
+[0:41:13]  Create table.
+[0:41:15]  If it doesn't exist, even though it's more terse than that,
+[0:41:18]  I want to create a table called favorites.
+[0:41:20]  And then the columns for that table are going
+[0:41:23]  to be timestamp, which is going to be text, comma, language, which is also
+[0:41:27]  going to be text, comma, problem, which is also going to be text.
+[0:41:31]  That was just inferred very trivially by the dot import command
+[0:41:36]  to just figure out that, yes, just give me a three-column database table
+[0:41:40]  based on the Google form.
+[0:41:42]  Questions on this?
+[0:41:44]  These are commands you run once to get up and running.
+[0:41:46]  You don't run these commands frequently.
+[0:41:49]  But we have them on the slide just for reference.
+[0:41:51]  All right, so now let's do something a little more interesting.
+[0:41:54]  I'm going to clear my SQLite terminal here.
+[0:41:56]  But I'm still in SQLite.
+[0:41:57]  I'm going to now use some of my first SQL commands,
+[0:42:00]  which, recall, were among them, select.
+[0:42:04]  So crud, C-R-U-D, the R with select, this is maybe the most common,
+[0:42:09]  the most useful, the most powerful thing to use with a SQL database,
+[0:42:12]  selecting data to answer questions akin to the ones
+[0:42:15]  we were trying to answer with Python.
+[0:42:17]  This is the general syntax.
+[0:42:18]  Anytime you want to select data from a SQL database, you literally say select.
+[0:42:22]  You then specify the column or columns that you want to select data from.
+[0:42:27]  You literally write the word from.
+[0:42:28]  And then you specify the name of the table.
+[0:42:30]  You want to get that data from, semicolon, in this case.
+[0:42:34]  Everything that's in capitals here is a SQL keyword.
+[0:42:37]  Strictly speaking, you don't have to capitalize things.
+[0:42:40]  But we would encourage you to do so stylistically.
+[0:42:42]  And especially as you're learning and even as you're writing it,
+[0:42:45]  it just helps to distinguish SQL from words you chose,
+[0:42:49]  like the names of the columns and the data they're in.
+[0:42:51]  So do adopt early on this convention.
+[0:42:55]  So let me go back now to my code space here.
+[0:42:58]  I'm running my terminal window with SQLite 3 inside of it.
+[0:43:01]  Suppose that I just want to get all of the data from the favorites table, which
+[0:43:05]  was automatically imported.
+[0:43:07]  Let's do this.
+[0:43:07]  Select.
+[0:43:08]  I want everything.
+[0:43:10]  Well, I can do timestamp, comma, language, comma, problem.
+[0:43:15]  But you know what?
+[0:43:16]  Here's a convenience already.
+[0:43:18]  If you want everything, there's what's called a wildcard character
+[0:43:21]  in SQL, which is just a star, an asterisk, which
+[0:43:23]  means give me every column without my knowing even what they're called.
+[0:43:27]  Let me go ahead now and say from favorites, semicolon.
+[0:43:30]  And this is the SQL way of opening the database,
+[0:43:34]  iterating over every row they're in, printing out every row they're in, done.
+[0:43:38]  So those three steps, which was like nine lines of Python code,
+[0:43:42]  give or take earlier, is now one line of SQL.
+[0:43:45]  I hit Enter.
+[0:43:46]  There is all of the data.
+[0:43:49]  So I see now all of the data just outputted as a CSV here.
+[0:43:52]  But it's not the CSV file.
+[0:43:54]  It's now actually the table.
+[0:43:55]  And in fact, just for good measure, let me do this,
+[0:43:57]  because you'll see the behavior a little differently the next time
+[0:44:00]  I open the file.
+[0:44:01]  I've just exited out of SQLite 3.
+[0:44:03]  I'm going to rerun it.
+[0:44:04]  But I'm not going to re-import the data or do anything like that,
+[0:44:07]  because my file now exists.
+[0:44:08]  In fact, let me take one step back.
+[0:44:10]  If I type ls at my Linux prompt, there's my favorites.py from before.
+[0:44:14]  There's my favorites.csv from before.
+[0:44:16]  And here's a third file that I did create a moment ago
+[0:44:19]  when I first ran SQLite 3.
+[0:44:22]  So the data is persistent.
+[0:44:23]  It's not using RAM or memory.
+[0:44:25]  Anything I do now is saved there.
+[0:44:27]  So let's go ahead and rerun SQLite 3 with the same file.
+[0:44:30]  But I don't have to re-import everything, because the file already exists.
+[0:44:33]  Let me now do that same thing again.
+[0:44:35]  Select star from favorites to get all of the data.
+[0:44:39]  And what you'll see now is the same data, but it's a little prettier now.
+[0:44:42]  Because I reran it, I effectively disabled CSV mode this time.
+[0:44:47]  And what I'm now seeing is the entire contents of this database
+[0:44:52]  table called favorites.
+[0:44:54]  Now, there's nothing new here.
+[0:44:55]  What you're just seeing now, like an ASCII or Unicode version
+[0:44:58]  of all of the same data from that database.
+[0:45:00]  Well, suppose I want to get a subset of the data.
+[0:45:02]  Well, let me clear my screen.
+[0:45:03]  And just like in Linux, I can hit Control-L just
+[0:45:05]  to clean things up aesthetically.
+[0:45:07]  Suppose I want to get just the languages.
+[0:45:08]  So I could do select language from favorites.
+[0:45:12]  And this will now select not all three columns, AKA star.
+[0:45:16]  This will only select the language column and all of the data therein.
+[0:45:19]  If I hit Enter, voila.
+[0:45:21]  Now I just see those there.
+[0:45:23]  No timestamps, no problems.
+[0:45:25]  It's just a slice of the table, if you will.
+[0:45:28]  All right, not that interesting still, because it's just a big column of data.
+[0:45:32]  But now things get more interesting.
+[0:45:34]  It turns out in SQL that there are functions
+[0:45:37]  that come with this language, just like C, just like Python.
+[0:45:40]  In SQL, some of the more useful ones, some of the simpler ones,
+[0:45:44]  are these here, average, count, distinct, lower, max, min, upper,
+[0:45:47]  which pretty much do what they say.
+[0:45:50]  And count is a particularly useful one.
+[0:45:53]  Let's start with that.
+[0:45:54]  It's a reasonable question to be asked, how many people submitted to Google
+[0:45:58]  Form by the time I actually downloaded the CSV?
+[0:46:01]  Well, why don't we go ahead and do this?
+[0:46:02]  Let me go back to VS Code here in my terminal window.
+[0:46:05]  Let me select not star, but the count of star.
+[0:46:09]  So give me the count of the rows that are being returned from the database
+[0:46:15]  table called favorites.
+[0:46:16]  Now when I hit Enter, I'm not going to get all the data.
+[0:46:19]  I'm just going to get simply a number.
+[0:46:21]  430 rows came back.
+[0:46:24]  So that's pretty good.
+[0:46:25]  I now know how much data is in there.
+[0:46:27]  Well, what languages were in there?
+[0:46:28]  Well, I could do select language from favorites, just as before.
+[0:46:33]  But that's not that useful, especially if I'm inheriting the data.
+[0:46:35]  Like, I'm the analyst who's been handed a data set by my boss,
+[0:46:38]  and they want me to crunch some numbers.
+[0:46:39]  OK, I could load this into Excel.
+[0:46:42]  I could sort it.
+[0:46:43]  But you can use SQL now to answer pretty basic questions, too.
+[0:46:46]  If you want to select the distinct languages in the data set,
+[0:46:50]  because you weren't privy to the Google Form,
+[0:46:52]  let me go ahead and select only the distinct languages
+[0:46:57]  from the favorites table.
+[0:46:59]  And now I hit Enter, and I get back a much more succinct answer,
+[0:47:02]  just the three languages in question.
+[0:47:04]  Not really that useful since I created the Google Form.
+[0:47:07]  But certainly, if you're inheriting data from someone else,
+[0:47:09]  you've just downloaded a data set, at least now I'm arguably
+[0:47:12]  wrapping my mind around what's going on.
+[0:47:14]  Now, this is not necessary for such a small data set.
+[0:47:17]  But I can combine these things, select the count
+[0:47:20]  of the distinct languages in this data set called favorites.
+[0:47:24]  And now I should get back what answer?
+[0:47:27]  So hopefully, indeed, an answer called three.
+[0:47:29]  And what you're getting back, notice, aesthetically, too,
+[0:47:32]  is like a mini temporary table.
+[0:47:34]  When I asked for just the distinct languages, what SQL hands me back
+[0:47:39]  is this temporary table in memory that has one column called language
+[0:47:43]  and then three rows.
+[0:47:45]  Now, this is not saved anywhere.
+[0:47:47]  It's just executed ephemerally like this.
+[0:47:50]  But that's why it's depicted in this way.
+[0:47:52]  What you're getting is subsets of your data, smaller tables
+[0:47:55]  containing some of your data.
+[0:47:57]  And same thing down here.
+[0:47:58]  This is like a crazy long column name.
+[0:48:00]  You can rename it if you really want.
+[0:48:02]  But that's all we're seeing there.
+[0:48:05]  And in fact, if that's a little ugly, we can actually alias these things.
+[0:48:09]  N is a common name for a variable, a number in any programming language.
+[0:48:14]  So I can actually alias this to be a column called N. Hit Enter.
+[0:48:18]  And now I'm getting a tiny, tiny table whose column
+[0:48:21]  is called N that just has the one value there.
+[0:48:25]  All right, questions on these application of these functions here?
+[0:48:34]  Questions, yeah?
+[0:48:37]  Should I say a little louder?
+[0:48:39]  Oh, as, as, literally in English.
+[0:48:41]  So rename this column as this.
+[0:48:45]  Technically, it creates an alias for the column.
+[0:48:47]  So that's all.
+[0:48:48]  Yeah?
+[0:48:52]  Exactly.
+[0:48:53]  Distinct will operate on whatever you hand it in parentheses
+[0:48:56]  and get rid of all of the duplicates, giving you
+[0:48:57]  back just the uniques.
+[0:49:00]  Correct.
+[0:49:00]  Other questions here?
+[0:49:02]  Yeah?
+[0:49:09]  Good question.
+[0:49:10]  When you define an alias like N, which I just did,
+[0:49:12]  does it become like a variable you can reuse?
+[0:49:14]  Short answer, no, in this case.
+[0:49:16]  But you can reuse it within your same query.
+[0:49:19]  Even though these queries are getting a little longer, admittedly,
+[0:49:23]  statements that they are, you can actually
+[0:49:25]  reuse N in even longer queries, so later in your query.
+[0:49:29]  And we'll see a few that are going to start to grow in length.
+[0:49:32]  So it's a nice way of nicknaming things just to be
+[0:49:35]  a little more terse in your query.
+[0:49:37]  So we can transition to some of these more sophisticated queries
+[0:49:40]  because it turns out there's some other techniques we can introduce as well.
+[0:49:45]  Here are some other keywords in SQL.
+[0:49:47]  And again, even though this is another list of things,
+[0:49:49]  there's only four things fundamentally we're doing, creating, reading,
+[0:49:52]  updating, and deleting data.
+[0:49:54]  These are just allowing us to fine tune how we do it exactly.
+[0:49:58]  So where is going to allow us to filter data,
+[0:50:00]  as we'll do in just a moment?
+[0:50:01]  Select data where this conditional is true.
+[0:50:05]  Like is going to be an alternative to an equal sign.
+[0:50:08]  So instead of looking for exactly scratch or exactly Python or exactly C,
+[0:50:13]  you can look for something like dot, dot, dot.
+[0:50:16]  And it can be a little bit of a fuzzier match, if you will,
+[0:50:19]  with other characters as well.
+[0:50:20]  Order by is going to deal with sorting.
+[0:50:22]  Limit is going to just let me limit the total number of rows
+[0:50:25]  that come back to 1 or 10 or finite if I don't want to see all 400
+[0:50:29]  plus rows all at once, because I'm just trying to wrap my mind around it.
+[0:50:32]  And group by is best shown by example.
+[0:50:34]  So let's play with just a couple of these as well.
+[0:50:36]  Let me go back to BS code here.
+[0:50:38]  I'll clear my screen.
+[0:50:39]  I'm still in the same SQLite instance.
+[0:50:42]  And let's count how many of you like C without writing Python code as before.
+[0:50:46]  So let me go ahead and select the count of the rows from favorites
+[0:50:52]  where the language in each row equals C. And the convention in SQLite
+[0:50:58]  is to use single quotes any time you're surrounding
+[0:51:01]  a string that's meant to represent a literal piece of text as opposed
+[0:51:05]  to C, which was double quotes, or Python, which was either.
+[0:51:09]  So this is selecting the count of rows from favorites table
+[0:51:13]  where the language in question is C. Enter.
+[0:51:16]  And this gives me 98.
+[0:51:18]  Notice, though, if I omit that predicate like we did before,
+[0:51:21]  you'll get back the total number of rows that were in the table.
+[0:51:26]  So where is what's called a predicate that just allows me to filter things,
+[0:51:29]  just like an if condition or the like, in a language that we've seen before.
+[0:51:33]  You can be a little more specific, like how many people really
+[0:51:36]  liked C and the Mario problem specifically.
+[0:51:41]  Well, let's do this.
+[0:51:42]  Let's go ahead and do select the number of rows from the favorites table
+[0:51:48]  where the language is C. And so it's still literally the word ands and or,
+[0:51:55]  just like in Python, but not like in C. And problem equals Mario.
+[0:52:00]  So let's see if there's any fans of both C and the Mario problem.
+[0:52:04]  And three of us really like those two things together in this case.
+[0:52:08]  All right, what else can we do?
+[0:52:09]  Well, more compelling might be to see, kind of like in Python,
+[0:52:12]  for each language, what was the popularity thereof.
+[0:52:16]  And at the moment, we don't really have a way of doing that,
+[0:52:18]  except in Python, where we had the loop and we
+[0:52:20]  had those variables in the dictionary that
+[0:52:22]  did all of that counting for us.
+[0:52:23]  Totally doable, but tedious, especially if your job is to analyze data.
+[0:52:27]  My god, like even writing 15 lines of code to answer simple questions
+[0:52:30]  is kind of ridiculous.
+[0:52:32]  SQL can do better for us.
+[0:52:34]  So let me go ahead and do this.
+[0:52:36]  Let me go ahead and select every language and the count thereof
+[0:52:42]  from the favorites table, but this time group by language.
+[0:52:48]  So this was another one of the keywords that we
+[0:52:50]  can use in this abbreviated list of extra features of SQL.
+[0:52:55]  And this one's a little, takes a moment to wrap your mind around,
+[0:52:58]  but this is going to give me a two-column temporary table, where
+[0:53:01]  the first column is the language, and the second column
+[0:53:04]  is the count thereof from this data set.
+[0:53:07]  And group by language just means that only show me scratch once,
+[0:53:12]  only show me C once, only show me Python once,
+[0:53:14]  that is group all of the identical values together,
+[0:53:18]  but keep track of how many of them there are.
+[0:53:21]  And so now, if I go over to SQLite and I hit Enter,
+[0:53:27]  now I have in SQL version the exact same output
+[0:53:30]  that I had from Python that took me, what, 15 plus lines before.
+[0:53:34]  Now we're down to just one, because SQL, structured query language,
+[0:53:38]  is all about constructing queries like this to answer questions and get back
+[0:53:42]  answers quickly.
+[0:53:43]  If we want to clean this up a little bit,
+[0:53:45]  you asked earlier about sorting order, well, we can do that too.
+[0:53:48]  There's another key phrase we can use here.
+[0:53:51]  We can order by the count of those rows, and then run that query here.
+[0:53:57]  So now, unfortunately, they're from smallest to biggest,
+[0:53:59]  but we can reverse that.
+[0:54:01]  It turns out, and my query is starting to wrap here.
+[0:54:03]  I'll zoom out for a moment.
+[0:54:04]  If you want to order by count, the default
+[0:54:08]  is in ascending order, abbreviated ASC.
+[0:54:11]  If you want to reverse the sort in SQL, instead of using reverse
+[0:54:14]  equals true, like we did in Python, you say DESC for descending order.
+[0:54:18]  And now we get almost the same output, but flipped in reverse.
+[0:54:22]  So it's just a lot faster to answer questions once, of course,
+[0:54:24]  you get some muscle memory and some comfort with it.
+[0:54:27]  Well, what else can I do?
+[0:54:28]  You know, what if I just care about the most popular language?
+[0:54:31]  I don't care about the second place or the third place languages
+[0:54:34]  or anything else.
+[0:54:35]  Well, let me add one more clause here.
+[0:54:37]  Limit the answer to one.
+[0:54:39]  And no matter how many rows should come back now,
+[0:54:41]  I just get the number one language as of the data set
+[0:54:44]  we collected with 270 votes for it.
+[0:54:50]  Questions on this?
+[0:54:54]  Any questions here?
+[0:54:57]  No?
+[0:54:58]  Well, what if we're starting to introduce SQL,
+[0:55:01]  and it was kind of too late to make it into the Google Form?
+[0:55:04]  So it turns out there's syntax for this, too.
+[0:55:06]  You can create data, of course, not just the tables, but the data they're in.
+[0:55:10]  And here's the typical syntax for inserting data into a SQL database.
+[0:55:14]  You literally say, insert into the name of the table.
+[0:55:17]  And then in parentheses, you specify one or more columns
+[0:55:20]  for which you have values that you want to insert.
+[0:55:23]  This is to say, you don't have to give values for every column
+[0:55:27]  in the given row.
+[0:55:28]  If you only have answers to some of those questions,
+[0:55:30]  you can enumerate them here like this.
+[0:55:32]  But the values you insert are going to be these.
+[0:55:34]  So you literally say, after the closed parentheses, values.
+[0:55:38]  And then in a second set of parentheses with the same length comma separated
+[0:55:42]  you specify what values do you want to insert.
+[0:55:44]  So it's a little verbose.
+[0:55:46]  And frankly, longer term, you're going to use Python code
+[0:55:48]  to automatically do these kinds of insertions.
+[0:55:50]  But let's go ahead and try this.
+[0:55:52]  Right now, if I do select distinct language from favorites again,
+[0:56:00]  we see this, just these three candidates.
+[0:56:02]  But we've now taught you a bit of SQL.
+[0:56:04]  So let's do insert into favorites, the column called language.
+[0:56:11]  And you know what?
+[0:56:13]  I'm going to give a problem here.
+[0:56:14]  The values for which, and let me zoom back out,
+[0:56:16]  are going to be quote unquote SQL and quote unquote 50-ville.
+[0:56:20]  You'll soon see what that's all about.
+[0:56:22]  Semicolon.
+[0:56:23]  Nothing seems to happen, but that's usually a good thing.
+[0:56:27]  And now if I scroll back up in my queries in SQLite 3,
+[0:56:29]  you can scroll back and forth in time to avoid retyping things.
+[0:56:33]  Now I should see, indeed, four candidate languages here.
+[0:56:37]  Now suppose that you were never really a fan of C
+[0:56:40]  and maybe you programmed a little bit in high school or in the real world,
+[0:56:43]  and you liked C++.
+[0:56:45]  Well, there's a whole lot of answers for C. So select star from favorites
+[0:56:52]  where language equals quote unquote C. So here's
+[0:56:56]  everyone who submitted the answer for C. Let's presume that, no, they didn't
+[0:57:00]  really want C. They wanted C++, which is not a language
+[0:57:03]  we teach in the class.
+[0:57:04]  But I could also now do this.
+[0:57:06]  You can use the update command to set a column or columns
+[0:57:10]  to different values where some condition is met.
+[0:57:12]  So if I do update table name, set column name equal to some value,
+[0:57:17]  filtering it perhaps by where some condition is true.
+[0:57:21]  So suppose I've changed my mind or, you know what,
+[0:57:25]  let's go ahead and do update favorites.
+[0:57:29]  Set language equal to maybe C++ where language equals C. Now this
+[0:57:36]  is destructive, so you generally don't want
+[0:57:38]  to do this unless you have a backup of your data, too,
+[0:57:40]  overriding what people's answers are.
+[0:57:42]  This seems to have been successful because no error messages.
+[0:57:45]  And if I rerun the previous select that gives me all of the favorites
+[0:57:48]  where language equals C, now, indeed, I get none.
+[0:57:52]  But if I search for C++, now I get a lot.
+[0:57:55]  And if I get rid of that where clause altogether
+[0:57:57]  and just look at the contents of my database,
+[0:58:00]  now you see that indeed C++ is commingled with all the other data.
+[0:58:03]  This is not what you all intended, of course, so I can undo this.
+[0:58:06]  Let me go ahead and undo what I just did.
+[0:58:08]  Let me set my favorite language to C where language equals C++.
+[0:58:15]  But the predicate is important.
+[0:58:17]  This I'm not going to do.
+[0:58:18]  What if I accidentally omitted this predicate, the where clause?
+[0:58:22]  How would that screw things up, might you think?
+[0:58:28]  Yeah, in back.
+[0:58:31]  It would set every row's language to indeed C. And this is dangerous.
+[0:58:36]  And if you start Googling around for like SQL mistakes or the like,
+[0:58:40]  people in the real world have accidentally run commands like this.
+[0:58:44]  And without naming names, a former member of our teaching staff
+[0:58:46]  at one point accidentally ran a command like this
+[0:58:49]  and changed every student's name in our database to Bobby, I think it was.
+[0:58:54]  The same name for every row because they simply forgot a predicate.
+[0:58:57]  So here, too, there's dangers in code.
+[0:59:00]  And you should adopt the habit quite quickly of always backing up
+[0:59:04]  your data, like with CP, for instance, in Linux or any other technique,
+[0:59:08]  or just making sure before you hit Enter that, yes, this is indeed
+[0:59:12]  the query I want to execute.
+[0:59:13]  And generally speaking, in the real world,
+[0:59:15]  there should be process controls in place,
+[0:59:17]  like the intern should not have access to the production database,
+[0:59:20]  the live database, and the like.
+[0:59:22]  But you have a lot of power now with these queries,
+[0:59:24]  so just be all the more careful because very easily can you do bad things.
+[0:59:27]  So let me undo this.
+[0:59:29]  Where language equals quote unquote C++, and I'll zoom back out, Enter.
+[0:59:35]  And now I think we're back in business.
+[0:59:37]  C is among the answers.
+[0:59:38]  Yeah.
+[0:59:45]  Is essentially doing what at the end?
+[0:59:47]  It's essentially find and replace.
+[0:59:49]  Yes, in layperson's terms, this is find and replace implemented with SQL.
+[0:59:53]  And in fact, the authors of Microsoft Word or Google Docs
+[0:59:57]  might very well be using language like
