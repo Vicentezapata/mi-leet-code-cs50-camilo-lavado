@@ -97,7 +97,16 @@ Cuando veas `Local: http://localhost:5173`, abre esa dirección en tu navegador.
 
 **4. Descarga las imágenes de Docker** (solo la primera vez)
 
-La primera vez que ejecutes un problema en C o Python, Docker descargará automáticamente las imágenes necesarias (`gcc:latest` y `python:3.11-alpine`). Esto puede tardar 1-2 minutos dependiendo de tu conexión. Las siguientes ejecuciones serán instantáneas.
+La primera vez que ejecutes un problema, Docker descargará automáticamente la imagen del lenguaje:
+
+| Lenguaje | Imagen Docker | Tamaño aprox. |
+|----------|--------------|---------------|
+| C | `gcc:latest` | ~1.2 GB |
+| Python | `python:3.11-alpine` | ~50 MB |
+| SQL | `keinos/sqlite3:latest` | ~15 MB |
+| JavaScript | `node:18-alpine` | ~180 MB |
+
+Esto puede tardar 1-5 minutos la primera vez según tu conexión. Las siguientes ejecuciones son instantáneas.
 
 ---
 
@@ -150,7 +159,7 @@ La primera vez que ejecutes un problema en C o Python, Docker descargará autom�
 
 ## Estado actual
 
-🟢 **Fase 2 MVP Completada e Inicio de Fase 3** — Plataforma completamente funcional. Todos los elementos del Core (Go, SQLite, Docker, Monaco Editor) y las mecánicas pedagógicas (Flashcards, Feynman, Pistas, Visor de Teoría y Gamificación) están listos. Actualmente poblando el contenido y retos de la Semana 1 en C.
+🟢 **Fase 3 Completada — Iniciando Fase 4** — Plataforma completamente funcional con contenido para las 12 semanas (0–10 + Ciberseguridad) y 13 problemas activos en C y Python. El executor soporta C, Python, SQL y JavaScript. Contenido teórico completo con transcripciones, material complementario y glosario para cada semana.
 
 ---
 

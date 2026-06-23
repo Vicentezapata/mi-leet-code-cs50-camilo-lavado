@@ -1,6 +1,3 @@
-### `04_EXECUTION_ENGINE.md` (Isolated Runner Specs)
-
-```markdown
 # Execution Engine Adapter Specification
 
 ### 1. Responsibility
@@ -8,46 +5,69 @@ The DockerExecutor fulfills the CodeExecutor port. It takes a CodeSnippet and a 
 
 ### 2. Execution Flow
 1. Receive code string and language target.
-2. Create a temporary directory in the host OS.
-3. Write the code string to a file inside the temp directory.
-4. Mount the directory as a read-only volume inside an ephemeral Docker container.
-5. Execute the compilation/interpretation command.
-6. Capture stdout, stderr, and exit codes.
-7. Destroy the container and remove temporary files automatically.
+2. Write code + `input.txt` + common assets (`assets/common/`) + problem-specific assets (`assets/problems/<id>/`) into a tar archive.
+3. Create an ephemeral Docker container from the language image.
+4. Copy the tar archive into `/workspace` inside the container.
+5. Execute the compile/run command.
+6. Wait for completion (5 second hard timeout via `context.WithTimeout`).
+7. Capture stdout, stderr, and exit code from container logs.
+8. Destroy the container (`defer ContainerRemove`).
 
 ### 3. Container Constraints (Security limits via Docker SDK)
-- NetworkMode: "none"
-- Memory: 128MB
-- Timeout: 5000ms hard kill
+- `NetworkDisabled: true` — sin acceso a red
+- `Memory: 128MB`
+- `Timeout: 5s` — via `context.WithTimeout`
+- `AutoRemove: false` — limpieza manual con `defer ContainerRemove(Force: true)`
 
 ### 4. Environments
+
 #### C Environment
-- Image: gcc:latest
-- Run Command: sh -c "gcc -O3 -o solution code.c && ./solution < input.txt"
+- **Image:** `gcc:latest`
+- **File:** `code.c`
+- **Command:** `sh -c "gcc -O3 -I/workspace *.c -o solution && ./solution < input.txt"`
+- **Nota:** `-I/workspace` permite `#include <cs50.h>` cuando `cs50.h` y `cs50.c` están en `assets/common/`
 
 #### Python Environment
-- Image: python:3.11-alpine
-- Run Command: sh -c "python solution.py < input.txt"
+- **Image:** `python:3.11-alpine`
+- **File:** `code.py`
+- **Command:** `sh -c "python code.py < input.txt"`
+
+#### SQL Environment
+- **Image:** `keinos/sqlite3:latest`
+- **File:** `code.sql`
+- **Command:** `sh -c "sqlite3 /workspace/db.sqlite < /workspace/setup.sql && sqlite3 -separator '|' /workspace/db.sqlite < /workspace/code.sql < input.txt"`
+- **Assets requeridos:** `setup.sql` en `assets/problems/<problem_id>/`
+
+#### JavaScript Environment
+- **Image:** `node:18-alpine`
+- **File:** `code.js`
+- **Command:** `sh -c "node code.js < input.txt"`
 
 ---
 
-### 5. Subtareas pendientes del executor
+### 5. Normalización de datos de test
 
-#### Nuevos lenguajes
-- [ ] **SQL:** Configurar imagen `sqlite:alpine`, ejecutar `.read solution.sql` contra test case
-- [ ] **JavaScript:** Configurar imagen `node:alpine`, ejecutar `node solution.js < input.txt`
-- [ ] Documentar plantilla para agregar un nuevo lenguaje (guía en `backend/internal/infrastructure/docker/README.md`)
+Los `input_data` y `expected_output` en SQLite se almacenan con `\n` literal (backslash-n) porque SQL no interpreta secuencias de escape en strings. El use case `SubmitCodeUseCase` normaliza ambos campos antes de usarlos:
+
+```go
+// submit_code.go
+tc.InputData = strings.ReplaceAll(tc.InputData, "\\n", "\n")           // antes de ejecutar
+expectedNormalized := strings.ReplaceAll(tc.ExpectedOutput, "\\n", "\n") // antes de comparar
+```
+
+Sin esta normalización, `int(input())` en Python recibe `"42\n"` literal y lanza `ValueError`.
+
+---
+
+### 6. Subtareas pendientes
 
 #### Robustez
-- [ ] Implementar timeout con `context.WithTimeout` en Go (no solo flag de Docker)
 - [ ] Verificar que contenedores huérfanos se limpian (test: matar proceso Go mientras corre un container)
 - [ ] Agregar límite de tamaño de código (max 100KB) para evitar ataques de compresión
-- [ ] Capturar y retornar `stderr` en la respuesta de la API (para debugging del usuario)
-- [ ] Agregar healthcheck al iniciar el servidor: verificar que Docker daemon responde
+- [ ] Agregar stderr en el resultado del executor para feedback al usuario
 
 #### Métricas
 - [ ] Leer memoria real usada por el contenedor (no solo el límite), exponerla en `ExecutionMetrics`
-- [ ] Agregar contador de submissions y tiempo promedio de ejecución (métricas internas)
 
 #### Testing
 - [ ] Test: código C que compila pero hace `while(1)` → debe terminar por timeout

@@ -119,33 +119,37 @@
 ### Subtareas detalladas
 
 #### Expansión del executor (prerrequisito)
-- [ ] Agregar soporte SQL (`sqlite:alpine`) al `DockerExecutor`
-- [ ] Agregar soporte JavaScript (`node:alpine`) al `DockerExecutor`
-- [ ] Agregar selector de lenguaje SQL y JS en el frontend (Monaco ya los soporta)
+- [x] Agregar soporte SQL (`keinos/sqlite3:latest`) al `DockerExecutor`
+- [x] Agregar soporte JavaScript (`node:18-alpine`) al `DockerExecutor`
+- [x] Agregar selector de lenguaje SQL y JS en el frontend (Monaco ya los soporta)
 
 #### Semana 6 — Python
-- [ ] `lectura.md` + `complemento.md` (Python vs C) + `glosario.md`
+- [x] `lectura.md` + `complemento.md` (Python vs C) + `glosario.md`
 - [ ] 4 problemas: Mario, Cash, Readability (versiones Python) + DNA
+  - [x] Mario Python (`p-mario-py`)
+  - [x] Cash Python (`p-cash-py`)
+  - [x] Binary Python (`p-binary-py`)
+  - [ ] DNA Python
 
 #### Semana 7 — SQL
-- [ ] `lectura.md` + `complemento.md` (cómo piensa una BD) + `glosario.md`
+- [x] `lectura.md` + `complemento.md` (cómo piensa una BD) + `glosario.md`
 - [ ] 3 problemas: Songs, Movies, Fiftyville (con evaluación SQL)
 
 #### Semana 8 — HTML, CSS, JavaScript
-- [ ] `lectura.md` + `complemento.md` (el navegador como runtime) + `glosario.md`
+- [x] `lectura.md` + `complemento.md` (el navegador como runtime) + `glosario.md`
 - [ ] 2 problemas: Trivia (quiz JS), Homepage (evaluación manual)
 
 #### Semana 9 — Flask
-- [ ] `lectura.md` + `complemento.md` (flujo HTTP completo) + `glosario.md`
+- [x] `lectura.md` + `complemento.md` (flujo HTTP completo) + `glosario.md`
 - [ ] 2 problemas: Birthdays (CRUD), Finance (simulador bolsa)
 - [ ] ⚠️ Evaluación adaptada: no se puede ejecutar Flask en Docker de forma trivial
 
 #### Semana 10 — Emoji/Unicode
-- [ ] `lectura.md` + `complemento.md` + `glosario.md`
+- [x] `lectura.md` + `complemento.md` + `glosario.md`
 - [ ] Sin problemas de código (contenido teórico)
 
 #### Ciberseguridad
-- [ ] `lectura.md` + `complemento.md` (amenazas reales en español)
+- [x] `lectura.md` + `complemento.md` (amenazas reales en español)
 - [ ] Ejercicios conceptuales (no requieren executor)
 
 **Entregable:** Plataforma con el CS50 completo en español.
@@ -192,6 +196,6 @@
 | M1 | Arquitectura y documentación definidas | ✅ Completo |
 | M2 | Backend + Docker executor funcional | ✅ Completo |
 | M3 | Frontend MVP con Semana 1 funcional | ✅ Completo |
-| M4 | Semanas 0–5 con contenido completo | 🔲 Pendiente |
-| M5 | Semanas 6–10 + Ciberseguridad | 🔲 Pendiente |
+| M4 | Semanas 0–5 con contenido completo | ✅ Completo |
+| M5 | Semanas 6–10 + Ciberseguridad (contenido teórico) | ✅ Completo |
 | M6 | Autor completa el CS50 en la plataforma | 🔲 Pendiente |

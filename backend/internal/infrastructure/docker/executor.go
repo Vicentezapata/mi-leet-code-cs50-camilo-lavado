@@ -76,7 +76,7 @@ func (e *DockerExecutor) Execute(snippet domain.CodeSnippet, testCase domain.Tes
 	case "c":
 		img = "gcc:latest"
 		filename = "code.c"
-		cmd = []string{"sh", "-c", "gcc -O3 *.c -o solution && ./solution < input.txt"}
+		cmd = []string{"sh", "-c", "gcc -O3 -I/workspace *.c -o solution && ./solution < input.txt"}
 	case "python":
 		img = "python:3.11-alpine"
 		filename = "code.py"

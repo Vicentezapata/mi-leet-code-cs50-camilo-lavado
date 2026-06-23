@@ -77,6 +77,7 @@ func (uc *SubmitCodeUseCase) Execute(problemId string, language string, code str
 		}
 		totalCount++
 
+		tc.InputData = strings.ReplaceAll(tc.InputData, "\\n", "\n")
 		res := uc.Executor.Execute(snippet, tc)
 		
 		totalTimeMs += res.TimeMs
