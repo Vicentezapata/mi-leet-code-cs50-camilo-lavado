@@ -8,8 +8,9 @@ type TabType = 'lectura' | 'complemento' | 'glosario';
 
 export function TheoryPage() {
   const { weekStr } = useParams<{ weekStr: string }>();
-  const week = Number(weekStr ?? '1');
-  const { content, isLoading, error } = useContent(week);
+  const slug = weekStr ?? '1';
+  const week = Number(slug);
+  const { content, isLoading, error } = useContent(slug);
   const [activeTab, setActiveTab] = useState<TabType>('lectura');
 
   if (isLoading) {
@@ -23,7 +24,7 @@ export function TheoryPage() {
   if (error || !content) {
     return (
       <div className="h-full flex flex-col items-center justify-center bg-local-bg text-center px-4">
-        <div className="text-red-400 text-lg font-semibold mb-4">No se pudo cargar la teoría para la Semana {week}</div>
+        <div className="text-red-400 text-lg font-semibold mb-4">No se pudo cargar el contenido para: {slug}</div>
         <Link to="/" className="btn-secondary">
           Volver al catálogo
         </Link>
@@ -75,7 +76,7 @@ export function TheoryPage() {
             <span className="text-xs uppercase font-semibold text-local-muted tracking-wider">Teoría en Español</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-            Semana {week}: Fundamentos e Introducción
+            {isNaN(week) ? slug.charAt(0).toUpperCase() + slug.slice(1) : `Semana ${week}`}
           </h1>
         </div>
 

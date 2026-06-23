@@ -72,17 +72,27 @@ func (e *DockerExecutor) Execute(snippet domain.CodeSnippet, testCase domain.Tes
 	var cmd []string
 	var filename string
 
-	if strings.ToLower(snippet.Language) == "c" {
+	switch strings.ToLower(snippet.Language) {
+	case "c":
 		img = "gcc:latest"
 		filename = "code.c"
 		cmd = []string{"sh", "-c", "gcc -O3 *.c -o solution && ./solution < input.txt"}
-	} else if strings.ToLower(snippet.Language) == "python" {
+	case "python":
 		img = "python:3.11-alpine"
 		filename = "code.py"
 		cmd = []string{"sh", "-c", "python code.py < input.txt"}
-	} else {
+	case "sql":
+		img = "keinos/sqlite3:latest"
+		filename = "code.sql"
+		// input.txt contains the DB schema+data; code.sql contains the student's query
+		cmd = []string{"sh", "-c", "sqlite3 /workspace/db.sqlite < /workspace/setup.sql && sqlite3 -separator '|' /workspace/db.sqlite < /workspace/code.sql < input.txt"}
+	case "javascript", "js":
+		img = "node:18-alpine"
+		filename = "code.js"
+		cmd = []string{"sh", "-c", "node code.js < input.txt"}
+	default:
 		return domain.ExecutionResult{
-			Stderr:   "Unsupported language",
+			Stderr:   "Lenguaje no soportado: " + snippet.Language,
 			ExitCode: -1,
 		}
 	}

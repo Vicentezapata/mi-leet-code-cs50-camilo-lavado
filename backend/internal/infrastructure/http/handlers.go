@@ -97,8 +97,9 @@ func (h *Handlers) SubmitCode(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "code exceeds maximum length of 100KB"})
 		return
 	}
-	if req.Language != "c" && req.Language != "python" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "unsupported language. Supported: c, python"})
+	supported := map[string]bool{"c": true, "python": true, "sql": true, "javascript": true}
+	if !supported[req.Language] {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "unsupported language. Supported: c, python, sql, javascript"})
 		return
 	}
 
@@ -177,14 +178,13 @@ func (h *Handlers) GetProgress(c *gin.Context) {
 }
 
 func (h *Handlers) GetContent(c *gin.Context) {
-	weekStr := c.Param("week")
-	week, err := strconv.Atoi(weekStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid week parameter"})
+	slug := c.Param("week")
+	if slug == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "week or slug is required"})
 		return
 	}
 
-	content, err := h.FetchContentUC.Execute(week)
+	content, err := h.FetchContentUC.Execute(slug)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

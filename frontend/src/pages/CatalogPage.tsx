@@ -1,12 +1,28 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useProblems } from '@/hooks/useProblems';
 import { useSubmissions } from '@/hooks/useSubmissions';
 import { ProblemList } from '@/components/problems/ProblemList';
 import { GamificationStats } from '@/components/dashboard/GamificationStats';
 import { useProgress } from '@/hooks/useProgress';
 
+const ALL_WEEKS = [
+  { slug: '0',             label: 'Semana 0',  topic: 'Scratch' },
+  { slug: '1',             label: 'Semana 1',  topic: 'C' },
+  { slug: '2',             label: 'Semana 2',  topic: 'Arreglos' },
+  { slug: '3',             label: 'Semana 3',  topic: 'Algoritmos' },
+  { slug: '4',             label: 'Semana 4',  topic: 'Memoria' },
+  { slug: '5',             label: 'Semana 5',  topic: 'Estructuras de Datos' },
+  { slug: '6',             label: 'Semana 6',  topic: 'Python' },
+  { slug: '7',             label: 'Semana 7',  topic: 'SQL' },
+  { slug: '8',             label: 'Semana 8',  topic: 'HTML / CSS / JS' },
+  { slug: '9',             label: 'Semana 9',  topic: 'Flask' },
+  { slug: '10',            label: 'Semana 10', topic: 'Emoji y Unicode' },
+  { slug: 'ciberseguridad', label: 'Módulo',   topic: 'Ciberseguridad' },
+];
+
 export function CatalogPage() {
-  const [weekFilter, setWeekFilter] = useState(0);
+  const [weekFilter, setWeekFilter] = useState<number | null>(null);
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const { data: problemsData, isLoading: problemsLoading, error: problemsError } = useProblems(weekFilter, difficultyFilter);
   const { data: submissionsData, isLoading: submissionsLoading, error: submissionsError } = useSubmissions();
@@ -37,16 +53,25 @@ export function CatalogPage() {
             <label htmlFor="week-filter" className="text-sm font-medium text-local-muted">Semana</label>
             <select
               id="week-filter"
-              value={weekFilter}
-              onChange={(e) => setWeekFilter(Number(e.target.value))}
+              value={weekFilter ?? ''}
+              onChange={(e) => {
+                const v = e.target.value;
+                setWeekFilter(v === '' ? null : Number(v));
+              }}
               className="bg-black/30 border border-white/5 rounded-lg px-3 py-1.5 text-sm text-local-text focus:outline-none focus:border-local-primary cursor-pointer"
             >
-              <option value={0}>Todas las semanas</option>
-              <option value={1}>Semana 1</option>
-              <option value={2}>Semana 2</option>
-              <option value={3}>Semana 3</option>
-              <option value={4}>Semana 4</option>
-              <option value={5}>Semana 5</option>
+              <option value="">Todas las semanas</option>
+              <option value={0}>Semana 0 — Scratch</option>
+              <option value={1}>Semana 1 — C</option>
+              <option value={2}>Semana 2 — Arreglos</option>
+              <option value={3}>Semana 3 — Algoritmos</option>
+              <option value={4}>Semana 4 — Memoria</option>
+              <option value={5}>Semana 5 — Estructuras de Datos</option>
+              <option value={6}>Semana 6 — Python</option>
+              <option value={7}>Semana 7 — SQL</option>
+              <option value={8}>Semana 8 — HTML/CSS/JS</option>
+              <option value={9}>Semana 9 — Flask</option>
+              <option value={10}>Semana 10 — Emoji</option>
             </select>
           </div>
           <div className="flex items-center gap-3">
@@ -62,6 +87,23 @@ export function CatalogPage() {
               <option value="Medium">Media</option>
               <option value="Hard">Difícil</option>
             </select>
+          </div>
+        </div>
+
+        {/* Navegación de teoría — todas las semanas */}
+        <div className="glass-panel p-5 mb-8 bg-local-panel/40 border border-white/5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-local-muted mb-3">Teoría del curso</p>
+          <div className="flex flex-wrap gap-2">
+            {ALL_WEEKS.map(({ slug, label, topic }) => (
+              <Link
+                key={slug}
+                to={`/weeks/${slug}`}
+                className="flex flex-col px-3 py-2 rounded-lg bg-white/5 hover:bg-local-primary/20 border border-white/10 hover:border-local-primary/50 transition-all text-left"
+              >
+                <span className="text-xs text-local-muted font-medium">{label}</span>
+                <span className="text-sm text-white font-semibold">{topic}</span>
+              </Link>
+            ))}
           </div>
         </div>
 

@@ -4,7 +4,7 @@ interface LanguageSelectorProps {
   availableLanguages?: string[];
 }
 
-const LANGUAGES = ['c', 'python'];
+const LANGUAGES = ['c', 'python', 'sql', 'javascript'];
 
 export function LanguageSelector({
   value,
@@ -22,7 +22,7 @@ export function LanguageSelector({
     >
       {languages.map((lang) => (
         <option key={lang} value={lang} className="bg-local-panel text-white">
-          {lang === 'c' ? 'C' : 'Python 3'}
+          {lang === 'c' ? 'C' : lang === 'python' ? 'Python 3' : lang === 'sql' ? 'SQL' : 'JavaScript'}
         </option>
       ))}
     </select>
