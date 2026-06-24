@@ -1624,3 +1624,464 @@ print(template)',
 'python')
 
 ON CONFLICT(problem_id) DO NOTHING;
+
+-- ═══════════════════════════════════════════════
+-- Semana 3 — Algoritmos (2 problemas nuevos)
+-- ═══════════════════════════════════════════════
+
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-binary-search-c', 'Búsqueda Binaria', '## Búsqueda Binaria
+
+La búsqueda binaria es uno de los algoritmos más eficientes para encontrar un elemento en un arreglo **ordenado**. A diferencia de recorrer el arreglo uno por uno (O(n)), la búsqueda binaria lo hace en **O(log n)** dividiendo el espacio de búsqueda a la mitad en cada paso.
+
+### Tarea
+
+Dado un arreglo de `n` enteros **ordenados de menor a mayor** y un número objetivo `target`, implementa una búsqueda binaria que devuelva el **índice base-0** del elemento, o `-1` si no existe.
+
+### Entrada
+
+- Primera línea: dos enteros `n` y `target` separados por espacio.
+- Segunda línea: `n` enteros ordenados de menor a mayor, separados por espacio.
+
+### Salida
+
+Un entero: el índice del elemento (0-basado), o `-1` si no se encontró.
+
+### Ejemplo
+
+```
+Entrada:
+5 3
+1 2 3 4 5
+
+Salida:
+2
+```', 'Fácil', 'c', 3)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-binary-search-1', 'p-binary-search-c', '5 3
+1 2 3 4 5', '2
+', 0),
+('tc-binary-search-2', 'p-binary-search-c', '5 1
+1 2 3 4 5', '0
+', 0),
+('tc-binary-search-3', 'p-binary-search-c', '5 6
+1 2 3 4 5', '-1
+', 1),
+('tc-binary-search-4', 'p-binary-search-c', '1 7
+7', '0
+', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-binary-search-1', 'p-binary-search-c', 1, '¿Cuál es la idea principal de la búsqueda binaria? ¿Cómo se diferencia de buscar elemento por elemento?'),
+('h-binary-search-2', 'p-binary-search-c', 2, 'Necesitas mantener tres variables: el límite izquierdo, el derecho y el índice del medio. ¿Cómo calculas el índice del medio a partir de los otros dos?'),
+('h-binary-search-3', 'p-binary-search-c', 3, 'Si el elemento del medio es menor que el objetivo, ¿qué parte del arreglo puedes descartar? ¿Cómo actualizas los límites?'),
+('h-binary-search-4', 'p-binary-search-c', 4, '¿Cuándo sabes que el elemento no está en el arreglo? Piensa en qué condición hace que el rango de búsqueda quede vacío.')
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-bubble-sort-c', 'Bubble Sort', '## Ordenamiento Burbuja
+
+El **bubble sort** (ordenamiento burbuja) es uno de los algoritmos de ordenamiento más simples de entender. Aunque no es el más eficiente (O(n²)), es ideal para aprender cómo funcionan los algoritmos de comparación e intercambio.
+
+### Tarea
+
+Dado un arreglo de `n` enteros, ordénalos de menor a mayor usando el algoritmo bubble sort e imprímelos uno por línea.
+
+### Idea del algoritmo
+
+En cada "pasada" sobre el arreglo, compara pares adyacentes y los intercambia si están en el orden incorrecto. Después de `k` pasadas, los `k` elementos más grandes ya están en su posición final.
+
+### Entrada
+
+- Primera línea: un entero `n` (cantidad de elementos).
+- Siguiente línea: `n` enteros separados por espacio.
+
+### Salida
+
+Los `n` enteros ordenados de menor a mayor, uno por línea.
+
+### Ejemplo
+
+```
+Entrada:
+4
+4 2 1 3
+
+Salida:
+1
+2
+3
+4
+```', 'Media', 'c', 3)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-bubble-sort-1', 'p-bubble-sort-c', '4
+4 2 1 3', '1
+2
+3
+4
+', 0),
+('tc-bubble-sort-2', 'p-bubble-sort-c', '5
+5 3 1 4 2', '1
+2
+3
+4
+5
+', 1),
+('tc-bubble-sort-3', 'p-bubble-sort-c', '1
+42', '42
+', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-bubble-sort-1', 'p-bubble-sort-c', 1, '¿Cuántas veces necesitas recorrer el arreglo para garantizar que quede ordenado? ¿Depende del tamaño del arreglo?'),
+('h-bubble-sort-2', 'p-bubble-sort-c', 2, 'En cada pasada, comparas pares de elementos adyacentes. ¿Cuántas comparaciones haces en la primera pasada? ¿Y en la segunda?'),
+('h-bubble-sort-3', 'p-bubble-sort-c', 3, '¿Cómo intercambias dos elementos en C sin perder ninguno de los dos? Necesitas una variable auxiliar temporal.'),
+('h-bubble-sort-4', 'p-bubble-sort-c', 4, 'Después de cada pasada completa, ¿cuántos elementos del final ya están en su posición definitiva? ¿Cómo puedes usar eso para hacer el algoritmo un poco más eficiente?')
+ON CONFLICT(id) DO NOTHING;
+
+-- ═══════════════════════════════════════════════
+-- Semana 4 — Memoria (2 problemas nuevos)
+-- ═══════════════════════════════════════════════
+
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-palindrome-c', 'Palíndromo', '## ¿Es un palíndromo?
+
+Una palabra es un **palíndromo** si se lee igual de izquierda a derecha que de derecha a izquierda. Por ejemplo: `racecar`, `level`, `madam`.
+
+Este problema te obliga a trabajar con arreglos de caracteres (strings en C) y acceder a posiciones específicas usando índices.
+
+### Tarea
+
+Dada una palabra (sin espacios, solo letras minúsculas), determina si es un palíndromo.
+
+### Entrada
+
+Una sola palabra en minúsculas.
+
+### Salida
+
+`SI` si es palíndromo, `NO` si no lo es.
+
+### Ejemplos
+
+```
+Entrada: racecar
+Salida: SI
+
+Entrada: hello
+Salida: NO
+```', 'Fácil', 'c', 4)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-palindrome-1', 'p-palindrome-c', 'racecar', 'SI
+', 0),
+('tc-palindrome-2', 'p-palindrome-c', 'hello', 'NO
+', 0),
+('tc-palindrome-3', 'p-palindrome-c', 'a', 'SI
+', 1),
+('tc-palindrome-4', 'p-palindrome-c', 'level', 'SI
+', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-palindrome-1', 'p-palindrome-c', 1, '¿Qué significa que una palabra sea palíndromo en términos de sus caracteres individuales? ¿Qué relación hay entre el primer y el último carácter?'),
+('h-palindrome-2', 'p-palindrome-c', 2, '¿Cómo calculas la longitud de una cadena en C? ¿Qué función de `<string.h>` te puede ayudar?'),
+('h-palindrome-3', 'p-palindrome-c', 3, 'Si la cadena tiene longitud `n`, ¿cuántas comparaciones necesitas hacer? ¿Hasta qué índice llegas antes de que los punteros "se crucen"?'),
+('h-palindrome-4', 'p-palindrome-c', 4, '¿Qué pasa con una palabra de longitud impar? ¿Necesitas comparar el carácter del medio con algo? ¿Por qué no?')
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-capitalize-c', 'Capitalizar Palabras', '## Capitalizar cada palabra
+
+Escribe un programa que reciba una frase en minúsculas y la imprima con la **primera letra de cada palabra en mayúscula**.
+
+Este problema requiere iterar sobre caracteres y usar las funciones de `<ctype.h>` para convertir entre mayúsculas y minúsculas.
+
+### Tarea
+
+Dada una línea de texto en minúsculas (con espacios), imprimirla con la primera letra de cada palabra en mayúscula y el resto en minúscula.
+
+### Entrada
+
+Una línea de texto en minúsculas.
+
+### Salida
+
+La misma línea con la primera letra de cada palabra en mayúscula.
+
+### Ejemplo
+
+```
+Entrada: hello world from cs50
+Salida: Hello World From Cs50
+```', 'Media', 'c', 4)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-capitalize-1', 'p-capitalize-c', 'hello world', 'Hello World
+', 0),
+('tc-capitalize-2', 'p-capitalize-c', 'the quick brown fox', 'The Quick Brown Fox
+', 0),
+('tc-capitalize-3', 'p-capitalize-c', 'cs50 is fun', 'Cs50 Is Fun
+', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-capitalize-1', 'p-capitalize-c', 1, '¿Cómo conviertes un carácter a mayúscula en C? ¿Qué función de `<ctype.h>` hace eso?'),
+('h-capitalize-2', 'p-capitalize-c', 2, '¿Cómo lees una línea completa con espacios en C? Pista: `scanf("%s")` se detiene en el primer espacio, así que no sirve aquí.'),
+('h-capitalize-3', 'p-capitalize-c', 3, '¿Cómo sabes si el carácter actual es la primera letra de una nueva palabra? Piensa en qué carácter lo precede.'),
+('h-capitalize-4', 'p-capitalize-c', 4, 'Puedes llevar una variable booleana `new_word` que sea 1 al inicio y cada vez que encuentres un espacio. ¿Cómo la usas para decidir si capitalizar o no el carácter actual?')
+ON CONFLICT(id) DO NOTHING;
+
+-- ═══════════════════════════════════════════════
+-- Semana 5 — Estructuras de Datos (2 problemas nuevos)
+-- ═══════════════════════════════════════════════
+
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-stack-c', 'Pila (Stack)', '## Implementa una Pila
+
+Una **pila** (stack) es una estructura de datos que sigue el principio **LIFO** (Last In, First Out): el último elemento en entrar es el primero en salir. Como una pila de platos: agregas y quitas siempre desde arriba.
+
+Las dos operaciones fundamentales son:
+- **PUSH N**: agrega el entero `N` a la cima de la pila.
+- **POP**: extrae y muestra el elemento de la cima.
+
+### Tarea
+
+Lee operaciones de la entrada estándar y ejecuta cada una. Si se intenta hacer POP en una pila vacía, imprime `EMPTY`.
+
+### Entrada
+
+Varias líneas, cada una con `PUSH N` o `POP`.
+
+### Salida
+
+Por cada `POP`, imprime el valor extraído o `EMPTY` si la pila está vacía.
+
+### Ejemplo
+
+```
+Entrada:
+PUSH 5
+PUSH 3
+POP
+POP
+
+Salida:
+3
+5
+```', 'Media', 'c', 5)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-stack-1', 'p-stack-c', 'PUSH 5
+PUSH 3
+POP
+POP', '3
+5
+', 0),
+('tc-stack-2', 'p-stack-c', 'PUSH 1
+POP
+POP', '1
+EMPTY
+', 0),
+('tc-stack-3', 'p-stack-c', 'POP', 'EMPTY
+', 1),
+('tc-stack-4', 'p-stack-c', 'PUSH 10
+PUSH 20
+PUSH 30
+POP
+POP
+POP', '30
+20
+10
+', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-stack-1', 'p-stack-c', 1, '¿Qué significa LIFO? Si agregas 5, luego 3, y haces POP, ¿qué valor sale primero?'),
+('h-stack-2', 'p-stack-c', 2, '¿Cómo simularías una pila usando un arreglo en C? ¿Qué variable extra necesitas para saber cuántos elementos tiene actualmente?'),
+('h-stack-3', 'p-stack-c', 3, '¿Cómo lees el nombre de la operación de stdin? ¿Cómo distingues entre "PUSH" y "POP"? Pista: `strcmp` de `<string.h>`.'),
+('h-stack-4', 'p-stack-c', 4, '¿Qué condición debes verificar antes de ejecutar un POP? ¿Qué pasa con el índice "top" cuando haces PUSH? ¿Y cuando haces POP?')
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-freq-words-c', 'Frecuencia de Palabras', '## Contar frecuencia de palabras
+
+Escribe un programa que lea palabras de la entrada estándar y cuente cuántas veces aparece cada una. Las palabras deben imprimirse en el **orden en que aparecieron por primera vez**, junto con su conteo.
+
+Este problema simula el uso de una tabla hash o diccionario para contar elementos únicos.
+
+### Entrada
+
+Varias palabras, una por línea (solo minúsculas, sin espacios).
+
+### Salida
+
+Cada palabra única seguida de su conteo, separados por espacio, en orden de primera aparición.
+
+### Ejemplo
+
+```
+Entrada:
+hola
+mundo
+hola
+cs50
+mundo
+hola
+
+Salida:
+hola 3
+mundo 2
+cs50 1
+```', 'Media', 'c', 5)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-freq-words-1', 'p-freq-words-c', 'hola
+mundo
+hola', 'hola 2
+mundo 1
+', 0),
+('tc-freq-words-2', 'p-freq-words-c', 'a
+b
+a
+b
+a', 'a 3
+b 2
+', 1),
+('tc-freq-words-3', 'p-freq-words-c', 'cs50
+es
+cs50
+muy
+muy
+bueno', 'cs50 2
+es 1
+muy 2
+bueno 1
+', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-freq-words-1', 'p-freq-words-c', 1, '¿Qué necesitas guardar para cada palabra única? ¿Cuántos arreglos paralelos podrías usar?'),
+('h-freq-words-2', 'p-freq-words-c', 2, '¿Cómo sabes si una palabra ya fue vista? ¿Con qué función de `<string.h>` puedes comparar dos cadenas?'),
+('h-freq-words-3', 'p-freq-words-c', 3, '¿Cómo copias una cadena a un arreglo en C? Pista: `=` no funciona para strings, necesitas `strcpy`.'),
+('h-freq-words-4', 'p-freq-words-c', 4, 'Para imprimir en orden de primera aparición, ¿necesitas ordenar algo? ¿O simplemente imprimes en el mismo orden en que los fuiste guardando?')
+ON CONFLICT(id) DO NOTHING;
+
+-- Soluciones para los 6 nuevos problemas
+INSERT INTO solutions (problem_id, code, language) VALUES
+('p-binary-search-c',
+'#include <stdio.h>
+int main(void)
+{
+    int n, target;
+    scanf("%d %d", &n, &target);
+    int arr[1000];
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+    int lo = 0, hi = n - 1;
+    while (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        if (arr[mid] == target) { printf("%d\n", mid); return 0; }
+        else if (arr[mid] < target) lo = mid + 1;
+        else hi = mid - 1;
+    }
+    printf("-1\n");
+}',
+'c'),
+
+('p-bubble-sort-c',
+'#include <stdio.h>
+int main(void)
+{
+    int n;
+    scanf("%d", &n);
+    int arr[1000];
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - 1 - i; j++)
+            if (arr[j] > arr[j + 1]) {
+                int t = arr[j]; arr[j] = arr[j + 1]; arr[j + 1] = t;
+            }
+    for (int i = 0; i < n; i++) printf("%d\n", arr[i]);
+}',
+'c'),
+
+('p-palindrome-c',
+'#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    char s[1000];
+    scanf("%s", s);
+    int n = strlen(s);
+    for (int i = 0; i < n / 2; i++)
+        if (s[i] != s[n - 1 - i]) { printf("NO\n"); return 0; }
+    printf("SI\n");
+}',
+'c'),
+
+('p-capitalize-c',
+'#include <stdio.h>
+#include <ctype.h>
+int main(void)
+{
+    char line[1000];
+    fgets(line, sizeof(line), stdin);
+    int new_word = 1;
+    for (int i = 0; line[i] && line[i] != ''\n''; i++) {
+        if (line[i] == '' '') { new_word = 1; putchar('' ''); }
+        else if (new_word) { putchar(toupper(line[i])); new_word = 0; }
+        else putchar(tolower(line[i]));
+    }
+    printf("\n");
+}',
+'c'),
+
+('p-stack-c',
+'#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    int stack[1000], top = 0;
+    char op[10];
+    while (scanf("%s", op) == 1) {
+        if (strcmp(op, "PUSH") == 0) {
+            int val; scanf("%d", &val);
+            stack[top++] = val;
+        } else if (strcmp(op, "POP") == 0) {
+            if (top == 0) printf("EMPTY\n");
+            else printf("%d\n", stack[--top]);
+        }
+    }
+}',
+'c'),
+
+('p-freq-words-c',
+'#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    char words[100][50];
+    int counts[100] = {0};
+    int unique = 0;
+    char w[50];
+    while (scanf("%s", w) == 1) {
+        int found = 0;
+        for (int i = 0; i < unique; i++) {
+            if (strcmp(words[i], w) == 0) { counts[i]++; found = 1; break; }
+        }
+        if (!found) { strcpy(words[unique], w); counts[unique++] = 1; }
+    }
+    for (int i = 0; i < unique; i++) printf("%s %d\n", words[i], counts[i]);
+}',
+'c')
+
+ON CONFLICT(problem_id) DO NOTHING;

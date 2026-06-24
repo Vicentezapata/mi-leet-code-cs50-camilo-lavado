@@ -59,9 +59,9 @@ export function ProblemPage() {
         problemId={id!}
       />
 
-      <div className="h-full flex flex-col md:flex-row p-2 gap-2 bg-local-bg">
+      <div className="h-full flex flex-col md:flex-row p-2 gap-2 bg-local-bg overflow-hidden">
         {/* Panel Izquierdo: Descripción */}
-        <div className="w-full md:w-[40%] flex flex-col gap-4 p-6 glass-panel overflow-y-auto">
+        <div className="w-full md:w-[40%] max-h-[45vh] md:max-h-full flex flex-col gap-4 p-6 glass-panel overflow-y-auto">
           <div className="flex items-center justify-between border-b border-local-border pb-4 mb-2">
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">{problem.title}</h1>
@@ -117,7 +117,7 @@ export function ProblemPage() {
         </div>
 
         {/* Panel Derecho: Editor y Consola */}
-        <div className="w-full md:w-[60%] flex flex-col gap-2">
+        <div className="w-full md:w-[60%] flex flex-col gap-2 min-h-[55vh] md:min-h-0">
           {/* Editor */}
           <div className="flex-1 glass-panel flex flex-col overflow-hidden">
             <div className="px-4 py-3 border-b border-local-border bg-black/30">

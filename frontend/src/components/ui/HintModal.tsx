@@ -37,7 +37,7 @@ export function HintModal({ isOpen, onClose, hints, isLoading, problemId }: Hint
 
   if (!isOpen) return null;
 
-  const allRevealed = revealedCount >= hints.length;
+  const allRevealed = hints.length > 0 && revealedCount >= hints.length;
 
   return (
     <div
