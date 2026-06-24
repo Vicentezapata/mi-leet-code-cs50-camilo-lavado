@@ -17,7 +17,11 @@ import (
 
 func main() {
 	// 1. Conectar a SQLite
-	db, err := sql.Open("sqlite", "./localcode.db")
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "./localcode.db"
+	}
+	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
 		slog.Error(fmt.Sprintf("Error opening database: %v", err))
 		os.Exit(1)
