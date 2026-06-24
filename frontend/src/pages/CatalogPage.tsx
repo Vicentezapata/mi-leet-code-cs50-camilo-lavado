@@ -24,7 +24,7 @@ const ALL_WEEKS = [
 export function CatalogPage() {
   const [weekFilter, setWeekFilter] = useState<number | null>(null);
   const [difficultyFilter, setDifficultyFilter] = useState('all');
-  const { data: problemsData, isLoading: problemsLoading, error: problemsError } = useProblems(weekFilter, difficultyFilter);
+  const { data: problemsData, isLoading: problemsLoading, error: problemsError } = useProblems(weekFilter ?? undefined, difficultyFilter);
   const { data: submissionsData, isLoading: submissionsLoading, error: submissionsError } = useSubmissions();
   const { data: progressData } = useProgress();
   
@@ -133,7 +133,7 @@ export function CatalogPage() {
           </div>
         )}
         
-        <ProblemList problems={problems} submissions={submissions} isLoading={isLoading} error={error as Error | null} />
+        <ProblemList problems={problems} submissions={submissions} isLoading={isLoading} error={error as Error | null} weekFilter={weekFilter} />
       </div>
     </div>
   );
