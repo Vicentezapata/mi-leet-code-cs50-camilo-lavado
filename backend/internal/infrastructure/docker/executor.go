@@ -84,8 +84,9 @@ func (e *DockerExecutor) Execute(snippet domain.CodeSnippet, testCase domain.Tes
 	case "sql":
 		img = "keinos/sqlite3:latest"
 		filename = "code.sql"
-		// input.txt contains the DB schema+data; code.sql contains the student's query
-		cmd = []string{"sh", "-c", "sqlite3 /workspace/db.sqlite < /workspace/setup.sql && sqlite3 -separator '|' /workspace/db.sqlite < /workspace/code.sql < input.txt"}
+		// setup.sql (problem asset) loads the schema+data; code.sql has the student's query
+		// DB is created in /tmp because /workspace is owned by root (Docker CopyToContainer)
+		cmd = []string{"sh", "-c", "sqlite3 /tmp/db.sqlite < /workspace/setup.sql && sqlite3 -separator '|' /tmp/db.sqlite < /workspace/code.sql"}
 	case "javascript", "js":
 		img = "node:18-alpine"
 		filename = "code.js"
@@ -134,13 +135,13 @@ func (e *DockerExecutor) Execute(snippet domain.CodeSnippet, testCase domain.Tes
 	var tarBuf bytes.Buffer
 	tw := tar.NewWriter(&tarBuf)
 
-	// code file
-	hdr := &tar.Header{Name: filename, Mode: 0600, Size: int64(len(snippet.Code))}
+	// code file (0644 so non-root container users like keinos/sqlite3 can read it)
+	hdr := &tar.Header{Name: filename, Mode: 0644, Size: int64(len(snippet.Code))}
 	tw.WriteHeader(hdr)
 	tw.Write([]byte(snippet.Code))
 
 	// input file
-	hdrIn := &tar.Header{Name: "input.txt", Mode: 0600, Size: int64(len(testCase.InputData))}
+	hdrIn := &tar.Header{Name: "input.txt", Mode: 0644, Size: int64(len(testCase.InputData))}
 	tw.WriteHeader(hdrIn)
 	tw.Write([]byte(testCase.InputData))
 

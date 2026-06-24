@@ -775,3 +775,501 @@ INSERT INTO flashcards (id, week, question, answer, order_index) VALUES
 ('fc-6-7', 6, '¿Qué hace `import` en Python y cuáles son las formas de usarlo?', '`import` carga un módulo (librería) para usar sus funciones. Formas: `import math` (importa todo el módulo; se accede con `math.sqrt()`), `from math import sqrt` (importa solo `sqrt`; se usa directamente), `from math import *` (importa todo sin prefijo; no recomendado). Python tiene una biblioteca estándar enorme: `random`, `sys`, `os`, `csv`, `json`, etc.', 7),
 ('fc-6-8', 6, '¿Qué hace `range()` en Python y cuáles son sus formas de uso?', '`range()` genera una secuencia de números enteros. Formas: `range(n)` genera 0, 1, ..., n-1. `range(inicio, fin)` genera desde inicio hasta fin-1. `range(inicio, fin, paso)` genera con el incremento dado. Se usa principalmente en bucles `for`: `for i in range(5):` itera 5 veces. No crea una lista en memoria; es un objeto generador (eficiente para rangos grandes).', 8)
 ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- SEMANA 7: SQL y Bases de Datos Relacionales
+-- =============================================================
+
+-- Problema: Songs (Fácil) — SELECT / WHERE / ORDER BY sobre una tabla
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-songs-sql', 'Songs', '## El reto de Songs
+
+Tienes una base de datos de canciones populares con las columnas: `id`, `name`, `artist_id`, `tempo`, `energy` y `danceability`. Los valores de `energy` y `danceability` van de 0.0 a 1.0.
+
+### Tu tarea
+
+Escribe una consulta SQL que devuelva el **nombre** (`name`) de cada canción cuyo `energy` sea **mayor a 0.6**, ordenado **alfabéticamente por nombre**.
+
+### Esquema disponible
+
+```sql
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    artist_id INTEGER NOT NULL,
+    tempo REAL,
+    energy REAL,
+    danceability REAL
+);
+```
+
+### Ejemplo de salida esperada
+
+```
+Blinding Lights
+Closer
+Dance Monkey
+Happier
+One Dance
+Shape of You
+```
+
+### Requisitos
+- Solo devuelve la columna `name`.
+- Filtra con `WHERE energy > 0.6`.
+- Ordena con `ORDER BY name`.', 'Fácil', 'sql', 7)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-songs-1', 'p-songs-sql', '', 'Blinding Lights\nCloser\nDance Monkey\nHappier\nOne Dance\nShape of You\n', 0),
+('tc-songs-2', 'p-songs-sql', '', 'Blinding Lights\nCloser\nDance Monkey\nHappier\nOne Dance\nShape of You\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-songs-1', 'p-songs-sql', 1, '¿Cuál es la cláusula SQL que te permite elegir qué filas incluir según una condición? ¿Cómo se escribe para filtrar por un valor numérico mayor a 0.6?'),
+('h-songs-2', 'p-songs-sql', 2, '¿Cuál es la diferencia entre `SELECT *` y `SELECT name`? ¿Por qué importa especificar solo la columna que necesitas?'),
+('h-songs-3', 'p-songs-sql', 3, '¿Qué cláusula SQL ordena los resultados? ¿Cuál es el orden predeterminado y cómo lo escribirías para ordenar alfabéticamente por nombre?'),
+('h-songs-4', 'p-songs-sql', 4, 'La estructura completa de la consulta sigue este patrón: `SELECT columna FROM tabla WHERE condición ORDER BY columna`. ¿Puedes completar cada parte con los valores correctos para este problema?')
+ON CONFLICT(id) DO NOTHING;
+
+-- Problema: Artists (Media) — JOIN entre dos tablas
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-artists-sql', 'Artists', '## El reto de Artists
+
+Tienes dos tablas: `artists` (con `id` y `name`) y `songs` (con `id`, `name`, y `artist_id`).
+
+### Tu tarea
+
+Escribe una consulta SQL que devuelva el **nombre de cada canción** y el **nombre de su artista**, en ese orden, para **todas las canciones**. Ordena los resultados por **nombre del artista** (ascendente) y luego por **nombre de la canción** (ascendente).
+
+### Esquema disponible
+
+```sql
+CREATE TABLE artists (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    artist_id INTEGER NOT NULL,
+    FOREIGN KEY (artist_id) REFERENCES artists(id)
+);
+```
+
+### Ejemplo de salida (primeras filas)
+
+```
+Bad Guy|Billie Eilish
+Therefore I Am|Billie Eilish
+God''s Plan|Drake
+...
+```
+
+### Requisitos
+- Devuelve `songs.name` y `artists.name` (en ese orden), separados automáticamente por `|`.
+- Usa `JOIN` (o `INNER JOIN`) para combinar las tablas.
+- Ordena primero por `artists.name` ASC, luego por `songs.name` ASC.', 'Media', 'sql', 7)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-artists-1', 'p-artists-sql', '', 'Bad Guy|Billie Eilish\nTherefore I Am|Billie Eilish\nGod''s Plan|Drake\nHotline Bling|Drake\nOne Dance|Drake\nPerfect|Ed Sheeran\nShape of You|Ed Sheeran\nCircles|Post Malone\nRockstar|Post Malone\nSunflower|Post Malone\nAnti-Hero|Taylor Swift\nShake It Off|Taylor Swift\nBlinding Lights|The Weeknd\nSave Your Tears|The Weeknd\nStarboy|The Weeknd\n', 0),
+('tc-artists-2', 'p-artists-sql', '', 'Bad Guy|Billie Eilish\nTherefore I Am|Billie Eilish\nGod''s Plan|Drake\nHotline Bling|Drake\nOne Dance|Drake\nPerfect|Ed Sheeran\nShape of You|Ed Sheeran\nCircles|Post Malone\nRockstar|Post Malone\nSunflower|Post Malone\nAnti-Hero|Taylor Swift\nShake It Off|Taylor Swift\nBlinding Lights|The Weeknd\nSave Your Tears|The Weeknd\nStarboy|The Weeknd\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-artists-1', 'p-artists-sql', 1, '¿Qué cláusula SQL se usa para combinar filas de dos tablas basándose en una columna en común? ¿Qué columna conecta `songs` con `artists`?'),
+('h-artists-2', 'p-artists-sql', 2, 'Cuando usas `JOIN`, ¿cómo le dices a SQL qué columnas deben coincidir? La sintaxis es `tabla1 JOIN tabla2 ON tabla1.columna = tabla2.columna`. ¿Cuáles son las columnas correctas aquí?'),
+('h-artists-3', 'p-artists-sql', 3, '¿Cómo especificas en `SELECT` columnas de tablas distintas para evitar ambigüedad? Si ambas tablas tienen una columna `name`, ¿cómo las distingues?'),
+('h-artists-4', 'p-artists-sql', 4, '¿Cómo ordenas por más de un criterio en SQL? La cláusula `ORDER BY col1 ASC, col2 ASC` aplica orden primario y secundario. ¿Cuál va primero en este caso?')
+ON CONFLICT(id) DO NOTHING;
+
+-- Problema: Counts (Media) — GROUP BY / HAVING / COUNT
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-counts-sql', 'Counts', '## El reto de Counts
+
+Usando las tablas `artists` y `songs`, escribe una consulta SQL que muestre qué artistas tienen **2 o más canciones** en la base de datos, junto con la **cantidad de canciones** de cada uno.
+
+### Tu tarea
+
+Devuelve el **nombre del artista** y el **número de canciones**, para artistas con 2 o más canciones. Ordena por cantidad de canciones de **mayor a menor**, y en caso de empate, por nombre de artista en orden **alfabético ascendente**.
+
+### Esquema disponible
+
+```sql
+CREATE TABLE artists (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    artist_id INTEGER NOT NULL
+);
+```
+
+### Ejemplo de salida esperada
+
+```
+Drake|3
+Post Malone|3
+The Weeknd|3
+Billie Eilish|2
+Ed Sheeran|2
+Taylor Swift|2
+```
+
+### Requisitos
+- Usa `COUNT(*)` para contar canciones.
+- Usa `GROUP BY` para agrupar por artista.
+- Usa `HAVING` para filtrar grupos con conteo >= 2.
+- Ordena con `ORDER BY count DESC, name ASC`.', 'Media', 'sql', 7)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-counts-1', 'p-counts-sql', '', 'Drake|3\nPost Malone|3\nThe Weeknd|3\nBillie Eilish|2\nEd Sheeran|2\nTaylor Swift|2\n', 0),
+('tc-counts-2', 'p-counts-sql', '', 'Drake|3\nPost Malone|3\nThe Weeknd|3\nBillie Eilish|2\nEd Sheeran|2\nTaylor Swift|2\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-counts-1', 'p-counts-sql', 1, '¿Qué función de agregación SQL cuenta el número de filas en un grupo? ¿Cómo se escribe para contar todas las canciones de cada artista?'),
+('h-counts-2', 'p-counts-sql', 2, '¿Cuál es la diferencia entre `WHERE` y `HAVING`? `WHERE` filtra filas individuales antes de agrupar; `HAVING` filtra grupos después de aplicar la función de agregación. ¿Cuál necesitas para filtrar por conteo?'),
+('h-counts-3', 'p-counts-sql', 3, '¿Qué hace `GROUP BY` exactamente? Agrupa todas las filas que tienen el mismo valor en la columna indicada, para que las funciones de agregación (como `COUNT`) operen sobre cada grupo. ¿Por qué columna deberías agrupar aquí?'),
+('h-counts-4', 'p-counts-sql', 4, 'Para ordenar primero por conteo descendente y luego por nombre ascendente, ¿cómo quedaría la cláusula `ORDER BY`? Recuerda que puedes usar `COUNT(*)` directamente en `ORDER BY` o darle un alias con `AS`.')
+ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- FLASHCARDS: Semana 7 — SQL
+-- =============================================================
+
+INSERT INTO flashcards (id, week, question, answer, order_index) VALUES
+('fc-7-1', 7, '¿Qué es SQL y para qué sirve?', 'SQL (Structured Query Language) es el lenguaje estándar para interactuar con **bases de datos relacionales**. Permite crear tablas (`CREATE`), insertar datos (`INSERT`), consultarlos (`SELECT`), modificarlos (`UPDATE`) y eliminarlos (`DELETE`). Es declarativo: describes *qué* quieres, no *cómo* obtenerlo. Lo usan prácticamente todos los sistemas de información: aplicaciones web, móviles, análisis de datos, etc.', 1),
+('fc-7-2', 7, '¿Cuál es la estructura básica de una consulta SELECT?', 'La estructura básica es: `SELECT columnas FROM tabla WHERE condición ORDER BY columna`. Cada parte es opcional excepto `SELECT` y `FROM`. Ejemplo: `SELECT name, age FROM users WHERE age > 18 ORDER BY name`. SQL la ejecuta en este orden interno: FROM → WHERE → SELECT → ORDER BY. El orden que escribes no es el de ejecución.', 2),
+('fc-7-3', 7, '¿Qué hace JOIN y cuándo se usa?', '`JOIN` combina filas de dos o más tablas basándose en una columna en común. `INNER JOIN` (o simplemente `JOIN`) devuelve solo las filas que tienen coincidencia en ambas tablas. Ejemplo: `SELECT songs.name, artists.name FROM songs JOIN artists ON songs.artist_id = artists.id`. Se usa cuando los datos están distribuidos en varias tablas relacionadas por claves foráneas.', 3),
+('fc-7-4', 7, '¿Cuál es la diferencia entre WHERE y HAVING?', '`WHERE` filtra **filas individuales** antes de agruparlas — no puede usar funciones de agregación. `HAVING` filtra **grupos** después de `GROUP BY` — puede usar `COUNT`, `AVG`, etc. Regla práctica: si tu condición usa `COUNT(*)` o similar, necesitas `HAVING`; si filtra por valores de columna directa, usa `WHERE`. Ejemplo: `GROUP BY city HAVING COUNT(*) > 10`.', 4),
+('fc-7-5', 7, '¿Qué son las claves primaria y foránea en SQL?', 'La **clave primaria** (`PRIMARY KEY`) identifica unívocamente cada fila de una tabla — no puede ser NULL ni duplicada. La **clave foránea** (`FOREIGN KEY`) es una columna que referencia la clave primaria de otra tabla, estableciendo una relación entre ellas. Ejemplo: `songs.artist_id` es clave foránea que apunta a `artists.id`. Las claves foráneas garantizan integridad referencial: no puedes insertar una canción con `artist_id` que no exista en `artists`.', 5),
+('fc-7-6', 7, '¿Qué hace GROUP BY y qué funciones de agregación existen?', '`GROUP BY` agrupa filas con el mismo valor en una columna, para aplicar funciones de agregación sobre cada grupo. Funciones disponibles: `COUNT(*)` (número de filas), `SUM(col)` (suma), `AVG(col)` (promedio), `MAX(col)` (máximo), `MIN(col)` (mínimo). Ejemplo: `SELECT artist_id, COUNT(*) FROM songs GROUP BY artist_id` cuenta canciones por artista. Toda columna en `SELECT` que no esté en una función de agregación debe estar en `GROUP BY`.', 6),
+('fc-7-7', 7, '¿Qué es la inyección SQL y cómo se previene?', 'La inyección SQL ocurre cuando un atacante inserta código SQL en un input de usuario para manipular la consulta. Ejemplo clásico: si el código hace `"SELECT * FROM users WHERE name = ''" + userInput + "''"`, alguien puede ingresar `'' OR 1=1 --` y obtener todos los usuarios. Se previene usando **consultas parametrizadas** (prepared statements): `db.Query("SELECT * FROM users WHERE name = ?", userInput)`. El driver escapa el input automáticamente. Nunca concatenes input de usuario en SQL.', 7),
+('fc-7-8', 7, '¿Cuál es la diferencia entre una base de datos relacional y un archivo CSV o JSON?', 'Un CSV/JSON es solo texto plano: no tiene índices, no valida tipos, no puede hacer JOINs eficientes y se carga entero en memoria. Una base de datos relacional (como SQLite, PostgreSQL) almacena datos en tablas con esquema definido, soporta índices para búsquedas O(log n), garantiza integridad de datos con constraints, y puede manejar millones de filas con consultas complejas eficientemente. SQL es a los datos lo que los punteros son a la memoria: más potente pero requiere precisión.', 8)
+ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- SEMANA 8: HTML, CSS y JavaScript
+-- =============================================================
+
+-- Problema: Greet (Fácil) — stdin/stdout básico en JavaScript
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-greet-js', 'Greet', '## El reto de Greet
+
+Escribe un programa en **JavaScript** que lea un nombre desde la entrada estándar e imprima un saludo con el siguiente formato:
+
+```
+hello, <nombre>
+```
+
+El nombre puede tener espacios (por ejemplo, "David Malan") y debe aparecer tal cual en el saludo.
+
+### Ejemplo
+
+**Input:**
+```
+David Malan
+```
+
+**Output:**
+```
+hello, David Malan
+```
+
+### Requisitos
+- Lee una sola línea desde stdin.
+- Imprime exactamente `hello, ` seguido del nombre tal como fue ingresado.
+- Usa Node.js: puedes leer stdin con `require(''fs'').readFileSync(''/dev/stdin'', ''utf8'').trim()` o procesando línea a línea.', 'Fácil', 'javascript', 8)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-greet-1', 'p-greet-js', 'world\n', 'hello, world\n', 0),
+('tc-greet-2', 'p-greet-js', 'David Malan\n', 'hello, David Malan\n', 0),
+('tc-greet-3', 'p-greet-js', 'CS50\n', 'hello, CS50\n', 1),
+('tc-greet-4', 'p-greet-js', '   Alice   \n', 'hello, Alice\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-greet-1', 'p-greet-js', 1, '¿Cómo lees la entrada estándar en Node.js de forma sincrónica? Una opción es `require("fs").readFileSync("/dev/stdin", "utf8")`. ¿Qué necesitas hacer con ese string para obtener el nombre limpio?'),
+('h-greet-2', 'p-greet-js', 2, '¿Qué método de string elimina espacios al inicio y al final? Si el input viene con un salto de línea `\n` al final, ¿cómo lo quitas?'),
+('h-greet-3', 'p-greet-js', 3, '¿Cómo construyes el string de salida? Puedes usar concatenación (`"hello, " + name`) o template literals (`\`hello, ${name}\``). ¿Cuál es más legible?'),
+('h-greet-4', 'p-greet-js', 4, '¿Qué función imprime en stdout en Node.js? `console.log()` agrega un `\n` al final automáticamente. ¿Eso coincide con el formato de salida esperado?')
+ON CONFLICT(id) DO NOTHING;
+
+-- Problema: Tally (Media) — arrays y conteo en JavaScript
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-tally-js', 'Tally', '## El reto de Tally
+
+Escribe un programa en **JavaScript** que lea una lista de palabras (una por línea) desde stdin y que, al final, imprima cuántas veces apareció cada palabra, en orden **alfabético**, con el formato `palabra: N`.
+
+La entrada termina con EOF (fin de archivo). Las comparaciones son **sensibles a mayúsculas**: "Hola" y "hola" son palabras distintas.
+
+### Ejemplo
+
+**Input:**
+```
+manzana
+pera
+manzana
+uva
+pera
+manzana
+```
+
+**Output:**
+```
+manzana: 3
+pera: 2
+uva: 1
+```
+
+### Requisitos
+- Lee todas las líneas hasta EOF.
+- Ignora líneas vacías.
+- Imprime `palabra: cantidad` ordenado alfabéticamente por palabra.', 'Media', 'javascript', 8)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-tally-1', 'p-tally-js', 'manzana\npera\nmanzana\nuva\npera\nmanzana\n', 'manzana: 3\npera: 2\nuva: 1\n', 0),
+('tc-tally-2', 'p-tally-js', 'a\nb\na\nc\nb\na\n', 'a: 3\nb: 2\nc: 1\n', 0),
+('tc-tally-3', 'p-tally-js', 'Hola\nhola\nHola\n', 'Hola: 2\nhola: 1\n', 1),
+('tc-tally-4', 'p-tally-js', 'x\n', 'x: 1\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-tally-1', 'p-tally-js', 1, '¿Cómo lees todas las líneas de stdin en Node.js? Puedes usar `readFileSync` y luego `.split("\n")` para obtener un array de líneas. ¿Qué necesitas filtrar después del split?'),
+('h-tally-2', 'p-tally-js', 2, '¿Qué estructura de datos en JavaScript te permite contar cuántas veces aparece cada palabra? Un objeto `{}` o un `Map` pueden funcionar como diccionario `{ palabra: cantidad }`. ¿Cómo incrementas el conteo para una palabra que ya existe y lo inicializas si es nueva?'),
+('h-tally-3', 'p-tally-js', 3, '¿Cómo obtienes las claves de un objeto en JavaScript y las ordenas alfabéticamente? `Object.keys(obj).sort()` devuelve las claves ordenadas. ¿Cómo iteras sobre ellas para imprimir?'),
+('h-tally-4', 'p-tally-js', 4, '¿Cómo construyes la línea de salida `"manzana: 3"` para cada entrada? Recuerda que debes usar `console.log()` y que el formato es exactamente `palabra: N` (con dos puntos y espacio).')
+ON CONFLICT(id) DO NOTHING;
+
+-- Problema: JSON Parser (Media) — manejo de JSON en JavaScript
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-json-js', 'JSON Parser', '## El reto de JSON Parser
+
+Escribe un programa en **JavaScript** que lea una línea de stdin con un objeto JSON que representa a una persona, y que imprima un resumen con el siguiente formato:
+
+```
+Nombre: <nombre>
+Edad: <edad>
+Ciudad: <ciudad>
+```
+
+La línea de entrada tendrá siempre las claves `name`, `age` y `city`.
+
+### Ejemplo
+
+**Input:**
+```
+{"name":"Ana","age":25,"city":"Santiago"}
+```
+
+**Output:**
+```
+Nombre: Ana
+Edad: 25
+Ciudad: Santiago
+```
+
+### Requisitos
+- Parsea el JSON con `JSON.parse()`.
+- Imprime exactamente las tres líneas en el orden indicado.
+- No asumas nada sobre el orden de las claves en el JSON de entrada.', 'Media', 'javascript', 8)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-json-1', 'p-json-js', '{"name":"Ana","age":25,"city":"Santiago"}\n', 'Nombre: Ana\nEdad: 25\nCiudad: Santiago\n', 0),
+('tc-json-2', 'p-json-js', '{"name":"Carlos","age":30,"city":"Lima"}\n', 'Nombre: Carlos\nEdad: 30\nCiudad: Lima\n', 0),
+('tc-json-3', 'p-json-js', '{"city":"Bogotá","name":"María","age":22}\n', 'Nombre: María\nEdad: 22\nCiudad: Bogotá\n', 1),
+('tc-json-4', 'p-json-js', '{"name":"Pedro","age":0,"city":"Buenos Aires"}\n', 'Nombre: Pedro\nEdad: 0\nCiudad: Buenos Aires\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-json-1', 'p-json-js', 1, '¿Cómo conviertes un string JSON a un objeto JavaScript? La función `JSON.parse(string)` devuelve un objeto con los campos como propiedades. ¿Cómo accederías luego a `name`, `age` y `city`?'),
+('h-json-2', 'p-json-js', 2, '¿Cómo lees la línea completa de stdin en Node.js? Recuerda usar `.trim()` para eliminar el salto de línea antes de parsear, ya que `JSON.parse` fallaría con caracteres extra.'),
+('h-json-3', 'p-json-js', 3, '¿Qué pasa si el JSON tiene las claves en diferente orden? `JSON.parse` siempre devuelve un objeto con acceso por nombre de propiedad, sin importar el orden. ¿Por qué eso hace tu código más robusto?'),
+('h-json-4', 'p-json-js', 4, '¿Cómo imprimes exactamente las tres líneas requeridas? Usa `console.log()` tres veces, una por campo. Verifica que el formato sea exactamente `Nombre: Ana`, `Edad: 25`, `Ciudad: Santiago` (con mayúscula, dos puntos y espacio).')
+ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- FLASHCARDS: Semana 8 — HTML, CSS y JavaScript
+-- =============================================================
+
+INSERT INTO flashcards (id, week, question, answer, order_index) VALUES
+('fc-8-1', 8, '¿Cuál es la diferencia entre HTML, CSS y JavaScript?', '**HTML** (HyperText Markup Language) define la **estructura** del contenido: encabezados, párrafos, listas, formularios. **CSS** (Cascading Style Sheets) define la **presentación**: colores, fuentes, posición, animaciones. **JavaScript** define el **comportamiento**: responde a eventos del usuario, modifica la página dinámicamente, hace peticiones a servidores. La analogía: HTML es el esqueleto, CSS es la piel y ropa, JavaScript son los músculos y el cerebro.', 1),
+('fc-8-2', 8, '¿Qué es el DOM y para qué sirve en JavaScript?', 'El DOM (Document Object Model) es la representación en memoria del documento HTML como un árbol de objetos. Cada etiqueta HTML se convierte en un nodo del árbol. JavaScript puede acceder y modificar este árbol con funciones como `document.getElementById("id")`, `document.querySelector(".clase")`, y métodos como `.textContent`, `.style`, `.classList`. Cambiar el DOM actualiza lo que ve el usuario sin recargar la página.', 2),
+('fc-8-3', 8, '¿Cuál es la diferencia entre `let`, `const` y `var` en JavaScript?', '`var` es de ámbito de función y tiene *hoisting* (se "eleva" al inicio de la función) — evítalo en código moderno. `let` es de ámbito de bloque `{}` y puede reasignarse. `const` es de ámbito de bloque y no puede reasignarse (aunque los objetos/arrays que referencia sí pueden mutarse). Regla práctica: usa `const` por defecto; usa `let` cuando necesites reasignar; nunca uses `var`.', 3),
+('fc-8-4', 8, '¿Qué es un event listener y cómo se agrega en JavaScript?', 'Un event listener es una función que se ejecuta cuando ocurre un evento en el navegador (clic, tecla presionada, carga de página, etc.). Se agrega con `elemento.addEventListener("tipo", funcion)`. Ejemplo: `document.querySelector("button").addEventListener("click", () => alert("¡Clic!"))`. El primer argumento es el tipo de evento (`"click"`, `"submit"`, `"keydown"`), el segundo es la función a ejecutar.', 4),
+('fc-8-5', 8, '¿Qué es una función flecha (arrow function) en JavaScript?', 'Las funciones flecha (`=>`) son una sintaxis compacta para funciones. `const suma = (a, b) => a + b` es equivalente a `function suma(a, b) { return a + b; }`. Si el cuerpo es una sola expresión, el `return` y las llaves son implícitos. Diferencia clave: no tienen su propio `this` (heredan el del contexto padre), lo que las hace útiles en callbacks y event listeners.', 5),
+('fc-8-6', 8, '¿Qué hace `fetch()` en JavaScript y cómo se usa?', '`fetch(url)` hace una petición HTTP asíncrona y devuelve una `Promise`. Se usa con `async/await`: `const res = await fetch("/api/data"); const data = await res.json();`. También con `.then()`: `fetch(url).then(r => r.json()).then(data => console.log(data))`. Es la forma moderna de hacer peticiones AJAX (reemplaza `XMLHttpRequest`). Permite crear aplicaciones que cargan datos sin recargar la página.', 6),
+('fc-8-7', 8, '¿Qué son los selectores CSS y cuáles son los más usados?', 'Los selectores CSS identifican qué elementos HTML deben recibir un estilo. Los más usados: `etiqueta` (todos los `<p>`), `.clase` (todos los elementos con esa clase), `#id` (elemento único con ese id), `padre hijo` (elementos anidados), `elemento:hover` (pseudoclase, aplica al pasar el mouse). En JavaScript, `document.querySelector(".clase")` usa la misma sintaxis para buscar elementos.', 7),
+('fc-8-8', 8, '¿Qué es JSON y por qué es el formato estándar de intercambio de datos en la web?', 'JSON (JavaScript Object Notation) es un formato de texto para representar datos estructurados: objetos `{}` con pares clave-valor, arrays `[]`, strings, números, booleanos y null. Es legible por humanos y fácil de parsear por máquinas. Se convirtió en el estándar de las APIs web porque es más ligero que XML, nativo en JavaScript (`JSON.parse`/`JSON.stringify`), y soportado por todos los lenguajes. Ejemplo: `{"name": "Alice", "scores": [95, 87, 92]}`.', 8)
+ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- SEMANA 9: Flask y Python web/datos (consola)
+-- =============================================================
+
+-- Problema: Word Frequency (Fácil) — diccionarios Python
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-freq-py', 'Word Frequency', '## El reto de Word Frequency
+
+Escribe un programa en **Python** que lea líneas de texto desde stdin y cuente cuántas veces aparece cada palabra. Al final, imprime cada palabra y su frecuencia, **ordenadas por frecuencia de mayor a menor**. En caso de empate, ordena alfabéticamente.
+
+Las palabras son secuencias de caracteres separados por espacios. La comparación es **insensible a mayúsculas** (convierte todo a minúsculas).
+
+### Ejemplo
+
+**Input:**
+```
+el gato y el perro
+el gato salta
+```
+
+**Output:**
+```
+el: 3
+gato: 2
+perro: 1
+salta: 1
+y: 1
+```
+
+### Requisitos
+- Convierte todo a minúsculas antes de contar.
+- Ordena primero por frecuencia descendente, luego alfabéticamente.
+- Ignora líneas vacías.', 'Fácil', 'python', 9)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-freq-1', 'p-freq-py', 'el gato y el perro\nel gato salta\n', 'el: 3\ngato: 2\nperro: 1\nsalta: 1\ny: 1\n', 0),
+('tc-freq-2', 'p-freq-py', 'a b c a b a\n', 'a: 3\nb: 2\nc: 1\n', 0),
+('tc-freq-3', 'p-freq-py', 'Hola hola HOLA mundo\n', 'hola: 3\nmundo: 1\n', 1),
+('tc-freq-4', 'p-freq-py', 'uno\ndos tres\nuno dos\nuno\n', 'uno: 3\ndos: 2\ntres: 1\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-freq-1', 'p-freq-py', 1, '¿Qué estructura de datos de Python mapea palabras a su conteo? Un diccionario `{}` con la palabra como clave y el conteo como valor funciona perfectamente. ¿Cómo incrementarías el conteo de una palabra que ya existe, o lo inicializarías a 1 si es nueva?'),
+('h-freq-2', 'p-freq-py', 2, '¿Cómo lees todas las líneas de stdin en Python? `import sys` y `sys.stdin.readlines()` devuelve una lista de líneas. Luego puedes procesar cada una con `.split()` para obtener las palabras. ¿Y cómo conviertes a minúsculas?'),
+('h-freq-3', 'p-freq-py', 3, '¿Cómo ordenarías un diccionario por sus valores (frecuencia) de mayor a menor, y en caso de empate por clave alfabéticamente? Pista: `sorted(dic.items(), key=lambda x: (-x[1], x[0]))` ordena por frecuencia negativa (para invertir) y luego por nombre.'),
+('h-freq-4', 'p-freq-py', 4, '¿Cómo imprimes cada resultado con el formato `"palabra: N"`? Puedes usar un f-string: `f"{palabra}: {conteo}"`. Recuerda imprimir una línea por palabra en el orden correcto.')
+ON CONFLICT(id) DO NOTHING;
+
+-- Problema: CSV Filter (Media) — manejo de CSV en Python
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-csv-py', 'CSV Filter', '## El reto de CSV Filter
+
+Escribe un programa en **Python** que lea filas en formato CSV desde stdin y filtre aquellas que cumplan una condición. Luego imprime las filas filtradas ordenadas por el primer campo.
+
+El formato de entrada es: `nombre,edad,ciudad` (sin encabezado). Debes imprimir solo las filas donde la edad sea **mayor a 25**, ordenadas por **nombre** (primer campo) de forma **alfabética ascendente**, en el mismo formato `nombre,edad,ciudad`.
+
+### Ejemplo
+
+**Input:**
+```
+Ana,30,Santiago
+Luis,22,Lima
+Carlos,28,Bogotá
+María,19,Quito
+```
+
+**Output:**
+```
+Ana,30,Santiago
+Carlos,28,Bogotá
+```
+
+### Requisitos
+- Lee hasta EOF.
+- Filtra donde edad (segundo campo) > 25.
+- Ordena por nombre (primer campo) ascendente.
+- Imprime en formato `nombre,edad,ciudad`.', 'Media', 'python', 9)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-csv-1', 'p-csv-py', 'Ana,30,Santiago\nLuis,22,Lima\nCarlos,28,Bogotá\nMaría,19,Quito\n', 'Ana,30,Santiago\nCarlos,28,Bogotá\n', 0),
+('tc-csv-2', 'p-csv-py', 'Pedro,26,Madrid\nSofia,24,Roma\nJuan,35,Paris\n', 'Juan,35,Paris\nPedro,26,Madrid\n', 0),
+('tc-csv-3', 'p-csv-py', 'Alice,18,NY\nBob,40,LA\nChris,27,Chicago\nDana,25,Miami\n', 'Bob,40,LA\nChris,27,Chicago\n', 1),
+('tc-csv-4', 'p-csv-py', 'Zara,50,Dubai\nAmira,50,Cairo\n', 'Amira,50,Cairo\nZara,50,Dubai\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-csv-1', 'p-csv-py', 1, '¿Cómo separas cada línea CSV en sus campos? El método `.split(",")` sobre una línea devuelve una lista `[nombre, edad, ciudad]`. ¿Cómo accedes a cada campo por índice?'),
+('h-csv-2', 'p-csv-py', 2, '¿Cuál es el tipo del campo `edad` después de hacer `.split(",")`? Es un string, no un entero. ¿Qué función de Python convierte un string numérico a entero para poder compararlo con 25?'),
+('h-csv-3', 'p-csv-py', 3, '¿Cómo acumulas las filas que pasan el filtro? Una lista `resultado = []` a la que haces `.append(fila)` por cada fila válida funciona bien. ¿Cómo ordenarías esa lista por el primer campo (nombre) después de filtrar?'),
+('h-csv-4', 'p-csv-py', 4, '¿Cómo ordenas una lista de listas por un campo específico en Python? `sorted(lista, key=lambda row: row[0])` ordena por el primer elemento. ¿Cómo reconstruyes la línea de salida `nombre,edad,ciudad` desde la lista?')
+ON CONFLICT(id) DO NOTHING;
+
+-- Problema: Template Engine (Media) — string formatting estilo Jinja
+INSERT INTO problems (id, title, description, difficulty, language, week) VALUES
+('p-template-py', 'Template Engine', '## El reto de Template Engine
+
+Escribe un programa en **Python** que implemente un motor de plantillas minimalista, similar a cómo Flask usa Jinja2.
+
+La primera línea de stdin contiene la plantilla. Las líneas siguientes contienen pares `clave=valor` (uno por línea) que reemplazan las variables `{{clave}}` en la plantilla.
+
+### Ejemplo
+
+**Input:**
+```
+Hola {{nombre}}, tienes {{edad}} años y vives en {{ciudad}}.
+nombre=Ana
+edad=30
+ciudad=Santiago
+```
+
+**Output:**
+```
+Hola Ana, tienes 30 años y vives en Santiago.
+```
+
+### Requisitos
+- La primera línea es la plantilla.
+- Las líneas siguientes son `clave=valor`.
+- Reemplaza todas las ocurrencias de `{{clave}}` con su valor.
+- Si una clave no tiene valor definido, déjala como `{{clave}}` (sin cambiarla).
+- Imprime la plantilla con todos los reemplazos aplicados.', 'Media', 'python', 9)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO test_cases (id, problem_id, input_data, expected_output, is_hidden) VALUES
+('tc-template-1', 'p-template-py', 'Hola {{nombre}}, tienes {{edad}} años y vives en {{ciudad}}.\nnombre=Ana\nedad=30\nciudad=Santiago\n', 'Hola Ana, tienes 30 años y vives en Santiago.\n', 0),
+('tc-template-2', 'p-template-py', 'SELECT * FROM {{tabla}} WHERE id = {{id}};\ntabla=users\nid=42\n', 'SELECT * FROM users WHERE id = 42;\n', 0),
+('tc-template-3', 'p-template-py', 'Bienvenido {{usuario}}! Tu rol es {{rol}}.\nusuario=carlos\nrol=admin\n', 'Bienvenido carlos! Tu rol es admin.\n', 1),
+('tc-template-4', 'p-template-py', 'El valor de {{x}} no está definido.\n', 'El valor de {{x}} no está definido.\n', 1)
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO hints (id, problem_id, order_index, question) VALUES
+('h-template-1', 'p-template-py', 1, '¿Cómo lees la primera línea de stdin como plantilla y el resto como pares clave=valor? `input()` lee una línea; puedes usar un bucle `for line in sys.stdin` para leer el resto hasta EOF.'),
+('h-template-2', 'p-template-py', 2, '¿Cómo separas un par `clave=valor` en sus dos partes? El método `.split("=", 1)` divide solo en el primer `=`, lo que es seguro si el valor contiene `=`. ¿Qué devuelve ese split?'),
+('h-template-3', 'p-template-py', 3, '¿Cómo reemplazas `{{clave}}` por su valor en la plantilla? El método `.replace(buscar, reemplazar)` sobre el string de la plantilla funciona: `plantilla = plantilla.replace("{{" + clave + "}}", valor)`. ¿Dónde aplicas esto para cada par?'),
+('h-template-4', 'p-template-py', 4, 'Si una clave en la plantilla no tiene valor en los pares leídos, no debes reemplazarla. ¿Cómo aseguras eso? Si solo reemplazas las claves que SÍ aparecen en la entrada, las que faltan quedarán intactas automáticamente. ¿Por qué no necesitas manejo especial para el caso de clave no encontrada?')
+ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- FLASHCARDS: Semana 9 — Flask y Python Web
+-- =============================================================
+
+INSERT INTO flashcards (id, week, question, answer, order_index) VALUES
+('fc-9-1', 9, '¿Qué es Flask y cómo se diferencia de Django?', 'Flask es un **microframework** web para Python: liviano, sin ORM ni admin integrados, ideal para APIs y aplicaciones pequeñas/medianas. Django es un framework completo (ORM, admin, autenticación) para proyectos grandes con convenciones estrictas. Flask es más flexible: decides qué librerías agregar. App mínima: `from flask import Flask; app = Flask(__name__); @app.route("/"); def index(): return "Hola"`. Para CS50, Flask es la puerta de entrada al desarrollo web con Python.', 1),
+('fc-9-2', 9, '¿Qué es una ruta en Flask y cómo se define?', 'Una ruta asocia una URL con una función Python que genera la respuesta. Se define con el decorador `@app.route("/ruta")` sobre la función. Ejemplo: `@app.route("/users/<int:id>") def get_user(id): return str(id)`. Las partes de la URL entre `<>` son parámetros dinámicos. Flask soporta métodos HTTP: `@app.route("/form", methods=["GET", "POST"])` responde a ambos métodos.', 2),
+('fc-9-3', 9, '¿Qué hace `render_template` en Flask?', '`render_template("archivo.html", clave=valor)` busca `archivo.html` en la carpeta `templates/`, le inyecta las variables dadas, y devuelve el HTML resultante. Usa el motor de plantillas **Jinja2**: en el template puedes escribir `{{ clave }}` para interpolar variables, `{% if condicion %}...{% endif %}` para condicionales, y `{% for item in lista %}...{% endfor %}` para bucles. Separa la lógica de la presentación.', 3),
+('fc-9-4', 9, '¿Cuál es la diferencia entre GET y POST en HTTP?', '**GET** solicita datos del servidor: los parámetros van en la URL (`?key=value`). Idempotente (puedes repetirlo sin efectos secundarios). Se usa para búsquedas y navegación. **POST** envía datos al servidor: los parámetros van en el cuerpo de la petición (no en la URL). No idempotente. Se usa para formularios que modifican datos (crear usuario, enviar mensaje). En Flask: `request.args.get("q")` para GET, `request.form.get("campo")` para POST.', 4),
+('fc-9-5', 9, '¿Qué es `request` en Flask y cuándo se usa?', '`request` es un objeto global de Flask que contiene toda la información de la petición HTTP actual: método (`request.method`), datos del formulario (`request.form`), parámetros de URL (`request.args`), headers, cookies, archivos subidos. Se importa con `from flask import request`. Solo está disponible dentro de una función de ruta. Ejemplo: `nombre = request.form.get("nombre", "")` obtiene el campo "nombre" del formulario POST.', 5),
+('fc-9-6', 9, '¿Qué son las sesiones en Flask y para qué sirven?', 'Las sesiones permiten almacenar datos del usuario **entre peticiones HTTP** (HTTP es sin estado). Flask las implementa con cookies firmadas: `from flask import session; session["usuario"] = "Ana"`. Los datos se guardan en una cookie cifrada en el navegador del cliente. Requieren `app.secret_key = "clave-secreta"`. Se usan para mantener al usuario autenticado, guardar preferencias, o un carrito de compras. Son análogas a las variables globales, pero por usuario.', 6),
+('fc-9-7', 9, '¿Qué es el patrón MVC y cómo lo implementa Flask?', 'MVC (Model-View-Controller) separa la aplicación en tres capas: **Model** (datos y lógica de negocio, e.g., consultas SQL), **View** (presentación, e.g., templates Jinja2), **Controller** (intermediario, e.g., funciones de ruta en Flask). En Flask: las rutas son el Controller, los templates HTML son la View, y el acceso a la base de datos (con SQLite o SQLAlchemy) es el Model. Separar estas capas facilita el mantenimiento y las pruebas.', 7),
+('fc-9-8', 9, '¿Cómo funciona `redirect` y `url_for` en Flask?', '`redirect(url)` devuelve una respuesta HTTP 302 que lleva al cliente a otra URL. `url_for("nombre_funcion")` genera la URL de una ruta a partir del nombre de su función Python, evitando URLs hardcodeadas. Ejemplo: `return redirect(url_for("index"))` redirige al home tras un submit de formulario. Esto sigue el patrón **Post/Redirect/Get** (PRG): evita que recargar la página reenvíe el formulario.', 8)
+ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- FLASHCARDS: Semana 10 — Emoji, Unicode y Representación de Texto
+-- =============================================================
+
+INSERT INTO flashcards (id, week, question, answer, order_index) VALUES
+('fc-10-1', 10, '¿Qué es ASCII y cuál es su limitación principal?', 'ASCII (American Standard Code for Information Interchange) es una codificación de caracteres de **7 bits** que define 128 símbolos: letras A-Z, a-z, dígitos 0-9, signos de puntuación y 33 caracteres de control. Su limitación: solo cubre el inglés. No tiene ñ, tildes, caracteres chinos, árabes, o emojis. Históricamente, diferentes países crearon sus propias extensiones incompatibles (ISO-8859-1, etc.), lo que generó el caos de "caracteres raros" cuando se mezclaban sistemas.', 1),
+('fc-10-2', 10, '¿Qué es Unicode y qué problema resuelve?', 'Unicode es un estándar universal que asigna un número único (**code point**) a cada carácter de todos los sistemas de escritura del mundo. Actualmente define más de 140.000 caracteres, desde el latín hasta el chino, árabe, emojis y símbolos matemáticos. Resuelve el problema de incompatibilidad entre codificaciones: un solo estándar para todos. Un code point se escribe como `U+XXXX` (en hexadecimal). Ejemplo: `U+0041` es `A`, `U+1F600` es 😀.', 2),
+('fc-10-3', 10, '¿Qué es UTF-8 y por qué es la codificación dominante en la web?', 'UTF-8 es la codificación más usada de Unicode: representa cada code point usando **1 a 4 bytes**. Los caracteres ASCII usan 1 byte (compatible hacia atrás con ASCII), los europeos 2 bytes, los asiáticos 3 bytes, y emojis/símbolos raros 4 bytes. Es dominante porque: (1) es eficiente para texto en inglés/español, (2) es compatible con ASCII, (3) sin BOM, (4) autopárametro (no hay ambigüedad de dónde empieza/termina un carácter). Hoy el 98% del contenido web usa UTF-8.', 3),
+('fc-10-4', 10, '¿Por qué `strlen()` en C puede dar resultados incorrectos con caracteres Unicode?', '`strlen()` en C cuenta **bytes**, no caracteres. Un emoji como 😀 (`U+1F600`) se codifica en UTF-8 con **4 bytes**, así que `strlen("😀")` devuelve `4`, no `1`. Una `ñ` (`U+00F1`) usa 2 bytes: `strlen("ñ") == 2`. Esto puede causar errores al truncar strings, calcular ancho de columnas, o al iterar por "caracteres". En C moderno hay que usar librerías como ICU o contar code points manualmente procesando la secuencia UTF-8.', 4),
+('fc-10-5', 10, '¿Qué es un code point y cómo se relaciona con los bytes en UTF-8?', 'Un **code point** es el número asignado por Unicode a un carácter: `U+0041` (A), `U+00F1` (ñ), `U+1F600` (😀). Un **byte** es la unidad de almacenamiento. UTF-8 convierte code points a bytes con un esquema variable: `0xxxxxxx` (1 byte, ASCII), `110xxxxx 10xxxxxx` (2 bytes), `1110xxxx 10xxxxxx 10xxxxxx` (3 bytes), `11110xxx 10xxxxxx 10xxxxxx 10xxxxxx` (4 bytes). Los bytes `10xxxxxx` son continuación — no puedes empezar a leer desde el medio de un carácter.', 5),
+('fc-10-6', 10, '¿Qué es un "grapheme cluster" y por qué un emoji puede contar como varios code points?', 'Un **grapheme cluster** es lo que el usuario percibe como un solo "carácter" visual, aunque internamente sea uno o más code points. El emoji 👨‍👩‍👧‍👦 (familia) es en realidad **7 code points** unidos por ZWJ (Zero Width Joiner, U+200D). El emoji 👍🏽 (pulgar con tono de piel) son **2 code points**: 👍 + modificador de tono. Esto complica operaciones como "longitud de string" o "cortar por carácter" — hay que operar a nivel de grapheme cluster, no de code points.', 6),
+('fc-10-7', 10, '¿Cómo maneja Python los strings Unicode internamente?', 'En Python 3, todos los strings (`str`) son secuencias de **code points Unicode**, no de bytes. `len("😀") == 1` (correcto). Para trabajar con bytes, se usa el tipo `bytes`: `"😀".encode("utf-8")` devuelve `b''\xf0\x9f\x98\x80''` (4 bytes). Esto es una diferencia fundamental con C, donde los strings son bytes crudos. En Python, la codificación/decodificación ocurre explícitamente al leer/escribir archivos o hacer I/O de red.', 7),
+('fc-10-8', 10, '¿Qué es la normalización Unicode y por qué importa?', 'Unicode permite representar el mismo carácter visual de múltiples formas. La `é` puede ser un solo code point (`U+00E9`, forma compuesta NFC) o dos code points: `e` + combinador de acento agudo (`U+0301`, forma descompuesta NFD). Esto causa bugs: `"é" == "é"` puede ser `False` si usan formas distintas. La **normalización** (NFC, NFD, NFKC, NFKD) convierte todos los strings a una forma canónica antes de comparar. En Python: `import unicodedata; unicodedata.normalize("NFC", texto)`.', 8)
+ON CONFLICT(id) DO NOTHING;
