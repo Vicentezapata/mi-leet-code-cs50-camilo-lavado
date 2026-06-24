@@ -25,9 +25,9 @@
 | 0 | Scratch — Pensamiento computacional | Visual | — |
 | 1 | C — Fundamentos | C | 4 |
 | 2 | Arreglos | C | 4 |
-| 3 | Algoritmos | C | 1 |
-| 4 | Memoria | C | 1 |
-| 5 | Estructuras de Datos | C | 1 |
+| 3 | Algoritmos | C | 3 |
+| 4 | Memoria | C | 3 |
+| 5 | Estructuras de Datos | C | 3 |
 | 6 | Python | Python | 2 |
 | 7 | SQL | SQL | 3 |
 | 8 | HTML, CSS, JavaScript | JavaScript | 3 |
@@ -35,7 +35,7 @@
 | 10 | Emoji y Unicode | — | — |
 | — | Ciberseguridad | — | — |
 
-**Total: 22 problemas** con casos de prueba visibles y ocultos.
+**Total: 28 problemas** con casos de prueba visibles y ocultos.
 
 ---
 
@@ -180,7 +180,7 @@ La primera ejecución de cada lenguaje descarga la imagen correspondiente:
 
 ## Estado actual
 
-🟢 **Plataforma completa** — 22 problemas activos en C, Python, SQL y JavaScript. Contenido teórico para las 12 semanas (0–10 + Ciberseguridad). Docker Compose listo para instalación con un solo comando. Soluciones de referencia desbloqueables tras agotar pistas socráticas.
+🟢 **Plataforma completa** — 28 problemas activos en C, Python, SQL y JavaScript. Contenido teórico para las 12 semanas (0–10 + Ciberseguridad). Docker Compose listo para instalación con un solo comando. Soluciones de referencia desbloqueables tras agotar pistas socráticas.
 
 ---
 
