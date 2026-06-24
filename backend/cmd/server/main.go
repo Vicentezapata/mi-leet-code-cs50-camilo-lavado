@@ -54,6 +54,7 @@ func main() {
 
 	// 5. Inicializar Casos de Uso
 	progressRepo := sqlite.NewSQLiteProgressRepository(db)
+	solutionRepo := sqlite.NewSQLiteSolutionRepository(db)
 	fetchProgressUC := usecases.NewFetchProgressUseCase(progressRepo, problemRepo)
 	fetchProblemsUC := usecases.NewFetchProblemsUseCase(problemRepo, testCaseRepo)
 	submitCodeUC := usecases.NewSubmitCodeUseCase(problemRepo, testCaseRepo, submissionRepo, executor, progressRepo)
@@ -62,9 +63,10 @@ func main() {
 	fetchFlashcardsUC := usecases.NewFetchFlashcardsUseCase(flashcardRepo)
 	getStatsUC := usecases.NewGetStatsUseCase(problemRepo, submissionRepo)
 	fetchContentUC := usecases.NewFetchContentUseCase("content")
+	fetchSolutionUC := usecases.NewFetchSolutionUseCase(solutionRepo)
 
 	// 6. Inicializar Handlers y Router
-	handlers := httpAdapter.NewHandlers(fetchProblemsUC, submitCodeUC, fetchSubmissionsUC, fetchHintsUC, fetchFlashcardsUC, getStatsUC, fetchContentUC, fetchProgressUC)
+	handlers := httpAdapter.NewHandlers(fetchProblemsUC, submitCodeUC, fetchSubmissionsUC, fetchHintsUC, fetchFlashcardsUC, getStatsUC, fetchContentUC, fetchProgressUC, fetchSolutionUC)
 	router := httpAdapter.SetupRouter(handlers)
 
 	// 7. Iniciar Servidor

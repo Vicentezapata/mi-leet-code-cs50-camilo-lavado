@@ -49,3 +49,10 @@ CREATE TABLE IF NOT EXISTS progress (
     last_attempt_at DATETIME,
     FOREIGN KEY (problem_id) REFERENCES problems(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS solutions (
+    problem_id TEXT PRIMARY KEY,
+    code TEXT NOT NULL,
+    language TEXT NOT NULL,
+    FOREIGN KEY (problem_id) REFERENCES problems(id) ON DELETE CASCADE
+);

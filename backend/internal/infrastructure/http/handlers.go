@@ -17,6 +17,7 @@ type Handlers struct {
 	GetStatsUC         *usecases.GetStatsUseCase
 	FetchContentUC     *usecases.FetchContentUseCase
 	FetchProgressUC    *usecases.FetchProgressUseCase
+	FetchSolutionUC    *usecases.FetchSolutionUseCase
 }
 
 func NewHandlers(
@@ -28,6 +29,7 @@ func NewHandlers(
 	gs *usecases.GetStatsUseCase,
 	fc *usecases.FetchContentUseCase,
 	fpr *usecases.FetchProgressUseCase,
+	fsol *usecases.FetchSolutionUseCase,
 ) *Handlers {
 	return &Handlers{
 		FetchProblemsUC:    fp,
@@ -38,6 +40,7 @@ func NewHandlers(
 		GetStatsUC:         gs,
 		FetchContentUC:     fc,
 		FetchProgressUC:    fpr,
+		FetchSolutionUC:    fsol,
 	}
 }
 
@@ -191,4 +194,18 @@ func (h *Handlers) GetContent(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": content})
+}
+
+func (h *Handlers) GetSolution(c *gin.Context) {
+	id := c.Param("id")
+	sol, err := h.FetchSolutionUC.Execute(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	if sol == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "solution not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": sol})
 }

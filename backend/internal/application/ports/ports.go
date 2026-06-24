@@ -33,6 +33,10 @@ type ProgressRepository interface {
 	FindAll() ([]domain.Progress, error)
 }
 
+type SolutionRepository interface {
+	FindByProblemId(problemId string) (*domain.Solution, error)
+}
+
 type CodeExecutor interface {
 	Execute(snippet domain.CodeSnippet, testCase domain.TestCase) domain.ExecutionResult
 }

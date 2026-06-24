@@ -64,6 +64,12 @@ type Progress struct {
 	LastAttemptAt *time.Time `json:"last_attempt_at,omitempty"`
 }
 
+type Solution struct {
+	ProblemID string `json:"problem_id"`
+	Code      string `json:"code"`
+	Language  string `json:"language"`
+}
+
 type Badge struct {
 	Week      int    `json:"week"`
 	Title     string `json:"title"`

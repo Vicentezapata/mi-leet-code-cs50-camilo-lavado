@@ -56,6 +56,7 @@ export function ProblemPage() {
         onClose={() => setShowHints(false)}
         hints={hints}
         isLoading={hintsLoading}
+        problemId={id!}
       />
 
       <div className="h-full flex flex-col md:flex-row p-2 gap-2 bg-local-bg">

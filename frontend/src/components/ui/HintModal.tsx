@@ -1,20 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Hint } from '@/hooks/useHints';
+import { useSolution } from '@/hooks/useSolution';
 
 interface HintModalProps {
   isOpen: boolean;
   onClose: () => void;
   hints: Hint[];
   isLoading: boolean;
+  problemId: string;
 }
 
-export function HintModal({ isOpen, onClose, hints, isLoading }: HintModalProps) {
+export function HintModal({ isOpen, onClose, hints, isLoading, problemId }: HintModalProps) {
   const [revealedCount, setRevealedCount] = useState(0);
   const [animatingIndex, setAnimatingIndex] = useState<number | null>(null);
+  const [showSolution, setShowSolution] = useState(false);
+  const { solution, isLoading: solLoading, error: solError, load: loadSolution } = useSolution(problemId);
 
   // Reset when modal re-opens
   useEffect(() => {
-    if (isOpen) setRevealedCount(0);
+    if (isOpen) { setRevealedCount(0); setShowSolution(false); }
   }, [isOpen]);
 
   const handleRevealNext = useCallback(() => {
@@ -131,12 +135,12 @@ export function HintModal({ isOpen, onClose, hints, isLoading }: HintModalProps)
         </div>
 
         {/* Footer Action */}
-        <div className="px-6 py-4 border-t border-local-border bg-black/20">
-          {!isLoading && !allRevealed ? (
+        <div className="px-6 py-4 border-t border-local-border bg-black/20 space-y-3">
+          {!isLoading && !allRevealed && (
             <button
               onClick={handleRevealNext}
               className="w-full py-2.5 rounded-lg font-semibold text-sm transition-all
-                         bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 
+                         bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400
                          border border-yellow-500/30 hover:border-yellow-500/60
                          flex items-center justify-center gap-2"
             >
@@ -145,11 +149,38 @@ export function HintModal({ isOpen, onClose, hints, isLoading }: HintModalProps)
               </svg>
               {revealedCount === 0 ? 'Necesito una pista' : 'Ver siguiente pista'}
             </button>
-          ) : !isLoading && allRevealed ? (
-            <div className="text-center text-sm text-local-muted py-1">
-              Ya viste todas las pistas. ¡Ahora a programar! 💪
+          )}
+
+          {!isLoading && allRevealed && !showSolution && (
+            <div className="space-y-2">
+              <p className="text-center text-sm text-local-muted">Ya viste todas las pistas. ¡Ahora a programar! 💪</p>
+              <button
+                onClick={() => { setShowSolution(true); loadSolution(); }}
+                className="w-full py-2 rounded-lg text-sm font-medium transition-all
+                           bg-white/5 hover:bg-white/10 text-local-muted hover:text-white
+                           border border-white/10 hover:border-white/20
+                           flex items-center justify-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+                Ver solución de referencia
+              </button>
             </div>
-          ) : null}
+          )}
+
+          {showSolution && (
+            <div className="space-y-2">
+              <p className="text-xs text-local-muted font-semibold uppercase tracking-wider">Solución de referencia</p>
+              {solLoading && <div className="text-center text-local-muted text-sm py-2">Cargando…</div>}
+              {solError && <p className="text-red-400 text-sm">{solError}</p>}
+              {solution && (
+                <pre className="bg-black/40 border border-white/10 rounded-lg p-3 text-xs text-green-300 overflow-x-auto max-h-48 overflow-y-auto leading-relaxed">
+                  <code>{solution.code}</code>
+                </pre>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
