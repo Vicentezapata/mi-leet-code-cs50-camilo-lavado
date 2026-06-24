@@ -29,6 +29,7 @@ export function ProblemList({ problems, submissions = [], isLoading, error, week
   }
 
   if (problems.length === 0) {
+    const theorySlug = weekFilter === 11 ? 'ciberseguridad' : String(weekFilter);
     return (
       <>
         <FlashcardModal
@@ -43,7 +44,7 @@ export function ProblemList({ problems, submissions = [], isLoading, error, week
           {weekFilter !== null && (
             <div className="flex justify-center gap-3 mt-4">
               <a
-                href={`/weeks/${weekFilter}`}
+                href={`/weeks/${theorySlug}`}
                 className="text-sm bg-local-primary/10 text-local-primary hover:bg-local-primary/20 px-4 py-2 rounded-lg flex items-center gap-2 transition-all font-medium border border-local-primary/20 hover:border-local-primary/50"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

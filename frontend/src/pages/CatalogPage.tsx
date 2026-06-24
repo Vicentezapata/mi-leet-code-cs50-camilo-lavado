@@ -72,6 +72,7 @@ export function CatalogPage() {
               <option value={8}>Semana 8 — HTML/CSS/JS</option>
               <option value={9}>Semana 9 — Flask</option>
               <option value={10}>Semana 10 — Emoji</option>
+              <option value={11}>Módulo — Ciberseguridad</option>
             </select>
           </div>
           <div className="flex items-center gap-3">
