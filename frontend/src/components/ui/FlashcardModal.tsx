@@ -102,7 +102,7 @@ export function FlashcardModal({ isOpen, onClose, flashcards, isLoading, week }:
               </svg>
             </div>
             <div>
-              <h2 className="text-white font-bold text-base">Repaso Rápido — Semana {week}</h2>
+              <h2 className="text-white font-bold text-base">Repaso Rápido — {week === 11 ? 'Ciberseguridad' : `Semana ${week}`}</h2>
               {!isFinished && !isLoading && (
                 <p className="text-local-muted text-xs">Presiona Espacio para voltear la tarjeta</p>
               )}
