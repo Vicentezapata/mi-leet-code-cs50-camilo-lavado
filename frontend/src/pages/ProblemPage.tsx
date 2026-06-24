@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useProblem } from '@/hooks/useProblems';
 import { useSubmitCode } from '@/hooks/useSubmission';
 import { useSubmissions } from '@/hooks/useSubmissions';
@@ -62,6 +62,15 @@ export function ProblemPage() {
       <div className="h-full flex flex-col md:flex-row p-2 gap-2 bg-local-bg overflow-hidden">
         {/* Panel Izquierdo: Descripción */}
         <div className="w-full md:w-[40%] max-h-[45vh] md:max-h-full flex flex-col gap-4 p-6 glass-panel overflow-y-auto">
+          <Link
+            to="/"
+            className="flex items-center gap-1.5 text-xs text-local-muted hover:text-white transition-colors w-fit"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Volver al catálogo
+          </Link>
           <div className="flex items-center justify-between border-b border-local-border pb-4 mb-2">
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">{problem.title}</h1>
