@@ -1,123 +1,218 @@
-Markdown
 # RESTful API Contracts
+
+Todos los endpoints están bajo `/api/v1`. No hay autenticación.
+
+---
+
+## Problemas
 
 ### GET /api/v1/problems
 
-#### Response
+Lista todos los problemas. Acepta query params opcionales `?week=N` y `?difficulty=Easy|Medium|Hard`.
+
 ```json
 {
   "data": [
     {
-      "id": "c85b5e67-1234-4b56-a789-abcdef123456",
+      "id": "p-mario-c",
       "title": "Mario",
       "difficulty": "Easy",
-      "language": "C"
-    }
-  ]
-}
-GET /api/v1/problems/{id}
-Response
-JSON
-{
-  "id": "c85b5e67-1234-4b56-a789-abcdef123456",
-  "title": "Mario",
-  "description": "Implement a program that prints out a half-pyramid of a specified height.",
-  "language": "C",
-  "test_cases": [
-    {
-      "id": "d96c6f78-1234-4b56-a789-abcdef123456",
-      "input_data": "4",
-      "is_hidden": false
-    }
-  ]
-}
-POST /api/v1/submissions
-Request
-JSON
-{
-  "problem_id": "c85b5e67-1234-4b56-a789-abcdef123456",
-  "language": "c",
-  "code": "#include <stdio.h>\nint main() {\nprintf(\"hello, world\\n\");\nreturn 0;\n}"
-}
-Response
-JSON
-{
-  "submission_id": "e07d7g89-1234-4b56-a789-abcdef123456",
-  "status": "Accepted",
-  "passed_tests": 5,
-  "total_tests": 5,
-  "metrics": {
-    "time_ms": 12,
-    "memory_kb": 1024
-  }
-}
-
----
-
-### Endpoints pendientes (MVP)
-
-#### GET /api/v1/problems?week=1&difficulty=Easy
-Filtra problemas por semana y/o dificultad.
-
-#### GET /api/v1/submissions?problem_id={id}
-Historial de submissions para un problema.
-
-Response:
-```json
-{
-  "data": [
-    {
-      "submission_id": "...",
-      "status": "Accepted",
-      "passed_tests": 5,
-      "total_tests": 5,
-      "metrics": { "time_ms": 12, "memory_kb": 1024 },
-      "submitted_at": "2026-05-18T10:30:00Z"
+      "language": "c",
+      "week": 1
     }
   ]
 }
 ```
 
-#### GET /api/v1/progress
-Tracker de progreso global.
+### GET /api/v1/problems/:id
 
-Response:
+Devuelve un problema con sus casos de prueba visibles.
+
+```json
+{
+  "data": {
+    "id": "p-mario-c",
+    "title": "Mario",
+    "description": "...",
+    "language": "c",
+    "week": 1,
+    "difficulty": "Easy",
+    "test_cases": [
+      {
+        "id": "tc-mario-c-1",
+        "input_data": "4",
+        "expected_output": "   #\n  ##\n ###\n####\n",
+        "is_hidden": false
+      }
+    ]
+  }
+}
+```
+
+### GET /api/v1/problems/:id/hints
+
+Devuelve las pistas socráticas del problema (lista ordenada de preguntas guía).
+
+```json
+{
+  "data": [
+    { "id": "h-mario-c-1", "question": "¿Cuántas filas necesitas imprimir en total?" },
+    { "id": "h-mario-c-2", "question": "En cada fila i, ¿cuántos espacios van antes del primer #?" }
+  ]
+}
+```
+
+### GET /api/v1/problems/:id/solution
+
+Devuelve la solución de referencia del problema. Solo debe llamarse después de que el usuario haya agotado todas las pistas (el frontend lo controla).
+
+```json
+{
+  "data": {
+    "problem_id": "p-mario-c",
+    "language": "c",
+    "code": "#include <stdio.h>\nint main(void)\n{\n    int h;\n    do { scanf(\"%d\", &h); } while (h < 1 || h > 8);\n    for (int i = 1; i <= h; i++) {\n        for (int j = 0; j < h - i; j++) printf(\" \");\n        for (int k = 0; k < i; k++)     printf(\"#\");\n        printf(\"\\n\");\n    }\n}"
+  }
+}
+```
+
+Devuelve `404` con `{"error": "solution not found"}` si el problema no tiene solución registrada.
+
+---
+
+## Envíos
+
+### POST /api/v1/submissions
+
+Ejecuta el código contra todos los casos de prueba del problema.
+
+**Request:**
+```json
+{
+  "problem_id": "p-mario-c",
+  "language": "c",
+  "code": "#include <stdio.h>\n..."
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "id": "sub-abc123",
+    "problem_id": "p-mario-c",
+    "status": "Accepted",
+    "passed_tests": 3,
+    "total_tests": 3,
+    "submitted_at": "2026-06-24T10:00:00Z"
+  }
+}
+```
+
+Estados posibles: `Accepted`, `Wrong Answer`, `Compilation Error`, `Runtime Error`, `Time Limit Exceeded`.
+
+### GET /api/v1/submissions?problem_id=:id
+
+Historial de envíos. Si se omite `problem_id`, devuelve todos.
+
 ```json
 {
   "data": [
     {
-      "problem_id": "...",
+      "id": "sub-abc123",
+      "problem_id": "p-mario-c",
+      "status": "Accepted",
+      "passed_tests": 3,
+      "total_tests": 3,
+      "submitted_at": "2026-06-24T10:00:00Z"
+    }
+  ]
+}
+```
+
+---
+
+## Contenido
+
+### GET /api/v1/weeks/:week/flashcards
+
+Flashcards de una semana. `:week` es un número (0–10 para semanas, 11 para Ciberseguridad).
+
+```json
+{
+  "data": [
+    {
+      "id": "fc-1-1",
+      "question": "¿Qué es un compilador?",
+      "answer": "Un programa que traduce código fuente a código máquina."
+    }
+  ]
+}
+```
+
+### GET /api/v1/content/:week
+
+Contenido teórico en Markdown. `:week` acepta número (`"1"`) o slug (`"ciberseguridad"`).
+
+```json
+{
+  "data": {
+    "lectura": "## Semana 1\n...",
+    "complemento": "## Material adicional\n...",
+    "glosario": "## Glosario\n..."
+  }
+}
+```
+
+---
+
+## Stats y progreso
+
+### GET /api/v1/stats
+
+Estadísticas del usuario: racha, total resueltos, medallas.
+
+```json
+{
+  "data": {
+    "streak": 3,
+    "total_solved": 7,
+    "badges": ["week-1-complete", "week-2-complete"]
+  }
+}
+```
+
+### GET /api/v1/progress
+
+Estado de cada problema (resuelto / intentado / sin intentar).
+
+```json
+{
+  "data": [
+    {
+      "problem_id": "p-mario-c",
       "status": "solved",
-      "last_attempt_at": "2026-05-18T10:30:00Z"
+      "last_attempt_at": "2026-06-24T10:00:00Z"
     }
   ],
   "summary": {
-    "total": 30,
-    "solved": 3,
-    "in_progress": 1,
-    "not_attempted": 26
+    "total": 22,
+    "solved": 7,
+    "in_progress": 2,
+    "not_attempted": 13
   }
 }
 ```
 
 ---
 
-### Subtareas pendientes de API
+## Lenguajes soportados
 
-#### Endpoints nuevos
-- [ ] Implementar `GET /api/v1/problems?week=X&difficulty=Y` con query params
-- [ ] Implementar `GET /api/v1/submissions?problem_id=X` para historial
-- [ ] Implementar `GET /api/v1/progress` para tracker
-- [ ] Implementar `POST /api/v1/progress` (upsert) al resolver un problema
+| Valor en API | Imagen Docker | Comando de ejecución |
+|---|---|---|
+| `c` | `gcc:latest` | `gcc -O3 *.c -o solution && ./solution < input.txt` |
+| `python` | `python:3.11-alpine` | `python code.py < input.txt` |
+| `sql` | `keinos/sqlite3:latest` | `sqlite3 db.sqlite < setup.sql && sqlite3 -separator '\|' db.sqlite < code.sql` |
+| `javascript` | `node:18-alpine` | `node code.js < input.txt` |
 
-#### Robustez
-- [ ] Validar body en `POST /api/v1/submissions`: campos requeridos, `code` no vacío, max 100KB
-- [ ] Manejar errores con códigos HTTP correctos: 400 (bad request), 404 (not found), 500 (internal), 503 (Docker unavailable)
-- [ ] Rate limiting: máximo 10 submissions por minuto (proteger el executor)
-- [ ] Timeout de 30s en handlers HTTP que llaman al executor
-
-#### Frontend
-- [ ] Conectar `ProblemPage` al endpoint con filtro de semana
-- [ ] Conectar historial de submissions en `ProblemPage`
-- [ ] Crear página/hook para consumir `GET /api/v1/progress`
-- [ ] Agregar `week` y `difficulty` a los query params en `useProblems`
+Cada envío corre en un contenedor aislado con 5s de timeout y 128MB de RAM máximos. Sin acceso a red.

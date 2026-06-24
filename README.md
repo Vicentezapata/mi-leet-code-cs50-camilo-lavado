@@ -8,96 +8,115 @@
 
 **LocalCode** es una plataforma de aprendizaje interactiva que cubre las 12 semanas del curso **CS50 2026 de Harvard**, con:
 
-- 📖 Contenido completo en español (transcripción + material propio complementario)
+- 📖 Contenido completo en español (transcripción + material complementario propio)
 - 💻 Editor de código integrado (Monaco Editor)
-- ⚙️ Motor de ejecución seguro vía Docker
+- ⚙️ Motor de ejecución seguro vía Docker (C, Python, SQL, JavaScript)
 - ✅ Evaluación automática de soluciones contra casos de prueba
-- 📊 Seguimiento de progreso por semana y por problema
+- 💡 Pistas socráticas progresivas y soluciones de referencia desbloqueables
+- 🃏 Flashcards por semana (repaso activo)
+- 📊 Seguimiento de progreso con rachas y medallas
 
 ---
 
 ## Contenido del curso
 
-| Semana | Tema | Lenguaje |
-|--------|------|----------|
-| 0 | Scratch — Pensamiento computacional | Visual |
-| 1 | C — Fundamentos | C |
-| 2 | Arreglos | C |
-| 3 | Algoritmos | C |
-| 4 | Memoria | C |
-| 5 | Estructuras de Datos | C |
-| 6 | Python | Python |
-| 7 | SQL | SQL |
-| 8 | HTML, CSS, JavaScript | Web |
-| 9 | Flask | Python |
-| 10 | Emoji y Unicode | — |
-| — | Ciberseguridad | — |
+| Semana | Tema | Lenguaje | Problemas |
+|--------|------|----------|-----------|
+| 0 | Scratch — Pensamiento computacional | Visual | — |
+| 1 | C — Fundamentos | C | 4 |
+| 2 | Arreglos | C | 4 |
+| 3 | Algoritmos | C | 1 |
+| 4 | Memoria | C | 1 |
+| 5 | Estructuras de Datos | C | 1 |
+| 6 | Python | Python | 2 |
+| 7 | SQL | SQL | 3 |
+| 8 | HTML, CSS, JavaScript | JavaScript | 3 |
+| 9 | Flask | Python | 3 |
+| 10 | Emoji y Unicode | — | — |
+| — | Ciberseguridad | — | — |
+
+**Total: 22 problemas** con casos de prueba visibles y ocultos.
 
 ---
 
-## Cómo ejecutarlo en tu computadora
+## Cómo ejecutarlo — Docker Compose (recomendado)
 
-### Requisitos previos
+Esta es la forma más sencilla. Solo necesitas **Docker Desktop** instalado.
 
-Antes de empezar necesitas tener instalado:
+### Requisito único
 
 | Herramienta | Para qué sirve | Descarga |
 |-------------|----------------|----------|
-| **Docker Desktop** | Ejecuta tu código de forma segura y aislada | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
-| **Go 1.22+** | Corre el servidor del backend | [go.dev/dl](https://go.dev/dl/) |
-| **Node.js 20+** | Corre el servidor del frontend | [nodejs.org](https://nodejs.org/) |
+| **Docker Desktop** | Corre toda la plataforma y ejecuta tu código de forma segura | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
+
+> **¿Qué es Docker Desktop?** Es una aplicación que crea "cajas" aisladas (contenedores) donde corre tu código sin tocar el resto de tu sistema. En Windows, si el instalador pide activar WSL 2, acepta — es necesario. Una vez instalado, la ballena 🐳 en tu barra de tareas indica que está listo.
+
+### Instalación en 3 comandos
+
+```bash
+git clone https://github.com/camilo-lavado/mi-leet-code-cs50.git
+cd mi-leet-code-cs50
+docker compose up
+```
+
+La primera vez tarda 3-5 minutos en descargar e construir las imágenes. Cuando veas:
+
+```
+frontend-1  | [notice] start worker process
+```
+
+Abre **http://localhost:5173** en tu navegador.
+
+### Comandos útiles
+
+```bash
+docker compose up -d      # correr en segundo plano
+docker compose down       # detener
+docker compose logs -f    # ver logs en tiempo real
+```
+
+> Los datos (progreso, historial de envíos) se guardan en un volumen Docker persistente. Se mantienen entre reinicios. Para resetear todo: `docker compose down -v`.
 
 ---
 
-### ¿Qué es Docker Desktop y por qué lo necesito?
+## Cómo ejecutarlo — Forma manual (desarrollo)
 
-Cuando resuelves un problema en LocalCode y presionas **Ejecutar**, tu código no corre directamente en tu computadora. En cambio, la plataforma crea una pequeña "caja" aislada (llamada **contenedor**) donde tu código se ejecuta de forma segura, sin riesgo de dañar nada en tu sistema.
+Para contribuir o modificar el código fuente.
 
-Docker Desktop es la aplicación que hace posible crear esas cajas.
+### Requisitos
 
-**Pasos para instalar Docker Desktop:**
+| Herramienta | Descarga |
+|-------------|----------|
+| **Docker Desktop** | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
+| **Go 1.22+** | [go.dev/dl](https://go.dev/dl/) |
+| **Node.js 20+** | [nodejs.org](https://nodejs.org/) |
 
-1. Ve a [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) y descarga la versión para tu sistema operativo (Windows, Mac o Linux)
-2. Instálalo como cualquier otra aplicación (siguiente → siguiente → instalar)
-3. **En Windows:** si el instalador pide activar WSL 2, acepta — es necesario
-4. Una vez instalado, ábrelo. Verás una ballena (🐳) en la barra de tareas/menú superior
-5. Espera a que el ícono deje de moverse — eso significa que Docker está listo
+### Pasos
 
-> **Importante:** Docker Desktop debe estar abierto y corriendo cada vez que uses LocalCode. No necesitas hacer nada más con él, solo que esté activo.
-
----
-
-### Instalación paso a paso
-
-**1. Clona el repositorio**
-
+**1. Clonar**
 ```bash
 git clone https://github.com/camilo-lavado/mi-leet-code-cs50.git
 cd mi-leet-code-cs50
 ```
 
-**2. Inicia el backend** (en una terminal)
-
+**2. Backend** (una terminal)
 ```bash
 cd backend
 go run ./cmd/server/main.go
 ```
+Listo cuando aparece `[GIN-debug] Listening on :8080`.
 
-La primera vez tardará unos segundos en descargar las dependencias de Go. Cuando veas algo como `[GIN-debug] Listening on :8080`, el servidor está listo.
-
-**3. Inicia el frontend** (en otra terminal, sin cerrar la anterior)
-
+**3. Frontend** (otra terminal)
 ```bash
 cd frontend
 npm install       # solo la primera vez
 npm run dev
 ```
+Abre **http://localhost:5173** cuando aparezca `Local: http://localhost:5173`.
 
-Cuando veas `Local: http://localhost:5173`, abre esa dirección en tu navegador.
+### Descarga de imágenes Docker (solo la primera vez)
 
-**4. Descarga las imágenes de Docker** (solo la primera vez)
-
-La primera vez que ejecutes un problema, Docker descargará automáticamente la imagen del lenguaje:
+La primera ejecución de cada lenguaje descarga la imagen correspondiente:
 
 | Lenguaje | Imagen Docker | Tamaño aprox. |
 |----------|--------------|---------------|
@@ -106,45 +125,49 @@ La primera vez que ejecutes un problema, Docker descargará automáticamente la 
 | SQL | `keinos/sqlite3:latest` | ~15 MB |
 | JavaScript | `node:18-alpine` | ~180 MB |
 
-Esto puede tardar 1-5 minutos la primera vez según tu conexión. Las siguientes ejecuciones son instantáneas.
-
 ---
 
-### Solución de problemas comunes
+## Solución de problemas comunes
 
 | Problema | Causa probable | Solución |
 |----------|----------------|----------|
-| `Error: Cannot connect to Docker daemon` | Docker Desktop no está abierto | Abre Docker Desktop y espera a que el ícono deje de moverse |
-| `go: command not found` | Go no está instalado o no está en el PATH | Reinstala Go y reinicia la terminal |
-| `npm: command not found` | Node.js no está instalado | Instala Node.js desde nodejs.org |
-| La página carga pero los problemas no aparecen | El backend no está corriendo | Verifica que la terminal del backend muestra el mensaje de `:8080` |
-| Error al ejecutar código en Windows | WSL 2 no está activado | Abre Docker Desktop → Settings → General → activa "Use WSL 2 based engine" |
+| `Cannot connect to Docker daemon` | Docker Desktop no está abierto | Abre Docker Desktop y espera a que la ballena deje de moverse |
+| La página carga pero los problemas no aparecen | El backend no está corriendo | Verifica que el backend muestra `:8080` o usa Docker Compose |
+| Error al ejecutar código en Windows | WSL 2 no activado | Docker Desktop → Settings → General → activa "Use WSL 2 based engine" |
+| `go: command not found` | Go no en el PATH | Reinstala Go y reinicia la terminal |
+| `npm: command not found` | Node.js no instalado | Instala desde nodejs.org |
 
 ---
 
-## Stack Técnico
+## Características
 
-- **Frontend:** React + Vite + TypeScript + Monaco Editor
-- **Backend/API:** GoLang (Gin) — Arquitectura Hexagonal + DDD
-- **Base de datos:** SQLite
-- **Ejecución de código:** Docker Engine API
-
----
-
-## Características Destacadas
-
-*   **Pedagogía Activa (Active Recall):** Tarjetas interactivas (Flashcards) por semana para reforzar la teoría antes de escribir código.
-*   **Diario Feynman:** Espacio interactivo donde el alumno explica su lógica en lenguaje sencillo antes de enviar, consolidando su propio entendimiento.
-*   **Pistas Socráticas Progresivas:** Sugerencias reflexivas guiadas paso a paso sin revelar directamente el código de la solución.
-*   **Visor de Clases y Glosario:** Interfaz premium con pestañas para estudiar la transcripción de las clases magistrales en español, materiales complementarios de consola, y conceptos clave.
-*   **Gamificación (Rachas y Medallas):** Cálculo automático y dinámico de racha diaria de estudio (🔥) y obtención de medallas al resolver todos los retos de una semana.
+| Característica | Descripción |
+|----------------|-------------|
+| **Pistas socráticas** | Sugerencias reflexivas paso a paso. Cuando agotes todas, se desbloquea la solución de referencia. |
+| **Soluciones de referencia** | Código de ejemplo visible solo tras revelar todas las pistas. No hay atajos. |
+| **Flashcards** | Tarjetas interactivas por semana para repaso activo de conceptos teóricos. |
+| **Diario Feynman** | Espacio para explicar la lógica en tus propias palabras antes de enviar. |
+| **Teoría completa** | Transcripciones de clases, material complementario y glosario para cada semana. |
+| **Gamificación** | Rachas diarias 🔥 y medallas por completar semanas. |
+| **4 lenguajes** | C, Python, SQL y JavaScript ejecutados en contenedores aislados. |
 
 ---
 
-## Documentación
+## Stack técnico
+
+- **Frontend:** React 18 + Vite + TypeScript + Monaco Editor + TanStack Query
+- **Backend:** Go (Gin) — Arquitectura Hexagonal + Clean Architecture
+- **Base de datos:** SQLite (`modernc.org/sqlite` — sin CGO)
+- **Ejecución de código:** Docker Engine API (contenedor por envío, 5s timeout, 128MB RAM)
+- **Deploy:** Docker Compose con nginx como reverse proxy
+
+---
+
+## Documentación técnica
 
 | Archivo | Descripción |
 |---------|-------------|
+| [CLAUDE.md](./CLAUDE.md) | Guía de desarrollo para Claude Code |
 | [01_PRD.md](./01_PRD.md) | Requerimientos del producto |
 | [02_ARCHITECTURE.md](./02_ARCHITECTURE.md) | Arquitectura del sistema |
 | [03_DOMAIN_MODEL.md](./03_DOMAIN_MODEL.md) | Modelo de dominio y esquema SQLite |
@@ -152,14 +175,12 @@ Esto puede tardar 1-5 minutos la primera vez según tu conexión. Las siguientes
 | [05_API_SPECIFICATION.md](./05_API_SPECIFICATION.md) | Contratos REST API |
 | [06_CONTENT_STRATEGY.md](./06_CONTENT_STRATEGY.md) | Estrategia de contenido en español |
 | [07_ROADMAP.md](./07_ROADMAP.md) | Plan de desarrollo por fases |
-| [08_PHASE_1_PLAN.md](./08_PHASE_1_PLAN.md) | Planificación detallada de la Fase 1 |
-| [09_PHASE_2_AND_3_PLAN.md](./09_PHASE_2_AND_3_PLAN.md) | Planificación detallada de la Fase 2 y 3 |
 
 ---
 
 ## Estado actual
 
-🟢 **Fase 3 Completada — Iniciando Fase 4** — Plataforma completamente funcional con contenido para las 12 semanas (0–10 + Ciberseguridad) y 13 problemas activos en C y Python. El executor soporta C, Python, SQL y JavaScript. Contenido teórico completo con transcripciones, material complementario y glosario para cada semana.
+🟢 **Plataforma completa** — 22 problemas activos en C, Python, SQL y JavaScript. Contenido teórico para las 12 semanas (0–10 + Ciberseguridad). Docker Compose listo para instalación con un solo comando. Soluciones de referencia desbloqueables tras agotar pistas socráticas.
 
 ---
 
